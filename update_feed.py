@@ -24,6 +24,7 @@ SITES = [
  ("Smithsonian History", "https://www.smithsonianmag.com/category/smartnews-history-archaeology/",
    ["https://www.smithsonianmag.com/rss/history/"]),
  ("Audubon", "https://www.audubon.org/magazine", ["https://www.audubon.org/magazine/rss.xml", "https://www.audubon.org/rss.xml"]),
+ ("Reader's Digest", "https://www.rd.com", ["https://www.rd.com/feed/"]),
 ]
 PER_FEED = 4
 A = "{http://www.w3.org/2005/Atom}"
