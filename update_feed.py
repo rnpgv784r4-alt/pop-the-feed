@@ -13,9 +13,12 @@ FEEDS = [
 PER_FEED = 4
 A = "{http://www.w3.org/2005/Atom}"
 
+JUNK = re.compile(r"appeared first on|member|reader-supported|matter to you|support (independent|our)|subscribe|newsletter|sign up", re.I)
+
 def clean(s, n=190):
     s = html.unescape(re.sub(r"<[^>]+>", " ", s or ""))
     s = re.sub(r"\s+", " ", s).strip()
+    s = " ".join(p for p in re.split(r"(?<=[.!?])\s+", s) if not JUNK.search(p))
     if len(s) > n:
         s = s[:n].rsplit(" ", 1)[0].rstrip(",;:") + "…"
     return s
@@ -42,7 +45,7 @@ for name, url in FEEDS:
                 link = l.get("href") if l is not None else ""
             desc = clean(text(it, "description", A + "summary", A + "content"))
             if title and link.startswith("http"):
-                stories.append([name, title, desc or "Tap Read More for the full story.", link.strip()])
+                stories.append([name, title, desc or "Tap the button below for the full story.", link.strip()])
                 got += 1
             if got >= PER_FEED:
                 break
