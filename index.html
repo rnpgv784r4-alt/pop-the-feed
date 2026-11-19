@@ -46,7 +46,7 @@ svg{width:100%;height:100%;display:block}
 <g id="layer"></g>
 </svg></div>
 <div id="bar"><span id="cnt">0 / 12 popped</span><button id="reset">Reset</button></div>
-<label id="hp" style="position:fixed;top:-50px;left:-50px;width:1px;height:1px;opacity:0;pointer-events:none"><input type="checkbox" switch></label>
+<label id="hp" style="position:fixed;bottom:2px;left:2px;width:44px;height:26px;opacity:.01;pointer-events:none;z-index:-1"><input type="checkbox" switch></label>
 <div id="toast">All popped! Tap Reset for more.</div>
 <div id="ov"><div id="card"><div id="tb"><i id="logo"><u></u><u></u><u></u><u></u></i><span id="ttl">Pop The Feed</span><b id="x">&#10005;</b></div><div id="bd"><div id="row"><svg id="warn" viewBox="0 0 32 32"><path d="M16 2 2 29h28z" fill="#fc0" stroke="#a87c00" stroke-width="1.5" stroke-linejoin="round"/><rect x="14.5" y="10" width="3" height="10" rx="1.5" fill="#222"/><circle cx="16" cy="24" r="1.8" fill="#222"/></svg><p id="msg"><b id="src"></b> <span id="hl"></span><span id="sm"></span> <a id="lnk">Click Here</a> to learn more.</p></div><div id="chk"><span id="box"></span>Don’t show this message again</div><button id="more">Read More</button></div></div></div>
 <script>
@@ -75,30 +75,32 @@ const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg';
 const layer=$('layer'),defs=$('defs');
 let popped=0,pool=[],cur=null,AC=null;
 function hap(){try{if(navigator.vibrate){navigator.vibrate(18);return}}catch(e){}try{document.getElementById('hp').click()}catch(e){}}
-function snd(){hap();try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();
+function snd(){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();
 const t=AC.currentTime,sr=AC.sampleRate,v=.85+Math.random()*.3;
-function burst(at,len,ty,f,q,gain,pw){const n=Math.floor(sr*len),bf=AC.createBuffer(1,n,sr),d=bf.getChannelData(0);for(let i=0;i<n;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/n,pw);const s=AC.createBufferSource();s.buffer=bf;const fl=AC.createBiquadFilter();fl.type=ty;fl.frequency.value=f;fl.Q.value=q;const g=AC.createGain();g.gain.value=gain;s.connect(fl);fl.connect(g);g.connect(AC.destination);s.start(at)}
-burst(t,.008,'highpass',2500*v,.7,2.2,2);
-burst(t,.05,'bandpass',1700*v,5,1.6,4);
-burst(t+.012+Math.random()*.012,.02,'highpass',4000,.7,.9,3);
-const o=AC.createOscillator(),og=AC.createGain();o.frequency.setValueAtTime(220*v,t);o.frequency.exponentialRampToValueAtTime(90,t+.03);og.gain.setValueAtTime(.35,t);og.gain.exponentialRampToValueAtTime(.001,t+.04);o.connect(og);og.connect(AC.destination);o.start(t);o.stop(t+.05);
+const m=AC.createGain();m.gain.value=.75;const lp=AC.createBiquadFilter();lp.type='lowpass';lp.frequency.value=3800;m.connect(lp);lp.connect(AC.destination);
+function burst(at,len,ty,f,q,gain,pw){const n=Math.floor(sr*len),bf=AC.createBuffer(1,n,sr),d=bf.getChannelData(0);for(let i=0;i<n;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/n,pw);const s=AC.createBufferSource();s.buffer=bf;const fl=AC.createBiquadFilter();fl.type=ty;fl.frequency.value=f;fl.Q.value=q;const g=AC.createGain();g.gain.value=gain;s.connect(fl);fl.connect(g);g.connect(m);s.start(at)}
+burst(t,.012,'highpass',1400*v,.6,.9,2);
+burst(t,.07,'bandpass',1000*v,2.5,2,3);
+burst(t+.015+Math.random()*.012,.03,'bandpass',2200,1.5,.35,3);
+const o=AC.createOscillator(),og=AC.createGain();o.frequency.setValueAtTime(200*v,t);o.frequency.exponentialRampToValueAtTime(80,t+.05);og.gain.setValueAtTime(.5,t);og.gain.exponentialRampToValueAtTime(.001,t+.07);o.connect(og);og.connect(m);o.start(t);o.stop(t+.08);
 }catch(e){}}
-function clk(){hap();try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();const t=AC.currentTime,o=AC.createOscillator(),g=AC.createGain();o.type='square';o.frequency.setValueAtTime(2200,t);o.frequency.exponentialRampToValueAtTime(900,t+.025);g.gain.setValueAtTime(.18,t);g.gain.exponentialRampToValueAtTime(.001,t+.03);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+.04)}catch(e){}}
+function clk(){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();const t=AC.currentTime,o=AC.createOscillator(),g=AC.createGain();o.type='square';o.frequency.setValueAtTime(2200,t);o.frequency.exponentialRampToValueAtTime(900,t+.025);g.gain.setValueAtTime(.18,t);g.gain.exponentialRampToValueAtTime(.001,t+.03);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+.04)}catch(e){}}
 function el(n,a){const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e}
 B.forEach((b,i)=>{
  const cp=el('clipPath',{id:'c'+i});cp.appendChild(el('ellipse',{cx:b[0],cy:b[1],rx:b[2],ry:b[3]}));defs.appendChild(cp);
  const g=el('g',{'clip-path':'url(#c'+i+')',class:'pop',id:'p'+i});g.appendChild(el('image',{href:IMG2,x:0,y:0,width:941,height:1672}));layer.appendChild(g);
  const h=el('ellipse',{cx:b[0],cy:b[1],rx:b[2],ry:b[3],class:'hit',id:'h'+i});
- h.addEventListener('pointerdown',e=>{e.preventDefault();pop(i)});layer.appendChild(h);
+ h.addEventListener('pointerdown',()=>pop(i));layer.appendChild(h);
 });
 function next(){if(!pool.length)pool=S.map((_,i)=>i).sort(()=>Math.random()-.5);return S[pool.pop()]}
 function pop(i){
- if(cur)return;snd();$('p'+i).classList.add('on');$('h'+i).classList.add('done');
+ if(cur)return;lastPop=Date.now();snd();$('p'+i).classList.add('on');$('h'+i).classList.add('done');
  popped++;$('cnt').textContent=popped+' / 12 popped';
  cur=next();$('src').textContent=cur[0];$('hl').textContent=cur[1];$('sm').textContent=cur[2];
  setTimeout(()=>$('ov').classList.add('show'),90);
 }
-function closeCard(){$('ov').classList.remove('show');cur=null;if(popped>=12){$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',3500)}}
+let closedAt=0,lastPop=0;
+function closeCard(){closedAt=Date.now();$('ov').classList.remove('show');cur=null;if(popped>=12){$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',3500)}}
 let sx=0,sy=0,t0=0;const ov=$('ov');
 ov.addEventListener('pointerdown',e=>{sx=e.clientX;sy=e.clientY;t0=Date.now()});
 ov.addEventListener('pointerup',e=>{
@@ -109,6 +111,8 @@ ov.addEventListener('pointerup',e=>{
  if(T.closest('#more')||T.closest('#lnk')){snd();const u=cur[3];closeCard();window.open(u,'_blank','noopener');return}
  if(T.closest('#x')){clk();closeCard()}
 });
+$('svg').addEventListener('click',()=>{if(Date.now()-lastPop<600)hap()});
+ov.addEventListener('click',()=>{if(Date.now()-closedAt<600)hap()});
 $('reset').addEventListener('click',()=>{popped=0;$('cnt').textContent='0 / 12 popped';document.querySelectorAll('.pop').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.hit').forEach(x=>x.classList.remove('done'));closeCard()});
 
 fetch('stories.json?'+Date.now()).then(r=>r.ok?r.json():[]).then(d=>{if(Array.isArray(d)&&d.length>=12){S=d;pool=[]}}).catch(()=>{});
