@@ -1,8 +1,8 @@
 name: Update stories
 on:
   schedule:
-    - cron: "0 6,18 * * *"
-  workflow_dispatch: {}
+    - cron: '17 * * * *'   # every hour at :17 UTC
+  workflow_dispatch:        # lets you run it manually from the Actions tab
 permissions:
   contents: write
 jobs:
