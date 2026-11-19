@@ -27,7 +27,7 @@ SITES = [
 ]
 PER_FEED = 4
 A = "{http://www.w3.org/2005/Atom}"
-UA = {"User-Agent": "Mozilla/5.0 (compatible; PopTheFeed/1.0)"}
+UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36", "Accept": "application/rss+xml, application/xml, text/xml, */*"}
 JUNK = re.compile(r"appeared first on|member|reader-supported|matter to you|support (independent|our)|subscribe|newsletter|sign up", re.I)
 
 def clean(s, n=190):
@@ -48,7 +48,7 @@ def text(e, *names):
 def get(url):
     return urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=25).read()
 
-def parse(name, data):
+def parse_xml(name, data):
     root = ET.fromstring(data)
     out = []
     for it in root.findall(".//item") or root.findall(".//" + A + "entry"):
@@ -63,6 +63,40 @@ def parse(name, data):
         if len(out) >= PER_FEED:
             break
     return out
+
+def loose(name, data):
+    s = data.decode("utf-8", "ignore")
+    out = []
+    for blk in re.findall(r"<(?:item|entry)\b.*?</(?:item|entry)>", s, re.S | re.I):
+        def f(tag):
+            m = re.search(r"<%s\b[^>]*>(.*?)</%s>" % (tag, tag), blk, re.S | re.I)
+            return re.sub(r"<!\[CDATA\[|\]\]>", "", m.group(1)) if m else ""
+        title = clean(f("title"), 110)
+        link = html.unescape(f("link").strip())
+        if not link:
+            m = re.search(r"<link[^>]+href=[\"']([^\"']+)", blk, re.I)
+            link = html.unescape(m.group(1)) if m else ""
+        desc = clean(f("description") or f("summary") or f("content"))
+        if title and link.startswith("http"):
+            out.append([name, title, desc or "Tap the button below for the full story.", link])
+        if len(out) >= PER_FEED:
+            break
+    return out
+
+def parse(name, data):
+    starts = [i for i in (data.find(b"<?xml"), data.find(b"<rss"), data.find(b"<feed")) if i >= 0]
+    if starts:
+        data = data[min(starts):]
+    ends = [data.rfind(t) + len(t) for t in (b"</rss>", b"</feed>") if data.rfind(t) >= 0]
+    if ends:
+        data = data[:max(ends)]
+    try:
+        got = parse_xml(name, data)
+        if got:
+            return got
+    except Exception:
+        pass
+    return loose(name, data)
 
 def discover(home):
     page = get(home).decode("utf-8", "ignore")
