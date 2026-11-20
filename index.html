@@ -15,7 +15,7 @@ html,body{height:100%;margin:0;background:#35024a;overflow:hidden;overscroll-beh
 .glow{fill:none;stroke-width:34;opacity:0;transition:opacity .15s;pointer-events:none;filter:url(#gb)}.glow.on{opacity:.95}
 #bar{position:fixed;top:0;left:0;right:0;z-index:5;background:#35024a;color:#fff;padding:calc(env(safe-area-inset-top,0px) + 4px) 10px 8px;box-sizing:border-box}
 #top{display:grid;grid-template-columns:1fr auto 1fr;align-items:end}
-#logo{width:min(250px,64vw);height:auto;display:block}
+#logoimg{width:min(250px,64vw);height:auto;display:block}
 #side{display:flex;flex-direction:column;line-height:1.15;padding-bottom:8px}
 #cnt{font-weight:600;font-size:16px}#side small{font-size:11px;color:#d9c4f0}
 #reset{justify-self:end;background:none;border:0;padding:0 0 8px;margin:0;cursor:pointer}
@@ -51,7 +51,7 @@ html,body{height:100%;margin:0;background:#35024a;overflow:hidden;overscroll-beh
 <image href="bubbles.jpg" x="0" y="0" width="1179" height="5112"/>
 <g id="gl"></g><g id="layer"></g>
 </svg></div></div>
-<div id="bar"><div id="top"><div id="side"><span id="cnt">0 / 39</span><small>popped</small></div><img id="logo" src="logo-banner.png" alt="Pop The Feed"><button id="reset" aria-label="Refresh"><img src="refresh.png" alt="Refresh"></button></div>
+<div id="bar"><div id="top"><div id="side"><span id="cnt">0 / 39</span><small>popped</small></div><img id="logoimg" src="logo-banner.png" alt="Pop The Feed"><button id="reset" aria-label="Refresh"><img src="refresh.png" alt="Refresh"></button></div>
 <div id="cats"><button class="cat" data-c="Art">Art</button><button class="cat" data-c="Entertainment">Entertainment</button><button class="cat" data-c="Oddities">Oddities</button><button class="cat" data-c="History">History</button><button class="cat" data-c="Science">Science</button></div></div>
 <label id="hp" style="position:fixed;bottom:2px;left:2px;width:44px;height:26px;opacity:.01;pointer-events:none;z-index:-1"><input type="checkbox" switch></label>
 <div id="toast">All popped! Tap Refresh for more.</div>
@@ -60,6 +60,7 @@ html,body{height:100%;margin:0;background:#35024a;overflow:hidden;overscroll-beh
 const B=[[128, 9, 215, 198, "Art"], [606, 9, 215, 198, "Entertainment"], [1084, 9, 215, 198, "Oddities"], [128, 448, 215, 198, "Oddities"], [606, 448, 215, 198, "Science"], [1084, 448, 215, 198, "History"], [128, 881, 215, 198, "History"], [606, 881, 215, 198, "Art"], [1084, 881, 215, 198, "Entertainment"], [128, 1313, 215, 198, "Entertainment"], [606, 1313, 215, 198, "Oddities"], [1084, 1313, 215, 198, "Science"], [128, 1727, 215, 198, "Science"], [606, 1727, 215, 198, "History"], [1084, 1727, 215, 198, "Art"], [128, 2143, 215, 198, "Art"], [606, 2143, 215, 198, "Entertainment"], [1084, 2143, 215, 198, "Oddities"], [128, 2586, 215, 198, "Oddities"], [606, 2586, 215, 198, "Science"], [1084, 2586, 215, 198, "History"], [128, 3020, 215, 198, "History"], [606, 3020, 215, 198, "Art"], [1084, 3020, 215, 198, "Entertainment"], [128, 3452, 215, 198, "Entertainment"], [606, 3452, 215, 198, "Oddities"], [1084, 3452, 215, 198, "Science"], [128, 3866, 215, 198, "Science"], [606, 3866, 215, 198, "History"], [1084, 3866, 215, 198, "Art"], [128, 4280, 215, 198, "Art"], [606, 4280, 215, 198, "Entertainment"], [1084, 4280, 215, 198, "Oddities"], [128, 4725, 215, 198, "Oddities"], [606, 4725, 215, 198, "Science"], [1084, 4725, 215, 198, "History"], [128, 5155, 215, 198, "History"], [606, 5155, 215, 198, "Art"], [1084, 5155, 215, 198, "Entertainment"]];
 const GC={Art:'#ff8ac8',Entertainment:'#ffa98a',Oddities:'#ffd36b',History:'#c9baff',Science:'#8ff5e0'};
 const SRC={'Boing Boing':'Oddities','Atlas Obscura':'Oddities','Good News Network':'Oddities','Dangerous Minds':'Entertainment','Aquarium Drunkard':'Entertainment','Post-Punk.com':'Entertainment','Phys.org':'Science','Colossal':'Art','Hyperallergic':'Art'};
+const BB=u=>'https://boingboing.net/tag/'+u;
 let S=[
 ["Boing Boing","Bear cubs in a box","A North Carolina man ended up with a box full of bear cubs, and the story only gets stranger from there.",BB('odd')],
 ["Boing Boing","Sombrero pigeon takes the stage","A pigeon wearing a tiny sombrero turned up in Nevada after a cowboy-hat pigeon’s sad passing.",BB('odd')],
@@ -78,7 +79,6 @@ let S=[
 ["Post-Punk.com","New wave & post-punk","News, reissues and history for post-punk, new wave and indie lovers.","https://post-punk.com"],
 ["Good News Network","Uplifting human stories","Heartwarming stories of people doing good around the world.","https://www.goodnewsnetwork.org"]
 ];
-const BB=u=>'https://boingboing.net/tag/'+u;
 const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg';
 const layer=$('layer'),gl=$('gl'),defs=$('defs'),N=B.length;
 let popped=0,pools={},cur=null,AC=null,closedAt=0,lastPop=0;
@@ -137,6 +137,6 @@ document.querySelectorAll('.cat').forEach(btn=>{
 function loadStories(){fetch('stories.json?'+Date.now()).then(r=>r.ok?r.json():[]).then(d=>{if(Array.isArray(d)&&d.length){S=d;pools={}}}).catch(()=>{})}
 $('reset').addEventListener('click',()=>{popped=0;setCnt();$('reset').classList.remove('ready');document.querySelectorAll('.pop').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.hit').forEach(x=>x.classList.remove('done'));closeCard();$('scroll').scrollTo({top:0,behavior:'smooth'});loadStories()});
 function setBH(){document.documentElement.style.setProperty('--bh',$('bar').offsetHeight+'px')}
-addEventListener('resize',setBH);addEventListener('load',setBH);$('logo').addEventListener('load',setBH);setBH();
+addEventListener('resize',setBH);addEventListener('load',setBH);$('logoimg').addEventListener('load',setBH);if(window.ResizeObserver)new ResizeObserver(setBH).observe($('bar'));setBH();
 setCnt();loadStories();
 </script></body></html>
