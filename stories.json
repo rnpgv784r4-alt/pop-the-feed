@@ -193,6 +193,12 @@
  ],
  [
   "Kottke",
+  "Quick new feature for the Video Closet: Lazy mode picks a...",
+  "Quick new feature for the Video Closet : Lazy mode picks a video at random from the archive (or from the current search results) and plays it. You don’t have to make any decisions today, my…",
+  "https://kottke.org/26/11/0050043-the-video-closet"
+ ],
+ [
+  "Kottke",
   "Massive if true: “I believe I have, working with Claude,...",
   "Massive if true : “I believe I have, working with Claude, discovered a proof of the Riemann Hypothesis.” Levent Alpöge said of working with Claude: “what I saw…so amazed me that I believe…",
   "https://kottke.org/26/11/0050044-massive-if-true"
@@ -208,12 +214,6 @@
   "The Rose by Jay DeFeo",
   "Jay DeFao’s The Rose is one of my favorite pieces at The Whitney (or anywhere really). The story of how this art world behemoth somehow survived to become of the jewels of American art is…",
   "https://kottke.org/26/11/the-rose-by-jay-defeo"
- ],
- [
-  "Kottke",
-  "COO is Grand Theft Auto but with pigeons.",
-  "COO is Grand Theft Auto but with pigeons.",
-  "https://kottke.org/26/11/0050034-coo"
  ],
  [
   "The Public Domain Review",
@@ -289,27 +289,33 @@
  ],
  [
   "Phys.org",
-  "Excitons mimic light in atom-thin material, confirming decade-old quantum prediction",
-  "Combining their skills in theory and experiment, Yale researchers have observed for the first time a type of energy-carrying composite particle move in a highly unexpected way. It's a…",
-  "https://phys.org/news/2026-11-excitons-mimic-atom-thin-material.html"
+  "A new way to extract oxygen from lunar soil could support bases on the moon",
+  "Computer chip manufacturing and lunar exploration seem like completely different worlds. Yet our latest research suggests the two may be more closely connected than expected.",
+  "https://phys.org/news/2026-11-oxygen-lunar-soil-bases-moon.html"
  ],
  [
   "Phys.org",
-  "Researchers trace shifting pulsation modes in δ Scuti star KIC 4737720",
-  "Stars in the night sky may look calm and unchanging, but some are in fact constantly \"vibrating.\" Just as a musical instrument can sound several notes at once, a star can pulse in several…",
-  "https://phys.org/news/2026-11-shifting-pulsation-modes-scuti-star.html"
+  "Theory explains how fusion plasmas enter a state of improved energy confinement, solving a 40-year puzzle",
+  "Nuclear fusion promises a source of energy by combining light atomic nuclei, the same process that powers the sun. To achieve fusion on Earth, scientists must heat a gas to extreme…",
+  "https://phys.org/news/2026-11-theory-fusion-plasmas-state-energy.html"
  ],
  [
   "Phys.org",
-  "Venus-like conditions reveal how minerals could preserve traces of ancient water",
-  "Venus is one of the most inhospitable environments in our solar system, with surface temperatures hot enough to melt lead and atmospheric pressure nearly 100 times greater than Earth's. Yet…",
-  "https://phys.org/news/2026-11-venus-conditions-reveal-minerals-ancient.html"
+  "U.K.'s nature health check doesn't stack up in wildlife's favor—but volunteers are collecting plenty of…",
+  "As nature declines over time, it becomes easier to normalize an increasingly impoverished environment.",
+  "https://phys.org/news/2026-11-uk-nature-health-doesnt-stack.html"
  ],
  [
   "Phys.org",
-  "Tokyo's hidden methane: Survey pinpoints nearly 100 hot spots",
-  "Carbon dioxide (CO₂) has been the poster child of climate change, but another culprit could be flying just under the radar. Methane is a potent greenhouse gas with a global warming…",
-  "https://phys.org/news/2026-11-tokyo-hidden-methane-survey-hot.html"
+  "More worried, yet more hopeful: The paradox of young people's climate action",
+  "New research from NIHR School of Public Health Research, published in the Lancet Planetary Health, provides new insights into how taking action on climate can impact young people's climate…",
+  "https://phys.org/news/2026-11-paradox-young-people-climate-action.html"
+ ],
+ [
+  "Atlas Obscura",
+  "Visulahti Wax Museum in Mikkeli, Finland",
+  "Rather than being an impressive, polished wax museum, the Visulahti Wax Museum has become famous for its awkward, outdated, and sometimes unintentionally hilarious figures. The museum has…",
+  "https://www.atlasobscura.com/places/visulahti-wax-museum"
  ],
  [
   "Atlas Obscura",
@@ -328,12 +334,6 @@
   "Čigoč Stork Village in Kratečko, Croatia",
   "In the Croatian village of Čigoč, some of the most conspicuous residents live above the rooftops. White storks build bulky nests on traditional wooden houses, sharing the settlement with…",
   "https://www.atlasobscura.com/places/cigoc-stork-village"
- ],
- [
-  "Atlas Obscura",
-  "Thunder Hole in Bar Harbor, Maine",
-  "Located in Maine's Acadia National Park, along the rocky shoreline of Mount Desert Island, Thunder Hole is a natural geological formation known for producing a booming, thunder-like sound…",
-  "https://www.atlasobscura.com/places/thunder-hole-in-acadia-national-park"
  ],
  [
   "Colossal",
@@ -457,6 +457,18 @@
  ],
  [
   "Bloody Disgusting",
+  "New ‘Buffy the Vampire’ Novel Imagines the Slayer Becoming a Bloodsucker",
+  "Sarah Michelle Gellar‘s take on Buffy the Vampire Slayer in the small-screen series is a definitive journey for horror fans of all ages. The series debuted shortly after Scream helped…",
+  "https://bloody-disgusting.com/news/3976444/buffy-the-vampire-slayer-new-novel-2027/"
+ ],
+ [
+  "Bloody Disgusting",
+  "Control Is the Name of the Game in New ‘Nightholme’ Teaser [Watch]",
+  "Studio Ellipsis has released a new teaser for their upcoming PvEvP extraction title Nightholme, focusing on the need for restraint when it comes to noise. As the teaser implies, you…",
+  "https://bloody-disgusting.com/video-games/3976359/control-is-the-name-of-the-game-in-new-nightholme-teaser-watch/"
+ ],
+ [
+  "Bloody Disgusting",
   "Petition to Cancel Netflix’s ‘The Body’ From Religious Group Gets More Than 130,000 Signatures",
   "Netflix has a habit of debuting all-new series that spark lots of online discussion. Stranger Things ignited a lot of chatter in 2016 and Squid Game became a sensation in 2021, with even…",
   "https://bloody-disgusting.com/news/3976438/the-body-petition-netflix-cancellation-backlash-religious-group-signature/"
@@ -466,18 +478,6 @@
   "‘Carrie’ Star Amber Midthunder Reveals Deleted Scene, Prom Night Secrets and Working with Mike Flanagan",
   "Mike Flanagan’s Carrie has become a massive hit on Prime Video, bringing Stephen King‘s iconic story to a new generation with a terrifying and emotionally charged reimagining. .",
   "https://bloody-disgusting.com/interviews/3976233/carrie-star-amber-midthunder-reveals-deleted-scene-prom-night-secrets/"
- ],
- [
-  "Bloody Disgusting",
-  "Horror Series ‘FROM’ Is a Massive Hit on Netflix With 5 Billion Minutes Viewed Across Three Weeks",
-  "It was one month ago that the MGM+ horror series “FROM” hopped over to Netflix, with the first three seasons of the four season series (a fifth and final season is on the way!) now…",
-  "https://bloody-disgusting.com/tv/3976423/horror-series-from-is-a-massive-hit-on-netflix-with-5-billion-minutes-viewed-across-three-weeks/"
- ],
- [
-  "Bloody Disgusting",
-  "5 Scariest Episodes of ‘Mayfair Watchers Society’ You Need to Hear Before the Movie",
-  "It’s only natural to need a little extra motivation at the gym sometimes. That’s why some folks bring friends along so they can hype each other up. Others listen to heavy metal music and…",
-  "https://bloody-disgusting.com/editorials/3975924/5-of-the-scariest-episodes-of-the-mayfair-watchers-society-podcast/"
  ],
  [
   "BrooklynVegan",
@@ -577,27 +577,27 @@
  ],
  [
   "Mongabay",
-  "Japan looks to offshore wind to boost energy security, but hurdles remain",
-  "Japan has “tremendous potential” for offshore wind power, according to the national government and experts. But achieving that potential means overcoming major hurdles. While…",
-  "https://news.mongabay.com/2026/11/japan-looks-to-offshore-wind-to-boost-energy-security-but-hurdles-remain/"
+  "Ecuador copper mine advancing despite opposition from Indigenous communities",
+  "A proposed copper mine on Indigenous land in southeastern Ecuador is getting closer to opening despite opposition from some Shuar communities, who say they reject the project altogether and…",
+  "https://news.mongabay.com/2026/11/ecuador-copper-mine-advancing-despite-opposition-from-indigenous-communities/"
  ],
  [
   "Mongabay",
-  "Floating wind is building ‘A lot of momentum’ toward commercialization",
-  "It’s a little-known, nascent sustainable technology on the verge of commercialization: Floating wind turbines deployed across deep ocean waters could unlock vast amounts of renewable energy…",
-  "https://news.mongabay.com/2026/11/floating-wind-is-building-a-lot-of-momentum-toward-commercialization/"
+  "Could a short tail mean a new monkey species in Laos? Some scientists think so",
+  "There is no body. No genetic evidence — yet. There are just photos, but some scientists say those photos show a distinct enough primate to declare it a new species: the short-tailed langur…",
+  "https://news.mongabay.com/2026/11/could-a-short-tail-mean-a-new-monkey-species-in-laos-some-scientists-think-so/"
  ],
  [
   "Mongabay",
-  "Last Javan rhino habitat caught between mining plans and relocation debate",
-  "JAKARTA — Indonesian lawmakers and environmental groups are urging the government to revoke a mining map covering part of the waters around Ujung Kulon National Park, home to the world’s…",
-  "https://news.mongabay.com/2026/11/last-javan-rhino-habitat-caught-between-mining-plans-and-relocation-debate/"
+  "Quechua community in Peru builds up Andean bear camera trap project on their own reserve",
+  "Maribel Pacco grins as she recalls the first time she saw an Andean bear close-up in the wild. At the forest edge, a mother and her cubs browsed on bromeliads while the volunteer ranger…",
+  "https://news.mongabay.com/2026/11/quechua-community-in-peru-builds-up-andean-bear-camera-trap-project-on-their-own-reserve/"
  ],
  [
   "Mongabay",
-  "One in four land reptiles depends on rock habitats. Lack of protection leaves them in a hard place",
-  "More than a quarter of the world’s land reptiles depend on rocky habitats, yet these areas are often overlooked in conservation efforts, according to a recent study. For cold-blooded…",
-  "https://news.mongabay.com/short-article/2026/11/one-in-four-land-reptiles-depends-on-rock-habitats-lack-of-protection-leaves-them-in-a-hard-place/"
+  "UN climate talks slammed by activists, leaders as fossil fuels go unmentioned in draft agreement",
+  "ANTALYA, Turkey (AP) — Negotiators are still seeking concrete commitments for nations to transition away from fossil fuels, as this year’s U.N. climate summit reaches its final day. Friday…",
+  "https://news.mongabay.com/short-article/2026/11/un-climate-talks-slammed-by-activists-leaders-as-fossil-fuels-go-unmentioned-in-draft-agreement/"
  ],
  [
   "NASA Earth Observatory",
