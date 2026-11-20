@@ -3,6 +3,23 @@ import json, re, html, urllib.request, urllib.parse, xml.etree.ElementTree as ET
 # (name, home page, [feed addresses to try in order])
 SITES = [
  ("Boing Boing", "https://boingboing.net", ["https://boingboing.net/feed"]),
+     # Music and punk history
+    ("Louder Than War", "https://louderthanwar.com", ["https://louderthanwar.com/feed/"]),
+    ("Please Kill Me", "https://pleasekillme.com", ["https://pleasekillme.com/feed/"]),
+    ("Bandcamp Daily", "https://daily.bandcamp.com", ["https://daily.bandcamp.com/feed"]),
+
+    # Art, illustration, and art history
+    ("Beautiful Bizarre Magazine", "https://beautifulbizarre.net", ["https://beautifulbizarre.net/feed/"]),
+    ("StreetArtNews", "https://streetartnews.net", ["https://streetartnews.net/feed"]),
+    ("GraffitiStreet", "https://graffitistreet.com", ["https://graffitistreet.com/feed/"]),
+    ("Sour Harvest", "https://www.sourharvest.com", ["https://www.sourharvest.com/feed/"]),
+    ("DailyArt Magazine", "https://www.dailyartmagazine.com", ["https://www.dailyartmagazine.com/feed/"]),
+    ("Creative Boom", "https://www.creativeboom.com", ["https://www.creativeboom.com/feed/"]),
+
+    # Culture, history, and odd discoveries
+    ("Kottke", "https://kottke.org", ["https://feeds.kottke.org/main"]),
+    ("The Public Domain Review", "https://publicdomainreview.org", ["https://publicdomainreview.org/rss.xml"]),
+    ("The Kid Should See This", "https://thekidshouldseethis.com", ["https://thekidshouldseethis.com/feed"]),("Louder Than War", "https://louderthanwar.com", ["https://louderthanwar.com/feed/"]),
  ("Dangerous Minds", "https://dangerousminds.net", ["https://dangerousminds.net/feed"]),
  ("Phys.org", "https://phys.org", ["https://phys.org/rss-feed/"]),
  ("Atlas Obscura", "https://www.atlasobscura.com", ["https://www.atlasobscura.com/feeds/latest"]),
