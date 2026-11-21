@@ -47,14 +47,22 @@ SITES = [
  ("Audubon", "https://www.audubon.org/magazine", ["https://www.audubon.org/magazine/rss.xml", "https://www.audubon.org/rss.xml"], "Science"),
 ]
 CATS = ["Art", "Entertainment", "Oddities", "History", "Science"]
-PER_FEED = 6      # newest items read from each site
-PER_CAT = 12      # stories kept per category (bubbles use the newest ones first)
-MAX_PER_SITE = 2  # first pass: at most this many per site, so one busy site can't take over
+PER_FEED = 10     # newest items read from each site or search
+PER_CAT = 40      # stories kept per category (the page picks 7-8 per sheet, unseen ones first)
+MAX_PER_SITE = 3  # first pass: at most this many per site, so one busy site can't take over
+DROP = {"Smithsonian Ocean"}   # sources that block our servers; skipped even if they are in config.json
+TOPIC_DAYS = 30   # topic searches only look at stories from the last N days
 A = "{http://www.w3.org/2005/Atom}"
 MEDIA = "{http://search.yahoo.com/mrss/}"
 CONTENT = "{http://purl.org/rss/1.0/modules/content/}"
 DC = "{http://purl.org/dc/elements/1.1/}"
 UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36", "Accept": "application/rss+xml, application/xml, text/xml, */*"}
+AD = re.compile(r"\b(sponsored|advertorial|paid (post|partnership|content|promotion)|partner content|in partnership with|presented by|brand(ed)? content|promoted (post|content)|affiliate (links?|commission)|promo code|coupon code|discount code|\d+% off|deal alert|best deals?|gift guide|giveaway)\b", re.I)
+def is_ad(title, raw, cats=""):
+    body = html.unescape(re.sub(r"<[^>]+>", " ", raw or ""))[:700]
+    return bool(AD.search(title + " " + body + " " + cats))
+def norm(t):
+    return re.sub(r"[^a-z0-9]+", " ", t.lower()).strip()[:60]
 JUNK = re.compile(r"appeared first on|member|reader-supported|matter to you|support (independent|our)|subscribe|newsletter|sign up", re.I)
 IMG_EXT = re.compile(r"\.(jpe?g|png|webp|gif)(\?|$)", re.I)
 
@@ -127,6 +135,9 @@ def parse_xml(name, data):
         raw = text(it, "description", A + "summary", A + "content") + " " + text(it, CONTENT + "encoded")
         desc = clean(text(it, "description", A + "summary", A + "content"))
         ts = parse_date(text(it, "pubDate", "published", "updated", A + "published", A + "updated", DC + "date"))
+        cats = " ".join((c.text or "") for c in it.findall("category")) + " " + " ".join((c.get("term") or "") for c in it.findall(A + "category"))
+        if is_ad(title, raw, cats):
+            continue
         if title and link.strip().startswith("http"):
             out.append([name, title, desc or "Tap the button below for the full story.", link.strip(), "", find_image(it, raw), ts])
         if len(out) >= PER_FEED:
@@ -147,6 +158,8 @@ def loose(name, data):
             link = html.unescape(m.group(1)) if m else ""
         desc = clean(f("description") or f("summary") or f("content"))
         ts = parse_date(html.unescape(f("pubDate") or f("published") or f("updated")))
+        if is_ad(title, f("description") or f("summary") or f("content"), " ".join(re.findall(r"<category[^>]*>(.*?)</category>", blk, re.S | re.I))):
+            continue
         im = re.search(r"<media:(?:thumbnail|content)[^>]+url=[\"']([^\"']+)", blk, re.I) or re.search(r"<img[^>]+src=[\"']([^\"']+)", html.unescape(blk), re.I)
         if title and link.startswith("http"):
             out.append([name, title, desc or "Tap the button below for the full story.", link, "", good_img(im.group(1)) if im else "", ts])
@@ -181,10 +194,12 @@ def discover(home):
 
 def pick(stories):
     """Keep the newest PER_CAT stories in each category, spread across sites."""
-    seen, uniq = set(), []
+    seen, titles, uniq = set(), set(), []
     for s in stories:
-        if s[3] not in seen:
+        k = norm(s[1])
+        if s[3] not in seen and k not in titles:
             seen.add(s[3])
+            titles.add(k)
             uniq.append(s)
     final = []
     for cat in CATS:
@@ -250,9 +265,10 @@ def pin_story(url, cat):
 def main():
     cfg = load_cfg()
     sites = [(x["name"], x.get("home", ""), x.get("feeds", []), x["cat"]) for x in cfg["sites"] if x.get("cat") in CATS] if cfg.get("sites") else list(SITES)
+    sites = [x for x in sites if x[0] not in DROP]
     for t in cfg.get("topics", []):
         if t.get("q") and t.get("cat") in CATS:
-            sites.append(("Search: " + t["q"], "", ["https://news.google.com/rss/search?q=" + urllib.parse.quote(t["q"]) + "&hl=en-US&gl=US&ceid=US:en"], t["cat"]))
+            sites.append(("Search: " + t["q"], "", ["https://news.google.com/rss/search?q=" + urllib.parse.quote('"%s" when:%dd' % (t["q"], TOPIC_DAYS)) + "&hl=en-US&gl=US&ceid=US:en"], t["cat"]))
     blocked = [b.strip().lower() for b in cfg.get("blocked", []) if b.strip()]
     stories = []
     for name, home, feeds, cat in sites:
@@ -276,6 +292,13 @@ def main():
         print(name, len(got) if got else "SKIPPED")
         for s in got:
             s[4] = cat
+            if name.startswith("Search: "):
+                # Google News titles end with " - Publisher": show the publisher as the source
+                m = re.match(r"^(.*\S)\s+[-\u2013\u2014]\s+([^-\u2013\u2014]{2,40})$", s[1])
+                if m:
+                    s[1], s[0] = m.group(1), m.group(2).strip()
+                    if s[2].startswith(s[1]):
+                        s[2] = "Tap the button below for the full story."
         stories += got
     stories = [s for s in stories if not any(b in s[3].lower() or b in s[1].lower() for b in blocked)]
     pins = [pin_story(p["url"], p["cat"]) for p in cfg.get("pins", []) if p.get("url") and p.get("cat") in CATS]
