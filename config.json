@@ -98,14 +98,6 @@
    "cat": "Entertainment"
   },
   {
-   "name": "BrooklynVegan",
-   "home": "https://www.brooklynvegan.com",
-   "feeds": [
-    "https://www.brooklynvegan.com/feed/"
-   ],
-   "cat": "Entertainment"
-  },
-  {
    "name": "Beautiful Bizarre Magazine",
    "home": "https://beautifulbizarre.net",
    "feeds": [
@@ -272,8 +264,38 @@
   {
    "q": "Marcel Duchamp",
    "cat": "Art"
+  },
+  {
+   "q": "Lux Interior",
+   "cat": "Oddities"
+  },
+  {
+   "q": "David Byrne",
+   "cat": "Art"
+  },
+  {
+   "q": "David Bowie",
+   "cat": "Art"
+  },
+  {
+   "q": "Trent Reznor",
+   "cat": "Entertainment"
+  },
+  {
+   "q": "Guillermo del Toro",
+   "cat": "Entertainment"
+  },
+  {
+   "q": "Gael García Bernal",
+   "cat": "Entertainment"
+  },
+  {
+   "q": "Monet",
+   "cat": "Art"
   }
  ],
- "blocked": [],
+ "blocked": [
+  "Paid Promotion"
+ ],
  "pins": []
 }
