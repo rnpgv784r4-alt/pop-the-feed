@@ -357,7 +357,12 @@ def main():
     cfg = load_cfg()
     sites = [(x["name"], x.get("home", ""), x.get("feeds", []), x["cat"]) for x in cfg["sites"] if x.get("cat") in CATS] if cfg.get("sites") else list(SITES)
     sites = [x for x in sites if x[0] not in DROP]
+    seen_q = set()
     for t in cfg.get("topics", []):
+        k = (t.get("q", "").strip().lower(), t.get("cat"))
+        if k in seen_q:
+            continue
+        seen_q.add(k)
         if t.get("q") and t.get("cat") in CATS:
             sites.append(("Search: " + t["q"], "", ["https://news.google.com/rss/search?q=" + urllib.parse.quote('"%s" when:%dd' % (t["q"], TOPIC_DAYS)) + "&hl=en-US&gl=US&ceid=US:en"], t["cat"]))
     blocked = [b.strip().lower() for b in cfg.get("blocked", []) if b.strip()]
@@ -371,7 +376,7 @@ def main():
                 print("  try failed", name, url, e)
             if got:
                 break
-        if not got:
+        if not got and home:
             try:
                 for url in discover(home):
                     got = parse(name, get(url))
@@ -396,8 +401,8 @@ def main():
     stories = [p for p in pins if p] + stories
     final = pick(stories)
     # Topic stories come as Google News redirects: find the real article address so we can read its picture
-    cand = [s for s in final if gn_id(s[3])][:90]
-    with ThreadPoolExecutor(3) as ex:
+    cand = [s for s in final if gn_id(s[3])][:200]
+    with ThreadPoolExecutor(4) as ex:
         resolved = list(ex.map(lambda s: gn_resolve(s[3]), cand))
     ok = 0
     for s, u in zip(cand, resolved):
