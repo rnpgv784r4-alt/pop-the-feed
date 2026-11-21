@@ -2,7 +2,7 @@ import json, re, html, urllib.request, urllib.parse, xml.etree.ElementTree as ET
 from email.utils import parsedate_to_datetime
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor
-import time
+import time, base64
 
 # (name, home page, [feed addresses to try in order], category)
 # Categories must be exactly: Art, Entertainment, Oddities, History, Science
@@ -235,6 +235,93 @@ def og_image(url):
         pass
     return ""
 
+GN = re.compile(r"^https?://news\.google\.com/(?:rss/)?articles/([^?/#]+)")
+def gn_id(url):
+    m = GN.match(url or "")
+    return m.group(1) if m else None
+
+def gn_old(gid):
+    """Older Google News links carry the real address inside the id itself."""
+    try:
+        b = base64.urlsafe_b64decode(gid + "=" * (-len(gid) % 4))
+    except Exception:
+        return ""
+    if b.startswith(b"\x08\x13\x22"):
+        b = b[3:]
+    if b.endswith(b"\xd2\x01\x00"):
+        b = b[:-3]
+    if not b:
+        return ""
+    if b[0] >= 0x80 and len(b) > 1:
+        n, start = (b[0] & 0x7F) | (b[1] << 7), 2
+    else:
+        n, start = b[0], 1
+    u = b[start:start + n].decode("utf-8", "ignore")
+    return u if u.startswith("http") else ""
+
+def gn_parse_batch(text):
+    parts = text.split("\n\n")
+    data = json.loads(parts[1])[:-2]
+    u = json.loads(data[0][2])[1]
+    return u if isinstance(u, str) and u.startswith("http") else ""
+
+def gn_new(gid):
+    """Newer links need one question to Google's own page, which answers with the real address."""
+    page = ""
+    for base in ("https://news.google.com/rss/articles/", "https://news.google.com/articles/"):
+        try:
+            page = get(base + gid).decode("utf-8", "ignore")
+        except Exception:
+            continue
+        if "data-n-a-sg" in page:
+            break
+    sg = re.search(r'data-n-a-sg="([^"]+)"', page)
+    ts = re.search(r'data-n-a-ts="([^"]+)"', page)
+    if not (sg and ts):
+        return ""
+    inner = ('["garturlreq",[["X","X",["X","X"],null,null,1,1,"US:en",null,1,null,null,null,null,null,0,1],"X","X",1,[1,1,1],1,1,null,0,0,null,0],"%s",%s,"%s"]'
+             % (gid, ts.group(1), sg.group(1)))
+    body = ("f.req=" + urllib.parse.quote(json.dumps([[["Fbv4je", inner]]]))).encode()
+    req = urllib.request.Request("https://news.google.com/_/DotsSplashUi/data/batchexecute", data=body,
+                                 headers={"Content-Type": "application/x-www-form-urlencoded;charset=UTF-8", "User-Agent": UA["User-Agent"]})
+    return gn_parse_batch(urllib.request.urlopen(req, timeout=20).read().decode("utf-8", "ignore"))
+
+def gn_resolve(url):
+    gid = gn_id(url)
+    if not gid:
+        return ""
+    try:
+        u = gn_old(gid) or gn_new(gid)
+    except Exception as e:
+        print("  could not resolve", url[:70], e)
+        return ""
+    return u if u and not gn_id(u) else ""
+
+def og_meta(url):
+    """Picture and description from an article's own page."""
+    img, desc = "", ""
+    try:
+        page = urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=10).read(400000).decode("utf-8", "ignore")
+    except Exception:
+        return "", ""
+    for p in (r'<meta[^>]+property=["\']og:image(?::secure_url)?["\'][^>]*content=["\']([^"\']+)',
+              r'<meta[^>]+content=["\']([^"\']+)["\'][^>]*property=["\']og:image["\']',
+              r'<meta[^>]+name=["\']twitter:image["\'][^>]*content=["\']([^"\']+)'):
+        m = re.search(p, page, re.I)
+        if m:
+            img = good_img(urllib.parse.urljoin(url, html.unescape(m.group(1))))
+            if img:
+                break
+    for p in (r'<meta[^>]+property=["\']og:description["\'][^>]*content=["\']([^"\']+)',
+              r'<meta[^>]+content=["\']([^"\']+)["\'][^>]*property=["\']og:description["\']',
+              r'<meta[^>]+name=["\']description["\'][^>]*content=["\']([^"\']+)'):
+        m = re.search(p, page, re.I)
+        if m:
+            desc = clean(m.group(1))
+            if desc:
+                break
+    return img, desc
+
 def load_cfg():
     try:
         return json.load(open("config.json"))
@@ -308,10 +395,24 @@ def main():
     pins = [pin_story(p["url"], p["cat"]) for p in cfg.get("pins", []) if p.get("url") and p.get("cat") in CATS]
     stories = [p for p in pins if p] + stories
     final = pick(stories)
-    missing = [s for s in final if not s[5]]
+    # Topic stories come as Google News redirects: find the real article address so we can read its picture
+    cand = [s for s in final if gn_id(s[3])][:90]
+    with ThreadPoolExecutor(3) as ex:
+        resolved = list(ex.map(lambda s: gn_resolve(s[3]), cand))
+    ok = 0
+    for s, u in zip(cand, resolved):
+        if u:
+            s[3] = u
+            ok += 1
+    print("resolved", ok, "of", len(cand), "Google News links")
+    final = [s for s in final if not (DEALURL.search(s[3]) or any(b in s[3].lower() for b in blocked))]
+    need = [s for s in final if not gn_id(s[3]) and (not s[5] or s[2].startswith("Tap the button"))]
     with ThreadPoolExecutor(8) as ex:
-        for s, u in zip(missing, ex.map(lambda s: og_image(s[3]), missing)):
-            s[5] = u
+        for s, (img, desc) in zip(need, ex.map(lambda s: og_meta(s[3]), need)):
+            if not s[5]:
+                s[5] = img
+            if desc and s[2].startswith("Tap the button"):
+                s[2] = desc
     for c in CATS:
         mine = [s for s in final if s[4] == c]
         print(c, len(mine), "stories,", sum(1 for s in mine if s[5]), "with pictures")
