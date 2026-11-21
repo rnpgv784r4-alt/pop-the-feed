@@ -258,6 +258,12 @@
     "https://www.audubon.org/rss.xml"
    ],
    "cat": "Science"
+  },
+  {
+   "name": "Sound Art",
+   "home": "https://www.creativeboom.com/news/apple-musics-new-logo-was-shaped-by-fred-again-and-a-bath-of-mineral-oil/",
+   "feeds": [],
+   "cat": "Art"
   }
  ],
  "topics": [
@@ -292,6 +298,10 @@
   {
    "q": "Monet",
    "cat": "Art"
+  },
+  {
+   "q": "Patrick Stewart",
+   "cat": "Entertainment"
   }
  ],
  "blocked": [
