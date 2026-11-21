@@ -46,6 +46,8 @@ html,body{height:100%;margin:0;background:#35024a;overflow:hidden;overscroll-beh
 #toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 18px);transform:translateX(-50%);background:rgba(30,8,50,.85);color:#fff;padding:10px 16px;border-radius:18px;font:600 14px system-ui,sans-serif;display:none;z-index:6}
 #thumb{width:84px;height:84px;object-fit:cover;flex:none;border:1px solid #7a96d8;border-radius:3px;background:#d9d6c3}
 #ptr{position:fixed;left:50%;top:calc(var(--bh,210px) + 6px);transform:translateX(-50%);opacity:0;z-index:4;pointer-events:none;background:rgba(53,2,74,.92);color:#fff;font:600 13px system-ui,sans-serif;padding:6px 14px;border-radius:16px;transition:opacity .15s}
+.cat.done span::after{content:' ✓'}
+#lvl{position:fixed;left:50%;top:calc(var(--bh,210px) + 10px);transform:translateX(-50%);opacity:0;z-index:6;pointer-events:none;background:rgba(53,2,74,.94);border:1px solid #6b2d86;color:#fff;font:700 15px system-ui,sans-serif;padding:8px 18px;border-radius:18px;white-space:nowrap}
 </style></head><body>
 <div id="scroll"><div id="inner">
 <svg id="svg" viewBox="0 0 1179 5112" preserveAspectRatio="xMidYMin meet" xmlns="http://www.w3.org/2000/svg">
@@ -54,10 +56,11 @@ html,body{height:100%;margin:0;background:#35024a;overflow:hidden;overscroll-beh
 <g id="gl"></g><g id="layer"></g>
 </svg></div></div>
 <div id="bar"><div id="top"><div id="side"><span id="cnt">0 / 39</span><small>popped</small></div><img id="logoimg" src="logo-banner.png" alt="Pop The Feed"><button id="reset" aria-label="Refresh"><img src="refresh.png" alt="Refresh"></button></div>
-<div id="cats"><button class="cat" data-c="Art">Art</button><button class="cat" data-c="Entertainment">Entertainment</button><button class="cat" data-c="Oddities">Oddities</button><button class="cat" data-c="History">History</button><button class="cat" data-c="Science">Science</button></div></div>
+<div id="cats"><button class="cat" data-c="Art"><span>Art</span></button><button class="cat" data-c="Entertainment"><span>Entertainment</span></button><button class="cat" data-c="Oddities"><span>Oddities</span></button><button class="cat" data-c="History"><span>History</span></button><button class="cat" data-c="Science"><span>Science</span></button></div></div>
 <label id="hp" style="position:fixed;bottom:2px;left:2px;width:44px;height:26px;opacity:.01;pointer-events:none;z-index:-1"><input type="checkbox" switch></label>
-<div id="ver" style="position:fixed;right:6px;bottom:calc(env(safe-area-inset-bottom,0px) + 2px);font:10px system-ui,sans-serif;color:#fff;opacity:.35;z-index:4;pointer-events:none">v8 shuffle</div>
+<div id="ver" style="position:fixed;right:6px;bottom:calc(env(safe-area-inset-bottom,0px) + 2px);font:10px system-ui,sans-serif;color:#fff;opacity:.35;z-index:4;pointer-events:none">v10 level-up</div>
 <div id="ptr">Pull to refresh</div>
+<div id="lvl"></div>
 <div id="toast">All popped! Tap Refresh for more.</div>
 <div id="ov"><div id="card"><div id="tb"><i id="logo"><u></u><u></u><u></u><u></u></i><span id="ttl">Pop The Feed</span><b id="x">&#10005;</b></div><div id="bd"><div id="row"><img id="thumb" alt="" referrerpolicy="no-referrer" style="display:none"><svg id="warn" viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="12" y="1" width="1" height="1" fill="#ffffff"/><rect x="10" y="3" width="1" height="1" fill="#c9a2ff"/><rect x="13" y="4" width="1" height="1" fill="#c9a2ff"/><rect x="3" y="5" width="4" height="1" fill="#3a1670"/><rect x="2" y="6" width="1" height="1" fill="#3a1670"/><rect x="3" y="6" width="2" height="1" fill="#c9a2ff"/><rect x="5" y="6" width="3" height="1" fill="#9a5bec"/><rect x="1" y="7" width="1" height="1" fill="#3a1670"/><rect x="2" y="7" width="1" height="1" fill="#c9a2ff"/><rect x="3" y="7" width="2" height="1" fill="#ffffff"/><rect x="5" y="7" width="4" height="1" fill="#9a5bec"/><rect x="0" y="8" width="1" height="1" fill="#3a1670"/><rect x="1" y="8" width="1" height="1" fill="#c9a2ff"/><rect x="2" y="8" width="2" height="1" fill="#ffffff"/><rect x="4" y="8" width="6" height="1" fill="#9a5bec"/><rect x="10" y="8" width="1" height="1" fill="#3a1670"/><rect x="0" y="9" width="1" height="1" fill="#3a1670"/><rect x="1" y="9" width="1" height="1" fill="#c9a2ff"/><rect x="2" y="9" width="1" height="1" fill="#ffffff"/><rect x="3" y="9" width="7" height="1" fill="#9a5bec"/><rect x="10" y="9" width="1" height="1" fill="#3a1670"/><rect x="0" y="10" width="1" height="1" fill="#3a1670"/><rect x="1" y="10" width="8" height="1" fill="#9a5bec"/><rect x="9" y="10" width="1" height="1" fill="#7a3dc8"/><rect x="10" y="10" width="1" height="1" fill="#3a1670"/><rect x="0" y="11" width="1" height="1" fill="#3a1670"/><rect x="1" y="11" width="8" height="1" fill="#9a5bec"/><rect x="9" y="11" width="1" height="1" fill="#7a3dc8"/><rect x="10" y="11" width="1" height="1" fill="#3a1670"/><rect x="0" y="12" width="1" height="1" fill="#3a1670"/><rect x="1" y="12" width="7" height="1" fill="#9a5bec"/><rect x="8" y="12" width="2" height="1" fill="#7a3dc8"/><rect x="10" y="12" width="1" height="1" fill="#3a1670"/><rect x="1" y="13" width="1" height="1" fill="#3a1670"/><rect x="2" y="13" width="4" height="1" fill="#9a5bec"/><rect x="6" y="13" width="3" height="1" fill="#7a3dc8"/><rect x="9" y="13" width="1" height="1" fill="#3a1670"/><rect x="2" y="14" width="1" height="1" fill="#3a1670"/><rect x="3" y="14" width="5" height="1" fill="#7a3dc8"/><rect x="8" y="14" width="1" height="1" fill="#3a1670"/><rect x="3" y="15" width="5" height="1" fill="#3a1670"/></svg><div id="msg"><span id="src"></span><b id="hl"></b></div></div><p id="sm"></p><button id="more">Read More</button></div></div></div>
 <script>
@@ -129,16 +132,29 @@ B.forEach((b,i)=>{
  h.addEventListener('pointerup',e=>{const s=ps[i];ps[i]=0;if(s&&Math.hypot(e.clientX-s[0],e.clientY-s[1])<12&&Date.now()-s[2]<700)pop(i)});
  layer.appendChild(h);
 });
+const CL=['Art','Entertainment','Oddities','History','Science'],CC={Art:'#D63384',Entertainment:'#E8603C',Oddities:'#E8A020',History:'#8E7BE0',Science:'#1FA58C'},catT={},catN={};let pendingCat=null;
+CL.forEach(c=>{catT[c]=B.filter(b=>b[4]===c).length;catN[c]=0});
+function setNs(){document.querySelectorAll('.cat').forEach(b=>b.classList.toggle('done',catN[b.dataset.c]>=catT[b.dataset.c]))}
+function chime(big){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();const t=AC.currentTime,ns=big?[523.25,659.25,783.99,1046.5,1318.5]:[587.33,739.99,880];ns.forEach((f,k)=>{const o=AC.createOscillator(),g=AC.createGain();o.type='triangle';o.frequency.value=f;const st=t+k*.085;g.gain.setValueAtTime(.0001,st);g.gain.exponentialRampToValueAtTime(.22,st+.015);g.gain.exponentialRampToValueAtTime(.001,st+.35);o.connect(g);g.connect(AC.destination);o.start(st);o.stop(st+.4)})}catch(e){}}
+function celebrate(c,big){
+ const r=document.querySelector('.cat[data-c="'+c+'"]').getBoundingClientRect(),ox=r.left+r.width/2,oy=r.top+r.height/2;
+ chime(big);hap();setTimeout(hap,170);
+ if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const n=big?70:34;for(let k=0;k<n;k++){const p=document.createElement('i'),w=5+Math.random()*6;
+  p.style.cssText='position:fixed;left:'+ox+'px;top:'+oy+'px;width:'+w+'px;height:'+(w*1.5)+'px;background:'+(k%4===0?'#fff':CC[c])+';border-radius:1px;pointer-events:none;z-index:9';document.body.appendChild(p);
+  const a=Math.random()*Math.PI*2,sp=(big?170:120)*(.4+Math.random()),dx=Math.cos(a)*sp,dy=Math.sin(a)*sp-40,fall=120+Math.random()*120,rot=Math.random()*720-360;
+  p.animate([{transform:'translate(0,0) rotate(0deg)',opacity:1},{transform:'translate('+dx+'px,'+dy+'px) rotate('+(rot/2)+'deg)',opacity:1,offset:.45},{transform:'translate('+(dx*1.15)+'px,'+(dy+fall)+'px) rotate('+rot+'deg)',opacity:0}],{duration:1000+Math.random()*350,easing:'cubic-bezier(.2,.7,.3,1)'}).onfinish=()=>p.remove()}}
+ if(!big){const l=$('lvl');l.textContent=c+' complete!';l.getAnimations().forEach(a=>a.cancel());l.animate([{opacity:0,transform:'translate(-50%,-14px)'},{opacity:1,transform:'translate(-50%,0)',offset:.2},{opacity:1,transform:'translate(-50%,0)',offset:.75},{opacity:0,transform:'translate(-50%,-6px)'}],{duration:1500})}
+}
 function setCnt(){$('cnt').textContent=popped+' / '+N}
 function pop(i){
  if(cur)return;lastPop=Date.now();snd();$('p'+i).classList.add('on');$('h'+i).classList.add('done');$('g'+i).classList.remove('on');
- popped++;setCnt();
+ popped++;setCnt();const pc=B[i][4];catN[pc]++;setNs();if(catN[pc]===catT[pc])pendingCat=pc;
  cur=storyFor(i);$('src').textContent=cur[0];$('more').textContent='Read at '+cur[0];$('hl').textContent=cur[1];$('sm').textContent=cur[2];
  const th=$('thumb'),wr=$('warn');th.style.display='none';wr.style.display='';th.onload=null;th.onerror=null;
  if(cur[5]){th.onload=()=>{th.style.display='block';wr.style.display='none'};th.onerror=()=>{th.style.display='none';wr.style.display=''};th.src=cur[5]}
  setTimeout(()=>$('ov').classList.add('show'),90);
 }
-function closeCard(){closedAt=Date.now();$('ov').classList.remove('show');cur=null;if(popped>=N){$('reset').classList.add('ready');$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',3500)}}
+function closeCard(){closedAt=Date.now();$('ov').classList.remove('show');cur=null;const pc=pendingCat;pendingCat=null;if(popped>=N){$('reset').classList.add('ready');$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',3500)}if(pc)celebrate(pc,popped>=N)}
 let sx=0,sy=0,t0=0;const ov=$('ov');
 ov.addEventListener('pointerdown',e=>{sx=e.clientX;sy=e.clientY;t0=Date.now()});
 ov.addEventListener('pointerup',e=>{
@@ -157,7 +173,7 @@ document.querySelectorAll('.cat').forEach(btn=>{
  btn.addEventListener('contextmenu',e=>e.preventDefault());
 });
 function loadStories(){fetch('stories.json?'+Date.now()).then(r=>r.ok?r.json():[]).then(d=>{if(Array.isArray(d)&&d.length){const j=JSON.stringify(d);if(j!==SJ){S=d;SJ=j;build()}}}).catch(()=>{})}
-function doReset(){popped=0;setCnt();$('reset').classList.remove('ready');document.querySelectorAll('.pop').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.hit').forEach(x=>x.classList.remove('done'));applyGlow();closeCard();build();$('scroll').scrollTo({top:0,behavior:'smooth'});loadStories()}
+function doReset(){popped=0;CL.forEach(c=>catN[c]=0);pendingCat=null;setNs();setCnt();$('reset').classList.remove('ready');document.querySelectorAll('.pop').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.hit').forEach(x=>x.classList.remove('done'));applyGlow();closeCard();build();$('scroll').scrollTo({top:0,behavior:'smooth'});loadStories()}
 $('reset').addEventListener('click',doReset);
 const pt=$('ptr'),sc=$('scroll'),inn=$('inner');let py=null,pull=0;
 function mv(y,anim){inn.style.transition=anim?'transform .35s cubic-bezier(.2,.8,.3,1)':'none';inn.style.transform='translateY('+y+'px)';pt.style.transform='translateX(-50%) translateY('+(y/2-16)+'px)'}
@@ -169,5 +185,5 @@ sc.addEventListener('touchend',ptrEnd);
 sc.addEventListener('touchcancel',()=>{ptrOff();py=null;pull=0});
 function setBH(){document.documentElement.style.setProperty('--bh',$('bar').offsetHeight+'px')}
 addEventListener('resize',setBH);addEventListener('load',setBH);$('logoimg').addEventListener('load',setBH);if(window.ResizeObserver)new ResizeObserver(setBH).observe($('bar'));setBH();
-setCnt();loadStories();
+setCnt();setNs();loadStories();
 </script></body></html>
