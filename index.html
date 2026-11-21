@@ -37,7 +37,9 @@ html,body{height:100%;margin:0;background:#35024a;overflow:hidden;overscroll-beh
 #card #bd{padding-bottom:14px}
 #card,#achcard{width:min(100vw,460px);box-sizing:border-box;background:#ece9d8;border:3px solid #0a3fd6;border-top:0;border-bottom:0;border-radius:12px 12px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,.55);font:13px Tahoma,Verdana,sans-serif;color:#000;transform:translateY(105%);transition:transform .32s cubic-bezier(.2,.9,.3,1)}
 #ov.show #card,#achov.show #achcard{transform:none}
-#ov{align-items:flex-start}#ov #card{width:min(90vw,400px);margin-top:43vh;border-bottom:3px solid #0a3fd6;border-radius:12px;transform:translateY(60vh)}#ov.show #card{transform:none}
+#ov #card,#achov #achcard{position:absolute;left:50%;top:43%;width:min(88vw,400px)!important;max-width:88vw;margin:0;border-bottom:3px solid #0a3fd6;border-radius:12px;transform:translate(-50%,70vh)}
+#ov.show #card,#achov.show #achcard{transform:translate(-50%,0)}
+#achcard #abd{padding-bottom:14px}
 #tb,#atb{display:flex;align-items:center;gap:6px;height:30px;margin:0 -3px;padding:0 5px;border-radius:9px 9px 0 0;background:linear-gradient(#3c8cf5,#0a5be0 12%,#0553d8 85%,#0a3fd6)}
 #logo,#alogo{display:grid;grid-template:1fr 1fr/1fr 1fr;gap:1px;width:16px;height:16px;transform:skew(-4deg)}
 :is(#logo,#alogo) u{display:block}:is(#logo,#alogo) u:nth-child(1){background:#f35325}:is(#logo,#alogo) u:nth-child(2){background:#81bc06}:is(#logo,#alogo) u:nth-child(3){background:#05a6f0}:is(#logo,#alogo) u:nth-child(4){background:#ffba08}
