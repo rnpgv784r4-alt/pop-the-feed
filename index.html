@@ -54,14 +54,13 @@ html,body{height:100%;margin:0;background:#35024a;overflow:hidden;overscroll-beh
 <div id="scroll"><div id="inner">
 <svg id="svg" viewBox="0 0 1179 5112" preserveAspectRatio="xMidYMin meet" xmlns="http://www.w3.org/2000/svg">
 <defs id="defs"><filter id="gb" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="16"/></filter></defs>
-<image href="bubbles.jpg" x="0" y="-2138" width="1179" height="5112"/>
-<image href="bubbles.jpg" x="0" y="0" width="1179" height="5112"/>
+<image href="bubbles-v2.jpg" x="0" y="-400" width="1179" height="5512"/>
 <g id="gl"></g><g id="layer"></g>
 </svg></div></div>
 <div id="bar"><div id="top"><div id="side"><span id="cnt">0 / 39</span><small>popped</small></div><img id="logoimg" src="logo-banner.png" alt="Pop The Feed"><button id="reset" aria-label="Refresh"><img src="refresh.png" alt="Refresh"></button></div>
 <div id="cats"><button class="cat" data-c="Art"><span>Art</span></button><button class="cat" data-c="Entertainment"><span>Entertainment</span></button><button class="cat" data-c="Oddities"><span>Oddities</span></button><button class="cat" data-c="History"><span>History</span></button><button class="cat" data-c="Science"><span>Science</span></button></div></div>
 <label id="hp" style="position:fixed;bottom:2px;left:2px;width:44px;height:26px;opacity:.01;pointer-events:none;z-index:-1"><input type="checkbox" switch></label>
-<div id="ver" style="position:fixed;right:6px;bottom:calc(env(safe-area-inset-bottom,0px) + 2px);font:10px system-ui,sans-serif;color:#fff;opacity:.35;z-index:4;pointer-events:none">v11 shadow</div>
+<div id="ver" style="position:fixed;right:6px;bottom:calc(env(safe-area-inset-bottom,0px) + 2px);font:10px system-ui,sans-serif;color:#fff;opacity:.35;z-index:4;pointer-events:none">v12 seamless</div>
 <div id="ptr">Pull to refresh</div>
 <div id="lvl"></div>
 <div id="toast">All popped! Tap Refresh for more.</div>
@@ -129,7 +128,9 @@ const ps={};
 B.forEach((b,i)=>{
  const cp=el('clipPath',{id:'c'+i});cp.appendChild(el('ellipse',{cx:b[0],cy:b[1],rx:b[2],ry:b[3]}));defs.appendChild(cp);
  gl.appendChild(el('ellipse',{cx:b[0],cy:b[1],rx:b[2]+8,ry:b[3]+8,class:'glow',id:'g'+i,stroke:GC[b[4]]}));
- const g=el('g',{'clip-path':'url(#c'+i+')',class:'pop',id:'p'+i});g.appendChild(el('image',{href:'bubbles-popped.jpg',x:0,y:0,width:1179,height:5112}));layer.appendChild(g);
+ const g=el('g',{'clip-path':'url(#c'+i+')',class:'pop',id:'p'+i});g.appendChild(el('image',{href:'bubbles-popped-v2.jpg',x:0,y:-400,width:1179,height:5512}));layer.appendChild(g);
+ if(b[1]>1500&&b[1]<1900){const cq=el('clipPath',{id:'cq'+i});cq.appendChild(el('ellipse',{cx:b[0],cy:b[1]-2138,rx:b[2],ry:b[3]}));defs.appendChild(cq);
+  const q=el('g',{'clip-path':'url(#cq'+i+')',class:'pop',id:'q'+i});q.appendChild(el('image',{href:'bubbles-popped-v2.jpg',x:0,y:-400,width:1179,height:5512}));layer.appendChild(q)}
  const h=el('ellipse',{cx:b[0],cy:b[1],rx:b[2]-8,ry:b[3]-8,class:'hit',id:'h'+i});
  h.addEventListener('pointerdown',e=>{ps[i]=[e.clientX,e.clientY,Date.now()]});
  h.addEventListener('pointerup',e=>{const s=ps[i];ps[i]=0;if(s&&Math.hypot(e.clientX-s[0],e.clientY-s[1])<12&&Date.now()-s[2]<700)pop(i)});
@@ -150,7 +151,7 @@ function celebrate(c,big){
 }
 function setCnt(){$('cnt').textContent=popped+' / '+N}
 function pop(i){
- if(cur)return;lastPop=Date.now();snd();$('p'+i).classList.add('on');$('h'+i).classList.add('done');$('g'+i).classList.remove('on');
+ if(cur)return;lastPop=Date.now();snd();$('p'+i).classList.add('on');if($('q'+i))$('q'+i).classList.add('on');$('h'+i).classList.add('done');$('g'+i).classList.remove('on');
  popped++;setCnt();const pc=B[i][4];catN[pc]++;setNs();if(catN[pc]===catT[pc])pendingCat=pc;
  cur=storyFor(i);$('src').textContent=cur[0];$('more').textContent='Read at '+cur[0];$('hl').textContent=cur[1];$('sm').textContent=cur[2];
  const th=$('thumb'),wr=$('warn');th.style.display='none';wr.style.display='';th.onload=null;th.onerror=null;
