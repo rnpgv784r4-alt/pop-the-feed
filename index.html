@@ -69,6 +69,7 @@ html,body{height:100%;margin:0;background:#35024a;overflow:hidden;overscroll-beh
 #svg{overflow:visible}
 #side{justify-self:center;align-items:center;text-align:center;margin:0}#reset{justify-self:center;margin:0}
 #logoimg{transform:translateX(5px)}
+#cats{position:relative;z-index:3}#logoimg,#side,#reset img{-webkit-user-drag:none}#logoimg{pointer-events:none}
 </style></head><body>
 <div id="scroll"><div id="inner">
 <svg id="svg" viewBox="0 0 1179 5112" preserveAspectRatio="xMidYMin meet" xmlns="http://www.w3.org/2000/svg">
@@ -207,7 +208,9 @@ ov.addEventListener('click',()=>{if(Date.now()-closedAt<600)hap()});
 let act=null;
 function applyGlow(){B.forEach((b,i)=>$('g'+i).classList.toggle('on',b[4]===act&&!$('h'+i).classList.contains('done')));document.querySelectorAll('.cat').forEach(x=>x.classList.toggle('held',x.dataset.c===act))}
 document.querySelectorAll('.cat').forEach(btn=>{
- btn.addEventListener('click',()=>{act=act===btn.dataset.c?null:btn.dataset.c;applyGlow()});
+ let lastT=0;const tgl=()=>{act=act===btn.dataset.c?null:btn.dataset.c;applyGlow()};
+ btn.addEventListener('pointerup',e=>{if(e.pointerType==='mouse')return;lastT=Date.now();tgl()});
+ btn.addEventListener('click',()=>{if(Date.now()-lastT>600)tgl()});
  btn.addEventListener('contextmenu',e=>e.preventDefault());
 });
 function loadStories(){fetch('stories.json?'+Date.now()).then(r=>r.ok?r.json():[]).then(d=>{if(Array.isArray(d)&&d.length){const j=JSON.stringify(d);if(j!==SJ){S=d;SJ=j;build()}}}).catch(()=>{})}
