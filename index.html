@@ -16,37 +16,47 @@ html,body{height:100%;margin:0;background:#35024a;overflow:hidden;overscroll-beh
 #bar{position:fixed;top:0;left:0;right:0;z-index:5;background:#35024a;color:#fff;padding:calc(env(safe-area-inset-top,0px) + 4px) 10px 8px;box-sizing:border-box}
 #top{display:grid;grid-template-columns:1fr auto 1fr;align-items:end}
 #logoimg{width:min(250px,64vw);height:auto;display:block}
-#side{display:flex;flex-direction:column;line-height:1.15;padding-bottom:8px}
+#side{align-self:stretch;display:flex;flex-direction:column;justify-content:space-between;line-height:1.15;padding-bottom:8px;min-width:0}
+#cn{display:flex;flex-direction:column}
+#rank{display:flex;flex-direction:column;gap:1px;padding-top:2px}
+#lv{font:800 13px system-ui,sans-serif;color:#ffe9a8;letter-spacing:.02em}
+#rk{font:600 10px/1.15 system-ui,sans-serif;color:#d9c4f0;overflow-wrap:anywhere}
 #cnt{font-weight:600;font-size:16px}#side small{font-size:11px;color:#d9c4f0}
 #reset{justify-self:end;background:none;border:0;padding:0 0 8px;margin:0;cursor:pointer}
 #reset img{width:30px;height:30px;display:block;opacity:.4;transition:opacity .2s}
 #reset.ready img{opacity:1;animation:blink 1.1s ease-in-out infinite}
 @keyframes blink{0%,100%{opacity:.65;filter:drop-shadow(0 0 2px #fff)}50%{opacity:1;filter:drop-shadow(0 0 8px #ffe9a8) drop-shadow(0 0 16px #fff)}}
-#cats{display:flex;justify-content:space-between;margin-top:6px;padding:0 4px}
-.cat{background:none;border:0;color:#fff;font:600 13px system-ui,sans-serif;padding:8px 4px;touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
-.cat.held{text-decoration:underline}
-#ov{position:fixed;inset:0;background:rgba(20,5,35,.55);display:none;align-items:center;justify-content:center;z-index:10;touch-action:none}
-#ov.show{display:flex}
-#card{width:min(90vw,400px);background:#ece9d8;border:3px solid #0a3fd6;border-top:0;border-radius:9px 9px 3px 3px;box-shadow:0 12px 40px rgba(0,0,0,.55);font:13px Tahoma,Verdana,sans-serif;color:#000;transform:scale(.2);opacity:0;transition:transform .28s cubic-bezier(.3,1.6,.5,1),opacity .15s}
-#ov.show #card{transform:scale(1);opacity:1}
-#tb{display:flex;align-items:center;gap:6px;height:30px;margin:0 -3px;padding:0 5px;border-radius:8px 8px 0 0;background:linear-gradient(#3c8cf5,#0a5be0 12%,#0553d8 85%,#0a3fd6)}
-#logo{display:grid;grid-template:1fr 1fr/1fr 1fr;gap:1px;width:16px;height:16px;transform:skew(-4deg)}
-#logo u{display:block}#logo u:nth-child(1){background:#f35325}#logo u:nth-child(2){background:#81bc06}#logo u:nth-child(3){background:#05a6f0}#logo u:nth-child(4){background:#ffba08}
-#ttl{flex:1;color:#fff;font:700 15px 'Trebuchet MS',Tahoma,sans-serif;text-shadow:1px 1px #0a1f78}
-#x{width:22px;height:22px;box-sizing:border-box;border:1px solid #fff;border-radius:3px;background:linear-gradient(#e9775a,#c8401f);color:#fff;text-align:center;font:700 13px/20px Arial,sans-serif;cursor:pointer}
-#bd{padding:16px 14px 14px}
+#cats{display:flex;justify-content:space-between;gap:4px;margin-top:6px;padding:0 2px}
+.cat{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.32);border-radius:999px;color:#fff;font:600 11.5px system-ui,sans-serif;padding:11px 3px;flex:1 1 auto;text-align:center;white-space:nowrap;touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+@media(max-width:375px){.cat{font-size:10.5px;padding:11px 2px}#cats{gap:3px}}
+.cat.held{background:#fff;color:#35024a;border-color:#fff;box-shadow:0 0 0 2px rgba(255,255,255,.25)}
+#ov,#achov{position:fixed;inset:0;background:rgba(20,5,35,.55);display:none;align-items:flex-end;justify-content:center;z-index:10;touch-action:none}
+#achov{z-index:11}
+#ov.show,#achov.show{display:flex}
+#card,#achcard{width:min(100vw,460px);box-sizing:border-box;background:#ece9d8;border:3px solid #0a3fd6;border-top:0;border-bottom:0;border-radius:12px 12px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,.55);font:13px Tahoma,Verdana,sans-serif;color:#000;transform:translateY(105%);transition:transform .32s cubic-bezier(.2,.9,.3,1)}
+#ov.show #card,#achov.show #achcard{transform:none}
+#tb,#atb{display:flex;align-items:center;gap:6px;height:30px;margin:0 -3px;padding:0 5px;border-radius:9px 9px 0 0;background:linear-gradient(#3c8cf5,#0a5be0 12%,#0553d8 85%,#0a3fd6)}
+#logo,#alogo{display:grid;grid-template:1fr 1fr/1fr 1fr;gap:1px;width:16px;height:16px;transform:skew(-4deg)}
+:is(#logo,#alogo) u{display:block}:is(#logo,#alogo) u:nth-child(1){background:#f35325}:is(#logo,#alogo) u:nth-child(2){background:#81bc06}:is(#logo,#alogo) u:nth-child(3){background:#05a6f0}:is(#logo,#alogo) u:nth-child(4){background:#ffba08}
+#ttl,#attl{flex:1;color:#fff;font:700 15px 'Trebuchet MS',Tahoma,sans-serif;text-shadow:1px 1px #0a1f78}
+#x,#ax{width:30px;height:30px;box-sizing:border-box;border:1px solid #fff;border-radius:3px;background:linear-gradient(#e9775a,#c8401f);color:#fff;text-align:center;font:700 16px/28px Arial,sans-serif;cursor:pointer}
+#bd,#abd{padding:16px 16px calc(18px + env(safe-area-inset-bottom,0px))}
 #row{display:flex;gap:12px;align-items:center}
-#warn{width:32px;height:32px;flex:none;image-rendering:pixelated}
 #src{display:block;font:700 11px Tahoma,Verdana,sans-serif;color:#0a3fd6;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px}
 #hl{display:block;font:700 18px/1.2 'Trebuchet MS',Tahoma,sans-serif}
 #sm{margin:12px 0 16px;font-size:13px;line-height:1.4}
 #msg{margin:0;flex:1}
-#more{display:block;margin:0 auto;min-width:120px;height:28px;padding:0 18px;border:1px solid #003c74;border-radius:3px;background:linear-gradient(#fff,#ecebe5 85%,#d6d0c5);font:700 13px Tahoma,Verdana,sans-serif;cursor:pointer;box-shadow:inset 0 0 0 1px #8ab0f0}
-#more:active{background:#d6d0c5}
+#more,#aok{display:block;margin:0 auto;min-width:min(260px,80%);height:46px;padding:0 18px;border:1px solid #003c74;border-radius:3px;background:linear-gradient(#fff,#ecebe5 85%,#d6d0c5);font:700 15px Tahoma,Verdana,sans-serif;cursor:pointer;box-shadow:inset 0 0 0 1px #8ab0f0}
+#more:active,#aok:active{background:#d6d0c5}
 #toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 18px);transform:translateX(-50%);background:rgba(30,8,50,.85);color:#fff;padding:10px 16px;border-radius:18px;font:600 14px system-ui,sans-serif;display:none;z-index:6}
-#thumb{width:84px;height:84px;object-fit:cover;flex:none;border:1px solid #7a96d8;border-radius:3px;background:#d9d6c3}
+#thumb{width:88px;height:88px;object-fit:cover;flex:none;border:1px solid #7a96d8;border-radius:3px;background:#d9d6c3}
+#thumb.fb{object-fit:contain;image-rendering:pixelated;background:#35024a;border-color:#0a3fd6}
+.trophy{text-align:center;font-size:46px;line-height:1}
+.lvbig{font:800 34px/1.1 'Trebuchet MS',Tahoma,sans-serif;text-align:center;color:#0a3fd6;margin:6px 0 4px}
+.rknm{font:700 20px/1.2 'Trebuchet MS',Tahoma,sans-serif;text-align:center}
+#apt{text-align:center;margin:12px 0 16px;font-size:13px;line-height:1.4}
 #ptr{position:fixed;left:50%;top:calc(var(--bh,210px) + 6px);transform:translateX(-50%);opacity:0;z-index:4;pointer-events:none;background:rgba(53,2,74,.92);color:#fff;font:600 13px system-ui,sans-serif;padding:6px 14px;border-radius:16px;transition:opacity .15s}
-.cat.done span::after{content:' ✓'}
+.cat.done span::after{content:'\2713';margin-left:2px}
 #lvl{position:fixed;left:50%;top:calc(var(--bh,210px) + 10px);transform:translateX(-50%);opacity:0;z-index:6;pointer-events:none;background:rgba(53,2,74,.94);border:1px solid #6b2d86;color:#fff;font:700 15px system-ui,sans-serif;padding:8px 18px;border-radius:18px;white-space:nowrap}
 #bar{box-shadow:0 10px 18px -4px rgba(10,0,20,.72),0 24px 40px -14px rgba(0,0,0,.5)}
 #svg{overflow:visible}
@@ -57,14 +67,14 @@ html,body{height:100%;margin:0;background:#35024a;overflow:hidden;overscroll-beh
 <image href="bubbles-v2.jpg" x="0" y="-400" width="1179" height="5512"/>
 <g id="gl"></g><g id="layer"></g>
 </svg></div></div>
-<div id="bar"><div id="top"><div id="side"><span id="cnt">0 / 39</span><small>popped</small></div><img id="logoimg" src="logo-banner.png" alt="Pop The Feed"><button id="reset" aria-label="Refresh"><img src="refresh.png" alt="Refresh"></button></div>
+<div id="bar"><div id="top"><div id="side"><div id="rank"><b id="lv">Lvl 1</b><span id="rk">Bubble Wrap Beginner</span></div><div id="cn"><span id="cnt">0 / 39</span><small>popped</small></div></div><img id="logoimg" src="logo-banner.png" alt="Pop The Feed"><button id="reset" aria-label="Refresh"><img src="refresh.png" alt="Refresh"></button></div>
 <div id="cats"><button class="cat" data-c="Art"><span>Art</span></button><button class="cat" data-c="Entertainment"><span>Entertainment</span></button><button class="cat" data-c="Oddities"><span>Oddities</span></button><button class="cat" data-c="History"><span>History</span></button><button class="cat" data-c="Science"><span>Science</span></button></div></div>
 <label id="hp" style="position:fixed;bottom:2px;left:2px;width:44px;height:26px;opacity:.01;pointer-events:none;z-index:-1"><input type="checkbox" switch></label>
-<div id="ver" style="position:fixed;right:6px;bottom:calc(env(safe-area-inset-bottom,0px) + 2px);font:10px system-ui,sans-serif;color:#fff;opacity:.35;z-index:4;pointer-events:none">v12 seamless</div>
 <div id="ptr">Pull to refresh</div>
 <div id="lvl"></div>
 <div id="toast">All popped! Tap Refresh for more.</div>
-<div id="ov"><div id="card"><div id="tb"><i id="logo"><u></u><u></u><u></u><u></u></i><span id="ttl">Pop The Feed</span><b id="x">&#10005;</b></div><div id="bd"><div id="row"><img id="thumb" alt="" referrerpolicy="no-referrer" style="display:none"><svg id="warn" viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="12" y="1" width="1" height="1" fill="#ffffff"/><rect x="10" y="3" width="1" height="1" fill="#c9a2ff"/><rect x="13" y="4" width="1" height="1" fill="#c9a2ff"/><rect x="3" y="5" width="4" height="1" fill="#3a1670"/><rect x="2" y="6" width="1" height="1" fill="#3a1670"/><rect x="3" y="6" width="2" height="1" fill="#c9a2ff"/><rect x="5" y="6" width="3" height="1" fill="#9a5bec"/><rect x="1" y="7" width="1" height="1" fill="#3a1670"/><rect x="2" y="7" width="1" height="1" fill="#c9a2ff"/><rect x="3" y="7" width="2" height="1" fill="#ffffff"/><rect x="5" y="7" width="4" height="1" fill="#9a5bec"/><rect x="0" y="8" width="1" height="1" fill="#3a1670"/><rect x="1" y="8" width="1" height="1" fill="#c9a2ff"/><rect x="2" y="8" width="2" height="1" fill="#ffffff"/><rect x="4" y="8" width="6" height="1" fill="#9a5bec"/><rect x="10" y="8" width="1" height="1" fill="#3a1670"/><rect x="0" y="9" width="1" height="1" fill="#3a1670"/><rect x="1" y="9" width="1" height="1" fill="#c9a2ff"/><rect x="2" y="9" width="1" height="1" fill="#ffffff"/><rect x="3" y="9" width="7" height="1" fill="#9a5bec"/><rect x="10" y="9" width="1" height="1" fill="#3a1670"/><rect x="0" y="10" width="1" height="1" fill="#3a1670"/><rect x="1" y="10" width="8" height="1" fill="#9a5bec"/><rect x="9" y="10" width="1" height="1" fill="#7a3dc8"/><rect x="10" y="10" width="1" height="1" fill="#3a1670"/><rect x="0" y="11" width="1" height="1" fill="#3a1670"/><rect x="1" y="11" width="8" height="1" fill="#9a5bec"/><rect x="9" y="11" width="1" height="1" fill="#7a3dc8"/><rect x="10" y="11" width="1" height="1" fill="#3a1670"/><rect x="0" y="12" width="1" height="1" fill="#3a1670"/><rect x="1" y="12" width="7" height="1" fill="#9a5bec"/><rect x="8" y="12" width="2" height="1" fill="#7a3dc8"/><rect x="10" y="12" width="1" height="1" fill="#3a1670"/><rect x="1" y="13" width="1" height="1" fill="#3a1670"/><rect x="2" y="13" width="4" height="1" fill="#9a5bec"/><rect x="6" y="13" width="3" height="1" fill="#7a3dc8"/><rect x="9" y="13" width="1" height="1" fill="#3a1670"/><rect x="2" y="14" width="1" height="1" fill="#3a1670"/><rect x="3" y="14" width="5" height="1" fill="#7a3dc8"/><rect x="8" y="14" width="1" height="1" fill="#3a1670"/><rect x="3" y="15" width="5" height="1" fill="#3a1670"/></svg><div id="msg"><span id="src"></span><b id="hl"></b></div></div><p id="sm"></p><button id="more">Read More</button></div></div></div>
+<div id="achov"><div id="achcard"><div id="atb"><i id="alogo"><u></u><u></u><u></u><u></u></i><span id="attl">Achievement Unlocked!</span><b id="ax">&#10005;</b></div><div id="abd"><div class="trophy">&#127942;</div><div class="lvbig" id="avl">LEVEL 2</div><div class="rknm" id="ark">Thumb Warmup</div><p id="apt"></p><button id="aok">Keep Popping</button></div></div></div>
+<div id="ov"><div id="card"><div id="tb"><i id="logo"><u></u><u></u><u></u><u></u></i><span id="ttl">Pop The Feed</span><b id="x">&#10005;</b></div><div id="bd"><div id="row"><img id="thumb" alt="" referrerpolicy="no-referrer" style="display:none"><div id="msg"><span id="src"></span><b id="hl"></b></div></div><p id="sm"></p><button id="more">Read More</button></div></div></div>
 <script>
 const B=[[128, 9, 215, 198, "Art"], [606, 9, 215, 198, "Entertainment"], [1084, 9, 215, 198, "Oddities"], [128, 448, 215, 198, "Oddities"], [606, 448, 215, 198, "Science"], [1084, 448, 215, 198, "History"], [128, 881, 215, 198, "History"], [606, 881, 215, 198, "Art"], [1084, 881, 215, 198, "Entertainment"], [128, 1313, 215, 198, "Entertainment"], [606, 1313, 215, 198, "Oddities"], [1084, 1313, 215, 198, "Science"], [128, 1727, 215, 198, "Science"], [606, 1727, 215, 198, "History"], [1084, 1727, 215, 198, "Art"], [128, 2143, 215, 198, "Art"], [606, 2143, 215, 198, "Entertainment"], [1084, 2143, 215, 198, "Oddities"], [128, 2586, 215, 198, "Oddities"], [606, 2586, 215, 198, "Science"], [1084, 2586, 215, 198, "History"], [128, 3020, 215, 198, "History"], [606, 3020, 215, 198, "Art"], [1084, 3020, 215, 198, "Entertainment"], [128, 3452, 215, 198, "Entertainment"], [606, 3452, 215, 198, "Oddities"], [1084, 3452, 215, 198, "Science"], [128, 3866, 215, 198, "Science"], [606, 3866, 215, 198, "History"], [1084, 3866, 215, 198, "Art"], [128, 4280, 215, 198, "Art"], [606, 4280, 215, 198, "Entertainment"], [1084, 4280, 215, 198, "Oddities"], [128, 4725, 215, 198, "Oddities"], [606, 4725, 215, 198, "Science"], [1084, 4725, 215, 198, "History"], [128, 5155, 215, 198, "History"], [606, 5155, 215, 198, "Art"], [1084, 5155, 215, 198, "Entertainment"]];
 const GC={Art:'#ff8ac8',Entertainment:'#ffa98a',Oddities:'#ffd36b',History:'#c9baff',Science:'#8ff5e0'};
@@ -149,16 +159,30 @@ function celebrate(c,big){
   p.animate([{transform:'translate(0,0) rotate(0deg)',opacity:1},{transform:'translate('+dx+'px,'+dy+'px) rotate('+(rot/2)+'deg)',opacity:1,offset:.45},{transform:'translate('+(dx*1.15)+'px,'+(dy+fall)+'px) rotate('+rot+'deg)',opacity:0}],{duration:1000+Math.random()*350,easing:'cubic-bezier(.2,.7,.3,1)'}).onfinish=()=>p.remove()}}
  if(!big){const l=$('lvl');l.textContent=c+' complete!';l.getAnimations().forEach(a=>a.cancel());l.animate([{opacity:0,transform:'translate(-50%,-14px)'},{opacity:1,transform:'translate(-50%,0)',offset:.2},{opacity:1,transform:'translate(-50%,0)',offset:.75},{opacity:0,transform:'translate(-50%,-6px)'}],{duration:1500})}
 }
+const RANKS=['Bubble Wrap Beginner','Thumb Warmup','Accidental Fidgeter','Certified Stress-Reliever','Packing Material Menace','Doomscroll Defeater','Chief Popping Officer (CPO)','Tactile Overlord','Carpal Tunnel Contender','Supreme Sultan of Static & Pop'];
+const FB='apple-touch-icon.png';let popIdx=[],pendingAch=null,sheetsMem=0;
+const lvlOf=n=>Math.min(10,1+n);
+function getSheets(){let v=0;try{v=parseInt(localStorage.getItem('ptf_sheets_cleared'))||0}catch(e){}return Math.max(v,sheetsMem)}
+function renderRank(){const l=lvlOf(getSheets());$('lv').textContent='Lvl '+l;$('rk').textContent=RANKS[l-1]}
+function savePop(){try{localStorage.setItem('ptf_current_popped',JSON.stringify(popIdx))}catch(e){}}
+function restorePop(){let a=[];try{a=JSON.parse(localStorage.getItem('ptf_current_popped')||'[]')}catch(e){}
+ if(!Array.isArray(a)||a.length>=N){popIdx=[];savePop();return}
+ a.forEach(i=>{if(!Number.isInteger(i)||i<0||i>=N||popIdx.includes(i))return;$('p'+i).classList.add('on');if($('q'+i))$('q'+i).classList.add('on');$('h'+i).classList.add('done');popped++;catN[B[i][4]]++;popIdx.push(i)})}
+function sheetDone(){const n=getSheets()+1;sheetsMem=n;try{localStorage.setItem('ptf_sheets_cleared',String(n))}catch(e){}popIdx=[];savePop();pendingAch={lvl:lvlOf(n),n}}
+function showAch(a){renderRank();$('avl').textContent='LEVEL '+a.lvl;$('ark').textContent=RANKS[a.lvl-1];
+ $('apt').textContent=a.lvl<10?'Sheet cleared! All 39 bubbles popped. Next rank: '+RANKS[a.lvl]+'.':(a.n===9?'Maximum level reached. You are a legend.':'Another sheet cleared. Still the Supreme Sultan.');
+ $('achov').classList.add('show')}
+function hideAch(){clk();$('achov').classList.remove('show')}
+$('aok').addEventListener('click',hideAch);$('ax').addEventListener('click',hideAch);$('achov').addEventListener('click',e=>{if(e.target.id==='achov')hideAch()});
 function setCnt(){$('cnt').textContent=popped+' / '+N}
 function pop(i){
  if(cur)return;lastPop=Date.now();snd();$('p'+i).classList.add('on');if($('q'+i))$('q'+i).classList.add('on');$('h'+i).classList.add('done');$('g'+i).classList.remove('on');
- popped++;setCnt();const pc=B[i][4];catN[pc]++;setNs();if(catN[pc]===catT[pc])pendingCat=pc;
+ popped++;setCnt();const pc=B[i][4];catN[pc]++;setNs();if(catN[pc]===catT[pc])pendingCat=pc;popIdx.push(i);savePop();if(popped>=N)sheetDone();
  cur=storyFor(i);$('src').textContent=cur[0];$('more').textContent='Read at '+cur[0];$('hl').textContent=cur[1];$('sm').textContent=cur[2];
- const th=$('thumb'),wr=$('warn');th.style.display='none';wr.style.display='';th.onload=null;th.onerror=null;
- if(cur[5]){th.onload=()=>{th.style.display='block';wr.style.display='none'};th.onerror=()=>{th.style.display='none';wr.style.display=''};th.src=cur[5]}
+ const th=$('thumb');th.style.display='block';th.classList.toggle('fb',!cur[5]);th.onerror=()=>{th.onerror=null;th.classList.add('fb');th.src=FB};th.src=cur[5]||FB;
  setTimeout(()=>$('ov').classList.add('show'),90);
 }
-function closeCard(){closedAt=Date.now();$('ov').classList.remove('show');cur=null;const pc=pendingCat;pendingCat=null;if(popped>=N){$('reset').classList.add('ready');$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',3500)}if(pc)celebrate(pc,popped>=N)}
+function closeCard(){closedAt=Date.now();$('ov').classList.remove('show');cur=null;const pc=pendingCat;pendingCat=null;if(popped>=N){$('reset').classList.add('ready');$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',3500)}if(pc)celebrate(pc,popped>=N);if(pendingAch){const a=pendingAch;pendingAch=null;setTimeout(()=>showAch(a),pc?900:250)}}
 let sx=0,sy=0,t0=0;const ov=$('ov');
 ov.addEventListener('pointerdown',e=>{sx=e.clientX;sy=e.clientY;t0=Date.now()});
 ov.addEventListener('pointerup',e=>{
@@ -166,7 +190,7 @@ ov.addEventListener('pointerup',e=>{
  if(d>40){closeCard();return}
  const T=e.target;
  if(T.closest('#more')){snd();const u=cur[3];closeCard();window.open(u,'_blank','noopener');return}
- if(T.closest('#x')){clk();closeCard()}
+ if(T.closest('#x')||T===ov){clk();closeCard()}
 });
 $('svg').addEventListener('click',()=>{if(Date.now()-lastPop<600)hap()});
 ov.addEventListener('click',()=>{if(Date.now()-closedAt<600)hap()});
@@ -177,7 +201,7 @@ document.querySelectorAll('.cat').forEach(btn=>{
  btn.addEventListener('contextmenu',e=>e.preventDefault());
 });
 function loadStories(){fetch('stories.json?'+Date.now()).then(r=>r.ok?r.json():[]).then(d=>{if(Array.isArray(d)&&d.length){const j=JSON.stringify(d);if(j!==SJ){S=d;SJ=j;build()}}}).catch(()=>{})}
-function doReset(){popped=0;CL.forEach(c=>catN[c]=0);pendingCat=null;setNs();setCnt();$('reset').classList.remove('ready');document.querySelectorAll('.pop').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.hit').forEach(x=>x.classList.remove('done'));applyGlow();closeCard();build();$('scroll').scrollTo({top:0,behavior:'smooth'});loadStories()}
+function doReset(){popped=0;popIdx=[];savePop();CL.forEach(c=>catN[c]=0);pendingCat=null;setNs();setCnt();$('reset').classList.remove('ready');document.querySelectorAll('.pop').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.hit').forEach(x=>x.classList.remove('done'));applyGlow();closeCard();build();$('scroll').scrollTo({top:0,behavior:'smooth'});loadStories()}
 $('reset').addEventListener('click',doReset);
 const pt=$('ptr'),sc=$('scroll'),inn=$('inner');let py=null,pull=0;
 function mv(y,anim){inn.style.transition=anim?'transform .35s cubic-bezier(.2,.8,.3,1)':'none';inn.style.transform='translateY('+y+'px)';pt.style.transform='translateX(-50%) translateY('+(y/2-16)+'px)'}
@@ -189,5 +213,5 @@ sc.addEventListener('touchend',ptrEnd);
 sc.addEventListener('touchcancel',()=>{ptrOff();py=null;pull=0});
 function setBH(){document.documentElement.style.setProperty('--bh',$('bar').offsetHeight+'px')}
 addEventListener('resize',setBH);addEventListener('load',setBH);$('logoimg').addEventListener('load',setBH);if(window.ResizeObserver)new ResizeObserver(setBH).observe($('bar'));setBH();
-setCnt();setNs();loadStories();
+restorePop();renderRank();setCnt();setNs();loadStories();
 </script></body></html>
