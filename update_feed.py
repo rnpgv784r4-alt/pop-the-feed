@@ -57,10 +57,14 @@ MEDIA = "{http://search.yahoo.com/mrss/}"
 CONTENT = "{http://purl.org/rss/1.0/modules/content/}"
 DC = "{http://purl.org/dc/elements/1.1/}"
 UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36", "Accept": "application/rss+xml, application/xml, text/xml, */*"}
-AD = re.compile(r"\b(sponsored|advertorial|paid (post|partnership|content|promotion)|partner content|in partnership with|presented by|brand(ed)? content|promoted (post|content)|affiliate (links?|commission)|promo code|coupon code|discount code|\d+% off|deal alert|best deals?|gift guide|giveaway)\b", re.I)
-def is_ad(title, raw, cats=""):
+AD = re.compile(r"\b(sponsored|advertorial|paid (post|partnership|content|promotion)|partner content|in partnership with|presented by|brand(ed)? content|promoted (post|content)|affiliate (links?|commission)|promo code|coupon code|discount code|deal alert|best deals?|gift guide|giveaway)\b", re.I)
+SALE = re.compile(r"\(reg\.?\s*\$|\bTL;?DR\b|\blifetime (subscription|access|license|plan|deal)|one-time (purchase|payment|fee)|stacksocial|\bsave \d+%|\d+% off (with|your|at|sitewide|everything|code|when)|\d+% discount|limited[- ]time (offer|deal|price)|\bon sale\b|for just \$|only \$\d|\$\d[\d,.]* (right now|today|for life|lifetime)|\bcheck out (this|these) deals?\b|\bdeals? (of the day|roundup)\b", re.I)
+DEALURL = re.compile(r"/(deals?|sponsored|promo|partner)(/|$)|[?&]utm_(medium|source)=(affiliate|sponsor)", re.I)
+def is_ad(title, raw, cats="", link=""):
     body = html.unescape(re.sub(r"<[^>]+>", " ", raw or ""))[:700]
-    return bool(AD.search(title + " " + body + " " + cats))
+    if DEALURL.search(link or "") or re.search(r"\b(deals?|sponsored|promo(tion)?s?|shopping)\b", cats or "", re.I):
+        return True
+    return bool(AD.search(title + " " + body + " " + cats) or SALE.search(title + " " + body))
 def norm(t):
     return re.sub(r"[^a-z0-9]+", " ", t.lower()).strip()[:60]
 JUNK = re.compile(r"appeared first on|member|reader-supported|matter to you|support (independent|our)|subscribe|newsletter|sign up", re.I)
@@ -136,7 +140,7 @@ def parse_xml(name, data):
         desc = clean(text(it, "description", A + "summary", A + "content"))
         ts = parse_date(text(it, "pubDate", "published", "updated", A + "published", A + "updated", DC + "date"))
         cats = " ".join((c.text or "") for c in it.findall("category")) + " " + " ".join((c.get("term") or "") for c in it.findall(A + "category"))
-        if is_ad(title, raw, cats):
+        if is_ad(title, raw, cats, link):
             continue
         if title and link.strip().startswith("http"):
             out.append([name, title, desc or "Tap the button below for the full story.", link.strip(), "", find_image(it, raw), ts])
@@ -158,7 +162,7 @@ def loose(name, data):
             link = html.unescape(m.group(1)) if m else ""
         desc = clean(f("description") or f("summary") or f("content"))
         ts = parse_date(html.unescape(f("pubDate") or f("published") or f("updated")))
-        if is_ad(title, f("description") or f("summary") or f("content"), " ".join(re.findall(r"<category[^>]*>(.*?)</category>", blk, re.S | re.I))):
+        if is_ad(title, f("description") or f("summary") or f("content"), " ".join(re.findall(r"<category[^>]*>(.*?)</category>", blk, re.S | re.I)), link):
             continue
         im = re.search(r"<media:(?:thumbnail|content)[^>]+url=[\"']([^\"']+)", blk, re.I) or re.search(r"<img[^>]+src=[\"']([^\"']+)", html.unescape(blk), re.I)
         if title and link.startswith("http"):
