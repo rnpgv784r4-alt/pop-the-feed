@@ -268,7 +268,12 @@
    "cat": "Science"
   }
  ],
- "topics": [],
+ "topics": [
+  {
+   "q": "Marcel Duchamp",
+   "cat": "Art"
+  }
+ ],
  "blocked": [],
  "pins": []
 }
