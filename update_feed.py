@@ -216,9 +216,46 @@ def og_image(url):
         pass
     return ""
 
-if __name__ == "__main__":
+def load_cfg():
+    try:
+        return json.load(open("config.json"))
+    except Exception:
+        return {}
+
+def pin_story(url, cat):
+    """Read a pinned article's own page and build a story from its title, summary and picture."""
+    try:
+        page = urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=12).read(500000).decode("utf-8", "ignore")
+    except Exception as e:
+        print("  pin failed", url, e)
+        return None
+    def meta(*keys):
+        for k in keys:
+            for p in (r'<meta[^>]+(?:property|name)=["\']%s["\'][^>]*content=["\']([^"\']*)' % k,
+                      r'<meta[^>]+content=["\']([^"\']*)["\'][^>]*(?:property|name)=["\']%s["\']' % k):
+                m = re.search(p, page, re.I)
+                if m and m.group(1).strip():
+                    return html.unescape(m.group(1)).strip()
+        return ""
+    t = re.search(r"<title[^>]*>(.*?)</title>", page, re.S | re.I)
+    title = clean(meta("og:title", "twitter:title") or (t.group(1) if t else ""), 110)
+    if not title:
+        return None
+    desc = clean(meta("og:description", "description", "twitter:description")) or "Tap the button below for the full story."
+    site = clean(meta("og:site_name"), 40) or urllib.parse.urlparse(url).netloc.replace("www.", "")
+    im = meta("og:image", "twitter:image")
+    img = good_img(urllib.parse.urljoin(url, im)) if im else ""
+    return [site, title, desc, url, cat, img, int(time.time())]
+
+def main():
+    cfg = load_cfg()
+    sites = [(x["name"], x.get("home", ""), x.get("feeds", []), x["cat"]) for x in cfg["sites"] if x.get("cat") in CATS] if cfg.get("sites") else list(SITES)
+    for t in cfg.get("topics", []):
+        if t.get("q") and t.get("cat") in CATS:
+            sites.append(("Search: " + t["q"], "", ["https://news.google.com/rss/search?q=" + urllib.parse.quote(t["q"]) + "&hl=en-US&gl=US&ceid=US:en"], t["cat"]))
+    blocked = [b.strip().lower() for b in cfg.get("blocked", []) if b.strip()]
     stories = []
-    for name, home, feeds, cat in SITES:
+    for name, home, feeds, cat in sites:
         got = []
         for url in feeds:
             try:
@@ -240,6 +277,9 @@ if __name__ == "__main__":
         for s in got:
             s[4] = cat
         stories += got
+    stories = [s for s in stories if not any(b in s[3].lower() or b in s[1].lower() for b in blocked)]
+    pins = [pin_story(p["url"], p["cat"]) for p in cfg.get("pins", []) if p.get("url") and p.get("cat") in CATS]
+    stories = [p for p in pins if p] + stories
     final = pick(stories)
     missing = [s for s in final if not s[5]]
     with ThreadPoolExecutor(8) as ex:
@@ -253,3 +293,6 @@ if __name__ == "__main__":
         print("wrote", len(final))
     else:
         print("too few stories; keeping old file")
+
+if __name__ == "__main__":
+    main()

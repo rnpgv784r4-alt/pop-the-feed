@@ -1,0 +1,274 @@
+{
+ "sites": [
+  {
+   "name": "Boing Boing",
+   "home": "https://boingboing.net",
+   "feeds": [
+    "https://boingboing.net/feed"
+   ],
+   "cat": "Oddities"
+  },
+  {
+   "name": "Kottke",
+   "home": "https://kottke.org",
+   "feeds": [
+    "https://feeds.kottke.org/main"
+   ],
+   "cat": "Oddities"
+  },
+  {
+   "name": "Atlas Obscura",
+   "home": "https://www.atlasobscura.com",
+   "feeds": [
+    "https://www.atlasobscura.com/feeds/latest"
+   ],
+   "cat": "Oddities"
+  },
+  {
+   "name": "Good News Network",
+   "home": "https://www.goodnewsnetwork.org",
+   "feeds": [
+    "https://www.goodnewsnetwork.org/feed/"
+   ],
+   "cat": "Oddities"
+  },
+  {
+   "name": "Reader's Digest",
+   "home": "https://www.rd.com",
+   "feeds": [
+    "https://www.rd.com/feed/"
+   ],
+   "cat": "Oddities"
+  },
+  {
+   "name": "Louder Than War",
+   "home": "https://louderthanwar.com",
+   "feeds": [
+    "https://louderthanwar.com/feed/"
+   ],
+   "cat": "Entertainment"
+  },
+  {
+   "name": "Bandcamp Daily",
+   "home": "https://daily.bandcamp.com",
+   "feeds": [
+    "https://daily.bandcamp.com/feed"
+   ],
+   "cat": "Entertainment"
+  },
+  {
+   "name": "Dangerous Minds",
+   "home": "https://dangerousminds.net",
+   "feeds": [
+    "https://dangerousminds.net/feed"
+   ],
+   "cat": "Entertainment"
+  },
+  {
+   "name": "Pitchfork",
+   "home": "https://pitchfork.com",
+   "feeds": [
+    "https://pitchfork.com/feed/feed-news/rss",
+    "https://pitchfork.com/rss/news/feed/"
+   ],
+   "cat": "Entertainment"
+  },
+  {
+   "name": "Post-Punk.com",
+   "home": "https://post-punk.com",
+   "feeds": [
+    "https://post-punk.com/feed/"
+   ],
+   "cat": "Entertainment"
+  },
+  {
+   "name": "Bloody Disgusting",
+   "home": "https://bloody-disgusting.com",
+   "feeds": [
+    "https://bloody-disgusting.com/feed/"
+   ],
+   "cat": "Entertainment"
+  },
+  {
+   "name": "Little White Lies",
+   "home": "https://www.lwlies.com",
+   "feeds": [
+    "https://www.lwlies.com/feed/"
+   ],
+   "cat": "Entertainment"
+  },
+  {
+   "name": "BrooklynVegan",
+   "home": "https://www.brooklynvegan.com",
+   "feeds": [
+    "https://www.brooklynvegan.com/feed/"
+   ],
+   "cat": "Entertainment"
+  },
+  {
+   "name": "Beautiful Bizarre Magazine",
+   "home": "https://beautifulbizarre.net",
+   "feeds": [
+    "https://beautifulbizarre.net/feed/"
+   ],
+   "cat": "Art"
+  },
+  {
+   "name": "StreetArtNews",
+   "home": "https://streetartnews.net",
+   "feeds": [
+    "https://streetartnews.net/feed"
+   ],
+   "cat": "Art"
+  },
+  {
+   "name": "GraffitiStreet",
+   "home": "https://graffitistreet.com",
+   "feeds": [
+    "https://graffitistreet.com/feed/"
+   ],
+   "cat": "Art"
+  },
+  {
+   "name": "Sour Harvest",
+   "home": "https://www.sourharvest.com",
+   "feeds": [
+    "https://www.sourharvest.com/feed/"
+   ],
+   "cat": "Art"
+  },
+  {
+   "name": "DailyArt Magazine",
+   "home": "https://www.dailyartmagazine.com",
+   "feeds": [
+    "https://www.dailyartmagazine.com/feed/"
+   ],
+   "cat": "Art"
+  },
+  {
+   "name": "Creative Boom",
+   "home": "https://www.creativeboom.com",
+   "feeds": [
+    "https://www.creativeboom.com/feed/"
+   ],
+   "cat": "Art"
+  },
+  {
+   "name": "Colossal",
+   "home": "https://www.thisiscolossal.com",
+   "feeds": [
+    "https://www.thisiscolossal.com/feed/"
+   ],
+   "cat": "Art"
+  },
+  {
+   "name": "Hyperallergic",
+   "home": "https://hyperallergic.com",
+   "feeds": [
+    "https://hyperallergic.com/feed/"
+   ],
+   "cat": "Art"
+  },
+  {
+   "name": "It's Nice That",
+   "home": "https://www.itsnicethat.com",
+   "feeds": [
+    "https://www.itsnicethat.com/rss"
+   ],
+   "cat": "Art"
+  },
+  {
+   "name": "Please Kill Me",
+   "home": "https://pleasekillme.com",
+   "feeds": [
+    "https://pleasekillme.com/feed/"
+   ],
+   "cat": "History"
+  },
+  {
+   "name": "The Public Domain Review",
+   "home": "https://publicdomainreview.org",
+   "feeds": [
+    "https://publicdomainreview.org/rss.xml"
+   ],
+   "cat": "History"
+  },
+  {
+   "name": "Open Culture",
+   "home": "https://www.openculture.com",
+   "feeds": [
+    "https://www.openculture.com/feed"
+   ],
+   "cat": "History"
+  },
+  {
+   "name": "Smithsonian History",
+   "home": "https://www.smithsonianmag.com/category/smartnews-history-archaeology/",
+   "feeds": [
+    "https://www.smithsonianmag.com/rss/history/"
+   ],
+   "cat": "History"
+  },
+  {
+   "name": "The Kid Should See This",
+   "home": "https://thekidshouldseethis.com",
+   "feeds": [
+    "https://thekidshouldseethis.com/feed"
+   ],
+   "cat": "Science"
+  },
+  {
+   "name": "Phys.org",
+   "home": "https://phys.org",
+   "feeds": [
+    "https://phys.org/rss-feed/"
+   ],
+   "cat": "Science"
+  },
+  {
+   "name": "Biographic",
+   "home": "https://biographic.com",
+   "feeds": [
+    "https://biographic.com/feed/"
+   ],
+   "cat": "Science"
+  },
+  {
+   "name": "Mongabay",
+   "home": "https://news.mongabay.com",
+   "feeds": [
+    "https://news.mongabay.com/feed/"
+   ],
+   "cat": "Science"
+  },
+  {
+   "name": "Smithsonian Ocean",
+   "home": "https://ocean.si.edu",
+   "feeds": [
+    "https://ocean.si.edu/rss.xml"
+   ],
+   "cat": "Science"
+  },
+  {
+   "name": "NASA Earth Observatory",
+   "home": "https://science.nasa.gov/earth/earth-observatory/",
+   "feeds": [
+    "https://science.nasa.gov/earth/earth-observatory/feed/",
+    "https://earthobservatory.nasa.gov/feeds/earth-observatory.rss"
+   ],
+   "cat": "Science"
+  },
+  {
+   "name": "Audubon",
+   "home": "https://www.audubon.org/magazine",
+   "feeds": [
+    "https://www.audubon.org/magazine/rss.xml",
+    "https://www.audubon.org/rss.xml"
+   ],
+   "cat": "Science"
+  }
+ ],
+ "topics": [],
+ "blocked": [],
+ "pins": []
+}

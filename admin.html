@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Pop The Feed · Manage</title>
+<style>
+:root{--bg:#35024a;--card:#4a1263;--line:#6b2d86;--txt:#fff;--dim:#d9c4f0;--acc:#e6d6fa}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.4 system-ui,sans-serif;padding:16px 14px 90px}
+h1{font-size:20px;margin:0 0 12px}h2{font-size:17px;margin:26px 0 8px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:0 0 10px}
+.row{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--line)}.row:last-child{border:0}
+.row span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+input,select,button{font:16px system-ui,sans-serif;border-radius:8px;border:1px solid var(--line);padding:10px;background:#2a0239;color:#fff}
+input{width:100%;margin:4px 0}select{margin:4px 0}
+button{background:var(--acc);color:#35024a;font-weight:600;border:0}button.x{background:none;color:#ff9aa8;font-size:20px;padding:2px 8px}
+.add{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.add input{flex:1 1 100%}.add select{flex:1}.add button{flex:0 0 auto}
+.cat{font-size:12px;color:var(--dim);margin:12px 0 2px;text-transform:uppercase;letter-spacing:.06em}
+small,.dim{color:var(--dim)}#bar{position:fixed;left:0;right:0;bottom:0;background:#2a0239;border-top:1px solid var(--line);padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));display:flex;gap:10px}
+#bar button{flex:1}#bar button.b2{background:#fff}#msg{position:fixed;left:14px;right:14px;bottom:78px;text-align:center;font-size:14px;color:var(--acc)}
+</style></head><body>
+<h1>Manage Pop The Feed</h1>
+<div id="tk" class="card"></div>
+<div id="app" hidden>
+<h2>Sites</h2><div id="sites"></div>
+<div class="card"><b>Add a site</b><div class="add"><input id="sn" placeholder="Name (optional)"><input id="su" placeholder="Site or feed address (https://…)" inputmode="url" autocapitalize="off"><select id="sc"></select><button id="sa">Add</button></div><small>If you paste the site's home page, the script looks for its feed on its own.</small></div>
+<h2>Topics &amp; people</h2><div id="topics"></div>
+<div class="card"><div class="add"><input id="tq" placeholder="Name or topic, e.g. David Lynch"><select id="tc"></select><button id="ta">Add</button></div><small>Each run searches the news for this and adds the latest stories to that color.</small></div>
+<h2>Blocked articles</h2><div id="blocked"></div>
+<div class="card"><div class="add"><input id="bq" placeholder="Article link, site, or words in the title" autocapitalize="off"><button id="ba">Block</button></div></div>
+<h2>Pinned articles</h2><div id="pins"></div>
+<div class="card"><div class="add"><input id="pu" placeholder="Article link (https://…)" inputmode="url" autocapitalize="off"><select id="pc"></select><button id="pa">Pin</button></div><small>Pinned articles stay at the top of their color until you remove them.</small></div>
+</div>
+<div id="msg"></div>
+<div id="bar" hidden><button id="save">Save</button><button id="run" class="b2">Save &amp; update now</button></div>
+<script>
+const CATS=['Art','Entertainment','Oddities','History','Science'];
+const host=location.hostname.split('.')[0],seg=location.pathname.split('/')[1];
+const OWNER=localStorage.getItem('ptf_owner')||(location.hostname.endsWith('github.io')?host:'rnpgv784r4-alt');
+const REPO=localStorage.getItem('ptf_repo')||(location.hostname.endsWith('github.io')&&seg?seg:'pop-the-feed');
+const $=id=>document.getElementById(id);let tok=localStorage.getItem('ptf_token')||'',cfg=null,sha=null,dirty=false;
+const msg=t=>{$('msg').textContent=t};
+const api=(p,o={})=>fetch('https://api.github.com/repos/'+OWNER+'/'+REPO+p,Object.assign({},o,{headers:{Authorization:'Bearer '+tok,Accept:'application/vnd.github+json','Content-Type':'application/json'}}));
+const opts=sel=>{sel.innerHTML=CATS.map(c=>'<option>'+c+'</option>').join('')};['sc','tc','pc'].forEach(i=>opts($(i)));
+function tokenUI(){$('tk').innerHTML=tok?'<div class="row"><span>Signed in on this phone</span><button id="out">Sign out</button></div>':'<b>Access token</b><br><small>Paste your GitHub token. It stays on this phone only.</small><input id="ti" type="password" placeholder="github_pat_…" autocapitalize="off" autocomplete="off"><button id="ts">Save token</button>';
+ if(tok)$('out').onclick=()=>{localStorage.removeItem('ptf_token');tok='';cfg=null;$('app').hidden=true;$('bar').hidden=true;tokenUI()};else $('ts').onclick=()=>{tok=$('ti').value.trim();if(tok){localStorage.setItem('ptf_token',tok);tokenUI();load()}}}
+const dec=b=>decodeURIComponent(escape(atob(b.replace(/\n/g,''))));
+async function load(){
+ if(!tok)return;msg('Loading…');
+ try{const r=await api('/contents/config.json?ref=main');
+  if(r.status===401||r.status===403){msg('That token was refused. Check its permissions.');return}
+  if(r.status===404){cfg={sites:[],topics:[],blocked:[],pins:[]};sha=null}else{const j=await r.json();sha=j.sha;cfg=JSON.parse(dec(j.content))}
+  ['sites','topics','blocked','pins'].forEach(k=>cfg[k]=cfg[k]||[]);msg('');$('app').hidden=false;$('bar').hidden=false;draw()}
+ catch(e){msg('Could not load: '+e.message)}}
+function row(label,fn,extra){const d=document.createElement('div');d.className='row';const s=document.createElement('span');s.textContent=label;d.appendChild(s);if(extra)d.appendChild(extra);const b=document.createElement('button');b.className='x';b.textContent='×';b.setAttribute('aria-label','Remove');b.onclick=()=>{fn();dirty=true;draw()};d.appendChild(b);return d}
+function draw(){
+ const S=$('sites');S.innerHTML='';
+ CATS.forEach(c=>{const items=cfg.sites.filter(x=>x.cat===c);if(!items.length)return;const h=document.createElement('div');h.className='cat';h.textContent=c;S.appendChild(h);const card=document.createElement('div');card.className='card';
+  items.forEach(x=>{const sel=document.createElement('select');sel.innerHTML=CATS.map(k=>'<option'+(k===x.cat?' selected':'')+'>'+k+'</option>').join('');sel.onchange=()=>{x.cat=sel.value;dirty=true;draw()};card.appendChild(row(x.name,()=>{cfg.sites=cfg.sites.filter(y=>y!==x)},sel))});S.appendChild(card)});
+ const list=(id,arr,lab)=>{const el=$(id);el.innerHTML='';if(!arr.length){el.innerHTML='<div class="dim">None yet</div>';return}const card=document.createElement('div');card.className='card';arr.forEach(x=>card.appendChild(row(lab(x),()=>{arr.splice(arr.indexOf(x),1)})));el.appendChild(card)};
+ list('topics',cfg.topics,x=>x.q+' · '+x.cat);list('blocked',cfg.blocked,x=>x);list('pins',cfg.pins,x=>x.cat+' · '+x.url);
+ msg(dirty?'Unsaved changes':'')}
+const clean=v=>v.trim();
+$('sa').onclick=()=>{let u=clean($('su').value);if(!/^https?:\/\//i.test(u)){msg('Enter a full address starting with https://');return}
+ const isFeed=/(\/feed|\/rss|\.xml|\.rss|\/atom)/i.test(u);let o='';try{o=new URL(u).origin}catch(e){msg('That address does not look right');return}
+ const name=clean($('sn').value)||new URL(u).hostname.replace(/^www\./,'');
+ cfg.sites.push({name,home:isFeed?o:u,feeds:isFeed?[u]:[],cat:$('sc').value});$('sn').value=$('su').value='';dirty=true;draw()};
+$('ta').onclick=()=>{const q=clean($('tq').value);if(!q)return;cfg.topics.push({q,cat:$('tc').value});$('tq').value='';dirty=true;draw()};
+$('ba').onclick=()=>{const q=clean($('bq').value);if(!q)return;cfg.blocked.push(q);$('bq').value='';dirty=true;draw()};
+$('pa').onclick=()=>{const u=clean($('pu').value);if(!/^https?:\/\//i.test(u)){msg('Enter a full article address starting with https://');return}cfg.pins.push({url:u,cat:$('pc').value});$('pu').value='';dirty=true;draw()};
+async function save(){
+ msg('Saving…');const body={message:'Update feed settings',content:btoa(unescape(encodeURIComponent(JSON.stringify(cfg,null,1)))),branch:'main'};if(sha)body.sha=sha;
+ const r=await api('/contents/config.json',{method:'PUT',body:JSON.stringify(body)});
+ if(!r.ok){msg(r.status===409||r.status===422?'Out of date. Reload the page and try again.':'Save failed ('+r.status+'). The token needs Contents: read and write.');return false}
+ sha=(await r.json()).content.sha;dirty=false;draw();msg('Saved ✓');return true}
+$('save').onclick=()=>{save()};
+$('run').onclick=async()=>{if(!(await save()))return;msg('Starting update…');const r=await api('/actions/workflows/update.yml/dispatches',{method:'POST',body:JSON.stringify({ref:'main'})});msg(r.status===204?'Saved. Update started — new stories in about a minute.':'Saved, but the update did not start ('+r.status+'). The token needs Actions: read and write.')};
+tokenUI();load();
+</script></body></html>
