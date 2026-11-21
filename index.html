@@ -16,7 +16,7 @@ html,body{height:100%;margin:0;background:#35024a;overflow:hidden;overscroll-beh
 #bar{position:fixed;top:0;left:0;right:0;z-index:5;background:#35024a;color:#fff;padding:calc(env(safe-area-inset-top,0px) + 4px) 10px 8px;box-sizing:border-box}
 #top{display:grid;grid-template-columns:1fr auto 1fr;align-items:end}
 #logoimg{width:min(250px,64vw);height:auto;display:block}
-#side{align-self:stretch;display:flex;flex-direction:column;justify-content:space-between;line-height:1.15;padding-bottom:8px;min-width:0}
+#side{align-self:end;display:flex;flex-direction:column;line-height:1.15;padding-bottom:8px;min-width:0}
 #cn{display:flex;flex-direction:column}
 #rank{display:flex;flex-direction:column;gap:1px;padding-top:2px}
 #lv{font:800 13px system-ui,sans-serif;color:#ffe9a8;letter-spacing:.02em}
@@ -28,6 +28,8 @@ html,body{height:100%;margin:0;background:#35024a;overflow:hidden;overscroll-beh
 @keyframes blink{0%,100%{opacity:.65;filter:drop-shadow(0 0 2px #fff)}50%{opacity:1;filter:drop-shadow(0 0 8px #ffe9a8) drop-shadow(0 0 16px #fff)}}
 #cats{display:flex;justify-content:space-between;gap:4px;margin-top:6px;padding:0 2px}
 .cat{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.32);border-radius:999px;color:#fff;font:600 11.5px system-ui,sans-serif;padding:11px 3px;flex:1 1 auto;text-align:center;white-space:nowrap;touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+#stat{display:flex;gap:6px;align-items:center;margin:7px 2px 0;padding:2px 8px;background:#c0c0c0;color:#000;font:11px/16px Tahoma,Verdana,sans-serif;border:1px solid;border-color:#808080 #fff #fff #808080;box-shadow:inset 1px 1px 0 #404040;white-space:nowrap;overflow:hidden}
+#stk{color:#404040}#stl{font-weight:700;overflow:hidden;text-overflow:ellipsis}
 @media(max-width:375px){.cat{font-size:10.5px;padding:11px 2px}#cats{gap:3px}}
 .cat.held{background:#fff;color:#35024a;border-color:#fff;box-shadow:0 0 0 2px rgba(255,255,255,.25)}
 #ov,#achov{position:fixed;inset:0;background:rgba(20,5,35,.08);display:none;align-items:flex-end;justify-content:center;z-index:10;touch-action:none}
@@ -72,8 +74,9 @@ html,body{height:100%;margin:0;background:#35024a;overflow:hidden;overscroll-beh
 <image href="bubbles-v2.jpg" x="0" y="-400" width="1179" height="5512"/>
 <g id="gl"></g><g id="layer"></g>
 </svg></div></div>
-<div id="bar"><div id="top"><div id="side"><div id="rank"><b id="lv">Lvl 1</b><span id="rk">Bubble Wrap Beginner</span></div><div id="cn"><span id="cnt">0 / 39</span><small>popped</small></div></div><img id="logoimg" src="logo-banner.png" alt="Pop The Feed"><button id="reset" aria-label="Refresh"><img src="refresh.png" alt="Refresh"></button></div>
-<div id="cats"><button class="cat" data-c="Art"><span>Art</span></button><button class="cat" data-c="Entertainment"><span>Entertainment</span></button><button class="cat" data-c="Oddities"><span>Oddities</span></button><button class="cat" data-c="History"><span>History</span></button><button class="cat" data-c="Science"><span>Science</span></button></div></div>
+<div id="bar"><div id="top"><div id="side"><div id="cn"><span id="cnt">0 / 39</span><small>popped</small></div></div><img id="logoimg" src="logo-banner.png" alt="Pop The Feed"><button id="reset" aria-label="Refresh"><img src="refresh.png" alt="Refresh"></button></div>
+<div id="cats"><button class="cat" data-c="Art"><span>Art</span></button><button class="cat" data-c="Entertainment"><span>Entertainment</span></button><button class="cat" data-c="Oddities"><span>Oddities</span></button><button class="cat" data-c="History"><span>History</span></button><button class="cat" data-c="Science"><span>Science</span></button></div>
+<div id="stat"><span id="stk">Status:</span><span id="stl">Lvl 1 - Bubble Wrap Beginner</span></div></div>
 <label id="hp" style="position:fixed;bottom:2px;left:2px;width:44px;height:26px;opacity:.01;pointer-events:none;z-index:-1"><input type="checkbox" switch></label>
 <div id="ptr">Pull to refresh</div>
 <div id="lvl"></div>
@@ -168,7 +171,7 @@ const RANKS=['Bubble Wrap Beginner','Thumb Warmup','Accidental Fidgeter','Certif
 const FB='apple-touch-icon.png';let popIdx=[],pendingAch=null,sheetsMem=0;
 const lvlOf=n=>Math.min(10,1+n);
 function getSheets(){let v=0;try{v=parseInt(localStorage.getItem('ptf_sheets_cleared'))||0}catch(e){}return Math.max(v,sheetsMem)}
-function renderRank(){const l=lvlOf(getSheets());$('lv').textContent='Lvl '+l;$('rk').textContent=RANKS[l-1]}
+function renderRank(){const l=lvlOf(getSheets());$('stl').textContent='Lvl '+l+' - '+RANKS[l-1]}
 function savePop(){try{localStorage.setItem('ptf_current_popped',JSON.stringify(popIdx))}catch(e){}}
 function restorePop(){let a=[];try{a=JSON.parse(localStorage.getItem('ptf_current_popped')||'[]')}catch(e){}
  if(!Array.isArray(a)||a.length>=N){popIdx=[];savePop();return}
