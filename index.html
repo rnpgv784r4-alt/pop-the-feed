@@ -22,7 +22,7 @@ html,body{height:100%;margin:0;background:#35024a;overflow:hidden;overscroll-beh
 #lv{font:800 13px system-ui,sans-serif;color:#ffe9a8;letter-spacing:.02em}
 #rk{font:600 10px/1.15 system-ui,sans-serif;color:#d9c4f0;overflow-wrap:anywhere}
 #cnt{font-weight:600;font-size:16px}#side small{font-size:11px;color:#d9c4f0}
-#reset{justify-self:end;background:none;border:0;padding:0 0 8px;margin:0;cursor:pointer}
+#reset{justify-self:start;margin-left:4px;background:none;border:0;padding:0 0 8px;margin:0;cursor:pointer}
 #reset img{width:30px;height:30px;display:block;opacity:.4;transition:opacity .2s}
 #reset.ready img{opacity:1;animation:blink 1.1s ease-in-out infinite}
 @keyframes blink{0%,100%{opacity:.65;filter:drop-shadow(0 0 2px #fff)}50%{opacity:1;filter:drop-shadow(0 0 8px #ffe9a8) drop-shadow(0 0 16px #fff)}}
@@ -30,7 +30,7 @@ html,body{height:100%;margin:0;background:#35024a;overflow:hidden;overscroll-beh
 .cat{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.32);border-radius:999px;color:#fff;font:600 11.5px system-ui,sans-serif;padding:11px 3px;flex:1 1 auto;text-align:center;white-space:nowrap;touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 @media(max-width:375px){.cat{font-size:10.5px;padding:11px 2px}#cats{gap:3px}}
 .cat.held{background:#fff;color:#35024a;border-color:#fff;box-shadow:0 0 0 2px rgba(255,255,255,.25)}
-#ov,#achov{position:fixed;inset:0;background:rgba(20,5,35,.55);display:none;align-items:flex-end;justify-content:center;z-index:10;touch-action:none}
+#ov,#achov{position:fixed;inset:0;background:rgba(20,5,35,.08);display:none;align-items:flex-end;justify-content:center;z-index:10;touch-action:none}
 #achov{z-index:11}
 #ov.show,#achov.show{display:flex}
 #card,#achcard{width:min(100vw,460px);box-sizing:border-box;background:#ece9d8;border:3px solid #0a3fd6;border-top:0;border-bottom:0;border-radius:12px 12px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,.55);font:13px Tahoma,Verdana,sans-serif;color:#000;transform:translateY(105%);transition:transform .32s cubic-bezier(.2,.9,.3,1)}
@@ -40,7 +40,7 @@ html,body{height:100%;margin:0;background:#35024a;overflow:hidden;overscroll-beh
 :is(#logo,#alogo) u{display:block}:is(#logo,#alogo) u:nth-child(1){background:#f35325}:is(#logo,#alogo) u:nth-child(2){background:#81bc06}:is(#logo,#alogo) u:nth-child(3){background:#05a6f0}:is(#logo,#alogo) u:nth-child(4){background:#ffba08}
 #ttl,#attl{flex:1;color:#fff;font:700 15px 'Trebuchet MS',Tahoma,sans-serif;text-shadow:1px 1px #0a1f78}
 #x,#ax{width:30px;height:30px;box-sizing:border-box;border:1px solid #fff;border-radius:3px;background:linear-gradient(#e9775a,#c8401f);color:#fff;text-align:center;font:700 16px/28px Arial,sans-serif;cursor:pointer}
-#bd,#abd{padding:16px 16px calc(18px + env(safe-area-inset-bottom,0px))}
+#bd,#abd{padding:12px 16px calc(8px + env(safe-area-inset-bottom,0px))}
 #row{display:flex;gap:12px;align-items:center}
 #src{display:block;font:700 11px Tahoma,Verdana,sans-serif;color:#0a3fd6;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px}
 #hl{display:block;font:700 18px/1.2 'Trebuchet MS',Tahoma,sans-serif}
@@ -50,7 +50,7 @@ html,body{height:100%;margin:0;background:#35024a;overflow:hidden;overscroll-beh
 #more:active,#aok:active{background:#d6d0c5}
 #toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 18px);transform:translateX(-50%);background:rgba(30,8,50,.85);color:#fff;padding:10px 16px;border-radius:18px;font:600 14px system-ui,sans-serif;display:none;z-index:6}
 #thumb{width:88px;height:88px;object-fit:cover;flex:none;border:1px solid #7a96d8;border-radius:3px;background:#d9d6c3}
-#thumb.fb{object-fit:contain;image-rendering:pixelated;background:#35024a;border-color:#0a3fd6}
+#fbsvg{width:88px;height:88px;flex:none;image-rendering:pixelated;display:none}
 .trophy{text-align:center;font-size:46px;line-height:1}
 .lvbig{font:800 34px/1.1 'Trebuchet MS',Tahoma,sans-serif;text-align:center;color:#0a3fd6;margin:6px 0 4px}
 .rknm{font:700 20px/1.2 'Trebuchet MS',Tahoma,sans-serif;text-align:center}
@@ -74,7 +74,7 @@ html,body{height:100%;margin:0;background:#35024a;overflow:hidden;overscroll-beh
 <div id="lvl"></div>
 <div id="toast">All popped! Tap Refresh for more.</div>
 <div id="achov"><div id="achcard"><div id="atb"><i id="alogo"><u></u><u></u><u></u><u></u></i><span id="attl">Achievement Unlocked!</span><b id="ax">&#10005;</b></div><div id="abd"><div class="trophy">&#127942;</div><div class="lvbig" id="avl">LEVEL 2</div><div class="rknm" id="ark">Thumb Warmup</div><p id="apt"></p><button id="aok">Keep Popping</button></div></div></div>
-<div id="ov"><div id="card"><div id="tb"><i id="logo"><u></u><u></u><u></u><u></u></i><span id="ttl">Pop The Feed</span><b id="x">&#10005;</b></div><div id="bd"><div id="row"><img id="thumb" alt="" referrerpolicy="no-referrer" style="display:none"><div id="msg"><span id="src"></span><b id="hl"></b></div></div><p id="sm"></p><button id="more">Read More</button></div></div></div>
+<div id="ov"><div id="card"><div id="tb"><i id="logo"><u></u><u></u><u></u><u></u></i><span id="ttl">Pop The Feed</span><b id="x">&#10005;</b></div><div id="bd"><div id="row"><svg id="fbsvg" viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="12" y="1" width="1" height="1" fill="#ffffff"/><rect x="10" y="3" width="1" height="1" fill="#c9a2ff"/><rect x="13" y="4" width="1" height="1" fill="#c9a2ff"/><rect x="3" y="5" width="4" height="1" fill="#3a1670"/><rect x="2" y="6" width="1" height="1" fill="#3a1670"/><rect x="3" y="6" width="2" height="1" fill="#c9a2ff"/><rect x="5" y="6" width="3" height="1" fill="#9a5bec"/><rect x="1" y="7" width="1" height="1" fill="#3a1670"/><rect x="2" y="7" width="1" height="1" fill="#c9a2ff"/><rect x="3" y="7" width="2" height="1" fill="#ffffff"/><rect x="5" y="7" width="4" height="1" fill="#9a5bec"/><rect x="0" y="8" width="1" height="1" fill="#3a1670"/><rect x="1" y="8" width="1" height="1" fill="#c9a2ff"/><rect x="2" y="8" width="2" height="1" fill="#ffffff"/><rect x="4" y="8" width="6" height="1" fill="#9a5bec"/><rect x="10" y="8" width="1" height="1" fill="#3a1670"/><rect x="0" y="9" width="1" height="1" fill="#3a1670"/><rect x="1" y="9" width="1" height="1" fill="#c9a2ff"/><rect x="2" y="9" width="1" height="1" fill="#ffffff"/><rect x="3" y="9" width="7" height="1" fill="#9a5bec"/><rect x="10" y="9" width="1" height="1" fill="#3a1670"/><rect x="0" y="10" width="1" height="1" fill="#3a1670"/><rect x="1" y="10" width="8" height="1" fill="#9a5bec"/><rect x="9" y="10" width="1" height="1" fill="#7a3dc8"/><rect x="10" y="10" width="1" height="1" fill="#3a1670"/><rect x="0" y="11" width="1" height="1" fill="#3a1670"/><rect x="1" y="11" width="8" height="1" fill="#9a5bec"/><rect x="9" y="11" width="1" height="1" fill="#7a3dc8"/><rect x="10" y="11" width="1" height="1" fill="#3a1670"/><rect x="0" y="12" width="1" height="1" fill="#3a1670"/><rect x="1" y="12" width="7" height="1" fill="#9a5bec"/><rect x="8" y="12" width="2" height="1" fill="#7a3dc8"/><rect x="10" y="12" width="1" height="1" fill="#3a1670"/><rect x="1" y="13" width="1" height="1" fill="#3a1670"/><rect x="2" y="13" width="4" height="1" fill="#9a5bec"/><rect x="6" y="13" width="3" height="1" fill="#7a3dc8"/><rect x="9" y="13" width="1" height="1" fill="#3a1670"/><rect x="2" y="14" width="1" height="1" fill="#3a1670"/><rect x="3" y="14" width="5" height="1" fill="#7a3dc8"/><rect x="8" y="14" width="1" height="1" fill="#3a1670"/><rect x="3" y="15" width="5" height="1" fill="#3a1670"/></svg><img id="thumb" alt="" referrerpolicy="no-referrer" style="display:none"><div id="msg"><span id="src"></span><b id="hl"></b></div></div><p id="sm"></p><button id="more">Read More</button></div></div></div>
 <script>
 const B=[[128, 9, 215, 198, "Art"], [606, 9, 215, 198, "Entertainment"], [1084, 9, 215, 198, "Oddities"], [128, 448, 215, 198, "Oddities"], [606, 448, 215, 198, "Science"], [1084, 448, 215, 198, "History"], [128, 881, 215, 198, "History"], [606, 881, 215, 198, "Art"], [1084, 881, 215, 198, "Entertainment"], [128, 1313, 215, 198, "Entertainment"], [606, 1313, 215, 198, "Oddities"], [1084, 1313, 215, 198, "Science"], [128, 1727, 215, 198, "Science"], [606, 1727, 215, 198, "History"], [1084, 1727, 215, 198, "Art"], [128, 2143, 215, 198, "Art"], [606, 2143, 215, 198, "Entertainment"], [1084, 2143, 215, 198, "Oddities"], [128, 2586, 215, 198, "Oddities"], [606, 2586, 215, 198, "Science"], [1084, 2586, 215, 198, "History"], [128, 3020, 215, 198, "History"], [606, 3020, 215, 198, "Art"], [1084, 3020, 215, 198, "Entertainment"], [128, 3452, 215, 198, "Entertainment"], [606, 3452, 215, 198, "Oddities"], [1084, 3452, 215, 198, "Science"], [128, 3866, 215, 198, "Science"], [606, 3866, 215, 198, "History"], [1084, 3866, 215, 198, "Art"], [128, 4280, 215, 198, "Art"], [606, 4280, 215, 198, "Entertainment"], [1084, 4280, 215, 198, "Oddities"], [128, 4725, 215, 198, "Oddities"], [606, 4725, 215, 198, "Science"], [1084, 4725, 215, 198, "History"], [128, 5155, 215, 198, "History"], [606, 5155, 215, 198, "Art"], [1084, 5155, 215, 198, "Entertainment"]];
 const GC={Art:'#ff8ac8',Entertainment:'#ffa98a',Oddities:'#ffd36b',History:'#c9baff',Science:'#8ff5e0'};
@@ -179,7 +179,7 @@ function pop(i){
  if(cur)return;lastPop=Date.now();snd();$('p'+i).classList.add('on');if($('q'+i))$('q'+i).classList.add('on');$('h'+i).classList.add('done');$('g'+i).classList.remove('on');
  popped++;setCnt();const pc=B[i][4];catN[pc]++;setNs();if(catN[pc]===catT[pc])pendingCat=pc;popIdx.push(i);savePop();if(popped>=N)sheetDone();
  cur=storyFor(i);$('src').textContent=cur[0];$('more').textContent='Read at '+cur[0];$('hl').textContent=cur[1];$('sm').textContent=cur[2];
- const th=$('thumb');th.style.display='block';th.classList.toggle('fb',!cur[5]);th.onerror=()=>{th.onerror=null;th.classList.add('fb');th.src=FB};th.src=cur[5]||FB;
+ const th=$('thumb'),fs=$('fbsvg');const noimg=()=>{th.style.display='none';fs.style.display='block'};th.style.display='block';fs.style.display='none';th.onerror=noimg;if(cur[5])th.src=cur[5];else noimg();
  setTimeout(()=>$('ov').classList.add('show'),90);
 }
 function closeCard(){closedAt=Date.now();$('ov').classList.remove('show');cur=null;const pc=pendingCat;pendingCat=null;if(popped>=N){$('reset').classList.add('ready');$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',3500)}if(pc)celebrate(pc,popped>=N);if(pendingAch){const a=pendingAch;pendingAch=null;setTimeout(()=>showAch(a),pc?900:250)}}
