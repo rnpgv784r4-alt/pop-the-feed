@@ -48,17 +48,20 @@ html,body{height:100%;margin:0;background:#35024a;overflow:hidden;overscroll-beh
 #ptr{position:fixed;left:50%;top:calc(var(--bh,210px) + 6px);transform:translateX(-50%);opacity:0;z-index:4;pointer-events:none;background:rgba(53,2,74,.92);color:#fff;font:600 13px system-ui,sans-serif;padding:6px 14px;border-radius:16px;transition:opacity .15s}
 .cat.done span::after{content:' ✓'}
 #lvl{position:fixed;left:50%;top:calc(var(--bh,210px) + 10px);transform:translateX(-50%);opacity:0;z-index:6;pointer-events:none;background:rgba(53,2,74,.94);border:1px solid #6b2d86;color:#fff;font:700 15px system-ui,sans-serif;padding:8px 18px;border-radius:18px;white-space:nowrap}
+#bar{box-shadow:0 10px 18px -4px rgba(10,0,20,.72),0 24px 40px -14px rgba(0,0,0,.5)}
+#svg{overflow:visible}
 </style></head><body>
 <div id="scroll"><div id="inner">
 <svg id="svg" viewBox="0 0 1179 5112" preserveAspectRatio="xMidYMin meet" xmlns="http://www.w3.org/2000/svg">
 <defs id="defs"><filter id="gb" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="16"/></filter></defs>
+<image href="bubbles.jpg" x="0" y="-2138" width="1179" height="5112"/>
 <image href="bubbles.jpg" x="0" y="0" width="1179" height="5112"/>
 <g id="gl"></g><g id="layer"></g>
 </svg></div></div>
 <div id="bar"><div id="top"><div id="side"><span id="cnt">0 / 39</span><small>popped</small></div><img id="logoimg" src="logo-banner.png" alt="Pop The Feed"><button id="reset" aria-label="Refresh"><img src="refresh.png" alt="Refresh"></button></div>
 <div id="cats"><button class="cat" data-c="Art"><span>Art</span></button><button class="cat" data-c="Entertainment"><span>Entertainment</span></button><button class="cat" data-c="Oddities"><span>Oddities</span></button><button class="cat" data-c="History"><span>History</span></button><button class="cat" data-c="Science"><span>Science</span></button></div></div>
 <label id="hp" style="position:fixed;bottom:2px;left:2px;width:44px;height:26px;opacity:.01;pointer-events:none;z-index:-1"><input type="checkbox" switch></label>
-<div id="ver" style="position:fixed;right:6px;bottom:calc(env(safe-area-inset-bottom,0px) + 2px);font:10px system-ui,sans-serif;color:#fff;opacity:.35;z-index:4;pointer-events:none">v10 level-up</div>
+<div id="ver" style="position:fixed;right:6px;bottom:calc(env(safe-area-inset-bottom,0px) + 2px);font:10px system-ui,sans-serif;color:#fff;opacity:.35;z-index:4;pointer-events:none">v11 shadow</div>
 <div id="ptr">Pull to refresh</div>
 <div id="lvl"></div>
 <div id="toast">All popped! Tap Refresh for more.</div>
