@@ -56,7 +56,7 @@ html,body{height:100%;margin:0;background:#35024a;overflow:hidden;overscroll-beh
 <div id="bar"><div id="top"><div id="side"><span id="cnt">0 / 39</span><small>popped</small></div><img id="logoimg" src="logo-banner.png" alt="Pop The Feed"><button id="reset" aria-label="Refresh"><img src="refresh.png" alt="Refresh"></button></div>
 <div id="cats"><button class="cat" data-c="Art">Art</button><button class="cat" data-c="Entertainment">Entertainment</button><button class="cat" data-c="Oddities">Oddities</button><button class="cat" data-c="History">History</button><button class="cat" data-c="Science">Science</button></div></div>
 <label id="hp" style="position:fixed;bottom:2px;left:2px;width:44px;height:26px;opacity:.01;pointer-events:none;z-index:-1"><input type="checkbox" switch></label>
-<div id="ver" style="position:fixed;right:6px;bottom:calc(env(safe-area-inset-bottom,0px) + 2px);font:10px system-ui,sans-serif;color:#fff;opacity:.35;z-index:4;pointer-events:none">v7 pull-move</div>
+<div id="ver" style="position:fixed;right:6px;bottom:calc(env(safe-area-inset-bottom,0px) + 2px);font:10px system-ui,sans-serif;color:#fff;opacity:.35;z-index:4;pointer-events:none">v8 shuffle</div>
 <div id="ptr">Pull to refresh</div>
 <div id="toast">All popped! Tap Refresh for more.</div>
 <div id="ov"><div id="card"><div id="tb"><i id="logo"><u></u><u></u><u></u><u></u></i><span id="ttl">Pop The Feed</span><b id="x">&#10005;</b></div><div id="bd"><div id="row"><img id="thumb" alt="" referrerpolicy="no-referrer" style="display:none"><svg id="warn" viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="12" y="1" width="1" height="1" fill="#ffffff"/><rect x="10" y="3" width="1" height="1" fill="#c9a2ff"/><rect x="13" y="4" width="1" height="1" fill="#c9a2ff"/><rect x="3" y="5" width="4" height="1" fill="#3a1670"/><rect x="2" y="6" width="1" height="1" fill="#3a1670"/><rect x="3" y="6" width="2" height="1" fill="#c9a2ff"/><rect x="5" y="6" width="3" height="1" fill="#9a5bec"/><rect x="1" y="7" width="1" height="1" fill="#3a1670"/><rect x="2" y="7" width="1" height="1" fill="#c9a2ff"/><rect x="3" y="7" width="2" height="1" fill="#ffffff"/><rect x="5" y="7" width="4" height="1" fill="#9a5bec"/><rect x="0" y="8" width="1" height="1" fill="#3a1670"/><rect x="1" y="8" width="1" height="1" fill="#c9a2ff"/><rect x="2" y="8" width="2" height="1" fill="#ffffff"/><rect x="4" y="8" width="6" height="1" fill="#9a5bec"/><rect x="10" y="8" width="1" height="1" fill="#3a1670"/><rect x="0" y="9" width="1" height="1" fill="#3a1670"/><rect x="1" y="9" width="1" height="1" fill="#c9a2ff"/><rect x="2" y="9" width="1" height="1" fill="#ffffff"/><rect x="3" y="9" width="7" height="1" fill="#9a5bec"/><rect x="10" y="9" width="1" height="1" fill="#3a1670"/><rect x="0" y="10" width="1" height="1" fill="#3a1670"/><rect x="1" y="10" width="8" height="1" fill="#9a5bec"/><rect x="9" y="10" width="1" height="1" fill="#7a3dc8"/><rect x="10" y="10" width="1" height="1" fill="#3a1670"/><rect x="0" y="11" width="1" height="1" fill="#3a1670"/><rect x="1" y="11" width="8" height="1" fill="#9a5bec"/><rect x="9" y="11" width="1" height="1" fill="#7a3dc8"/><rect x="10" y="11" width="1" height="1" fill="#3a1670"/><rect x="0" y="12" width="1" height="1" fill="#3a1670"/><rect x="1" y="12" width="7" height="1" fill="#9a5bec"/><rect x="8" y="12" width="2" height="1" fill="#7a3dc8"/><rect x="10" y="12" width="1" height="1" fill="#3a1670"/><rect x="1" y="13" width="1" height="1" fill="#3a1670"/><rect x="2" y="13" width="4" height="1" fill="#9a5bec"/><rect x="6" y="13" width="3" height="1" fill="#7a3dc8"/><rect x="9" y="13" width="1" height="1" fill="#3a1670"/><rect x="2" y="14" width="1" height="1" fill="#3a1670"/><rect x="3" y="14" width="5" height="1" fill="#7a3dc8"/><rect x="8" y="14" width="1" height="1" fill="#3a1670"/><rect x="3" y="15" width="5" height="1" fill="#3a1670"/></svg><div id="msg"><span id="src"></span><b id="hl"></b></div></div><p id="sm"></p><button id="more">Read More</button></div></div></div>
@@ -101,11 +101,23 @@ function clk(){hap();try{AC=AC||new (window.AudioContext||window.webkitAudioCont
 function el(n,a){const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e}
 
 const catOf=s=>s[4]||SRC[s[0]]||null;
-const rank=B.map((b,i)=>B.slice(0,i).filter(x=>x[4]===b[4]).length);
-let lists={};
 const byNew=(x,y)=>(y[6]||0)-(x[6]||0);
-function build(){lists={};S.forEach(t=>{const c=catOf(t);if(c)(lists[c]=lists[c]||[]).push(t)});for(const c in lists)lists[c].sort(byNew)}
-function storyFor(i){let l=lists[B[i][4]];if(!l||!l.length)l=S.slice().sort(byNew);return l[rank[i]%l.length]}
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+let seen=new Set();try{seen=new Set(JSON.parse(localStorage.getItem('seen')||'[]'))}catch(e){}
+let assign={},SJ=JSON.stringify(S);
+function build(){
+ assign={};const by={};S.forEach(t=>{const c=catOf(t);if(c)(by[c]=by[c]||[]).push(t)});
+ ['Art','Entertainment','Oddities','History','Science'].forEach(c=>{
+  const idx=B.map((b,i)=>b[4]===c?i:-1).filter(i=>i>=0);
+  const pool=by[c]&&by[c].length?by[c]:S;
+  let pick=shuf(pool.filter(t=>!seen.has(t[3]))).concat(shuf(pool.filter(t=>seen.has(t[3]))));
+  while(pick.length<idx.length)pick=pick.concat(shuf(pool));
+  pick=pick.slice(0,idx.length).sort(byNew);
+  idx.forEach((bi,k)=>{assign[bi]=pick[k];seen.add(pick[k][3])});
+ });
+ try{localStorage.setItem('seen',JSON.stringify([...seen].slice(-400)))}catch(e){}
+}
+function storyFor(i){return assign[i]||S[0]}
 build();
 const ps={};
 B.forEach((b,i)=>{
@@ -144,8 +156,8 @@ document.querySelectorAll('.cat').forEach(btn=>{
  btn.addEventListener('click',()=>{act=act===btn.dataset.c?null:btn.dataset.c;applyGlow()});
  btn.addEventListener('contextmenu',e=>e.preventDefault());
 });
-function loadStories(){fetch('stories.json?'+Date.now()).then(r=>r.ok?r.json():[]).then(d=>{if(Array.isArray(d)&&d.length){S=d;build()}}).catch(()=>{})}
-function doReset(){popped=0;setCnt();$('reset').classList.remove('ready');document.querySelectorAll('.pop').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.hit').forEach(x=>x.classList.remove('done'));applyGlow();closeCard();$('scroll').scrollTo({top:0,behavior:'smooth'});loadStories()}
+function loadStories(){fetch('stories.json?'+Date.now()).then(r=>r.ok?r.json():[]).then(d=>{if(Array.isArray(d)&&d.length){const j=JSON.stringify(d);if(j!==SJ){S=d;SJ=j;build()}}}).catch(()=>{})}
+function doReset(){popped=0;setCnt();$('reset').classList.remove('ready');document.querySelectorAll('.pop').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.hit').forEach(x=>x.classList.remove('done'));applyGlow();closeCard();build();$('scroll').scrollTo({top:0,behavior:'smooth'});loadStories()}
 $('reset').addEventListener('click',doReset);
 const pt=$('ptr'),sc=$('scroll'),inn=$('inner');let py=null,pull=0;
 function mv(y,anim){inn.style.transition=anim?'transform .35s cubic-bezier(.2,.8,.3,1)':'none';inn.style.transform='translateY('+y+'px)';pt.style.transform='translateX(-50%) translateY('+(y/2-16)+'px)'}
