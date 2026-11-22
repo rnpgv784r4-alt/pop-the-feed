@@ -67,7 +67,7 @@ a#more{box-sizing:border-box;width:min(260px,80%);text-align:center;line-height:
 .trophy{text-align:center;font-size:46px;line-height:1}
 .lvbig{font:800 34px/1.1 'Trebuchet MS',Tahoma,sans-serif;text-align:center;color:#0a3fd6;margin:6px 0 4px}
 .rknm{font:700 20px/1.2 'Trebuchet MS',Tahoma,sans-serif;text-align:center}
-#apt{text-align:center;margin:12px 0 16px;font-size:13px;line-height:1.4}
+#ark{margin-top:8px}#apt{text-align:center;margin:12px 0 16px;font-size:13px;line-height:1.4}
 #ptr{position:fixed;left:50%;top:calc(var(--bh,210px) + 6px);transform:translateX(-50%);opacity:0;z-index:4;pointer-events:none;background:rgba(53,2,74,.92);color:#fff;font:600 13px system-ui,sans-serif;padding:6px 14px;border-radius:16px;transition:opacity .15s}
 .cat.done span::after{content:'\2713';margin-left:2px}
 #lvl{position:fixed;left:50%;top:calc(var(--bh,210px) + 10px);transform:translateX(-50%);opacity:0;z-index:6;pointer-events:none;background:rgba(53,2,74,.94);border:1px solid #6b2d86;color:#fff;font:700 15px system-ui,sans-serif;padding:8px 18px;border-radius:18px;white-space:nowrap}
@@ -364,7 +364,7 @@ function gHud(){
  const c=G.cat;$('grd').textContent=(G.stage===2?'S2 ':'')+'R'+G.r+'/5';const pl=$('gcat');pl.style.setProperty('--gc',CC[c]);pl.style.color=c==='Oddities'?'#35024a':'#fff';
  $('garr').textContent=G.dir>0?'↑':'↓';$('gcn').textContent=c;
  [...$('gdots').children].forEach((d,i)=>d.classList.toggle('on',i<G.hits));
- $('cnt').textContent=G.score;
+ $('cnt').innerHTML=pixT(G.score,'#ffffff',2.1);
 }
 function gTimer(){const low=G.time<=5;$('gtm').textContent=fmt(G.time);$('gtm').classList.toggle('low',low);const t=$('gtime');t.classList.toggle('low',low);t.style.transform='scaleX('+Math.max(0,Math.min(1,G.time/G.tmax))+')'}
 function gFlash(){const f=$('gflash');f.getAnimations().forEach(a=>a.cancel());f.animate([{opacity:.45},{opacity:0}],{duration:260})}
@@ -386,8 +386,8 @@ function gameOver(win){
  const nb=G.score>best;if(nb){best=G.score;try{localStorage.setItem('ptf_game_best',String(best))}catch(e){}}
  gHud();gmode='over';
  $('attl').textContent=win?'Stream Master!':(wr?'Wrong Bubble!':"Time's Up!");document.querySelector('#achcard .trophy').innerHTML=win?'&#127942;':(wr?'&#128165;':'&#9201;&#65039;');
- $('avl').textContent='SCORE '+G.score;$('ark').style.display='';$('ark').textContent=(nb?'NEW BEST! ':'Best: ')+best;
- $('apt').textContent=win?'You beat both stages of the stream.':(wr?'You hit a bubble from the wrong category. ':'Time ran out. ')+'You reached stage '+G.stage+', round '+G.r+' of 5 and unlocked '+((G.stage-1)*5+G.r-1)+' stories.';
+ $('avl').innerHTML=pixT('SCORE '+G.score,'#0a3fd6',3.4);$('ark').style.display='';$('ark').innerHTML=pixT((nb?'NEW BEST! ':'BEST: ')+best,nb?'#d3212b':'#222',2.2);
+ $('apt').textContent=win?'You beat both stages of the stream.':(wr?'You hit a bubble from the wrong category. ':'Time ran out. ')+'You reached stage '+G.stage+', round '+G.r+' of 5.';
  $('aok').textContent='Play Again';$('ayes').textContent='Exit';$('ayes').style.display='block';$('achov').classList.add('show')
 }
 function startGame(){
@@ -431,7 +431,7 @@ function pixB(t,col,sh){const w=t.length*8-1;let d='',d2='';
 
 Object.assign(PB,{C:"0111111,1111111,1100000,1100000,1100000,1100000,1100000,1111111,0111111",F:"1111111,1111111,1100000,1111110,1111110,1100000,1100000,1100000,1100000",G:"0111111,1111111,1100000,1100000,1101111,1100011,1100011,1111111,0111111",H:"1100011,1100011,1100011,1111111,1111111,1100011,1100011,1100011,1100011",I:"1111111,1111111,0011100,0011100,0011100,0011100,0011100,1111111,1111111",J:"0001111,0001111,0000011,0000011,0000011,1100011,1100011,1111111,0111110",K:"1100011,1100110,1101100,1111000,1111000,1101100,1100110,1100011,1100011",N:"1100011,1110011,1111011,1111111,1101111,1100111,1100011,1100011,1100011",Q:"0111110,1111111,1100011,1100011,1100011,1101011,1100111,1111111,0111111",U:"1100011,1100011,1100011,1100011,1100011,1100011,1100011,1111111,0111110",V:"1100011,1100011,1100011,1100011,1100011,0110110,0110110,0011100,0011100",W:"1100011,1100011,1100011,1100011,1101011,1111111,1111111,1110111,1100011",X:"1100011,1100011,0110110,0011100,0011100,0011100,0110110,1100011,1100011",Z:"1111111,1111111,0000110,0001100,0011000,0110000,1100000,1111111,1111111","/":"0000011,0000011,0000110,0001100,0011000,0110000,1100000,1100000,1100000","!":"0011100,0011100,0011100,0011100,0011100,0011100,0000000,0011100,0011100","•":"0000000,0000000,0000000,0011100,0111110,0111110,0011100,0000000,0000000","↑":"0001000,0011100,0111110,1111111,0001000,0001000,0001000,0001000,0001000","↓":"0001000,0001000,0001000,0001000,0001000,1111111,0111110,0011100,0001000"});
 function lite(h,a){const n=parseInt(h.slice(1),16),m=v=>Math.round(v+(255-v)*a);return 'rgb('+m(n>>16)+','+m((n>>8)&255)+','+m(n&255)+')'}
-function pixT(t,fill,u){t=t.toUpperCase();const on=new Set(),cols=t.length*8-1;
+function pixT(t,fill,u){t=String(t).toUpperCase();const on=new Set(),cols=t.length*8-1;
  [...t].forEach((ch,i)=>{(PB[ch]||PB[' ']).split(',').forEach((row,y)=>{[...row].forEach((v,x)=>{if(v==='1')on.add((i*8+x)+','+y)})})});
  let f='',h='',d='';on.forEach(k=>{const [X,y]=k.split(',').map(Number);f+='M'+X+' '+y+'h1v1h-1z';d+='M'+(X+.8)+' '+(y+.8)+'h1v1h-1z';
   if(!on.has(X+','+(y-1)))h+='M'+X+' '+y+'h1v.32h-1z';if(!on.has((X-1)+','+y))h+='M'+X+' '+y+'h.32v1h-.32z'});
