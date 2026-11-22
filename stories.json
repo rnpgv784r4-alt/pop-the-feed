@@ -56,10 +56,10 @@
  [
   "Hip Hop Golden Age",
   "Top 150 Hip Hop Albums Of The 1990s",
-  "Tap the button below for the full story.",
+  "Top 150 Hip Hop Albums Of The 1990s: some of the placements will start arguments. In the 1990s, that’s what Hip Hop fans did best.",
   "http://hiphopgoldenage.com/list/top-150-hip-hop-albums-of-the-1990s/",
   "Art",
-  "",
+  "https://hiphopgoldenage.com/wp-content/uploads/2026/07/The_1990s1x_hhga-1.webp",
   1795284742
  ],
  [
@@ -360,6 +360,24 @@
   1794960000
  ],
  [
+  "Dangerous Minds",
+  "The Crying Boy: how a series of paintings became a tabloid panic",
+  "Curse or coincidence?",
+  "https://dangerousminds.net/art/the-crying-boy-how-a-series-of-paintings-became-a-tabloid-panic/",
+  "Entertainment",
+  "https://cdn1.dangerousminds.net/uploads/7/2026/11/The-Crying-Boy-how-a-series-of-paintings-became-a-tabloid-panic-Dangerous-Minds-1024x768.jpg",
+  1795356000
+ ],
+ [
+  "Extra.ie",
+  "Gardai hunt masked gang of four after brutal home attack leaves man hospitalised",
+  "Gardaí are seeking to hunt down a masked gang of men who brutally attacked someone at their home during the week.",
+  "https://extra.ie/2026/11/22/news/gardai-masked-gang-home-attack-navan",
+  "Entertainment",
+  "https://extra.ie/wp-content/uploads/2026/06/Garda-2.jpg",
+  1795345725
+ ],
+ [
   "Search: Erling Haaland",
   "What to know about Erling Haaland, the Norwegian World Cup star finding viral fame off the field - ABC News -…",
   "What to know about Erling Haaland, the Norwegian World Cup star finding viral fame off the field ABC News - Breaking News, Latest News and Videos",
@@ -448,15 +466,6 @@
   "Entertainment",
   "",
   1795281915
- ],
- [
-  "Dangerous Minds",
-  "How football hooligans became known as ‘casuals’ in the 1980s",
-  "It makes sense in context, I swear!",
-  "https://dangerousminds.net/pop-culture/why-are-football-hooligans-called-casuals/",
-  "Entertainment",
-  "https://cdn1.dangerousminds.net/uploads/7/2026/11/Why-are-football-hooligans-called-casuals-Dangerous-Minds-1024x768.jpg",
-  1795280400
  ],
  [
   "Talk House",
@@ -709,15 +718,6 @@
   "Entertainment",
   "https://images.unsplash.com/photo-1777783577112-97d9ba648394?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTc3M3wwfDF8c2VhcmNofDZ8fHJhZGlvfGVufDB8fHx8MTc5NDUwMTAwM3ww&ixlib=rb-4.1.0&q=80&w=2000",
   1794999758
- ],
- [
-  "XKCD",
-  "Voyager Crash",
-  "Tap the button below for the full story.",
-  "https://xkcd.com/3326/",
-  "Entertainment",
-  "https://imgs.xkcd.com/comics/voyager_crash.png",
-  1794960000
  ],
  [
   "Good News Network",
@@ -1125,6 +1125,15 @@
   1795238940
  ],
  [
+  "The New York Times",
+  "On the Trail With Spain’s Prime Minister, as He Tries to Pull Out a Win",
+  "Tap the button below for the full story.",
+  "https://www.nytimes.com/2026/11/21/world/europe/spain-sanchez-interview-election-basketball.html",
+  "History",
+  "",
+  1795237270
+ ],
+ [
   "https://safariindia.com/",
   "NH Collection Dubai Ibn Battuta Opens in Dubai",
   "NH Collection Dubai Ibn Battuta has opened following the phased redevelopment of the former Oaks Gate Dubai Hotel. The 396-room property combines updated",
@@ -1244,10 +1253,10 @@
  [
   "ThePrint",
   "Al-Biruni wrote of Vishnu idol at Ghazni. Haryana now writes to MEA for its return to Kurukshetra",
-  "Haryana Sarasvati Heritage Development Board suggests taking help from Afghanistan to locate, authenticate and bring back the bronze idol of Vishnu.",
+  "Tap the button below for the full story.",
   "https://theprint.in/india/al-biruni-wrote-of-vishnu-idol-at-ghazni-haryana-now-writes-to-mea-for-its-return-to-kurukshetra/3103189/",
   "History",
-  "https://staticprintenglish.theprint.in/wp-content/uploads/2026/11/WhatsApp-Image-2026-11-19-at-6.12.24-PM-e1795097729886.jpeg",
+  "",
   1795089232
  ],
  [
@@ -1431,13 +1440,22 @@
   1794728746
  ],
  [
-  "Search: Hildegard of Bingen",
-  "Bach Aria Soloists and Actor Cinnamon Schultz Paulette Present Incisive Performance in Praise of Great Women…",
-  "Bach Aria Soloists and Actor Cinnamon Schultz Paulette Present Incisive Performance in Praise of Great Women KC Studio",
-  "https://kcstudio.org/bach-aria-soloists-and-actor-cinnamon-schultz-paulette-present-incisive-performance-in-praise-of-great-women/",
-  "History",
-  "https://kcstudio.org/wp-content/uploads/BAS-photo-2.jpg",
-  1794675048
+  "Tech Spot",
+  "Intel secures first external customer for 18A-P node, CEO Lip-Bu Tan says",
+  "The news was reiterated by Intel's chief technology officer, Pushkar Ranade, who clarified that Tan was talking about the cutting-edge 18A-P node rather than the base 18A. Though both are…",
+  "https://www.techspot.com/news/114649-intel-secures-first-external-customer-18a-p-node.html",
+  "Science",
+  "https://www.techspot.com/images2/news/ts3_thumbs/2026/04/2026-04-16-ts3_thumbs-ba1.jpg",
+  1795356420
+ ],
+ [
+  "Phys.org",
+  "Milky Way simulation reaches record resolution with the help of three supercomputers",
+  "A team of researchers, including those from the University of Tokyo, have developed a new way to model the Milky Way at a level of detail never achieved before. They simulated the entire…",
+  "https://phys.org/news/2026-11-milky-simulation-resolution-supercomputers.html",
+  "Science",
+  "https://scx1.b-cdn.net/csz/news/tmb/2026/three-supercomputers-c.jpg",
+  1795356001
  ],
  [
   "Pop Sci",
@@ -1503,15 +1521,6 @@
   1795309201
  ],
  [
-  "Phys.org",
-  "The avian champions of long-distance migration keep surprising scientists",
-  "\"The whole story began with an extinct bird from Hispaniola,\" said Min Zhao, a former postdoctoral associate at the Florida Museum of Natural History (now a postdoctoral researcher at…",
-  "https://phys.org/news/2026-11-avian-champions-distance-migration-scientists.html",
-  "Science",
-  "https://scx1.b-cdn.net/csz/news/tmb/2026/the-avian-champions-of.jpg",
-  1795298401
- ],
- [
   "Tech Spot",
   "Phison shows an SSD design with an NPU and 64GB of memory that runs AI on the data it stores",
   "The company showed off the design at Supercomputing 2026 (SC26) in Chicago this week. Rather than sending entire datasets to the host, the drive scans and processes data in parallel right…",
@@ -1528,15 +1537,6 @@
   "Science",
   "https://www.popsci.com/wp-content/uploads/2026/11/00-header_479173.jpg?quality=85",
   1795284000
- ],
- [
-  "Tech Spot",
-  "Jensen Huang berated Nvidia employees for decades, NYT report claims",
-  "According to an extensive New York Times report, former Nvidia CEO Jensen Huang's pattern of making abusive and often violent remarks toward employees dates back at least to the early…",
-  "https://www.techspot.com/news/114651-jensen-huang-berated-nvidia-employees-decades-nyt-report.html",
-  "Science",
-  "https://www.techspot.com/images2/news/ts3_thumbs/2026/07/2026-07-03-ts3_thumbs-caa.jpg",
-  1795281420
  ],
  [
   "The Observer",
@@ -1793,10 +1793,10 @@
  [
   "Tribute Archive",
   "Tyler William Beebe Obituary | Watkins Brothers Funeral Homes | Owosso, MI",
-  "Tap the button below for the full story.",
+  "View Tyler William Beebe's complete obituary, share memories, and explore 10 tribute posts from the community.",
   "https://www.tributearchive.com/obituaries/50294985/tyler-william-beebe",
   "Science",
-  "",
+  "https://d1q40j6jx1d8h6.cloudfront.net/Obituaries/50294985/Social_2.jpg",
   1794772520
  ]
 ]
