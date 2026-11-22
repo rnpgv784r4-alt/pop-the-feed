@@ -194,7 +194,7 @@ const layer=$('layer'),gl=$('gl'),defs=$('defs'),N=B.length;
 let popped=0,pools={},cur=null,AC=null,closedAt=0,lastPop=0;
 let lastHap=0;
 function hap(){const n=Date.now();if(n-lastHap<150)return;lastHap=n;try{if(navigator.vibrate){navigator.vibrate(18);return}}catch(e){}try{document.getElementById('hp').click()}catch(e){}}
-function snd(){hap();try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();
+function snd(){hap();try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state!=='running')AC.resume();
 const t=AC.currentTime,sr=AC.sampleRate,v=.85+Math.random()*.3;
 const m=AC.createGain();m.gain.value=.85;const lp=AC.createBiquadFilter();lp.type='lowpass';lp.frequency.value=5000;m.connect(lp);lp.connect(AC.destination);
 function burst(at,len,ty,f,q,gain,pw){const n=Math.floor(sr*len),bf=AC.createBuffer(1,n,sr),d=bf.getChannelData(0);for(let i=0;i<n;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/n,pw);const s=AC.createBufferSource();s.buffer=bf;const fl=AC.createBiquadFilter();fl.type=ty;fl.frequency.value=f;fl.Q.value=q;const g=AC.createGain();g.gain.value=gain;s.connect(fl);fl.connect(g);g.connect(m);s.start(at)}
@@ -203,7 +203,7 @@ burst(t,.06,'bandpass',1400*v,3,1.6,3);
 burst(t+.015+Math.random()*.012,.03,'bandpass',2200,1.5,.35,3);
 const o=AC.createOscillator(),og=AC.createGain();o.frequency.setValueAtTime(200*v,t);o.frequency.exponentialRampToValueAtTime(80,t+.05);og.gain.setValueAtTime(.5,t);og.gain.exponentialRampToValueAtTime(.001,t+.07);o.connect(og);og.connect(m);o.start(t);o.stop(t+.08);
 }catch(e){}}
-function clk(){hap();try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();const t=AC.currentTime,o=AC.createOscillator(),g=AC.createGain();o.type='square';o.frequency.setValueAtTime(2200,t);o.frequency.exponentialRampToValueAtTime(900,t+.025);g.gain.setValueAtTime(.18,t);g.gain.exponentialRampToValueAtTime(.001,t+.03);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+.04)}catch(e){}}
+function clk(){hap();try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state!=='running')AC.resume();const t=AC.currentTime,o=AC.createOscillator(),g=AC.createGain();o.type='square';o.frequency.setValueAtTime(2200,t);o.frequency.exponentialRampToValueAtTime(900,t+.025);g.gain.setValueAtTime(.18,t);g.gain.exponentialRampToValueAtTime(.001,t+.03);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+.04)}catch(e){}}
 function el(n,a){const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e}
 
 const catOf=s=>s[4]||SRC[s[0]]||null;
@@ -240,7 +240,7 @@ B.forEach((b,i)=>{
 const CL=['Art','Entertainment','Oddities','History','Science'],CC={Art:'#D63384',Entertainment:'#E8603C',Oddities:'#E8A020',History:'#8E7BE0',Science:'#1FA58C'},catT={},catN={};let pendingCat=null;
 CL.forEach(c=>{catT[c]=B.filter(b=>b[4]===c).length;catN[c]=0});
 function setNs(){document.querySelectorAll('.cat').forEach(b=>b.classList.toggle('done',catN[b.dataset.c]>=catT[b.dataset.c]))}
-function chime(big){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();const t=AC.currentTime,ns=big?[523.25,659.25,783.99,1046.5,1318.5]:[587.33,739.99,880];ns.forEach((f,k)=>{const o=AC.createOscillator(),g=AC.createGain();o.type='triangle';o.frequency.value=f;const st=t+k*.085;g.gain.setValueAtTime(.0001,st);g.gain.exponentialRampToValueAtTime(.22,st+.015);g.gain.exponentialRampToValueAtTime(.001,st+.35);o.connect(g);g.connect(AC.destination);o.start(st);o.stop(st+.4)})}catch(e){}}
+function chime(big){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state!=='running')AC.resume();const t=AC.currentTime,ns=big?[523.25,659.25,783.99,1046.5,1318.5]:[587.33,739.99,880];ns.forEach((f,k)=>{const o=AC.createOscillator(),g=AC.createGain();o.type='triangle';o.frequency.value=f;const st=t+k*.085;g.gain.setValueAtTime(.0001,st);g.gain.exponentialRampToValueAtTime(.22,st+.015);g.gain.exponentialRampToValueAtTime(.001,st+.35);o.connect(g);g.connect(AC.destination);o.start(st);o.stop(st+.4)})}catch(e){}}
 function celebrate(c,big){
  const r=document.querySelector('.cat[data-c="'+c+'"]').getBoundingClientRect(),ox=r.left+r.width/2,oy=r.top+r.height/2;
  chime(big);hap();setTimeout(hap,170);
@@ -358,13 +358,14 @@ const Music=(()=>{
   tmr=setTimeout(sched,60)
  }
  return{
-  start(){try{ctx=AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(ctx.state==='suspended')ctx.resume();ctx=AC;
+  start(){try{ctx=AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(ctx.state!=='running')ctx.resume();ctx=AC;
    out=ctx.createGain();out.gain.value=.5;const lp=ctx.createBiquadFilter();lp.type='lowpass';lp.frequency.value=6500;out.connect(lp);lp.connect(ctx.destination);
    on=true;step=0;round=1;next=ctx.currentTime+.1;sched()}catch(e){}},
   setRound(r){round=r},
   stop(){on=false;clearTimeout(tmr);if(out){const o=out;try{o.gain.setTargetAtTime(0,ctx.currentTime,.08);setTimeout(()=>{try{o.disconnect()}catch(e){}},500)}catch(e){}out=null}}
  }
 })();
+document.addEventListener('pointerdown',()=>{try{if(AC&&AC.state!=='running')AC.resume()}catch(e){}},true);
 document.addEventListener('visibilitychange',()=>{try{if(G&&document.hidden&&AC)AC.suspend();else if(G&&AC)AC.resume()}catch(e){}});
 
 /* ===== Stream game ===== */
@@ -417,7 +418,7 @@ function gameOver(win){
  $('aok').textContent='Play Again';$('ayes').textContent='Exit';$('ayes').style.display='block';$('achov').classList.add('show')
 }
 function startGame(){
- if(G)return;Song.resume=Song.playing||Song.want;try{if(Song.resume)songPause()}catch(e){}document.body.classList.add('gaming');try{gLayout()}catch(e){}
+ if(G)return;Song.resume=Song.playing||Song.want;try{if(Song.resume)songPause()}catch(e){}try{if(AC&&AC.state!=='running'){try{AC.close()}catch(e){}AC=null}}catch(e){}document.body.classList.add('gaming');try{gLayout()}catch(e){}
  G={stage:1,pos:0,v:0,score:0,order:shuf(CL),last:0,popped:new Set(),state:'intro',prev:'live'};
  $('attl').textContent='Achievement Unlocked!';$('ayes').textContent='New Sheet';
  const sm=$('side').querySelector('small');sm.textContent='score';
