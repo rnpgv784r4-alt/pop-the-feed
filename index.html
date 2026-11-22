@@ -112,6 +112,9 @@ a#more{box-sizing:border-box;width:min(260px,80%);text-align:center;line-height:
 #thumb{width:88px;height:88px;object-fit:cover;flex:none;border:1px solid #7a96d8;border-radius:3px;background:#d9d6c3}
 #fbsvg{width:88px;height:88px;flex:none;image-rendering:pixelated;display:none}
 .trophy{text-align:center;font-size:46px;line-height:1}
+.rk{display:inline-block;vertical-align:middle;flex:none;width:calc(var(--h)*.9);height:var(--h);background:url(ranks.png) no-repeat;background-size:calc(var(--h)*.9*13) var(--h);background-position:calc(var(--h)*-.9*var(--i)) 0}
+#stl .rk{margin:-3px 4px 0 0}
+.lvbig.sm{font-size:22px;line-height:1.15}
 .lvbig{font:800 34px/1.1 'Trebuchet MS',Tahoma,sans-serif;text-align:center;color:#0a3fd6;margin:6px 0 4px}
 .rknm{font:700 20px/1.2 'Trebuchet MS',Tahoma,sans-serif;text-align:center}
 #ark{margin-top:8px}#apt{text-align:center;margin:12px 0 16px;font-size:13px;line-height:1.4}
@@ -307,17 +310,39 @@ function celebrate(c,big){
 const RANKS=['Bubble Wrap Beginner','Thumb Warmup','Accidental Fidgeter','Certified Stress-Reliever','Packing Material Menace','Doomscroll Defeater','Chief Popping Officer (CPO)','Tactile Overlord','Carpal Tunnel Contender','Supreme Sultan of Static & Pop','Pop Prodigy Emeritus','Bubble Wrap Whisperer','Notification Nemesis','Feed Slayer','Thumb of Legend','Archduke of Air Pockets','Grand Master of the Pop','Keeper of the Last Bubble','Eternal Popper','Pop Deity'];
 const LT=[0,1,2,3,4,5,6,7,8,9,10,12,14,16,18,21,24,27,30,33];
 const FB='apple-touch-icon.png';let popIdx=[],pendingAch=null,sheetsMem=0;
+/* Prestige ranks: beating Level 20 resets levels to 1 and promotes you one rank (12 ranks) */
+const RK=[['PVT','Private Pop','Every legend starts somewhere. Yours starts here.'],
+['CPL','Corporal Crinkle','You have earned a curve. Stand tall.'],
+['SGT','Sergeant Squish','Your thumbs have been officially recognized as lethal.'],
+['SPC','Specialist Spread-Eagle','The eagle has landed. The eagle has popped.'],
+['SSG','Staff Sergeant Snap','Crackle and Pop now take orders from you.'],
+['SFC','Sergeant First Class Fizzle','Rumor has it the bubbles salute when you walk by.'],
+['MSG','Master Sergeant Muffle','Quiet confidence. Loud bubbles.'],
+['1SG','First Sergeant Flick','Your flick game is under federal investigation.'],
+['SGM','Sergeant Major Mayhem','The feed fears you. The feed respects you.'],
+['CSM','Command Sergeant Major Doomscroll','You doomscrolled so hard it became a career.'],
+['GM','Grand Marshal Mush','Your own mother would salute. Reluctantly.'],
+['SC','Supreme Commander Squeak','The air itself obeys you now.'],
+['EE','Eternal Emperor of Bubble Wrap','There are no ranks left. Only legend.']];
+const rkI=(n,h)=>'<i class="rk" style="--h:'+h+'px;--i:'+(n-1)+'"></i>';
+function getPres(){let v=0;try{v=parseInt(localStorage.getItem('ptf_prestige'))||0}catch(e){}return Math.max(0,Math.min(RK.length,v))}
 const lvlOf=n=>{let l=1;for(let i=0;i<LT.length;i++)if(n>=LT[i])l=i+1;return l};
 function getSheets(){let v=0;try{v=parseInt(localStorage.getItem('ptf_sheets_cleared'))||0}catch(e){}return Math.max(v,sheetsMem)}
-function renderRank(){const n=getSheets(),l=lvlOf(n);$('stl').innerHTML='<b>Lvl '+l+'</b> &nbsp;'+RANKS[l-1];
+function renderRank(){const n=getSheets(),l=lvlOf(n),pr=getPres();$('stl').innerHTML=(pr?rkI(pr,18):'')+'<b>Lvl '+l+'</b> &nbsp;'+RANKS[l-1];
  const need=l<20?LT[l]-LT[l-1]:0,d=$('sdots');d.innerHTML='';
  if(need>=2){const done=n-LT[l-1];for(let i=0;i<need;i++){const e=document.createElement('i');if(i<done)e.className='f';d.appendChild(e)}}}
 function savePop(){try{localStorage.setItem('ptf_current_popped',JSON.stringify(popIdx))}catch(e){}}
 function restorePop(){let a=[];try{a=JSON.parse(localStorage.getItem('ptf_current_popped')||'[]')}catch(e){}
  if(!Array.isArray(a)||a.length>=N){popIdx=[];savePop();return}
  a.forEach(i=>{if(!Number.isInteger(i)||i<0||i>=N||popIdx.includes(i))return;$('p'+i).classList.add('on');if($('q'+i))$('q'+i).classList.add('on');$('h'+i).classList.add('done');popped++;catN[B[i][4]]++;popIdx.push(i)})}
-function sheetDone(){const n=getSheets()+1;sheetsMem=n;try{localStorage.setItem('ptf_sheets_cleared',String(n))}catch(e){}popIdx=[];savePop();pendingAch={lvl:lvlOf(n),n}}
-function showAch(a){gmode=null;renderRank();$('attl').textContent='Achievement Unlocked!';$('ayes').style.display='none';document.querySelector('#achcard .trophy').innerHTML='&#127942;';$('ark').style.display='';$('aok').textContent='Keep Popping';$('avl').textContent='LEVEL '+a.lvl;$('ark').textContent=RANKS[a.lvl-1];
+function sheetDone(){let n=getSheets()+1;popIdx=[];savePop();
+ if(lvlOf(n)>=20&&getPres()<RK.length){const pr=getPres()+1;try{localStorage.setItem('ptf_prestige',String(pr))}catch(e){}n=0;sheetsMem=0;try{localStorage.setItem('ptf_sheets_cleared','0')}catch(e){}pendingAch={promo:true,rank:pr,lvl:1,n:0};return}
+ sheetsMem=n;try{localStorage.setItem('ptf_sheets_cleared',String(n))}catch(e){}pendingAch={lvl:lvlOf(n),n}}
+function showAch(a){gmode=null;renderRank();
+ if(a.promo){const r=RK[a.rank-1];$('attl').textContent='PROMOTION!';$('ayes').style.display='none';document.querySelector('#achcard .trophy').innerHTML=rkI(a.rank,92);
+  $('ark').style.display='';$('ark').textContent='RANK '+a.rank+' OF '+RK.length;$('avl').textContent=r[1].toUpperCase();$('avl').classList.add('sm');$('aok').textContent='Salute!';
+  $('apt').textContent='You beat Level 20, a true Pop Deity! Your levels reset to Level 1, but your rank stays. '+r[2]+(a.rank===RK.length?' You hold the highest rank.':'');
+  $('achov').classList.add('show');return}$('attl').textContent='Achievement Unlocked!';$('ayes').style.display='none';document.querySelector('#achcard .trophy').innerHTML='&#127942;';$('ark').style.display='';$('aok').textContent='Keep Popping';$('avl').classList.remove('sm');$('avl').textContent='LEVEL '+a.lvl;$('ark').textContent=RANKS[a.lvl-1];
  const up=LT.indexOf(a.n)>=0;
  $('apt').textContent=a.lvl>=20?(up?'Maximum level reached. You are a legend.':'Another sheet cleared. Still a Pop Deity.'):(up?'Sheet cleared! All 39 bubbles popped. Next rank: '+RANKS[a.lvl]+'.':'Sheet cleared! '+(LT[a.lvl]-a.n)+' more to reach '+RANKS[a.lvl]+'.');
  $('achov').classList.add('show')}
@@ -325,7 +350,7 @@ function askReset(){
  if(G)return false;
  if(popped<1||popped>=N){doReset();return false}
  $('attl').textContent='Start a new sheet?';document.querySelector('#achcard .trophy').innerHTML='&#128260;';
- $('avl').textContent='NEW SHEET?';$('ark').style.display='none';
+ $('avl').classList.remove('sm');$('avl').textContent='NEW SHEET?';$('ark').style.display='none';
  $('apt').textContent='You have popped '+popped+' of '+N+' on this sheet. A new sheet clears them.';
  $('aok').textContent='Keep Popping';$('ayes').style.display='block';$('achov').classList.add('show');return true}
 $('ayes').addEventListener('click',()=>{clk();$('achov').classList.remove('show');if(gmode){const m=gmode;gmode=null;if(m==='quit'||m==='over')exitGame();return}doReset()});
@@ -593,7 +618,7 @@ gm.addEventListener('pointerdown',e=>{
  else{gFlash();G.wrong=true;gameOver(false)}
 });
 $('gq').addEventListener('click',()=>{if(!G||G.state==='over'||G.state==='card')return;clk();G.prev=G.state;G.state='quit';gmode='quit';
- $('attl').textContent='Quit game?';document.querySelector('#achcard .trophy').innerHTML='&#9208;&#65039;';$('avl').textContent='PAUSED';$('ark').style.display='none';
+ $('attl').textContent='Quit game?';document.querySelector('#achcard .trophy').innerHTML='&#9208;&#65039;';$('avl').classList.remove('sm');$('avl').textContent='PAUSED';$('ark').style.display='none';
  $('apt').textContent='Your score so far: '+G.score+'.';$('aok').textContent='Keep Playing';$('ayes').textContent='Quit';$('ayes').style.display='block';$('achov').classList.add('show')});
 
 const PX={A:"01110,10001,10001,11111,10001,10001,10001",B:"11110,10001,10001,11110,10001,10001,11110",D:"11110,10001,10001,10001,10001,10001,11110",E:"11111,10000,10000,11110,10000,10000,11111",L:"10000,10000,10000,10000,10000,10000,11111",M:"10001,11011,10101,10101,10001,10001,10001",O:"01110,10001,10001,10001,10001,10001,01110",P:"11110,10001,10001,11110,10000,10000,10000",R:"11110,10001,10001,11110,10100,10010,10001",S:"01111,10000,10000,01110,00001,00001,11110",T:"11111,00100,00100,00100,00100,00100,00100",Y:"10001,10001,01010,00100,00100,00100,00100","?":"01110,10001,00001,00110,00100,00000,00100",":":"00000,00100,00000,00000,00100,00000,00000"," ":"00000,00000,00000,00000,00000,00000,00000",0:"01110,10001,10011,10101,11001,10001,01110",1:"00100,01100,00100,00100,00100,00100,01110",2:"01110,10001,00001,00010,00100,01000,11111",3:"11110,00001,00001,01110,00001,00001,11110",4:"00010,00110,01010,10010,11111,00010,00010",5:"11111,10000,11110,00001,00001,10001,01110",6:"00110,01000,10000,11110,10001,10001,01110",7:"11111,00001,00010,00100,01000,01000,01000",8:"01110,10001,10001,01110,10001,10001,01110",9:"01110,10001,10001,01111,00001,00010,01100"};
