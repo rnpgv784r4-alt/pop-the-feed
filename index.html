@@ -113,7 +113,7 @@ a#more{box-sizing:border-box;width:min(260px,80%);text-align:center;line-height:
 #fbsvg{width:88px;height:88px;flex:none;image-rendering:pixelated;display:none}
 .trophy{text-align:center;font-size:46px;line-height:1}
 .rk{display:inline-block;vertical-align:middle;flex:none;width:calc(var(--h)*.9);height:var(--h);background:url(ranks.png) no-repeat;background-size:calc(var(--h)*.9*13) var(--h);background-position:calc(var(--h)*-.9*var(--i)) 0}
-#stl .rk{margin:-3px 4px 0 0}
+#stl .rk{margin:-3px 6px 0 0}
 .lvbig.sm{font-size:22px;line-height:1.15}
 .lvbig{font:800 34px/1.1 'Trebuchet MS',Tahoma,sans-serif;text-align:center;color:#0a3fd6;margin:6px 0 4px}
 .rknm{font:700 20px/1.2 'Trebuchet MS',Tahoma,sans-serif;text-align:center}
@@ -328,7 +328,8 @@ const rkI=(n,h)=>'<i class="rk" style="--h:'+h+'px;--i:'+(n-1)+'"></i>';
 function getPres(){let v=0;try{v=parseInt(localStorage.getItem('ptf_prestige'))||0}catch(e){}return Math.max(0,Math.min(RK.length,v))}
 const lvlOf=n=>{let l=1;for(let i=0;i<LT.length;i++)if(n>=LT[i])l=i+1;return l};
 function getSheets(){let v=0;try{v=parseInt(localStorage.getItem('ptf_sheets_cleared'))||0}catch(e){}return Math.max(v,sheetsMem)}
-function renderRank(){const n=getSheets(),l=lvlOf(n),pr=getPres();$('stl').innerHTML=(pr?rkI(pr,18):'')+'<b>Lvl '+l+'</b> &nbsp;'+RANKS[l-1];
+function renderRank(){const n=getSheets(),l=lvlOf(n),pr=getPres();const st=$('stl'),tw=Math.min(innerWidth,520)*.70;let fs=14;
+ for(let k=0;k<3;k++){st.style.fontSize=fs+'px';st.innerHTML=(pr?rkI(pr,Math.round(fs*1.5)):'')+'<b>Lvl '+l+'</b> &nbsp;'+RANKS[l-1];const w=st.getBoundingClientRect().width;if(!w)break;fs=Math.max(12,Math.min(22,fs*tw/w))}
  const need=l<20?LT[l]-LT[l-1]:0,d=$('sdots');d.innerHTML='';
  if(need>=2){const done=n-LT[l-1];for(let i=0;i<need;i++){const e=document.createElement('i');if(i<done)e.className='f';d.appendChild(e)}}}
 function savePop(){try{localStorage.setItem('ptf_current_popped',JSON.stringify(popIdx))}catch(e){}}
