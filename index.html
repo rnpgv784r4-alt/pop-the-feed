@@ -137,6 +137,8 @@ body.gaming #oglint,body.gaming #osp{display:none}
 #mnote.has{display:block}#mnote.on{opacity:.8;animation:nbeat 1.6s ease-in-out infinite}
 @keyframes nbeat{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
 body.gaming #mnote{display:none}
+#ytw{position:fixed;left:-400px;top:0;width:240px;height:135px;opacity:.01;pointer-events:none;z-index:9;border-radius:12px;overflow:hidden}
+#ytw.show{left:50%;margin-left:-120px;top:auto;bottom:28px;opacity:1;pointer-events:auto}
 #spw{position:fixed;left:-400px;top:0;width:300px;height:80px;opacity:.01;pointer-events:none;z-index:9;border-radius:12px;overflow:hidden}
 #spw.show{left:50%;margin-left:-150px;top:auto;bottom:28px;opacity:1;pointer-events:auto}
 body.gaming #oglow{display:none}
@@ -155,7 +157,7 @@ body.gaming #oglow{display:none}
 <div id="gm"><div id="gart"></div><div id="gbs"></div><div id="gtime"></div><div id="gint"></div><div id="gflash"></div></div>
 <div id="bar"><button id="mnote" aria-label="Music"><svg viewBox="0 0 16 16" shape-rendering="crispEdges" fill="currentColor"><path d="M6 1h8v2H8v8H6zM4 10h3v1h1v3H7v1H4v-1H3v-3h1z"/></svg></button><div id="top"><div id="side"><div id="cn"><span id="cnt">0 / 39</span><small>popped</small></div></div><div id="lgw"><img id="logoimg" src="logo-banner.png" alt="Pop The Feed"><div id="oglow"></div><div id="oglint"></div><div id="osp"></div></div><button id="reset" aria-label="Refresh"><img src="refresh.png" alt="Refresh"></button></div>
 <div id="cats"><button class="cat" data-c="Art"><span>Art</span></button><button class="cat" data-c="Entertainment"><span>Entertainment</span></button><button class="cat" data-c="Oddities"><span>Oddities</span></button><button class="cat" data-c="History"><span>History</span></button><button class="cat" data-c="Science"><span>Science</span></button></div><div id="ghud"><span id="grd">R1/5</span><span id="gcat"><span id="garr">&#8593;</span> <span id="gcn">Art</span></span><span id="gdots"><i></i><i></i><i></i><i></i><i></i></span><span id="gtm">0:30</span><button id="gq">Quit</button></div></div>
-<div id="spw"></div>
+<div id="spw"></div><div id="ytw"></div>
 <label id="hp" style="position:fixed;bottom:2px;left:2px;width:44px;height:26px;opacity:.01;pointer-events:none;z-index:-1"><input type="checkbox" switch></label>
 <div id="ptr">Pull to refresh</div>
 <div id="lvl"></div>
@@ -415,11 +417,11 @@ function gameOver(win){
  $('aok').textContent='Play Again';$('ayes').textContent='Exit';$('ayes').style.display='block';$('achov').classList.add('show')
 }
 function startGame(){
- if(G)return;Song.resume=Song.playing||Song.want;if(Song.resume)songPause();document.body.classList.add('gaming');gLayout();
+ if(G)return;Song.resume=Song.playing||Song.want;try{if(Song.resume)songPause()}catch(e){}document.body.classList.add('gaming');try{gLayout()}catch(e){}
  G={stage:1,pos:0,v:0,score:0,order:shuf(CL),last:0,popped:new Set(),state:'intro',prev:'live'};
  $('attl').textContent='Achievement Unlocked!';$('ayes').textContent='New Sheet';
  const sm=$('side').querySelector('small');sm.textContent='score';
- Music.start();startRound(1);gRender();G.raf=requestAnimationFrame(gLoop)
+ try{Music.start()}catch(e){}startRound(1);gRender();G.raf=requestAnimationFrame(gLoop)
 }
 function exitGame(){if(!G)return;if(Song.resume){Song.resume=false;setTimeout(songPlay,300)}cancelAnimationFrame(G.raf);Music.stop();G=null;document.body.classList.remove('gaming');$('side').querySelector('small').textContent='popped';$('ayes').textContent='New Sheet';setCnt()}
 function gLoop(t){
@@ -485,7 +487,8 @@ if(/dbg/.test(location.search)){const d=document.createElement('div');d.style.cs
 /* ===== Song of the week (music.json) ===== */
 const Song={kind:null,id:null,audio:null,ctl:null,ready:false,loading:false,playing:false,resume:false,t:0};
 function songSet(u){u=String(u||'').trim();const m=u.match(/track[\/:]([A-Za-z0-9]{10,})/);
- if(m){Song.kind='spotify';Song.id=m[1]}else if(/\.(mp3|m4a|aac|ogg|wav)(\?|$)/i.test(u)){Song.kind='audio';Song.id=u}else return;
+ const y=/youtu/i.test(u)&&u.match(/(?:youtu\.be\/|[?&]v=|embed\/)([A-Za-z0-9_-]{11})/);
+ if(y){Song.kind='yt';Song.id=y[1]}else if(m){Song.kind='spotify';Song.id=m[1]}else if(/\.(mp3|m4a|aac|ogg|wav)(\?|$)/i.test(u)){Song.kind='audio';Song.id=u}else return;
  $('mnote').classList.add('has')}
 function songUi(on){Song.playing=on;$('mnote').classList.toggle('on',on)}
 function songSpotifyInit(then){
@@ -495,16 +498,27 @@ function songSpotifyInit(then){
   api.createController($('spw'),{uri:'spotify:track:'+Song.id,width:300,height:80},c=>{Song.ctl=c;
    c.addListener('ready',()=>{Song.ready=true;const q=Song.queue;Song.queue=null;q&&q()});
    c.addListener('playback_update',e=>{const d=e.data||{};
-    if(!d.isPaused&&!d.isBuffering){Song.started=true;clearTimeout(Song.t2);songUi(true);$('spw').classList.remove('show');clearTimeout(Song.t)}
-    else if(d.isPaused&&Song.want&&d.duration&&d.position>=d.duration-300){try{c.seek(0);c.resume()}catch(x){}}
+    if(!d.isPaused&&!d.isBuffering){Song.started=true;Song.lastPos=d.position||0;clearTimeout(Song.t2);songUi(true);$('spw').classList.remove('show');clearTimeout(Song.t)}
+    else if(d.isPaused&&Song.want&&Song.started&&Song.lastPos>5000&&(d.position<=500||d.position>=28500||(d.duration&&d.position>=d.duration-1500))&&Date.now()-(Song.rs||0)>2500){Song.rs=Date.now();Song.lastPos=0;try{c.seek(0)}catch(x){}setTimeout(()=>{try{c.resume()}catch(x){}},250);setTimeout(()=>{if(Song.want&&!Song.playing){try{c.play()}catch(x){}}},1500)}
     else if(d.isPaused&&!Song.want)songUi(false)})})};
  const sc=document.createElement('script');sc.src='https://open.spotify.com/embed/iframe-api/v1';sc.async=true;document.body.appendChild(sc)}
+function songYtInit(then){
+ if(Song.yt&&Song.ytReady){then&&then();return}
+ Song.ytq=then;if(Song.ytLoading)return;Song.ytLoading=true;
+ window.onYouTubeIframeAPIReady=()=>{Song.yt=new YT.Player('ytw',{width:240,height:135,videoId:Song.id,playerVars:{playsinline:1,controls:0,rel:0,disablekb:1,fs:0,modestbranding:1},events:{
+  onReady:()=>{Song.ytReady=true;const f=Song.ytq;Song.ytq=null;f&&f()},
+  onStateChange:e=>{const st=e.data;
+   if(st===1){clearTimeout(Song.t);clearTimeout(Song.t2);$('ytw').classList.remove('show');songUi(true)}
+   else if(st===0){if(Song.want){try{Song.yt.seekTo(0);Song.yt.playVideo()}catch(x){}}else songUi(false)}
+   else if(st===2&&!Song.want)songUi(false)}}})};
+ const sc=document.createElement('script');sc.src='https://www.youtube.com/iframe_api';sc.onerror=()=>{Song.ytLoading=false};document.head.appendChild(sc)}
 function songPlay(){Song.want=true;
+ if(Song.kind==='yt'){songYtInit(()=>{try{Song.yt.playVideo()}catch(e){}clearTimeout(Song.t2);Song.t2=setTimeout(()=>{if(Song.want&&!Song.playing){try{Song.yt.playVideo()}catch(e){}}},1200);clearTimeout(Song.t);Song.t=setTimeout(()=>{if(Song.want&&!Song.playing)$('ytw').classList.add('show')},3500)});return}
  if(Song.kind==='audio'){if(!Song.audio){Song.audio=new Audio(Song.id);Song.audio.loop=true}Song.audio.play().then(()=>songUi(true)).catch(()=>songUi(false));return}
- if(Song.kind==='spotify'){songSpotifyInit(()=>{try{Song.started?Song.ctl.resume():Song.ctl.play()}catch(e){}
+ if(Song.kind==='spotify'){songSpotifyInit(()=>{try{if(Song.started&&(Song.lastPos||0)>=25000){Song.lastPos=0;Song.ctl.loadUri('spotify:track:'+Song.id);setTimeout(()=>{try{Song.ctl.play()}catch(e){}},700)}else if(Song.started)Song.ctl.resume();else Song.ctl.play()}catch(e){}
    clearTimeout(Song.t2);Song.t2=setTimeout(()=>{if(Song.want&&!Song.playing){try{Song.ctl.play()}catch(e){}}},1200);
    clearTimeout(Song.t);Song.t=setTimeout(()=>{if(Song.want&&!Song.playing)$('spw').classList.add('show')},3200)})}}
-function songPause(){Song.want=false;if(Song.kind==='audio'&&Song.audio){Song.audio.pause();songUi(false)}else if(Song.kind==='spotify'){clearTimeout(Song.t);clearTimeout(Song.t2);$('spw').classList.remove('show');try{Song.ctl&&Song.ctl.pause()}catch(e){}songUi(false)}}
+function songPause(){Song.want=false;if(Song.kind==='yt'){clearTimeout(Song.t);clearTimeout(Song.t2);$('ytw').classList.remove('show');try{Song.yt&&Song.yt.pauseVideo()}catch(e){}songUi(false);return}if(Song.kind==='audio'&&Song.audio){Song.audio.pause();songUi(false)}else if(Song.kind==='spotify'){clearTimeout(Song.t);clearTimeout(Song.t2);$('spw').classList.remove('show');try{Song.ctl&&Song.ctl.pause()}catch(e){}songUi(false)}}
 $('mnote').addEventListener('click',()=>{if(Song.playing||Song.want)songPause();else songPlay()});
 fetch('music.json?'+Date.now()).then(r=>r.ok?r.json():null).then(d=>{if(d&&d.song)songSet(d.song)}).catch(()=>{});
 restorePop();renderRank();setCnt();setNs();loadStories();

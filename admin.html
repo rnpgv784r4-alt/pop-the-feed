@@ -30,7 +30,7 @@ small,.dim{color:var(--dim)}#bar{position:fixed;left:0;right:0;bottom:0;backgrou
 <h2>Pinned articles</h2><div id="pins"></div>
 <div class="card"><div class="add"><input id="pu" placeholder="Article link (https://…)" inputmode="url" autocapitalize="off"><select id="pc"></select><button id="pa">Pin</button></div><small>Pinned articles stay at the top of their color until you remove them.</small></div>
 <h2>Song of the week</h2><div id="song"></div>
-<div class="card"><div class="add"><input id="mu" placeholder="Spotify song link, or a link to an .mp3 file" inputmode="url" autocapitalize="off"><button id="ma">Set song</button></div><small>Players tap the small music note in the banner to play it. Setting a new song replaces the old one. Tap Save to publish.</small></div>
+<div class="card"><div class="add"><input id="mu" placeholder="YouTube link, Spotify link, or an .mp3 link" inputmode="url" autocapitalize="off"><button id="ma">Set song</button></div><small>Players tap the small music note in the banner to play it. Setting a new song replaces the old one. Tap Save to publish.</small></div>
 </div>
 <div id="msg"></div>
 <div id="bar" hidden><button id="save">Save</button><button id="run" class="b2">Save &amp; update now</button></div>
@@ -65,8 +65,8 @@ function draw(){
  const SG=$('song');SG.innerHTML='';if(music.song){const card=document.createElement('div');card.className='card';card.appendChild(row(songLabel(music.song),()=>{music.song='';mdirty=true}));SG.appendChild(card)}else SG.innerHTML='<div class="dim">No song set. The music note stays hidden.</div>';
  msg(dirty||mdirty?'Unsaved changes':'')}
 const clean=v=>v.trim();
-const songLabel=u=>/spotify/i.test(u)?'Spotify · '+(u.match(/track[\/:]([A-Za-z0-9]+)/)||[0,u])[1]:'Audio · '+u.split('/').pop();
-$('ma').onclick=()=>{const u=clean($('mu').value);if(!(/track[\/:][A-Za-z0-9]{10,}/.test(u)&&/spotify/i.test(u))&&!/^https?:\/\/.+\.(mp3|m4a|aac|ogg|wav)(\?.*)?$/i.test(u)&&!/^[\w.\-\/]+\.(mp3|m4a|aac|ogg|wav)$/i.test(u)){msg('Paste a Spotify song link (open.spotify.com/track/…) or an .mp3 link');return}
+const songLabel=u=>/youtu/i.test(u)?'YouTube · '+((u.match(/(?:youtu\.be\/|[?&]v=|embed\/)([A-Za-z0-9_-]{11})/)||[0,u])[1]):/spotify/i.test(u)?'Spotify · '+(u.match(/track[\/:]([A-Za-z0-9]+)/)||[0,u])[1]:'Audio · '+u.split('/').pop();
+$('ma').onclick=()=>{const u=clean($('mu').value);if(/youtu/i.test(u)&&/(?:youtu\.be\/|[?&]v=|embed\/)[A-Za-z0-9_-]{11}/.test(u)){const id=u.match(/(?:youtu\.be\/|[?&]v=|embed\/)([A-Za-z0-9_-]{11})/)[1];music.song='https://www.youtube.com/watch?v='+id;mdirty=true;$('mu').value='';draw();return}if(!(/track[\/:][A-Za-z0-9]{10,}/.test(u)&&/spotify/i.test(u))&&!/^https?:\/\/.+\.(mp3|m4a|aac|ogg|wav)(\?.*)?$/i.test(u)&&!/^[\w.\-\/]+\.(mp3|m4a|aac|ogg|wav)$/i.test(u)){msg('Paste a Spotify song link (open.spotify.com/track/…) or an .mp3 link');return}
  music.song=u.split('?')[0].replace(/\/$/,'')||u;if(/\.(mp3|m4a|aac|ogg|wav)/i.test(u))music.song=u;mdirty=true;$('mu').value='';draw()};
 $('sa').onclick=()=>{let u=clean($('su').value);if(!/^https?:\/\//i.test(u)){msg('Enter a full address starting with https://');return}
  const isFeed=/(\/feed|\/rss|\.xml|\.rss|\/atom)/i.test(u);let o='';try{o=new URL(u).origin}catch(e){msg('That address does not look right');return}
