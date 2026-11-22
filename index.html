@@ -28,6 +28,10 @@ html,body{height:100%;margin:0;background:#35024a;overflow:hidden;overscroll-beh
 @keyframes blink{0%,100%{opacity:.65;filter:drop-shadow(0 0 2px #fff)}50%{opacity:1;filter:drop-shadow(0 0 8px #ffe9a8) drop-shadow(0 0 16px #fff)}}
 #cats{display:flex;justify-content:space-between;gap:4px;margin-top:6px;padding:0 2px}
 .cat{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.32);border-radius:999px;color:#fff;font:600 11.5px system-ui,sans-serif;padding:11px 3px;flex:1 1 auto;text-align:center;white-space:nowrap;touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+#a2h{position:fixed;left:50%;transform:translateX(-50%);bottom:max(10px,env(safe-area-inset-bottom,0px));width:min(calc(100vw - 24px),380px);box-sizing:border-box;z-index:7;display:none;align-items:center;gap:9px;padding:6px 8px 6px 7px;background:rgba(24,12,40,.94);border:1px solid rgba(201,162,255,.35);border-radius:14px;box-shadow:0 4px 18px rgba(0,0,0,.5);font:600 12px/1.2 system-ui,sans-serif;color:#fff}
+#a2h.show{display:flex}body.gaming #a2h{display:none}
+#a2h img{width:30px;height:30px;border-radius:7px;flex:none}#a2h span{flex:1;min-width:0;color:#d9c4f0;font-weight:500}#a2h span b{display:block;color:#fff;font-weight:700}
+#a2h button{border:0;border-radius:9px;background:#ffe27a;color:#2a1a00;font:800 12px system-ui;padding:7px 12px}#a2h #a2x{background:none;color:#d9c4f0;font-size:16px;padding:4px 6px;font-weight:600}
 #sdots{display:flex;justify-content:center;gap:7px;margin-top:5px;height:5px}#sdots:empty{display:none}
 #sdots i{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.28);box-shadow:none}
 #sdots i.f{background:#ffe27a;box-shadow:0 0 6px 2px rgba(255,213,74,.75);animation:nbeat 1.6s ease-in-out infinite}
@@ -161,7 +165,7 @@ body.gaming #oglow{display:none}
 <div id="gm"><div id="gart"></div><div id="gbs"></div><div id="gtime"></div><div id="gint"></div><div id="gflash"></div></div>
 <div id="bar"><button id="mnote" aria-label="Music"><svg viewBox="0 0 16 16" shape-rendering="crispEdges" fill="currentColor"><path d="M6 1h8v2H8v8H6zM4 10h3v1h1v3H7v1H4v-1H3v-3h1z"/></svg></button><div id="top"><div id="side"><div id="cn"><span id="cnt">0 / 39</span><small>popped</small></div></div><div id="lgw"><img id="logoimg" src="logo-banner.png" alt="Pop The Feed"><div id="oglow"></div><div id="oglint"></div><div id="osp"></div></div><button id="reset" aria-label="Refresh"><img src="refresh.png" alt="Refresh"></button></div>
 <div id="cats"><button class="cat" data-c="Art"><span>Art</span></button><button class="cat" data-c="Entertainment"><span>Entertainment</span></button><button class="cat" data-c="Oddities"><span>Oddities</span></button><button class="cat" data-c="History"><span>History</span></button><button class="cat" data-c="Science"><span>Science</span></button></div><div id="ghud"><span id="grd">R1/5</span><span id="gcat"><span id="garr">&#8593;</span> <span id="gcn">Art</span></span><span id="gdots"><i></i><i></i><i></i><i></i><i></i></span><span id="gtm">0:30</span><button id="gq">Quit</button></div></div>
-<div id="spw"></div><div id="ytw"></div>
+<div id="a2h"><img src="apple-touch-icon.png" alt=""><span><b>Pop The Feed</b><i id="a2t" style="font-style:normal">Add us to your Home Screen.</i></span><button id="a2b">Add</button><button id="a2x" aria-label="Close">&#10005;</button></div><div id="spw"></div><div id="ytw"></div>
 <label id="hp" style="position:fixed;bottom:2px;left:2px;width:44px;height:26px;opacity:.01;pointer-events:none;z-index:-1"><input type="checkbox" switch></label>
 <div id="ptr">Pull to refresh</div>
 <div id="lvl"></div>
@@ -543,5 +547,18 @@ function songPlay(){Song.want=true;
 function songPause(){Song.want=false;if(Song.kind==='yt'){clearTimeout(Song.t);clearTimeout(Song.t2);$('ytw').classList.remove('show');try{Song.yt&&Song.yt.pauseVideo()}catch(e){}songUi(false);return}if(Song.kind==='audio'&&Song.audio){Song.audio.pause();songUi(false)}else if(Song.kind==='spotify'){clearTimeout(Song.t);clearTimeout(Song.t2);$('spw').classList.remove('show');try{Song.ctl&&Song.ctl.pause()}catch(e){}songUi(false)}}
 $('mnote').addEventListener('click',()=>{if(Song.playing||Song.want)songPause();else songPlay()});
 fetch('music.json?'+Date.now()).then(r=>r.ok?r.json():null).then(d=>{if(d&&d.song)songSet(d.song)}).catch(()=>{});
+(function(){const A=$('a2h');let dp=null;
+ const standalone=()=>navigator.standalone===true||(window.matchMedia&&matchMedia('(display-mode: standalone)').matches);
+ let off=false;try{off=Date.now()-(parseInt(localStorage.getItem('ptf_a2hs'))||0)<7*864e5}catch(e){}
+ if(standalone()||off)return;
+ window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();dp=e});
+ setTimeout(()=>A.classList.add('show'),2500);
+ const hide=()=>{A.classList.remove('show');try{localStorage.setItem('ptf_a2hs',String(Date.now()))}catch(e){}};
+ $('a2x').addEventListener('click',hide);
+ $('a2b').addEventListener('click',()=>{
+  if(dp){dp.prompt();dp=null;hide();return}
+  if($('a2b').dataset.s){hide();return}
+  $('a2b').dataset.s=1;$('a2b').textContent='Got it';
+  $('a2t').innerHTML='Tap <svg width="12" height="14" viewBox="0 0 12 14" style="vertical-align:-2px"><path d="M6 1v8M3 4l3-3 3 3M2 7v5h8V7" fill="none" stroke="#ffe27a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Share, then &ldquo;Add to Home Screen&rdquo;'})})();
 restorePop();renderRank();setCnt();setNs();loadStories();
 </script></body></html>
