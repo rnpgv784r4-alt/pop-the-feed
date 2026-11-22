@@ -257,9 +257,11 @@ function build(){
  ['Art','Entertainment','Oddities','History','Science'].forEach(c=>{
   const idx=B.map((b,i)=>b[4]===c?i:-1).filter(i=>i>=0);
   const pool=by[c]&&by[c].length?by[c]:S;
-  let pick=shuf(pool.filter(t=>!seen.has(t[3]))).concat(shuf(pool.filter(t=>seen.has(t[3]))));
+  /* stories with a Reader view get first pick of this colour's bubbles, and sit on the topmost ones */
+  const hasR=t=>Array.isArray(t[7])&&t[7].length>0,un=pool.filter(t=>!seen.has(t[3])),sn=pool.filter(t=>seen.has(t[3]));
+  let pick=shuf(un.filter(hasR)).concat(shuf(un.filter(t=>!hasR(t))),shuf(sn.filter(hasR)),shuf(sn.filter(t=>!hasR(t))));
   while(pick.length<idx.length)pick=pick.concat(shuf(pool));
-  pick=pick.slice(0,idx.length).sort(byNew);
+  pick=pick.slice(0,idx.length).sort((x,y)=>(hasR(y)-hasR(x))||byNew(x,y));
   idx.forEach((bi,k)=>{assign[bi]=pick[k];seen.add(pick[k][3])});
  });
  try{localStorage.setItem('seen',JSON.stringify([...seen].slice(-400)))}catch(e){}

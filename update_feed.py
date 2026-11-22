@@ -258,7 +258,8 @@ def pick(stories):
             uniq.append(s)
     final = []
     for cat in CATS:
-        pool = sorted([s for s in uniq if s[4] == cat], key=lambda s: -s[6])
+        # stories with a Reader view (full text in the feed) come first, newest first within each group
+        pool = sorted([s for s in uniq if s[4] == cat], key=lambda s: (0 if len(s) > 7 else 1, -s[6]))
         chosen, count = [], {}
         for s in pool:
             if len(chosen) < PER_CAT and count.get(s[0], 0) < MAX_PER_SITE:
@@ -471,7 +472,7 @@ def main():
                 s[2] = desc
     for c in CATS:
         mine = [s for s in final if s[4] == c]
-        print(c, len(mine), "stories,", sum(1 for s in mine if s[5]), "with pictures")
+        print(c, len(mine), "stories,", sum(1 for s in mine if s[5]), "with pictures,", sum(1 for s in mine if len(s) > 7), "with Reader view")
     if len(final) >= 20:
         json.dump(final, open("stories.json", "w"), ensure_ascii=False, indent=1)
         print("wrote", len(final))
