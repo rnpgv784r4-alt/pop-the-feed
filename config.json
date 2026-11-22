@@ -270,6 +270,138 @@
    "home": "https://www.pastemagazine.com/",
    "feeds": [],
    "cat": "Entertainment"
+  },
+  {
+   "name": "Print Magazine",
+   "home": "https://store.beautifulbizarre.net/product-category/magazine/?v=0b3b97fa6688",
+   "feeds": [],
+   "cat": "Art"
+  },
+  {
+   "name": "muddycolors.com",
+   "home": "https://muddycolors.com/",
+   "feeds": [],
+   "cat": "Art"
+  },
+  {
+   "name": "Hi-Frctose Magazine",
+   "home": "https://hifructose.com/",
+   "feeds": [],
+   "cat": "Art"
+  },
+  {
+   "name": "Claude Homies",
+   "home": "https://www.reddit.com/r/ClaudeHomies/?solution=cf82974f97b7e7a4cf82974f97b7e7a4&js_challenge=1&jsc_token=2824be10929bdc604753c70a67a1c331a2e48e264b610a253095d987fae29c7a&jsc_orig_r=&share_id=YxiPxgKZ9LYrTO8RZEtVq&utm_content=1&utm_medium=ios_app&utm_name=iossmf&utm_source=share&utm_term=2",
+   "feeds": [],
+   "cat": "Science"
+  },
+  {
+   "name": "The Conversation",
+   "home": "https://theconversation.com/topics/history-180",
+   "feeds": [],
+   "cat": "History"
+  },
+  {
+   "name": "American History",
+   "home": "https://learnaboutamerica.com/american-history",
+   "feeds": [],
+   "cat": "History"
+  },
+  {
+   "name": "Long Reads",
+   "home": "https://longreads.com/",
+   "feeds": [],
+   "cat": "Oddities"
+  },
+  {
+   "name": "Damn Interesting",
+   "home": "https://www.damninteresting.com/",
+   "feeds": [],
+   "cat": "Oddities"
+  },
+  {
+   "name": "History Today",
+   "home": "https://www.historytoday.com/",
+   "feeds": [],
+   "cat": "History"
+  },
+  {
+   "name": "Collider",
+   "home": "https://collider.com/",
+   "feeds": [],
+   "cat": "Entertainment"
+  },
+  {
+   "name": "XKCD",
+   "home": "https://xkcd.com/",
+   "feeds": [],
+   "cat": "Entertainment"
+  },
+  {
+   "name": "Scientific American",
+   "home": "https://www.scientificamerican.com/",
+   "feeds": [],
+   "cat": "Science"
+  },
+  {
+   "name": "Pop Sci",
+   "home": "https://www.popsci.com/",
+   "feeds": [],
+   "cat": "Science"
+  },
+  {
+   "name": "Far Out",
+   "home": "https://faroutmagazine.co.uk/",
+   "feeds": [],
+   "cat": "Entertainment"
+  },
+  {
+   "name": "AV Club",
+   "home": "https://www.avclub.com/",
+   "feeds": [],
+   "cat": "Entertainment"
+  },
+  {
+   "name": "Tech Spot",
+   "home": "https://www.techspot.com/",
+   "feeds": [],
+   "cat": "Science"
+  },
+  {
+   "name": "Gizmodo",
+   "home": "https://gizmodo.com/",
+   "feeds": [],
+   "cat": "Entertainment"
+  },
+  {
+   "name": "SPIN",
+   "home": "https://www.spinmagazine.com/",
+   "feeds": [],
+   "cat": "Entertainment"
+  },
+  {
+   "name": "Drowned In Sound",
+   "home": "https://www.drownedinsound.org/",
+   "feeds": [],
+   "cat": "Entertainment"
+  },
+  {
+   "name": "Talk House",
+   "home": "https://talkhouse.com/",
+   "feeds": [],
+   "cat": "Entertainment"
+  },
+  {
+   "name": "Beat In My Bones",
+   "home": "https://beatinmybones.com/",
+   "feeds": [],
+   "cat": "Entertainment"
+  },
+  {
+   "name": "The Data Drop",
+   "home": "https://sheets.works/data-viz",
+   "feeds": [],
+   "cat": "Science"
   }
  ],
  "topics": [
