@@ -34,6 +34,33 @@ html,body{height:100%;margin:0;background:#35024a;overflow:hidden;overscroll-beh
 .pspring{transform-box:fill-box;transform-origin:center;fill:rgba(255,255,255,.3);stroke:rgba(255,255,255,.85);stroke-width:7;pointer-events:none;animation:popSpring .3s cubic-bezier(.175,.885,.32,1.275) forwards,popFade .34s ease-out forwards}
 .air-particle{position:fixed;left:0;top:0;pointer-events:none;z-index:6;width:6px;height:6px;margin:-3px 0 0 -3px;background:rgba(255,255,255,.85);border-radius:50%;box-shadow:0 0 4px rgba(255,255,255,.7);animation:floatUp .6s ease-out both;will-change:transform,opacity}
 @keyframes floatUp{0%{transform:translate(var(--x),var(--y)) scale(1);opacity:1}100%{transform:translate(calc(var(--x) + var(--dx)),calc(var(--y) + var(--dy))) scale(.2);opacity:0}}
+/* ===== Reader view ===== */
+#rd{position:fixed;inset:0;z-index:12;display:none;touch-action:none}
+#rd.on{display:block}
+#rdb{position:absolute;inset:0;background:rgba(15,4,28,.78);opacity:0;transition:opacity .3s ease}
+#rdp{position:absolute;left:0;right:0;margin:0 auto;top:max(10px,env(safe-area-inset-top,0px));bottom:max(10px,env(safe-area-inset-bottom,0px));width:min(calc(100vw - 20px),560px);display:flex;flex-direction:column;background:#ece9d8;border:3px solid #0a3fd6;border-radius:12px;overflow:hidden;box-shadow:0 12px 50px rgba(0,0,0,.6);
+ transform:translate3d(var(--tx,0),var(--ty,0),0) scale(var(--sc,.86));opacity:0;transition:transform .42s cubic-bezier(.2,.9,.25,1),opacity .26s ease;will-change:transform,opacity}
+#rd.open #rdb{opacity:1}#rd.open #rdp{transform:none;opacity:1}
+#rdt{flex:none;display:flex;align-items:center;gap:8px;padding:0 6px 0 12px;height:48px;background:linear-gradient(#2f7bf0,#0a54d8 55%,#0a3fd6);color:#fff;font:700 14px Tahoma,Verdana,sans-serif;text-shadow:1px 1px 0 rgba(0,0,0,.45)}
+#rdn{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#rdx{flex:none;height:36px;min-width:84px;padding:0 12px;border:1px solid #fff;border-radius:6px;background:linear-gradient(#e9876b,#c9391a);color:#fff;font:800 14px Tahoma,Verdana,sans-serif;text-shadow:1px 1px 0 rgba(0,0,0,.4);cursor:pointer}
+#rdx:active{background:#a82d12}
+#rdc{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y;padding:16px 18px calc(28px + env(safe-area-inset-bottom,0px));color:#111}
+#rds{display:block;font:700 11px Tahoma,Verdana,sans-serif;color:#0a3fd6;text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px}
+#rdh{margin:0 0 14px;font:700 24px/1.18 'Trebuchet MS',Tahoma,sans-serif}
+#rdi{display:block;width:100%;max-height:300px;object-fit:cover;border:1px solid #7a96d8;border-radius:4px;background:#d9d6c3;margin:0 0 16px}
+#rdl{margin:0 0 16px;font:italic 17px/1.5 Georgia,serif;color:#333}
+#rdbd p{margin:0 0 15px;font:17px/1.62 Georgia,'Times New Roman',serif}
+#rdbd h3{margin:22px 0 10px;font:700 18px/1.25 'Trebuchet MS',Tahoma,sans-serif}
+#rdbd img{display:block;width:100%;height:auto;border:1px solid #7a96d8;border-radius:4px;margin:6px 0 18px;background:#d9d6c3}
+#rdm{display:block;box-sizing:border-box;width:min(300px,100%);margin:22px auto 8px;text-align:center;height:48px;line-height:46px;border:1px solid #003c74;border-radius:3px;background:linear-gradient(#fff,#ecebe5 85%,#d6d0c5);box-shadow:inset 0 0 0 1px #8ab0f0;font:700 15px Tahoma,Verdana,sans-serif;color:#0a3fd6;text-decoration:none;-webkit-tap-highlight-color:transparent}
+#rdm:active{background:#d6d0c5}
+#rdat{display:block;text-align:center;color:#665;font:11px Tahoma,Verdana,sans-serif;margin-top:6px}
+#btns{display:flex;gap:8px;justify-content:center}
+#btns #more,#btns #rdo{flex:1 1 0;min-width:0;width:auto;margin:0;padding:0 8px;box-sizing:border-box}
+#rdo{display:none;height:46px;border:1px solid #7a5a00;border-radius:3px;background:linear-gradient(#fff3bf,#ffe27a 85%,#e9c64f);box-shadow:inset 0 0 0 1px #fff8d6;font:700 15px Tahoma,Verdana,sans-serif;color:#2a1a00;cursor:pointer;white-space:nowrap}
+#rdo:active{background:#e9c64f}#rdo.has{display:block}
+#btns #more{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #a2h{position:fixed;left:50%;transform:translateX(-50%);bottom:max(10px,env(safe-area-inset-bottom,0px));width:min(calc(100vw - 24px),380px);box-sizing:border-box;z-index:7;display:none;align-items:center;gap:9px;padding:6px 8px 6px 7px;background:rgba(24,12,40,.94);border:1px solid rgba(201,162,255,.35);border-radius:14px;box-shadow:0 4px 18px rgba(0,0,0,.5);font:600 12px/1.2 system-ui,sans-serif;color:#fff}
 #a2h.show{display:flex}body.gaming #a2h{display:none}
 #a2h img{width:30px;height:30px;border-radius:7px;flex:none}#a2h span{flex:1;min-width:0;color:#d9c4f0;font-weight:500}#a2h span b{display:block;color:#fff;font-weight:700}
@@ -171,7 +198,7 @@ body.gaming #oglow{display:none}
 <div id="gm"><div id="gart"></div><div id="gbs"></div><div id="gtime"></div><div id="gint"></div><div id="gflash"></div></div>
 <div id="bar"><button id="mnote" aria-label="Music"><svg viewBox="0 0 16 16" shape-rendering="crispEdges" fill="currentColor"><path d="M6 1h8v2H8v8H6zM4 10h3v1h1v3H7v1H4v-1H3v-3h1z"/></svg></button><div id="top"><div id="side"><div id="cn"><span id="cnt">0 / 39</span><small>popped</small></div></div><div id="lgw"><img id="logoimg" src="logo-banner.png" alt="Pop The Feed"><div id="oglow"></div><div id="oglint"></div><div id="osp"></div></div><button id="reset" aria-label="Refresh"><img src="refresh.png" alt="Refresh"></button></div>
 <div id="cats"><button class="cat" data-c="Art"><span>Art</span></button><button class="cat" data-c="Entertainment"><span>Entertainment</span></button><button class="cat" data-c="Oddities"><span>Oddities</span></button><button class="cat" data-c="History"><span>History</span></button><button class="cat" data-c="Science"><span>Science</span></button></div><div id="ghud"><span id="grd">R1/5</span><span id="gcat"><span id="garr">&#8593;</span> <span id="gcn">Art</span></span><span id="gdots"><i></i><i></i><i></i><i></i><i></i></span><span id="gtm">0:30</span><button id="gq">Quit</button></div></div>
-<div id="a2h"><img src="apple-touch-icon.png" alt=""><span><b>Pop The Feed</b><i id="a2t" style="font-style:normal">Add us to your Home Screen.</i></span><button id="a2b">Add</button><button id="a2x" aria-label="Close">&#10005;</button></div><div id="spw"></div><div id="ytw"></div>
+<div id="a2h"><img src="apple-touch-icon.png" alt=""><span><b>Pop The Feed</b><i id="a2t" style="font-style:normal">Add us to your Home Screen.</i></span><button id="a2b">Add</button><button id="a2x" aria-label="Close">&#10005;</button></div><div id="rd"><div id="rdb"></div><div id="rdp" role="dialog" aria-modal="true" aria-label="Reader"><div id="rdt"><span id="rdn">Reader</span><button id="rdx" aria-label="Close reader">&#10005; Close</button></div><div id="rdc"><span id="rds"></span><h2 id="rdh"></h2><img id="rdi" alt=""><p id="rdl"></p><div id="rdbd"></div><a id="rdm" target="_blank" rel="noopener"></a><small id="rdat"></small></div></div></div><div id="spw"></div><div id="ytw"></div>
 <label id="hp" style="position:fixed;bottom:2px;left:2px;width:44px;height:26px;opacity:.01;pointer-events:none;z-index:-1"><input type="checkbox" switch></label>
 <div id="ptr">Pull to refresh</div>
 <div id="lvl"></div>
@@ -179,7 +206,7 @@ body.gaming #oglow{display:none}
 <div id="stat"><span id="stk">Status:</span><span id="stl">Lvl 1 - Bubble Wrap Beginner</span><div id="sdots"></div></div>
 <div id="nes"><div id="nesc"><div class="pn"></div><div class="dp"><svg viewBox="-1 -1 32 32"><polygon points="10,0 20,0 20,10 30,10 30,20 20,20 20,30 10,30 10,20 0,20 0,10 10,10" fill="#3a3834" stroke="#e8e6e0" stroke-width="1.3" stroke-linejoin="round"/><circle cx="15" cy="15" r="4.2" fill="#2c2a27"/></svg></div><div class="bar b1" id="npl"></div><div class="bar b2" id="nbest"></div><div class="lg" id="nlg"></div><div class="ab"><button id="nb"><span></span>B</button><button id="na"><span></span>A</button></div></div></div>
 <div id="achov"><div id="achcard"><div id="atb"><i id="alogo"><u></u><u></u><u></u><u></u></i><span id="attl">Achievement Unlocked!</span><b id="ax">&#10005;</b></div><div id="abd"><div class="trophy">&#127942;</div><div class="lvbig" id="avl">LEVEL 2</div><div class="rknm" id="ark">Thumb Warmup</div><p id="apt"></p><div id="hsrow"><input id="hsi" maxlength="3" placeholder="AAA" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false"><button id="hsv">Save top score</button></div><button id="aok">Keep Popping</button><button id="ayes" style="display:none;margin-top:10px">New Sheet</button></div></div></div>
-<div id="ov"><div id="card"><div id="tb"><i id="logo"><u></u><u></u><u></u><u></u></i><span id="ttl">Pop The Feed</span><b id="x">&#10005;</b></div><div id="bd"><div id="row"><svg id="fbsvg" viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="12" y="1" width="1" height="1" fill="#ffffff"/><rect x="10" y="3" width="1" height="1" fill="#c9a2ff"/><rect x="13" y="4" width="1" height="1" fill="#c9a2ff"/><rect x="3" y="5" width="4" height="1" fill="#3a1670"/><rect x="2" y="6" width="1" height="1" fill="#3a1670"/><rect x="3" y="6" width="2" height="1" fill="#c9a2ff"/><rect x="5" y="6" width="3" height="1" fill="#9a5bec"/><rect x="1" y="7" width="1" height="1" fill="#3a1670"/><rect x="2" y="7" width="1" height="1" fill="#c9a2ff"/><rect x="3" y="7" width="2" height="1" fill="#ffffff"/><rect x="5" y="7" width="4" height="1" fill="#9a5bec"/><rect x="0" y="8" width="1" height="1" fill="#3a1670"/><rect x="1" y="8" width="1" height="1" fill="#c9a2ff"/><rect x="2" y="8" width="2" height="1" fill="#ffffff"/><rect x="4" y="8" width="6" height="1" fill="#9a5bec"/><rect x="10" y="8" width="1" height="1" fill="#3a1670"/><rect x="0" y="9" width="1" height="1" fill="#3a1670"/><rect x="1" y="9" width="1" height="1" fill="#c9a2ff"/><rect x="2" y="9" width="1" height="1" fill="#ffffff"/><rect x="3" y="9" width="7" height="1" fill="#9a5bec"/><rect x="10" y="9" width="1" height="1" fill="#3a1670"/><rect x="0" y="10" width="1" height="1" fill="#3a1670"/><rect x="1" y="10" width="8" height="1" fill="#9a5bec"/><rect x="9" y="10" width="1" height="1" fill="#7a3dc8"/><rect x="10" y="10" width="1" height="1" fill="#3a1670"/><rect x="0" y="11" width="1" height="1" fill="#3a1670"/><rect x="1" y="11" width="8" height="1" fill="#9a5bec"/><rect x="9" y="11" width="1" height="1" fill="#7a3dc8"/><rect x="10" y="11" width="1" height="1" fill="#3a1670"/><rect x="0" y="12" width="1" height="1" fill="#3a1670"/><rect x="1" y="12" width="7" height="1" fill="#9a5bec"/><rect x="8" y="12" width="2" height="1" fill="#7a3dc8"/><rect x="10" y="12" width="1" height="1" fill="#3a1670"/><rect x="1" y="13" width="1" height="1" fill="#3a1670"/><rect x="2" y="13" width="4" height="1" fill="#9a5bec"/><rect x="6" y="13" width="3" height="1" fill="#7a3dc8"/><rect x="9" y="13" width="1" height="1" fill="#3a1670"/><rect x="2" y="14" width="1" height="1" fill="#3a1670"/><rect x="3" y="14" width="5" height="1" fill="#7a3dc8"/><rect x="8" y="14" width="1" height="1" fill="#3a1670"/><rect x="3" y="15" width="5" height="1" fill="#3a1670"/></svg><img id="thumb" alt="" referrerpolicy="no-referrer" style="display:none"><div id="msg"><span id="src"></span><b id="hl"></b></div></div><p id="sm"></p><a id="more" href="#" target="_blank" rel="noopener noreferrer">Read More</a></div></div></div>
+<div id="ov"><div id="card"><div id="tb"><i id="logo"><u></u><u></u><u></u><u></u></i><span id="ttl">Pop The Feed</span><b id="x">&#10005;</b></div><div id="bd"><div id="row"><svg id="fbsvg" viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="12" y="1" width="1" height="1" fill="#ffffff"/><rect x="10" y="3" width="1" height="1" fill="#c9a2ff"/><rect x="13" y="4" width="1" height="1" fill="#c9a2ff"/><rect x="3" y="5" width="4" height="1" fill="#3a1670"/><rect x="2" y="6" width="1" height="1" fill="#3a1670"/><rect x="3" y="6" width="2" height="1" fill="#c9a2ff"/><rect x="5" y="6" width="3" height="1" fill="#9a5bec"/><rect x="1" y="7" width="1" height="1" fill="#3a1670"/><rect x="2" y="7" width="1" height="1" fill="#c9a2ff"/><rect x="3" y="7" width="2" height="1" fill="#ffffff"/><rect x="5" y="7" width="4" height="1" fill="#9a5bec"/><rect x="0" y="8" width="1" height="1" fill="#3a1670"/><rect x="1" y="8" width="1" height="1" fill="#c9a2ff"/><rect x="2" y="8" width="2" height="1" fill="#ffffff"/><rect x="4" y="8" width="6" height="1" fill="#9a5bec"/><rect x="10" y="8" width="1" height="1" fill="#3a1670"/><rect x="0" y="9" width="1" height="1" fill="#3a1670"/><rect x="1" y="9" width="1" height="1" fill="#c9a2ff"/><rect x="2" y="9" width="1" height="1" fill="#ffffff"/><rect x="3" y="9" width="7" height="1" fill="#9a5bec"/><rect x="10" y="9" width="1" height="1" fill="#3a1670"/><rect x="0" y="10" width="1" height="1" fill="#3a1670"/><rect x="1" y="10" width="8" height="1" fill="#9a5bec"/><rect x="9" y="10" width="1" height="1" fill="#7a3dc8"/><rect x="10" y="10" width="1" height="1" fill="#3a1670"/><rect x="0" y="11" width="1" height="1" fill="#3a1670"/><rect x="1" y="11" width="8" height="1" fill="#9a5bec"/><rect x="9" y="11" width="1" height="1" fill="#7a3dc8"/><rect x="10" y="11" width="1" height="1" fill="#3a1670"/><rect x="0" y="12" width="1" height="1" fill="#3a1670"/><rect x="1" y="12" width="7" height="1" fill="#9a5bec"/><rect x="8" y="12" width="2" height="1" fill="#7a3dc8"/><rect x="10" y="12" width="1" height="1" fill="#3a1670"/><rect x="1" y="13" width="1" height="1" fill="#3a1670"/><rect x="2" y="13" width="4" height="1" fill="#9a5bec"/><rect x="6" y="13" width="3" height="1" fill="#7a3dc8"/><rect x="9" y="13" width="1" height="1" fill="#3a1670"/><rect x="2" y="14" width="1" height="1" fill="#3a1670"/><rect x="3" y="14" width="5" height="1" fill="#7a3dc8"/><rect x="8" y="14" width="1" height="1" fill="#3a1670"/><rect x="3" y="15" width="5" height="1" fill="#3a1670"/></svg><img id="thumb" alt="" referrerpolicy="no-referrer" style="display:none"><div id="msg"><span id="src"></span><b id="hl"></b></div></div><p id="sm"></p><div id="btns"><button id="rdo">Reader</button><a id="more" href="#" target="_blank" rel="noopener noreferrer">Read More</a></div></div></div></div>
 <script>
 const B=[[128, 9, 215, 198, "Art"], [606, 9, 215, 198, "Entertainment"], [1084, 9, 215, 198, "Oddities"], [128, 448, 215, 198, "Oddities"], [606, 448, 215, 198, "Science"], [1084, 448, 215, 198, "History"], [128, 881, 215, 198, "History"], [606, 881, 215, 198, "Art"], [1084, 881, 215, 198, "Entertainment"], [128, 1313, 215, 198, "Entertainment"], [606, 1313, 215, 198, "Oddities"], [1084, 1313, 215, 198, "Science"], [128, 1727, 215, 198, "Science"], [606, 1727, 215, 198, "History"], [1084, 1727, 215, 198, "Art"], [128, 2143, 215, 198, "Art"], [606, 2143, 215, 198, "Entertainment"], [1084, 2143, 215, 198, "Oddities"], [128, 2586, 215, 198, "Oddities"], [606, 2586, 215, 198, "Science"], [1084, 2586, 215, 198, "History"], [128, 3020, 215, 198, "History"], [606, 3020, 215, 198, "Art"], [1084, 3020, 215, 198, "Entertainment"], [128, 3452, 215, 198, "Entertainment"], [606, 3452, 215, 198, "Oddities"], [1084, 3452, 215, 198, "Science"], [128, 3866, 215, 198, "Science"], [606, 3866, 215, 198, "History"], [1084, 3866, 215, 198, "Art"], [128, 4280, 215, 198, "Art"], [606, 4280, 215, 198, "Entertainment"], [1084, 4280, 215, 198, "Oddities"], [128, 4725, 215, 198, "Oddities"], [606, 4725, 215, 198, "Science"], [1084, 4725, 215, 198, "History"], [128, 5155, 215, 198, "History"], [606, 5155, 215, 198, "Art"], [1084, 5155, 215, 198, "Entertainment"]];
 const GC={Art:'#ff8ac8',Entertainment:'#ffa98a',Oddities:'#ffd36b',History:'#c9baff',Science:'#8ff5e0'};
@@ -307,11 +334,40 @@ function pop(i){if(!cur&&tapXY){airBurst(tapXY[0],tapXY[1]);tapXY=null}
  popped++;setCnt();const pc=B[i][4];catN[pc]++;setNs();if(catN[pc]===catT[pc])pendingCat=pc;popIdx.push(i);savePop();if(popped>=N)sheetDone();
  showStory(storyFor(i));
 }
-function showStory(st){cur=st;$('src').textContent=cur[0];$('more').textContent='Read at '+cur[0];$('more').href=cur[3];$('hl').textContent=cur[1];$('sm').textContent=cur[2];
+function showStory(st){cur=st;$('rdo').classList.toggle('has',Array.isArray(st[7])&&st[7].length>0);$('src').textContent=cur[0];$('more').textContent=(Array.isArray(cur[7])&&cur[7].length)?'Read at source':'Read at '+cur[0];$('more').href=cur[3];$('hl').textContent=cur[1];$('sm').textContent=cur[2];
  const th=$('thumb'),fs=$('fbsvg');const noimg=()=>{th.style.display='none';fs.style.display='block'};th.style.display='block';fs.style.display='none';th.onerror=noimg;if(cur[5])th.src=cur[5];else noimg();
  setTimeout(()=>$('ov').classList.add('show'),90);
 }
 function closeCard(){closedAt=Date.now();if(G&&G.state==='card'){G.state='next';setTimeout(nextRound,200)}$('ov').classList.remove('show');cur=null;const pc=pendingCat;pendingCat=null;if(popped>=N){$('reset').classList.add('ready');$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',3500)}if(pc)celebrate(pc,popped>=N);if(pendingAch){const a=pendingAch;pendingAch=null;setTimeout(()=>showAch(a),pc?900:250)}}
+/* Reader view: the story popup grows into a full-screen, scrollable reader (transform + opacity only) */
+let rdOpen=false,rdAt=0,rdTm=0;
+function rdFill(st){
+ $('rdn').textContent=st[0];$('rds').textContent=st[0];$('rdh').textContent=st[1];$('rdl').textContent=st[2]&&!/^Tap the button/.test(st[2])?st[2]:'';
+ const im=$('rdi');im.style.display='none';im.onerror=()=>{im.style.display='none'};im.onload=()=>{im.style.display='block'};if(st[5]){im.referrerPolicy='no-referrer';im.src=st[5]}else im.removeAttribute('src');
+ const bd=$('rdbd');bd.textContent='';let more=false;
+ (Array.isArray(st[7])?st[7]:[]).forEach(b=>{const k=b[0],v=b[1];
+  if(k==='p'){const p=document.createElement('p');p.textContent=v;bd.appendChild(p)}
+  else if(k==='h'){const h=document.createElement('h3');h.textContent=v;bd.appendChild(h)}
+  else if(k==='i'){const g=document.createElement('img');g.loading='lazy';g.decoding='async';g.referrerPolicy='no-referrer';g.alt='';g.onerror=()=>g.remove();g.src=v;bd.appendChild(g)}
+  else if(k==='m')more=true});
+ const a=$('rdm');a.href=st[3];a.textContent=(more||!(Array.isArray(st[7])&&st[7].length)?'Read the full article at ':'Open original at ')+st[0];
+ $('rdat').textContent='From '+st[0]+'. Text and pictures belong to the publisher.';
+ $('rdc').scrollTop=0}
+function openReader(){
+ if(rdOpen||!cur)return;rdOpen=true;rdAt=Date.now();clearTimeout(rdTm);rdFill(cur);
+ const rd=$('rd'),p=$('rdp'),c=$('card').getBoundingClientRect();
+ rd.classList.add('on');p.style.setProperty('--tx','0px');p.style.setProperty('--ty','0px');p.style.setProperty('--sc','1');
+ const r=p.getBoundingClientRect();
+ const sc=Math.max(.2,Math.min(1,c.width/r.width));
+ p.style.setProperty('--sc',sc.toFixed(3));p.style.setProperty('--tx',((c.left+c.width/2)-(r.left+r.width/2)).toFixed(1)+'px');p.style.setProperty('--ty',((c.top+c.height/2)-(r.top+r.height/2)).toFixed(1)+'px');
+ void p.offsetWidth;requestAnimationFrame(()=>rd.classList.add('open'))}
+function closeReader(){
+ if(!rdOpen)return;rdOpen=false;$('rd').classList.remove('open');
+ rdTm=setTimeout(()=>$('rd').classList.remove('on'),440)}
+$('rdx').addEventListener('click',()=>{clk();closeReader()});
+$('rdb').addEventListener('click',()=>{if(Date.now()-rdAt>500){clk();closeReader()}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeReader()});
+$('more').addEventListener('click',()=>{closeReader()});
 let sx=0,sy=0,t0=0;const ov=$('ov');
 $('more').addEventListener('click',()=>{snd();setTimeout(closeCard,60)});
 ov.addEventListener('pointerdown',e=>{sx=e.clientX;sy=e.clientY;t0=Date.now()});
@@ -320,7 +376,8 @@ ov.addEventListener('pointerup',e=>{
  if(d>40){closeCard();return}
  const T=e.target;
  if(T.closest('#more'))return;
- if(T.closest('#x')||T===ov){clk();closeCard()}
+ if(T.closest('#x')||T===ov){clk();closeCard();return}
+ if(T.closest('#rdo')){clk();openReader()}
 });
 $('svg').addEventListener('click',()=>{if(Date.now()-lastPop<600)hap()});
 ov.addEventListener('click',()=>{if(Date.now()-closedAt<600)hap()});

@@ -112,6 +112,53 @@ def good_img(u):
         return ""
     return u
 
+BODY_JUNK = re.compile(r"appeared first on|read more|continue reading|subscribe|sign up for|newsletter|support (independent|our)|click here|follow us", re.I)
+BODY_MAX = 4200   # characters of article text kept per story
+BODY_IMGS = 5
+
+def reader_body(raw, desc=""):
+    """Reader view content, ONLY from the full text a publisher puts in its own feed (content:encoded).
+    Returns [["p",text],["h",text],["i",url],...] (+ ["m",""] when cut short), or None when the feed only has an excerpt."""
+    raw = re.sub(r"(?is)<(script|style|figcaption|iframe|noscript|aside|form)\b.*?</\1>", " ", raw or "")
+    if len(re.sub(r"<[^>]+>", "", raw)) < 700:
+        return None
+    raw = re.sub(r"(?is)<img\b[^>]*?(?:data-src|src)=[\"']([^\"']+)[\"'][^>]*>", lambda m: "\n\x00" + m.group(1) + "\x00\n", raw)
+    raw = re.sub(r"(?is)<h[1-6][^>]*>(.*?)</h[1-6]>", lambda m: "\n\x01" + m.group(1) + "\n", raw)
+    raw = re.sub(r"(?i)</(p|div|li|blockquote|ul|ol|figure|tr)>|<br\s*/?>", "\n", raw)
+    out, chars, imgs, cut = [], 0, 0, False
+    for line in raw.split("\n"):
+        line = line.strip()
+        if not line:
+            continue
+        if line.startswith("\x00"):
+            u = good_img(line.strip("\x00"))
+            if u and imgs < BODY_IMGS and out:
+                out.append(["i", u])
+                imgs += 1
+            continue
+        head = line.startswith("\x01")
+        t = html.unescape(re.sub(r"<[^>]+>", " ", line.lstrip("\x01")))
+        t = re.sub(r"\s+", " ", t).strip()
+        if len(t) < (3 if head else 30) or BODY_JUNK.search(t):
+            continue
+        if chars + len(t) > BODY_MAX:
+            room = BODY_MAX - chars
+            if room > 160:
+                t = t[:room].rsplit(" ", 1)[0].rstrip(",;:") + "\u2026"
+                out.append(["p", t])
+            cut = True
+            break
+        out.append(["h" if head else "p", t])
+        chars += len(t)
+    texts = sum(len(v) for k, v in out if k in ("p", "h"))
+    if texts < max(500, len(desc) * 2):
+        return None
+    while out and out[-1][0] == "i":
+        out.pop()
+    if cut:
+        out.append(["m", ""])
+    return out
+
 def find_image(it, raw):
     for tag in (MEDIA + "thumbnail", MEDIA + "content"):
         for e in it.iter(tag):
@@ -143,7 +190,11 @@ def parse_xml(name, data):
         if is_ad(title, raw, cats, link):
             continue
         if title and link.strip().startswith("http"):
-            out.append([name, title, desc or "Tap the button below for the full story.", link.strip(), "", find_image(it, raw), ts])
+            story = [name, title, desc or "Tap the button below for the full story.", link.strip(), "", find_image(it, raw), ts]
+            body = reader_body(text(it, CONTENT + "encoded") or text(it, A + "content"), desc)
+            if body:
+                story.append(body)
+            out.append(story)
         if len(out) >= PER_FEED:
             break
     return out
