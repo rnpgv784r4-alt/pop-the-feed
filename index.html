@@ -433,11 +433,13 @@ $('nes').addEventListener('click',e=>{if(e.target.id==='nes'){clk();$('nes').cla
 /* hidden long-press on the logo */
 function OSPOT(){const r=$('logoimg').getBoundingClientRect();return{x:r.left+r.width*.5,y:r.top+r.width*.622*.375,r:r.width*.085}}
 if(/dbg/.test(location.search)){const d=document.createElement('div');d.style.cssText='position:fixed;z-index:99;pointer-events:none;border:2px solid #0f0;border-radius:50%';document.body.appendChild(d);setInterval(()=>{const o=OSPOT();d.style.left=(o.x-o.r)+'px';d.style.top=(o.y-o.r)+'px';d.style.width=d.style.height=(o.r*2)+'px'},300)}
-(function(){const tp=$('top');let tm=null,x0=0,y0=0;const cancel=()=>{clearTimeout(tm);tm=null};
- tp.addEventListener('pointerdown',e=>{if(G||cur||$('nes').classList.contains('show')||$('achov').classList.contains('show'))return;const r=$('logoimg').getBoundingClientRect();const oc=OSPOT();if(Math.hypot(e.clientX-oc.x,e.clientY-oc.y)>oc.r)return;x0=e.clientX;y0=e.clientY;
-  tm=setTimeout(()=>{tm=null;hap();let best=0;try{best=parseInt(localStorage.getItem('ptf_game_best'))||0}catch(e){}setNBest(best);$('nes').classList.add('show')},650)});
- tp.addEventListener('pointermove',e=>{if(tm&&Math.hypot(e.clientX-x0,e.clientY-y0)>12)cancel()});
- ['pointerup','pointercancel','pointerleave'].forEach(n=>tp.addEventListener(n,cancel));tp.addEventListener('contextmenu',e=>e.preventDefault())})();
+(function(){const tp=$('top');let lastT=0,sx0=0,sy0=0,ok=false;
+ const open=()=>{hap();let best=0;try{best=parseInt(localStorage.getItem('ptf_game_best'))||0}catch(e){}setNBest(best);$('nes').classList.add('show')};
+ const inSpot=(x,y)=>{const o=OSPOT();return Math.hypot(x-o.x,y-o.y)<=o.r};
+ tp.addEventListener('pointerdown',e=>{if(G||cur||$('nes').classList.contains('show')||$('achov').classList.contains('show')){ok=false;return}ok=inSpot(e.clientX,e.clientY);sx0=e.clientX;sy0=e.clientY});
+ tp.addEventListener('pointerup',e=>{if(!ok)return;ok=false;if(Math.hypot(e.clientX-sx0,e.clientY-sy0)>12||!inSpot(e.clientX,e.clientY)){lastT=0;return}
+  const n=Date.now();if(n-lastT<450){lastT=0;open()}else lastT=n});
+ tp.addEventListener('contextmenu',e=>e.preventDefault())})();
 
 restorePop();renderRank();setCnt();setNs();loadStories();
 </script></body></html>
