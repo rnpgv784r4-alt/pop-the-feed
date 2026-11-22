@@ -247,7 +247,7 @@ function askReset(){
 $('ayes').addEventListener('click',()=>{clk();$('achov').classList.remove('show');if(gmode){const m=gmode;gmode=null;if(m==='quit'||m==='over')exitGame();return}doReset()});
 let gmode=null;
 function hideAch(){clk();$('achov').classList.remove('show');if(gmode){const m=gmode;gmode=null;if(m==='quit'&&G)G.state=G.prev;if(m==='over')exitGame()}}
-function aokClick(){if(gmode){const m=gmode,g=G;gmode=null;clk();$('achov').classList.remove('show');if(m==='start'||m==='over')startGame();else if(m==='quit'&&g)g.state=g.prev;return}hideAch()}
+function aokClick(){if(gmode){const m=gmode,g=G;gmode=null;clk();$('achov').classList.remove('show');if(m==='over')exitGame();if(m==='start'||m==='over')startGame();else if(m==='quit'&&g)g.state=g.prev;return}hideAch()}
 $('aok').addEventListener('click',aokClick);$('ax').addEventListener('click',hideAch);$('achov').addEventListener('click',e=>{if(e.target.id==='achov')hideAch()});
 function setCnt(){$('cnt').textContent=popped+' / '+N}
 function pop(i){
