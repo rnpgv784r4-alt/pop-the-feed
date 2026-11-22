@@ -495,15 +495,16 @@ function songSpotifyInit(then){
   api.createController($('spw'),{uri:'spotify:track:'+Song.id,width:300,height:80},c=>{Song.ctl=c;
    c.addListener('ready',()=>{Song.ready=true;const q=Song.queue;Song.queue=null;q&&q()});
    c.addListener('playback_update',e=>{const d=e.data||{};
-    if(!d.isPaused&&!d.isBuffering){songUi(true);$('spw').classList.remove('show');clearTimeout(Song.t)}
+    if(!d.isPaused&&!d.isBuffering){Song.started=true;clearTimeout(Song.t2);songUi(true);$('spw').classList.remove('show');clearTimeout(Song.t)}
     else if(d.isPaused&&Song.want&&d.duration&&d.position>=d.duration-300){try{c.seek(0);c.resume()}catch(x){}}
     else if(d.isPaused&&!Song.want)songUi(false)})})};
  const sc=document.createElement('script');sc.src='https://open.spotify.com/embed/iframe-api/v1';sc.async=true;document.body.appendChild(sc)}
 function songPlay(){Song.want=true;
  if(Song.kind==='audio'){if(!Song.audio){Song.audio=new Audio(Song.id);Song.audio.loop=true}Song.audio.play().then(()=>songUi(true)).catch(()=>songUi(false));return}
- if(Song.kind==='spotify'){songSpotifyInit(()=>{try{Song.ctl.play()}catch(e){}
-   clearTimeout(Song.t);Song.t=setTimeout(()=>{if(Song.want&&!Song.playing)$('spw').classList.add('show')},2500)})}}
-function songPause(){Song.want=false;if(Song.kind==='audio'&&Song.audio){Song.audio.pause();songUi(false)}else if(Song.kind==='spotify'){clearTimeout(Song.t);$('spw').classList.remove('show');try{Song.ctl&&Song.ctl.pause()}catch(e){}songUi(false)}}
+ if(Song.kind==='spotify'){songSpotifyInit(()=>{try{Song.started?Song.ctl.resume():Song.ctl.play()}catch(e){}
+   clearTimeout(Song.t2);Song.t2=setTimeout(()=>{if(Song.want&&!Song.playing){try{Song.ctl.play()}catch(e){}}},1200);
+   clearTimeout(Song.t);Song.t=setTimeout(()=>{if(Song.want&&!Song.playing)$('spw').classList.add('show')},3200)})}}
+function songPause(){Song.want=false;if(Song.kind==='audio'&&Song.audio){Song.audio.pause();songUi(false)}else if(Song.kind==='spotify'){clearTimeout(Song.t);clearTimeout(Song.t2);$('spw').classList.remove('show');try{Song.ctl&&Song.ctl.pause()}catch(e){}songUi(false)}}
 $('mnote').addEventListener('click',()=>{if(Song.playing||Song.want)songPause();else songPlay()});
 fetch('music.json?'+Date.now()).then(r=>r.ok?r.json():null).then(d=>{if(d&&d.song)songSet(d.song)}).catch(()=>{});
 restorePop();renderRank();setCnt();setNs();loadStories();
