@@ -122,11 +122,11 @@ body.gaming #gm{display:block}body.gaming #cats{display:none}body.gaming #ghud{d
 @keyframes nesp{0%,100%{box-shadow:0 0 0 0 rgba(255,120,100,0)}50%{box-shadow:0 0 14px 6px rgba(255,120,100,.95),0 0 28px 12px rgba(255,80,60,.6)}}
 @keyframes nesb{0%,100%{box-shadow:0 0 0 2px #f2f0ea}50%{box-shadow:0 0 0 2px #fff,0 0 18px 4px rgba(255,200,120,.85)}}
 #lgw{position:relative;width:min(250px,64vw);transform:translateX(5px)}#logoimg{width:100%;transform:none;position:relative;z-index:1}
-#oglow{position:absolute;left:50%;top:37.5%;width:82.3%;aspect-ratio:1/1;margin:-41.15% 0 0 -41.15%;z-index:2;mix-blend-mode:screen;pointer-events:none;border-radius:50%;background:radial-gradient(circle closest-side,rgba(235,215,255,.95) 0%,rgba(205,155,255,.7) 26%,rgba(190,135,255,.4) 50%,rgba(175,115,255,.16) 74%,rgba(170,110,255,0) 100%);transform:scale(.7);opacity:0}
+#oglow{position:absolute;left:50%;top:-15%;width:135%;height:105%;margin:0 0 0 -67.5%;z-index:2;mix-blend-mode:screen;pointer-events:none;border-radius:50%;background:radial-gradient(ellipse closest-side,rgba(235,215,255,.95) 0%,rgba(205,155,255,.7) 26%,rgba(190,135,255,.4) 50%,rgba(175,115,255,.16) 74%,rgba(170,110,255,0) 100%);transform:scale(.7);opacity:0}
 @keyframes oglow{0%,100%{transform:scale(.85);opacity:.15}50%{transform:scale(1.25);opacity:.77}}
 body.gaming #oglow{display:none}
-@keyframes oglowi{0%{transform:scale(.85);opacity:.15}16.7%{transform:scale(1.25);opacity:.885}33.3%{transform:scale(.85);opacity:.15}50%{transform:scale(1.22);opacity:.84}66.7%{transform:scale(.85);opacity:.14}83.3%{transform:scale(1.2);opacity:.80}100%{transform:scale(.85);opacity:0}}
-@keyframes oglowir{0%{opacity:.15}16.7%{opacity:.885}33.3%{opacity:.15}50%{opacity:.84}66.7%{opacity:.14}83.3%{opacity:.80}100%{opacity:0}}
+@keyframes oglowi{0%{transform:scale(.68);opacity:.15}10%{transform:scale(1);opacity:.97}20%{transform:scale(.61);opacity:.15}30%{transform:scale(.9);opacity:.92}40%{transform:scale(.55);opacity:.14}50%{transform:scale(.81);opacity:.875}60%{transform:scale(.55);opacity:.14}70%{transform:scale(.81);opacity:.83}80%{transform:scale(.55);opacity:.13}90%{transform:scale(.81);opacity:.79}100%{transform:scale(.55);opacity:0}}
+@keyframes oglowir{0%{opacity:.15}10%{opacity:.97}20%{opacity:.15}30%{opacity:.92}40%{opacity:.14}50%{opacity:.875}60%{opacity:.14}70%{opacity:.83}80%{opacity:.13}90%{opacity:.79}100%{opacity:0}}
 @keyframes oglowr{0%,100%{transform:scale(1.05);opacity:.17}50%{transform:scale(1.05);opacity:.77}}
 
 </style><script data-goatcounter="https://popthefeed.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -451,7 +451,7 @@ $('na').addEventListener('click',()=>{$('nes').classList.remove('show');startGam
 $('nes').addEventListener('click',e=>{if(e.target.id==='nes'){clk();$('nes').classList.remove('show')}});
 function placeGlow(){}
 addEventListener('resize',placeGlow);addEventListener('load',placeGlow);$('logoimg').addEventListener('load',placeGlow);setInterval(placeGlow,700);setTimeout(placeGlow,50);
-function glowRun(n){if(G)return;const g=$('oglow');g.style.animation='none';void g.offsetWidth;const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;g.style.animation=n==='i'?(rm?'oglowir':'oglowi')+' 7s ease-in-out 1':(rm?'oglowr':'oglow')+' 2.6s ease-in-out '+n}
+function glowRun(n){if(G)return;const g=$('oglow');g.style.animation='none';void g.offsetWidth;const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;g.style.animation=n==='i'?(rm?'oglowir':'oglowi')+' 11s ease-in-out 1':(rm?'oglowr':'oglow')+' 2.6s ease-in-out '+n}
 glowRun('i');let glowT=setInterval(()=>glowRun('i'),30000);
 function glowOpen(){glowRun('i');clearInterval(glowT);glowT=setInterval(()=>glowRun('i'),30000)}
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)glowOpen()});addEventListener('pageshow',e=>{if(e.persisted)glowOpen()});
