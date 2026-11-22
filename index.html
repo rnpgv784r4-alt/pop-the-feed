@@ -122,7 +122,7 @@ body.gaming #gm{display:block}body.gaming #cats{display:none}body.gaming #ghud{d
 @keyframes nesp{0%,100%{box-shadow:0 0 0 0 rgba(255,120,100,0)}50%{box-shadow:0 0 14px 6px rgba(255,120,100,.95),0 0 28px 12px rgba(255,80,60,.6)}}
 @keyframes nesb{0%,100%{box-shadow:0 0 0 2px #f2f0ea}50%{box-shadow:0 0 0 2px #fff,0 0 18px 4px rgba(255,200,120,.85)}}
 #lgw{position:relative;width:min(250px,64vw);transform:translateX(5px)}#logoimg{width:100%;transform:none;position:relative;z-index:1}
-#oglow{position:absolute;left:50%;top:37.5%;width:74.8%;aspect-ratio:1/1;margin:-37.4% 0 0 -37.4%;z-index:2;mix-blend-mode:screen;pointer-events:none;border-radius:50%;background:radial-gradient(circle closest-side,rgba(235,215,255,.95) 0%,rgba(205,155,255,.7) 26%,rgba(190,135,255,.4) 50%,rgba(175,115,255,.16) 74%,rgba(170,110,255,0) 100%);transform:scale(.7);opacity:0}
+#oglow{position:absolute;left:50%;top:37.5%;width:82.3%;aspect-ratio:1/1;margin:-41.15% 0 0 -41.15%;z-index:2;mix-blend-mode:screen;pointer-events:none;border-radius:50%;background:radial-gradient(circle closest-side,rgba(235,215,255,.95) 0%,rgba(205,155,255,.7) 26%,rgba(190,135,255,.4) 50%,rgba(175,115,255,.16) 74%,rgba(170,110,255,0) 100%);transform:scale(.7);opacity:0}
 @keyframes oglow{0%,100%{transform:scale(.85);opacity:.15}50%{transform:scale(1.25);opacity:.77}}
 body.gaming #oglow{display:none}
 @keyframes oglowi{0%{transform:scale(.85);opacity:.15}16.7%{transform:scale(1.25);opacity:.885}33.3%{transform:scale(.85);opacity:.15}50%{transform:scale(1.22);opacity:.84}66.7%{transform:scale(.85);opacity:.14}83.3%{transform:scale(1.2);opacity:.80}100%{transform:scale(.85);opacity:0}}
@@ -452,8 +452,8 @@ $('nes').addEventListener('click',e=>{if(e.target.id==='nes'){clk();$('nes').cla
 function placeGlow(){}
 addEventListener('resize',placeGlow);addEventListener('load',placeGlow);$('logoimg').addEventListener('load',placeGlow);setInterval(placeGlow,700);setTimeout(placeGlow,50);
 function glowRun(n){if(G)return;const g=$('oglow');g.style.animation='none';void g.offsetWidth;const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;g.style.animation=n==='i'?(rm?'oglowir':'oglowi')+' 7s ease-in-out 1':(rm?'oglowr':'oglow')+' 2.6s ease-in-out '+n}
-glowRun('i');let glowT=setInterval(()=>glowRun(2),30000);
-function glowOpen(){glowRun('i');clearInterval(glowT);glowT=setInterval(()=>glowRun(2),30000)}
+glowRun('i');let glowT=setInterval(()=>glowRun('i'),30000);
+function glowOpen(){glowRun('i');clearInterval(glowT);glowT=setInterval(()=>glowRun('i'),30000)}
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)glowOpen()});addEventListener('pageshow',e=>{if(e.persisted)glowOpen()});
 function OSPOT(){const r=$('logoimg').getBoundingClientRect();return{x:r.left+r.width*.5,y:r.top+r.width*.622*.375,r:r.width*.085}}
 if(/dbg/.test(location.search)){const d=document.createElement('div');d.style.cssText='position:fixed;z-index:99;pointer-events:none;border:2px solid #0f0;border-radius:50%';document.body.appendChild(d);setInterval(()=>{const o=OSPOT();d.style.left=(o.x-o.r)+'px';d.style.top=(o.y-o.r)+'px';d.style.width=d.style.height=(o.r*2)+'px'},300)}
