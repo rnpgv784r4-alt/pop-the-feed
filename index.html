@@ -125,6 +125,7 @@ body.gaming #gm{display:block}body.gaming #cats{display:none}body.gaming #ghud{d
 #oglow{position:absolute;z-index:2;mix-blend-mode:screen;pointer-events:none;border-radius:50%;background:radial-gradient(circle,rgba(235,215,255,.95) 0%,rgba(200,150,255,.75) 45%,rgba(170,110,255,0) 70%);transform:translate(-50%,-50%) scale(.7);opacity:0}
 @keyframes oglow{0%,100%{transform:translate(-50%,-50%) scale(.8);opacity:.08}50%{transform:translate(-50%,-50%) scale(1.2);opacity:.5}}
 body.gaming #oglow{display:none}
+@keyframes oglowr{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.1}50%{transform:translate(-50%,-50%) scale(1);opacity:.5}}
 
 </style><script data-goatcounter="https://popthefeed.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head><body>
@@ -448,7 +449,7 @@ $('na').addEventListener('click',()=>{$('nes').classList.remove('show');startGam
 $('nes').addEventListener('click',e=>{if(e.target.id==='nes'){clk();$('nes').classList.remove('show')}});
 function placeGlow(){const g=$('oglow'),o=OSPOT(),b=$('bar').getBoundingClientRect();g.style.left=(o.x-b.left)+'px';g.style.top=(o.y-b.top)+'px';g.style.width=g.style.height=(o.r*6.2)+'px'}
 addEventListener('resize',placeGlow);addEventListener('load',placeGlow);$('logoimg').addEventListener('load',placeGlow);setInterval(placeGlow,700);setTimeout(placeGlow,50);
-function glowRun(n){if(G)return;const g=$('oglow');g.style.animation='none';void g.offsetWidth;g.style.animation=matchMedia('(prefers-reduced-motion: reduce)').matches?'none':'oglow 2.6s ease-in-out '+n}
+function glowRun(n){if(G)return;const g=$('oglow');g.style.animation='none';void g.offsetWidth;g.style.animation=(matchMedia('(prefers-reduced-motion: reduce)').matches?'oglowr':'oglow')+' 2.6s ease-in-out '+n}
 glowRun(4);setInterval(()=>glowRun(2),30000);
 function OSPOT(){const r=$('logoimg').getBoundingClientRect();return{x:r.left+r.width*.5,y:r.top+r.width*.622*.375,r:r.width*.085}}
 if(/dbg/.test(location.search)){const d=document.createElement('div');d.style.cssText='position:fixed;z-index:99;pointer-events:none;border:2px solid #0f0;border-radius:50%';document.body.appendChild(d);setInterval(()=>{const o=OSPOT();d.style.left=(o.x-o.r)+'px';d.style.top=(o.y-o.r)+'px';d.style.width=d.style.height=(o.r*2)+'px'},300)}
