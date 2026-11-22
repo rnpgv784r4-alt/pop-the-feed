@@ -131,6 +131,14 @@ body.gaming #gm{display:block}body.gaming #cats{display:none}body.gaming #ghud{d
 #osp{position:absolute;z-index:3;left:60%;top:8%;width:4px;height:4px;margin:-2px 0 0 -2px;background:#fff;pointer-events:none;opacity:0;box-shadow:4px 0 #fff,-4px 0 #fff,0 4px #fff,0 -4px #fff,8px 0 #fff,-8px 0 #fff,0 8px #fff,0 -8px #fff,0 0 10px 4px rgba(255,255,255,.75);animation:ospk 6s ease-in-out infinite}
 @keyframes ospk{0%,12%{opacity:0;transform:scale(0)}16%{opacity:1;transform:scale(1.25)}22%{opacity:1;transform:scale(.9)}28%,100%{opacity:0;transform:scale(.3)}}
 body.gaming #oglint,body.gaming #osp{display:none}
+
+#mnote{position:absolute;left:8px;top:calc(env(safe-area-inset-top,0px) + 6px);width:30px;height:30px;padding:5px;border:0;background:none;color:#d9c4f0;opacity:.3;z-index:4;display:none;-webkit-tap-highlight-color:transparent;transition:opacity .25s}
+#mnote svg{display:block;width:100%;height:100%}
+#mnote.has{display:block}#mnote.on{opacity:.8;animation:nbeat 1.6s ease-in-out infinite}
+@keyframes nbeat{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
+body.gaming #mnote{display:none}
+#spw{position:fixed;left:-400px;top:0;width:300px;height:80px;opacity:.01;pointer-events:none;z-index:9;border-radius:12px;overflow:hidden}
+#spw.show{left:50%;margin-left:-150px;top:auto;bottom:28px;opacity:1;pointer-events:auto}
 body.gaming #oglow{display:none}
 @keyframes oglowi{0%{transform:scale(.68);opacity:.15}10%{transform:scale(1);opacity:.97}20%{transform:scale(.61);opacity:.15}30%{transform:scale(.9);opacity:.92}40%{transform:scale(.55);opacity:.14}50%{transform:scale(.81);opacity:.875}60%{transform:scale(.55);opacity:.14}70%{transform:scale(.81);opacity:.83}80%{transform:scale(.55);opacity:.13}90%{transform:scale(.81);opacity:.79}100%{transform:scale(.55);opacity:0}}
 @keyframes oglowir{0%{opacity:.15}10%{opacity:.97}20%{opacity:.15}30%{opacity:.92}40%{opacity:.14}50%{opacity:.875}60%{opacity:.14}70%{opacity:.83}80%{opacity:.13}90%{opacity:.79}100%{opacity:0}}
@@ -145,8 +153,9 @@ body.gaming #oglow{display:none}
 <g id="gl"></g><g id="layer"></g>
 </svg></div></div>
 <div id="gm"><div id="gart"></div><div id="gbs"></div><div id="gtime"></div><div id="gint"></div><div id="gflash"></div></div>
-<div id="bar"><div id="top"><div id="side"><div id="cn"><span id="cnt">0 / 39</span><small>popped</small></div></div><div id="lgw"><img id="logoimg" src="logo-banner.png" alt="Pop The Feed"><div id="oglow"></div><div id="oglint"></div><div id="osp"></div></div><button id="reset" aria-label="Refresh"><img src="refresh.png" alt="Refresh"></button></div>
+<div id="bar"><button id="mnote" aria-label="Music"><svg viewBox="0 0 16 16" shape-rendering="crispEdges" fill="currentColor"><path d="M6 1h8v2H8v8H6zM4 10h3v1h1v3H7v1H4v-1H3v-3h1z"/></svg></button><div id="top"><div id="side"><div id="cn"><span id="cnt">0 / 39</span><small>popped</small></div></div><div id="lgw"><img id="logoimg" src="logo-banner.png" alt="Pop The Feed"><div id="oglow"></div><div id="oglint"></div><div id="osp"></div></div><button id="reset" aria-label="Refresh"><img src="refresh.png" alt="Refresh"></button></div>
 <div id="cats"><button class="cat" data-c="Art"><span>Art</span></button><button class="cat" data-c="Entertainment"><span>Entertainment</span></button><button class="cat" data-c="Oddities"><span>Oddities</span></button><button class="cat" data-c="History"><span>History</span></button><button class="cat" data-c="Science"><span>Science</span></button></div><div id="ghud"><span id="grd">R1/5</span><span id="gcat"><span id="garr">&#8593;</span> <span id="gcn">Art</span></span><span id="gdots"><i></i><i></i><i></i><i></i><i></i></span><span id="gtm">0:30</span><button id="gq">Quit</button></div></div>
+<div id="spw"></div>
 <label id="hp" style="position:fixed;bottom:2px;left:2px;width:44px;height:26px;opacity:.01;pointer-events:none;z-index:-1"><input type="checkbox" switch></label>
 <div id="ptr">Pull to refresh</div>
 <div id="lvl"></div>
@@ -406,13 +415,13 @@ function gameOver(win){
  $('aok').textContent='Play Again';$('ayes').textContent='Exit';$('ayes').style.display='block';$('achov').classList.add('show')
 }
 function startGame(){
- if(G)return;document.body.classList.add('gaming');gLayout();
+ if(G)return;Song.resume=Song.playing||Song.want;if(Song.resume)songPause();document.body.classList.add('gaming');gLayout();
  G={stage:1,pos:0,v:0,score:0,order:shuf(CL),last:0,popped:new Set(),state:'intro',prev:'live'};
  $('attl').textContent='Achievement Unlocked!';$('ayes').textContent='New Sheet';
  const sm=$('side').querySelector('small');sm.textContent='score';
  Music.start();startRound(1);gRender();G.raf=requestAnimationFrame(gLoop)
 }
-function exitGame(){if(!G)return;cancelAnimationFrame(G.raf);Music.stop();G=null;document.body.classList.remove('gaming');$('side').querySelector('small').textContent='popped';$('ayes').textContent='New Sheet';setCnt()}
+function exitGame(){if(!G)return;if(Song.resume){Song.resume=false;setTimeout(songPlay,300)}cancelAnimationFrame(G.raf);Music.stop();G=null;document.body.classList.remove('gaming');$('side').querySelector('small').textContent='popped';$('ayes').textContent='New Sheet';setCnt()}
 function gLoop(t){
  if(!G)return;G.raf=requestAnimationFrame(gLoop);
  if(gm.clientHeight!==GH||gm.clientWidth!==GW){gLayout()}
@@ -472,5 +481,30 @@ if(/dbg/.test(location.search)){const d=document.createElement('div');d.style.cs
   open()});
  tp.addEventListener('contextmenu',e=>e.preventDefault())})();
 
+
+/* ===== Song of the week (music.json) ===== */
+const Song={kind:null,id:null,audio:null,ctl:null,ready:false,loading:false,playing:false,resume:false,t:0};
+function songSet(u){u=String(u||'').trim();const m=u.match(/track[\/:]([A-Za-z0-9]{10,})/);
+ if(m){Song.kind='spotify';Song.id=m[1]}else if(/\.(mp3|m4a|aac|ogg|wav)(\?|$)/i.test(u)){Song.kind='audio';Song.id=u}else return;
+ $('mnote').classList.add('has')}
+function songUi(on){Song.playing=on;$('mnote').classList.toggle('on',on)}
+function songSpotifyInit(then){
+ if(Song.ctl){then&&then();return}
+ if(Song.loading){Song.queue=then;return}Song.loading=true;Song.queue=then;
+ window.onSpotifyIframeApiReady=api=>{
+  api.createController($('spw'),{uri:'spotify:track:'+Song.id,width:300,height:80},c=>{Song.ctl=c;
+   c.addListener('ready',()=>{Song.ready=true;const q=Song.queue;Song.queue=null;q&&q()});
+   c.addListener('playback_update',e=>{const d=e.data||{};
+    if(!d.isPaused&&!d.isBuffering){songUi(true);$('spw').classList.remove('show');clearTimeout(Song.t)}
+    else if(d.isPaused&&Song.want&&d.duration&&d.position>=d.duration-300){try{c.seek(0);c.resume()}catch(x){}}
+    else if(d.isPaused&&!Song.want)songUi(false)})})};
+ const sc=document.createElement('script');sc.src='https://open.spotify.com/embed/iframe-api/v1';sc.async=true;document.body.appendChild(sc)}
+function songPlay(){Song.want=true;
+ if(Song.kind==='audio'){if(!Song.audio){Song.audio=new Audio(Song.id);Song.audio.loop=true}Song.audio.play().then(()=>songUi(true)).catch(()=>songUi(false));return}
+ if(Song.kind==='spotify'){songSpotifyInit(()=>{try{Song.ctl.play()}catch(e){}
+   clearTimeout(Song.t);Song.t=setTimeout(()=>{if(Song.want&&!Song.playing)$('spw').classList.add('show')},2500)})}}
+function songPause(){Song.want=false;if(Song.kind==='audio'&&Song.audio){Song.audio.pause();songUi(false)}else if(Song.kind==='spotify'){clearTimeout(Song.t);$('spw').classList.remove('show');try{Song.ctl&&Song.ctl.pause()}catch(e){}songUi(false)}}
+$('mnote').addEventListener('click',()=>{if(Song.playing||Song.want)songPause();else songPlay()});
+fetch('music.json?'+Date.now()).then(r=>r.ok?r.json():null).then(d=>{if(d&&d.song)songSet(d.song)}).catch(()=>{});
 restorePop();renderRank();setCnt();setNs();loadStories();
 </script></body></html>

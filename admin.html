@@ -29,6 +29,8 @@ small,.dim{color:var(--dim)}#bar{position:fixed;left:0;right:0;bottom:0;backgrou
 <div class="card"><div class="add"><input id="bq" placeholder="Article link, site, or words in the title" autocapitalize="off"><button id="ba">Block</button></div></div>
 <h2>Pinned articles</h2><div id="pins"></div>
 <div class="card"><div class="add"><input id="pu" placeholder="Article link (https://…)" inputmode="url" autocapitalize="off"><select id="pc"></select><button id="pa">Pin</button></div><small>Pinned articles stay at the top of their color until you remove them.</small></div>
+<h2>Song of the week</h2><div id="song"></div>
+<div class="card"><div class="add"><input id="mu" placeholder="Spotify song link, or a link to an .mp3 file" inputmode="url" autocapitalize="off"><button id="ma">Set song</button></div><small>Players tap the small music note in the banner to play it. Setting a new song replaces the old one. Tap Save to publish.</small></div>
 </div>
 <div id="msg"></div>
 <div id="bar" hidden><button id="save">Save</button><button id="run" class="b2">Save &amp; update now</button></div>
@@ -37,7 +39,7 @@ const CATS=['Art','Entertainment','Oddities','History','Science'];
 const host=location.hostname.split('.')[0],seg=location.pathname.split('/')[1];
 const OWNER=localStorage.getItem('ptf_owner')||(location.hostname.endsWith('github.io')?host:'rnpgv784r4-alt');
 const REPO=localStorage.getItem('ptf_repo')||(location.hostname.endsWith('github.io')&&seg?seg:'pop-the-feed');
-const $=id=>document.getElementById(id);let tok=localStorage.getItem('ptf_token')||'',cfg=null,sha=null,dirty=false;
+const $=id=>document.getElementById(id);let tok=localStorage.getItem('ptf_token')||'',cfg=null,sha=null,dirty=false,music={song:''},msha=null,mdirty=false;
 const msg=t=>{$('msg').textContent=t};
 const api=(p,o={})=>fetch('https://api.github.com/repos/'+OWNER+'/'+REPO+p,Object.assign({},o,{headers:{Authorization:'Bearer '+tok,Accept:'application/vnd.github+json','Content-Type':'application/json'}}));
 const opts=sel=>{sel.innerHTML=CATS.map(c=>'<option>'+c+'</option>').join('')};['sc','tc','pc'].forEach(i=>opts($(i)));
@@ -49,7 +51,9 @@ async function load(){
  try{const r=await api('/contents/config.json?ref=main');
   if(r.status===401||r.status===403){msg('That token was refused. Check its permissions.');return}
   if(r.status===404){cfg={sites:[],topics:[],blocked:[],pins:[]};sha=null}else{const j=await r.json();sha=j.sha;cfg=JSON.parse(dec(j.content))}
-  ['sites','topics','blocked','pins'].forEach(k=>cfg[k]=cfg[k]||[]);msg('');$('app').hidden=false;$('bar').hidden=false;draw()}
+  ['sites','topics','blocked','pins'].forEach(k=>cfg[k]=cfg[k]||[]);
+  try{const m=await api('/contents/music.json?ref=main');if(m.status===404){music={song:''};msha=null}else if(m.ok){const mj=await m.json();msha=mj.sha;music=JSON.parse(dec(mj.content))||{song:''}}}catch(e){}
+  msg('');$('app').hidden=false;$('bar').hidden=false;draw()}
  catch(e){msg('Could not load: '+e.message)}}
 function row(label,fn,extra){const d=document.createElement('div');d.className='row';const s=document.createElement('span');s.textContent=label;d.appendChild(s);if(extra)d.appendChild(extra);const b=document.createElement('button');b.className='x';b.textContent='×';b.setAttribute('aria-label','Remove');b.onclick=()=>{fn();dirty=true;draw()};d.appendChild(b);return d}
 function draw(){
@@ -58,8 +62,12 @@ function draw(){
   items.forEach(x=>{const sel=document.createElement('select');sel.innerHTML=CATS.map(k=>'<option'+(k===x.cat?' selected':'')+'>'+k+'</option>').join('');sel.onchange=()=>{x.cat=sel.value;dirty=true;draw()};card.appendChild(row(x.name,()=>{cfg.sites=cfg.sites.filter(y=>y!==x)},sel))});S.appendChild(card)});
  const list=(id,arr,lab)=>{const el=$(id);el.innerHTML='';if(!arr.length){el.innerHTML='<div class="dim">None yet</div>';return}const card=document.createElement('div');card.className='card';arr.forEach(x=>card.appendChild(row(lab(x),()=>{arr.splice(arr.indexOf(x),1)})));el.appendChild(card)};
  list('topics',cfg.topics,x=>x.q+' · '+x.cat);list('blocked',cfg.blocked,x=>x);list('pins',cfg.pins,x=>x.cat+' · '+x.url);
- msg(dirty?'Unsaved changes':'')}
+ const SG=$('song');SG.innerHTML='';if(music.song){const card=document.createElement('div');card.className='card';card.appendChild(row(songLabel(music.song),()=>{music.song='';mdirty=true}));SG.appendChild(card)}else SG.innerHTML='<div class="dim">No song set. The music note stays hidden.</div>';
+ msg(dirty||mdirty?'Unsaved changes':'')}
 const clean=v=>v.trim();
+const songLabel=u=>/spotify/i.test(u)?'Spotify · '+(u.match(/track[\/:]([A-Za-z0-9]+)/)||[0,u])[1]:'Audio · '+u.split('/').pop();
+$('ma').onclick=()=>{const u=clean($('mu').value);if(!(/track[\/:][A-Za-z0-9]{10,}/.test(u)&&/spotify/i.test(u))&&!/^https?:\/\/.+\.(mp3|m4a|aac|ogg|wav)(\?.*)?$/i.test(u)&&!/^[\w.\-\/]+\.(mp3|m4a|aac|ogg|wav)$/i.test(u)){msg('Paste a Spotify song link (open.spotify.com/track/…) or an .mp3 link');return}
+ music.song=u.split('?')[0].replace(/\/$/,'')||u;if(/\.(mp3|m4a|aac|ogg|wav)/i.test(u))music.song=u;mdirty=true;$('mu').value='';draw()};
 $('sa').onclick=()=>{let u=clean($('su').value);if(!/^https?:\/\//i.test(u)){msg('Enter a full address starting with https://');return}
  const isFeed=/(\/feed|\/rss|\.xml|\.rss|\/atom)/i.test(u);let o='';try{o=new URL(u).origin}catch(e){msg('That address does not look right');return}
  const name=clean($('sn').value)||new URL(u).hostname.replace(/^www\./,'');
@@ -67,7 +75,12 @@ $('sa').onclick=()=>{let u=clean($('su').value);if(!/^https?:\/\//i.test(u)){msg
 $('ta').onclick=()=>{const q=clean($('tq').value);if(!q)return;cfg.topics.push({q,cat:$('tc').value});$('tq').value='';dirty=true;draw()};
 $('ba').onclick=()=>{const q=clean($('bq').value);if(!q)return;cfg.blocked.push(q);$('bq').value='';dirty=true;draw()};
 $('pa').onclick=()=>{const u=clean($('pu').value);if(!/^https?:\/\//i.test(u)){msg('Enter a full article address starting with https://');return}cfg.pins.push({url:u,cat:$('pc').value});$('pu').value='';dirty=true;draw()};
-async function save(){
+async function save(){if(dirty||!sha){if(!(await saveCfg()))return false}if(mdirty){if(!(await saveMusic()))return false}if(!dirty&&!mdirty)msg('Saved ✓');return true}
+async function saveMusic(){msg('Saving song…');const body={message:'Update song',content:btoa(unescape(encodeURIComponent(JSON.stringify({song:music.song||''},null,1)))),branch:'main'};if(msha)body.sha=msha;
+ const r=await api('/contents/music.json',{method:'PUT',body:JSON.stringify(body)});
+ if(!r.ok){msg(r.status===409||r.status===422?'Out of date. Reload the page and try again.':'Song save failed ('+r.status+').');return false}
+ msha=(await r.json()).content.sha;mdirty=false;draw();msg('Saved ✓');return true}
+async function saveCfg(){
  msg('Saving…');const body={message:'Update feed settings',content:btoa(unescape(encodeURIComponent(JSON.stringify(cfg,null,1)))),branch:'main'};if(sha)body.sha=sha;
  const r=await api('/contents/config.json',{method:'PUT',body:JSON.stringify(body)});
  if(!r.ok){msg(r.status===409||r.status===422?'Out of date. Reload the page and try again.':'Save failed ('+r.status+'). The token needs Contents: read and write.');return false}
