@@ -28,6 +28,12 @@ html,body{height:100%;margin:0;background:#35024a;overflow:hidden;overscroll-beh
 @keyframes blink{0%,100%{opacity:.65;filter:drop-shadow(0 0 2px #fff)}50%{opacity:1;filter:drop-shadow(0 0 8px #ffe9a8) drop-shadow(0 0 16px #fff)}}
 #cats{display:flex;justify-content:space-between;gap:4px;margin-top:6px;padding:0 2px}
 .cat{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.32);border-radius:999px;color:#fff;font:600 11.5px system-ui,sans-serif;padding:11px 3px;flex:1 1 auto;text-align:center;white-space:nowrap;touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+/* pop spring + air-bubble burst */
+@keyframes popSpring{0%{transform:scale(1)}40%{transform:scale(.85)}70%{transform:scale(1.08)}100%{transform:scale(1)}}
+@keyframes popFade{0%{opacity:.9}100%{opacity:0}}
+.pspring{transform-box:fill-box;transform-origin:center;fill:rgba(255,255,255,.3);stroke:rgba(255,255,255,.85);stroke-width:7;pointer-events:none;animation:popSpring .3s cubic-bezier(.175,.885,.32,1.275) forwards,popFade .34s ease-out forwards}
+.air-particle{position:fixed;left:0;top:0;pointer-events:none;z-index:6;width:6px;height:6px;margin:-3px 0 0 -3px;background:rgba(255,255,255,.85);border-radius:50%;box-shadow:0 0 4px rgba(255,255,255,.7);animation:floatUp .6s ease-out forwards;will-change:transform,opacity}
+@keyframes floatUp{0%{transform:translate(var(--x),var(--y)) scale(1);opacity:1}100%{transform:translate(calc(var(--x) + var(--dx)),calc(var(--y) + var(--dy))) scale(.2);opacity:0}}
 #a2h{position:fixed;left:50%;transform:translateX(-50%);bottom:max(10px,env(safe-area-inset-bottom,0px));width:min(calc(100vw - 24px),380px);box-sizing:border-box;z-index:7;display:none;align-items:center;gap:9px;padding:6px 8px 6px 7px;background:rgba(24,12,40,.94);border:1px solid rgba(201,162,255,.35);border-radius:14px;box-shadow:0 4px 18px rgba(0,0,0,.5);font:600 12px/1.2 system-ui,sans-serif;color:#fff}
 #a2h.show{display:flex}body.gaming #a2h{display:none}
 #a2h img{width:30px;height:30px;border-radius:7px;flex:none}#a2h span{flex:1;min-width:0;color:#d9c4f0;font-weight:500}#a2h span b{display:block;color:#fff;font-weight:700}
@@ -242,7 +248,7 @@ B.forEach((b,i)=>{
   const q=el('g',{'clip-path':'url(#cq'+i+')',class:'pop',id:'q'+i});q.appendChild(el('image',{href:'bubbles-popped-v2.jpg',x:0,y:-400,width:1179,height:5512}));layer.appendChild(q)}
  const h=el('ellipse',{cx:b[0],cy:b[1],rx:b[2]-8,ry:b[3]-8,class:'hit',id:'h'+i});
  h.addEventListener('pointerdown',e=>{ps[i]=[e.clientX,e.clientY,Date.now()]});
- h.addEventListener('pointerup',e=>{const s=ps[i];ps[i]=0;if(s&&Math.hypot(e.clientX-s[0],e.clientY-s[1])<12&&Date.now()-s[2]<700)pop(i)});
+ h.addEventListener('pointerup',e=>{const s=ps[i];ps[i]=0;if(s&&Math.hypot(e.clientX-s[0],e.clientY-s[1])<12&&Date.now()-s[2]<700){tapXY=[e.clientX,e.clientY];pop(i)}});
  layer.appendChild(h);
 });
 const CL=['Art','Entertainment','Oddities','History','Science'],CC={Art:'#D63384',Entertainment:'#E8603C',Oddities:'#E8A020',History:'#8E7BE0',Science:'#1FA58C'},catT={},catN={};let pendingCat=null;
@@ -288,7 +294,12 @@ function hideAch(){clk();$('achov').classList.remove('show');if(gmode){const m=g
 function aokClick(){if(gmode){const m=gmode,g=G;gmode=null;clk();$('achov').classList.remove('show');if(m==='over')exitGame();if(m==='start'||m==='over')startGame();else if(m==='quit'&&g)g.state=g.prev;return}hideAch()}
 $('aok').addEventListener('click',aokClick);$('ax').addEventListener('click',hideAch);$('achov').addEventListener('click',e=>{if(e.target.id==='achov')hideAch()});
 function setCnt(){$('cnt').textContent=popped+' / '+N}
-function pop(i){
+function airBurst(x,y,n){n=n||9;for(let k=0;k<n;k++){const p=document.createElement('i'),a=Math.random()*6.283,d=26+Math.random()*44,sz=5+Math.random()*5;
+  p.className='air-particle';p.style.cssText='--x:'+x+'px;--y:'+y+'px;--dx:'+(Math.cos(a)*d).toFixed(1)+'px;--dy:'+(Math.sin(a)*d-14).toFixed(1)+'px;width:'+sz+'px;height:'+sz+'px;margin:'+(-sz/2)+'px 0 0 '+(-sz/2)+'px';
+  document.body.appendChild(p);setTimeout(()=>p.remove(),680)}}
+function springAt(i){try{const b=B[i],e=el('ellipse',{cx:b[0],cy:b[1],rx:b[2]-6,ry:b[3]-6,class:'pspring'});layer.appendChild(e);setTimeout(()=>e.remove(),420)}catch(x){}}
+let tapXY=null;
+function pop(i){if(!cur&&tapXY){airBurst(tapXY[0],tapXY[1]);tapXY=null}if(!cur)springAt(i);
  if(cur)return;lastPop=Date.now();snd();$('p'+i).classList.add('on');if($('q'+i))$('q'+i).classList.add('on');$('h'+i).classList.add('done');$('g'+i).classList.remove('on');
  popped++;setCnt();const pc=B[i][4];catN[pc]++;setNs();if(catN[pc]===catT[pc])pendingCat=pc;popIdx.push(i);savePop();if(popped>=N)sheetDone();
  showStory(storyFor(i));
@@ -455,7 +466,7 @@ function gLoop(t){
 gm.addEventListener('pointerdown',e=>{
  const d=e.target.closest('.gb');if(!d||!G||G.state!=='live')return;
  const x=GE[+d.dataset.e],key=x.k+':'+x.n;if(G.popped.has(key))return;
- G.popped.add(key);x.pp=true;d.classList.add('p');snd();
+ G.popped.add(key);x.pp=true;d.classList.add('p');snd();airBurst(e.clientX,e.clientY,7);
  if(B[x.k][4]===G.cat){G.hits++;G.score+=10*G.r;gHud();if(G.hits>=5)roundDone()}
  else{gFlash();G.wrong=true;gameOver(false)}
 });
