@@ -124,6 +124,13 @@ body.gaming #gm{display:block}body.gaming #cats{display:none}body.gaming #ghud{d
 #lgw{position:relative;width:min(250px,64vw);transform:translateX(5px)}#logoimg{width:100%;transform:none;position:relative;z-index:1}
 #oglow{position:absolute;left:50%;top:-15%;width:135%;height:105%;margin:0 0 0 -67.5%;z-index:2;mix-blend-mode:screen;pointer-events:none;border-radius:50%;background:radial-gradient(ellipse closest-side,rgba(235,215,255,.95) 0%,rgba(205,155,255,.7) 26%,rgba(190,135,255,.4) 50%,rgba(175,115,255,.16) 74%,rgba(170,110,255,0) 100%);transform:scale(.7);opacity:0}
 @keyframes oglow{0%,100%{transform:scale(.85);opacity:.15}50%{transform:scale(1.25);opacity:.77}}
+
+#oglint{position:absolute;z-index:3;left:49.4%;top:10.6%;width:32%;aspect-ratio:1/1;margin-left:-16%;border-radius:50%;overflow:hidden;pointer-events:none}
+#oglint::after{content:'';position:absolute;top:-25%;bottom:-25%;width:34%;left:-45%;background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.95),rgba(255,255,255,0));transform:skewX(-18deg);opacity:0;animation:osweep 6s ease-in-out infinite}
+@keyframes osweep{0%,3%{left:-45%;opacity:0}5%{opacity:1}15%{left:115%;opacity:1}16%,100%{left:115%;opacity:0}}
+#osp{position:absolute;z-index:3;left:60%;top:8%;width:4px;height:4px;margin:-2px 0 0 -2px;background:#fff;pointer-events:none;opacity:0;box-shadow:4px 0 #fff,-4px 0 #fff,0 4px #fff,0 -4px #fff,8px 0 #fff,-8px 0 #fff,0 8px #fff,0 -8px #fff,0 0 10px 4px rgba(255,255,255,.75);animation:ospk 6s ease-in-out infinite}
+@keyframes ospk{0%,12%{opacity:0;transform:scale(0)}16%{opacity:1;transform:scale(1.25)}22%{opacity:1;transform:scale(.9)}28%,100%{opacity:0;transform:scale(.3)}}
+body.gaming #oglint,body.gaming #osp{display:none}
 body.gaming #oglow{display:none}
 @keyframes oglowi{0%{transform:scale(.68);opacity:.15}10%{transform:scale(1);opacity:.97}20%{transform:scale(.61);opacity:.15}30%{transform:scale(.9);opacity:.92}40%{transform:scale(.55);opacity:.14}50%{transform:scale(.81);opacity:.875}60%{transform:scale(.55);opacity:.14}70%{transform:scale(.81);opacity:.83}80%{transform:scale(.55);opacity:.13}90%{transform:scale(.81);opacity:.79}100%{transform:scale(.55);opacity:0}}
 @keyframes oglowir{0%{opacity:.15}10%{opacity:.97}20%{opacity:.15}30%{opacity:.92}40%{opacity:.14}50%{opacity:.875}60%{opacity:.14}70%{opacity:.83}80%{opacity:.13}90%{opacity:.79}100%{opacity:0}}
@@ -138,7 +145,7 @@ body.gaming #oglow{display:none}
 <g id="gl"></g><g id="layer"></g>
 </svg></div></div>
 <div id="gm"><div id="gart"></div><div id="gbs"></div><div id="gtime"></div><div id="gint"></div><div id="gflash"></div></div>
-<div id="bar"><div id="top"><div id="side"><div id="cn"><span id="cnt">0 / 39</span><small>popped</small></div></div><div id="lgw"><img id="logoimg" src="logo-banner.png" alt="Pop The Feed"><div id="oglow"></div></div><button id="reset" aria-label="Refresh"><img src="refresh.png" alt="Refresh"></button></div>
+<div id="bar"><div id="top"><div id="side"><div id="cn"><span id="cnt">0 / 39</span><small>popped</small></div></div><div id="lgw"><img id="logoimg" src="logo-banner.png" alt="Pop The Feed"><div id="oglow"></div><div id="oglint"></div><div id="osp"></div></div><button id="reset" aria-label="Refresh"><img src="refresh.png" alt="Refresh"></button></div>
 <div id="cats"><button class="cat" data-c="Art"><span>Art</span></button><button class="cat" data-c="Entertainment"><span>Entertainment</span></button><button class="cat" data-c="Oddities"><span>Oddities</span></button><button class="cat" data-c="History"><span>History</span></button><button class="cat" data-c="Science"><span>Science</span></button></div><div id="ghud"><span id="grd">R1/5</span><span id="gcat"><span id="garr">&#8593;</span> <span id="gcn">Art</span></span><span id="gdots"><i></i><i></i><i></i><i></i><i></i></span><span id="gtm">0:30</span><button id="gq">Quit</button></div></div>
 <label id="hp" style="position:fixed;bottom:2px;left:2px;width:44px;height:26px;opacity:.01;pointer-events:none;z-index:-1"><input type="checkbox" switch></label>
 <div id="ptr">Pull to refresh</div>
@@ -455,14 +462,14 @@ function glowRun(n){if(G)return;const g=$('oglow');g.style.animation='none';void
 glowRun('i');let glowT=setInterval(()=>glowRun('i'),30000);
 function glowOpen(){glowRun('i');clearInterval(glowT);glowT=setInterval(()=>glowRun('i'),30000)}
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)glowOpen()});addEventListener('pageshow',e=>{if(e.persisted)glowOpen()});
-function OSPOT(){const r=$('logoimg').getBoundingClientRect();return{x:r.left+r.width*.5,y:r.top+r.width*.622*.375,r:r.width*.085}}
+function OSPOT(){const r=$('logoimg').getBoundingClientRect();return{x:r.left+r.width*.5,y:r.top+r.width*.622*.375,r:r.width*.17}}
 if(/dbg/.test(location.search)){const d=document.createElement('div');d.style.cssText='position:fixed;z-index:99;pointer-events:none;border:2px solid #0f0;border-radius:50%';document.body.appendChild(d);setInterval(()=>{const o=OSPOT();d.style.left=(o.x-o.r)+'px';d.style.top=(o.y-o.r)+'px';d.style.width=d.style.height=(o.r*2)+'px'},300)}
 (function(){const tp=$('top');let lastT=0,sx0=0,sy0=0,ok=false;
  const open=()=>{hap();let best=0;try{best=parseInt(localStorage.getItem('ptf_game_best'))||0}catch(e){}setNBest(best);$('nes').classList.add('show')};
  const inSpot=(x,y)=>{const o=OSPOT();return Math.hypot(x-o.x,y-o.y)<=o.r};
  tp.addEventListener('pointerdown',e=>{if(G||cur||$('nes').classList.contains('show')||$('achov').classList.contains('show')){ok=false;return}ok=inSpot(e.clientX,e.clientY);sx0=e.clientX;sy0=e.clientY});
  tp.addEventListener('pointerup',e=>{if(!ok)return;ok=false;if(Math.hypot(e.clientX-sx0,e.clientY-sy0)>12||!inSpot(e.clientX,e.clientY)){lastT=0;return}
-  const n=Date.now();if(n-lastT<450){lastT=0;open()}else lastT=n});
+  open()});
  tp.addEventListener('contextmenu',e=>e.preventDefault())})();
 
 restorePop();renderRank();setCnt();setNs();loadStories();
