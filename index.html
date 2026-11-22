@@ -121,6 +121,11 @@ body.gaming #gm{display:block}body.gaming #cats{display:none}body.gaming #ghud{d
 #na span::after{animation:nesp 1.1s ease-in-out infinite}
 @keyframes nesp{0%,100%{box-shadow:0 0 0 0 rgba(255,120,100,0)}50%{box-shadow:0 0 14px 6px rgba(255,120,100,.95),0 0 28px 12px rgba(255,80,60,.6)}}
 @keyframes nesb{0%,100%{box-shadow:0 0 0 2px #f2f0ea}50%{box-shadow:0 0 0 2px #fff,0 0 18px 4px rgba(255,200,120,.85)}}
+#logoimg{position:relative;z-index:1}
+#oglow{position:absolute;z-index:2;mix-blend-mode:screen;pointer-events:none;border-radius:50%;background:radial-gradient(circle,rgba(235,215,255,.95) 0%,rgba(200,150,255,.75) 45%,rgba(170,110,255,0) 70%);transform:translate(-50%,-50%) scale(.7);opacity:0}
+@keyframes oglow{0%,100%{transform:translate(-50%,-50%) scale(.8);opacity:.08}50%{transform:translate(-50%,-50%) scale(1.2);opacity:.5}}
+body.gaming #oglow{display:none}
+
 </style><script data-goatcounter="https://popthefeed.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head><body>
 <div id="scroll"><div id="inner">
@@ -130,7 +135,7 @@ body.gaming #gm{display:block}body.gaming #cats{display:none}body.gaming #ghud{d
 <g id="gl"></g><g id="layer"></g>
 </svg></div></div>
 <div id="gm"><div id="gart"></div><div id="gbs"></div><div id="gtime"></div><div id="gint"></div><div id="gflash"></div></div>
-<div id="bar"><div id="top"><div id="side"><div id="cn"><span id="cnt">0 / 39</span><small>popped</small></div></div><img id="logoimg" src="logo-banner.png" alt="Pop The Feed"><button id="reset" aria-label="Refresh"><img src="refresh.png" alt="Refresh"></button></div>
+<div id="bar"><div id="oglow"></div><div id="top"><div id="side"><div id="cn"><span id="cnt">0 / 39</span><small>popped</small></div></div><img id="logoimg" src="logo-banner.png" alt="Pop The Feed"><button id="reset" aria-label="Refresh"><img src="refresh.png" alt="Refresh"></button></div>
 <div id="cats"><button class="cat" data-c="Art"><span>Art</span></button><button class="cat" data-c="Entertainment"><span>Entertainment</span></button><button class="cat" data-c="Oddities"><span>Oddities</span></button><button class="cat" data-c="History"><span>History</span></button><button class="cat" data-c="Science"><span>Science</span></button></div><div id="ghud"><span id="grd">R1/5</span><span id="gcat"><span id="garr">&#8593;</span> <span id="gcn">Art</span></span><span id="gdots"><i></i><i></i><i></i><i></i><i></i></span><span id="gtm">0:30</span><button id="gq">Quit</button></div></div>
 <label id="hp" style="position:fixed;bottom:2px;left:2px;width:44px;height:26px;opacity:.01;pointer-events:none;z-index:-1"><input type="checkbox" switch></label>
 <div id="ptr">Pull to refresh</div>
@@ -281,7 +286,7 @@ document.querySelectorAll('.cat').forEach(btn=>{
  btn.addEventListener('contextmenu',e=>e.preventDefault());
 });
 function loadStories(){fetch('stories.json?'+Date.now()).then(r=>r.ok?r.json():[]).then(d=>{if(Array.isArray(d)&&d.length){const j=JSON.stringify(d);if(j!==SJ){S=d;SJ=j;build()}}}).catch(()=>{})}
-function doReset(){popped=0;popIdx=[];savePop();CL.forEach(c=>catN[c]=0);pendingCat=null;setNs();setCnt();$('reset').classList.remove('ready');document.querySelectorAll('.pop').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.hit').forEach(x=>x.classList.remove('done'));applyGlow();closeCard();build();$('scroll').scrollTo({top:0,behavior:'smooth'});loadStories()}
+function doReset(){glowRun(4);popped=0;popIdx=[];savePop();CL.forEach(c=>catN[c]=0);pendingCat=null;setNs();setCnt();$('reset').classList.remove('ready');document.querySelectorAll('.pop').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.hit').forEach(x=>x.classList.remove('done'));applyGlow();closeCard();build();$('scroll').scrollTo({top:0,behavior:'smooth'});loadStories()}
 $('reset').addEventListener('click',askReset);
 const pt=$('ptr'),sc=$('scroll'),inn=$('inner');let py=null,pull=0;const PULL=150;
 function mv(y,anim){inn.style.transition=anim?'transform .35s cubic-bezier(.2,.8,.3,1)':'none';inn.style.transform='translateY('+y+'px)';pt.style.transform='translateX(-50%) translateY('+(y/2-16)+'px)'}
@@ -441,7 +446,10 @@ $('npl').innerHTML=pixB('PLAY?','#2e2c28','#b7c0bd');
 function setNBest(b){$('nbest').innerHTML=pixB('BEST: '+b,'#2e2c28','#b7c0bd')}setNBest(0);
 $('na').addEventListener('click',()=>{$('nes').classList.remove('show');startGame()});$('nb').addEventListener('click',()=>{clk();$('nes').classList.remove('show')});(function(){let x=0,y=0,d=false;const n=$('nes');n.addEventListener('pointerdown',e=>{x=e.clientX;y=e.clientY;d=true});n.addEventListener('pointerup',e=>{if(!d)return;d=false;if(Math.hypot(e.clientX-x,e.clientY-y)>50){clk();n.classList.remove('show')}})})();
 $('nes').addEventListener('click',e=>{if(e.target.id==='nes'){clk();$('nes').classList.remove('show')}});
-/* hidden long-press on the logo */
+function placeGlow(){const g=$('oglow'),o=OSPOT(),b=$('bar').getBoundingClientRect();g.style.left=(o.x-b.left)+'px';g.style.top=(o.y-b.top)+'px';g.style.width=g.style.height=(o.r*6.2)+'px'}
+addEventListener('resize',placeGlow);addEventListener('load',placeGlow);$('logoimg').addEventListener('load',placeGlow);setInterval(placeGlow,700);setTimeout(placeGlow,50);
+function glowRun(n){if(G)return;const g=$('oglow');g.style.animation='none';void g.offsetWidth;g.style.animation=matchMedia('(prefers-reduced-motion: reduce)').matches?'none':'oglow 2.6s ease-in-out '+n}
+glowRun(4);setInterval(()=>glowRun(2),30000);
 function OSPOT(){const r=$('logoimg').getBoundingClientRect();return{x:r.left+r.width*.5,y:r.top+r.width*.622*.375,r:r.width*.085}}
 if(/dbg/.test(location.search)){const d=document.createElement('div');d.style.cssText='position:fixed;z-index:99;pointer-events:none;border:2px solid #0f0;border-radius:50%';document.body.appendChild(d);setInterval(()=>{const o=OSPOT();d.style.left=(o.x-o.r)+'px';d.style.top=(o.y-o.r)+'px';d.style.width=d.style.height=(o.r*2)+'px'},300)}
 (function(){const tp=$('top');let lastT=0,sx0=0,sy0=0,ok=false;
