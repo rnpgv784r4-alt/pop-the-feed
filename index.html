@@ -593,14 +593,22 @@ function gameOver(win){
  $('apt').textContent=win?'You beat all '+GLV+' levels of the stream!':(wr?'You hit a bubble from the wrong category. ':'Time ran out. ')+'You reached level '+G.r+' of '+GLV+'.';
  $('aok').textContent='Play Again';$('ayes').textContent='Exit';$('ayes').style.display='block';$('achov').classList.add('show')
 }
+/* zoom lock while the game is on */
+(function(){const vp=document.querySelector('meta[name=viewport]'),base=vp.content;let lt=0;
+ window.zoomLock=function(on){vp.content=on?base+', maximum-scale=1, user-scalable=no':base};
+ const g=e=>{if(document.body.classList.contains('gaming'))e.preventDefault()};
+ ['gesturestart','gesturechange','gestureend'].forEach(t=>document.addEventListener(t,g,{passive:false}));
+ document.addEventListener('touchend',e=>{if(!document.body.classList.contains('gaming'))return;const n=Date.now();if(n-lt<400)e.preventDefault();lt=n},{passive:false});
+ document.addEventListener('touchmove',e=>{if(document.body.classList.contains('gaming')&&e.touches.length>1)e.preventDefault()},{passive:false});
+ document.addEventListener('dblclick',g,{passive:false})})();
 function startGame(){
- if(G)return;$('hsrow').style.display='none';audioSess();Song.resume=Song.playing||Song.want;try{if(Song.resume)songPause()}catch(e){}try{if(AC&&AC.state!=='running'){try{AC.close()}catch(e){}AC=null}}catch(e){}document.body.classList.add('gaming');try{gLayout()}catch(e){}
+ if(G)return;zoomLock(true);$('hsrow').style.display='none';audioSess();Song.resume=Song.playing||Song.want;try{if(Song.resume)songPause()}catch(e){}try{if(AC&&AC.state!=='running'){try{AC.close()}catch(e){}AC=null}}catch(e){}document.body.classList.add('gaming');try{gLayout()}catch(e){}
  G={stage:1,pos:0,v:0,lx:0,ly:0,vx:0,vy:0,mode:'v',score:0,order:gOrder(),last:0,popped:new Set(),state:'intro',prev:'live'};
  $('attl').textContent='Achievement Unlocked!';$('ayes').textContent='New Sheet';
  const sm=$('side').querySelector('small');sm.textContent='score';
  try{Music.start()}catch(e){}startRound(1);gRender();G.raf=requestAnimationFrame(gLoop)
 }
-function exitGame(){if(!G)return;if(Song.resume){Song.resume=false;setTimeout(songPlay,300)}cancelAnimationFrame(G.raf);Music.stop();G=null;document.body.classList.remove('gaming');$('side').querySelector('small').textContent='popped';$('ayes').textContent='New Sheet';setCnt()}
+function exitGame(){if(!G)return;if(Song.resume){Song.resume=false;setTimeout(songPlay,300)}cancelAnimationFrame(G.raf);Music.stop();G=null;zoomLock(false);document.body.classList.remove('gaming');$('side').querySelector('small').textContent='popped';$('ayes').textContent='New Sheet';setCnt()}
 function gLoop(t){
  if(!G)return;G.raf=requestAnimationFrame(gLoop);
  if(gm.clientHeight!==GH||gm.clientWidth!==GW){gLayout()}
