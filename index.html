@@ -123,9 +123,9 @@ body.gaming #gm{display:block}body.gaming #cats{display:none}body.gaming #ghud{d
 @keyframes nesb{0%,100%{box-shadow:0 0 0 2px #f2f0ea}50%{box-shadow:0 0 0 2px #fff,0 0 18px 4px rgba(255,200,120,.85)}}
 #logoimg{position:relative;z-index:1}
 #oglow{position:absolute;z-index:2;mix-blend-mode:screen;pointer-events:none;border-radius:50%;background:radial-gradient(circle,rgba(235,215,255,.95) 0%,rgba(200,150,255,.75) 45%,rgba(170,110,255,0) 70%);transform:translate(-50%,-50%) scale(.7);opacity:0}
-@keyframes oglow{0%,100%{transform:translate(-50%,-50%) scale(.8);opacity:.08}50%{transform:translate(-50%,-50%) scale(1.2);opacity:.5}}
+@keyframes oglow{0%,100%{transform:translate(-50%,-50%) scale(.85);opacity:.2}50%{transform:translate(-50%,-50%) scale(1.3);opacity:.95}}
 body.gaming #oglow{display:none}
-@keyframes oglowr{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.1}50%{transform:translate(-50%,-50%) scale(1);opacity:.5}}
+@keyframes oglowr{0%,100%{transform:translate(-50%,-50%) scale(1.05);opacity:.25}50%{transform:translate(-50%,-50%) scale(1.05);opacity:.95}}
 
 </style><script data-goatcounter="https://popthefeed.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head><body>
@@ -447,7 +447,7 @@ $('npl').innerHTML=pixB('PLAY?','#2e2c28','#b7c0bd');
 function setNBest(b){$('nbest').innerHTML=pixB('BEST: '+b,'#2e2c28','#b7c0bd')}setNBest(0);
 $('na').addEventListener('click',()=>{$('nes').classList.remove('show');startGame()});$('nb').addEventListener('click',()=>{clk();$('nes').classList.remove('show')});(function(){let x=0,y=0,d=false;const n=$('nes');n.addEventListener('pointerdown',e=>{x=e.clientX;y=e.clientY;d=true});n.addEventListener('pointerup',e=>{if(!d)return;d=false;if(Math.hypot(e.clientX-x,e.clientY-y)>50){clk();n.classList.remove('show')}})})();
 $('nes').addEventListener('click',e=>{if(e.target.id==='nes'){clk();$('nes').classList.remove('show')}});
-function placeGlow(){const g=$('oglow'),o=OSPOT(),b=$('bar').getBoundingClientRect();g.style.left=(o.x-b.left)+'px';g.style.top=(o.y-b.top)+'px';g.style.width=g.style.height=(o.r*6.2)+'px'}
+function placeGlow(){const g=$('oglow'),o=OSPOT(),b=$('bar').getBoundingClientRect();g.style.left=(o.x-b.left)+'px';g.style.top=(o.y-b.top)+'px';g.style.width=g.style.height=(o.r*7.2)+'px'}
 addEventListener('resize',placeGlow);addEventListener('load',placeGlow);$('logoimg').addEventListener('load',placeGlow);setInterval(placeGlow,700);setTimeout(placeGlow,50);
 function glowRun(n){if(G)return;const g=$('oglow');g.style.animation='none';void g.offsetWidth;g.style.animation=(matchMedia('(prefers-reduced-motion: reduce)').matches?'oglowr':'oglow')+' 2.6s ease-in-out '+n}
 glowRun(4);setInterval(()=>glowRun(2),30000);
