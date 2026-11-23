@@ -275,7 +275,7 @@ function build(){
   const hasR=t=>Array.isArray(t[7])&&t[7].length>0,un=pool.filter(t=>!seen.has(t[3])),sn=pool.filter(t=>seen.has(t[3]));
   let pick=shuf(un.filter(hasR)).concat(shuf(un.filter(t=>!hasR(t))),shuf(sn.filter(hasR)),shuf(sn.filter(t=>!hasR(t))));
   while(pick.length<idx.length)pick=pick.concat(shuf(pool));
-  pick=pick.slice(0,idx.length).sort((x,y)=>(hasR(y)-hasR(x))||byNew(x,y));
+  pick=pick.slice(0,idx.length).sort((x,y)=>hasR(y)-hasR(x));
   idx.forEach((bi,k)=>{assign[bi]=pick[k];seen.add(pick[k][3])});
  });
  try{localStorage.setItem('seen',JSON.stringify([...seen].slice(-400)))}catch(e){}
