@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="apple-touch-icon.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<title>Pop The Feed</title>
+<script>/* narrow window or phone: go straight to the app */if(innerWidth<700){location.replace("index.html?nf=1")}
+addEventListener("resize",function(){if(innerWidth<700)location.replace("index.html?nf=1")})</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<style>
+:root{--ink:#f3eaff;--dim:#bfa6dc;--gold:#ffe9a8;--card:rgba(255,255,255,.06);--line:rgba(217,196,240,.22)}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden}
+body{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;column-gap:clamp(18px,2.4vw,40px);padding:0 24px;background:radial-gradient(1300px 800px at 50% 30%,#4a0a66,#220033 60%,#14001f);font:14px/1.4 ui-rounded,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink)}
+.col{width:clamp(240px,16vw,310px);align-self:center;display:flex;flex-direction:column;gap:14px;max-height:calc(100vh - 48px);overflow:auto;scrollbar-width:none}.col::-webkit-scrollbar{display:none}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 16px 14px;backdrop-filter:blur(6px)}
+h2{margin:0 0 12px;font:400 9px/1.4 "Press Start 2P","Courier New",monospace;letter-spacing:.04em;color:var(--dim);text-transform:uppercase}
+#phoneWrap{display:flex;flex-direction:column;align-items:center;gap:10px;flex:none}
+#phone{--h:min(calc(100vh - 64px),940px);height:var(--h);width:min(var(--h),920px,calc(100vw - 48px));min-width:380px;border-radius:30px;overflow:hidden;background:#35024a;box-shadow:0 0 0 6px #120019,0 0 0 8px #5b2b78,0 30px 80px rgba(0,0,0,.6)}
+iframe{border:0;width:100%;height:100%;display:block;background:#35024a}
+small.cap{opacity:.7;font-size:12px}
+/* rank */
+.rkrow{display:flex;gap:14px;align-items:center}
+#rkimg{flex:none;width:81px;height:90px;background:url(ranks.png) no-repeat;background-size:1053px 90px}
+#rkimg.none{filter:grayscale(1) brightness(.7);opacity:.35}
+#rkt{font-weight:800;font-size:16px;line-height:1.2;color:var(--gold)}
+#rks{color:var(--dim);font-size:12px;margin-top:4px}
+.lv{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin:14px 0 8px}
+#lvn{white-space:nowrap;font:400 20px "Press Start 2P","Courier New",monospace;color:var(--gold)}
+#lvt{font-weight:700;font-size:15px}
+.bar{height:10px;border-radius:6px;background:rgba(255,255,255,.12);overflow:hidden}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ffd45a,#ff8a3d);border-radius:6px;transition:width .4s}
+.bar.p i{background:linear-gradient(90deg,#b678ff,#ff5fd0)}
+.sub{color:var(--dim);font-size:12px;margin:6px 0 0}
+.big{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}.big b{font:400 18px "Press Start 2P","Courier New",monospace}.big span{color:var(--dim);font-size:12px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{background:rgba(0,0,0,.18);border-radius:12px;padding:10px 12px}.stat b{display:block;font-size:20px;font-weight:800}.stat span{font-size:11px;color:var(--dim)}.stat.w{grid-column:1/-1}
+ol.how{margin:0;padding-left:20px;color:#e4d6f5}ol.how li{margin:0 0 7px}ol.how li::marker{color:var(--gold);font-weight:800}
+ul.rd{list-style:none;margin:0;padding:0}ul.rd li{border-top:1px solid var(--line)}ul.rd li:first-child{border-top:0}
+ul.rd a{display:block;padding:9px 2px;color:var(--ink);text-decoration:none;font-size:13px;line-height:1.35}ul.rd a:hover{color:var(--gold)}
+.empty{color:var(--dim);font-size:13px}
+#left{grid-column:1;justify-self:end}#phoneWrap{grid-column:2}#right{grid-column:3;justify-self:start}
+@media (max-width:1680px){#right{display:none}}
+@media (max-width:1380px){#left{display:none}}
+</style></head><body>
+<aside class="col" id="left">
+ <div class="card"><h2>Your rank</h2>
+  <div class="rkrow"><div id="rkimg" class="none"></div><div><div id="rkt">No rank yet</div><div id="rks">Clear Level 20 to earn your first rank.</div></div></div>
+  <div class="lv"><span id="lvn">LV 1</span><span id="lvt"></span></div>
+  <div class="bar"><i id="lvb"></i></div><p class="sub" id="lvs"></p>
+ </div>
+ <div class="card"><h2>This sheet</h2>
+  <div class="big"><b id="pp">0 / 39</b><span>bubbles popped</span></div>
+  <div class="bar p"><i id="ppb"></i></div>
+ </div>
+ <div class="card"><h2>Stats</h2>
+  <div class="stats"><div class="stat"><b id="sq">0</b><span>quizzes passed</span></div><div class="stat"><b id="sb">0</b><span>your best game</span></div><div class="stat w"><b id="st">&mdash;</b><span>global top score</span></div></div>
+ </div>
+</aside>
+<div id="phoneWrap"><div id="phone"><iframe id="fr" title="Pop The Feed" allow="autoplay; fullscreen; clipboard-write"></iframe></div><small class="cap">Pop The Feed</small></div>
+<aside class="col" id="right">
+ <div class="card"><h2>How it works</h2>
+  <ol class="how"><li>Pop a bubble to open a story.</li><li>Tap <b>Reader</b> and read it to the end.</li><li>Close the Reader to take a 3-question pop quiz.</li><li>Get all 3 right to level up.</li><li>Clear Level 20 to earn the next military rank.</li></ol>
+ </div>
+ <div class="card"><h2>Recently read</h2><ul class="rd" id="rd"></ul><div class="empty" id="rde">Stories you read in the Reader will show up here.</div></div>
+</aside>
+<script>
+var fr=document.getElementById("fr");fr.src="index.html?nf=0"+location.search.replace(/^\?/,"&");
+var $=function(i){return document.getElementById(i)},last="",topAt=0,TOPV=null;
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function render(s){
+ var k=JSON.stringify([s.popped,s.n,s.pres,s.best,s.qpass,s.read,TOPV]);if(k===last)return;last=k;
+ var rk=s.rk||s.nextRk;
+ $("rkimg").className=s.rk?"":"none";$("rkimg").style.backgroundPosition=(-81*((s.rk?s.pres:s.pres+1)-1))+"px 0";
+ $("rkt").textContent=s.rk?s.rk[1]:"No rank yet";
+ $("rks").textContent=s.rk?(s.nextRk?"Next rank: "+s.nextRk[1]+" · clear Level 20 again":"Highest rank reached"):"Clear Level 20 to earn "+(s.nextRk?s.nextRk[1]:"a rank")+".";
+ $("lvn").textContent="LV "+s.lvl;$("lvt").textContent=s.lvlName||"";
+ if(s.hi){var d=s.hi-s.lo,c=s.n-s.lo;$("lvb").style.width=Math.max(0,Math.min(100,c/d*100))+"%";var m=s.hi-s.n;$("lvs").textContent=m+" more quiz"+(m===1?"":"zes").replace("quizzes","zes")+" to Level "+(s.lvl+1);if(m===1)$("lvs").textContent="1 more quiz to Level "+(s.lvl+1)}
+ else{$("lvb").style.width="100%";$("lvs").textContent="Top level reached — clear it again for the next rank."}
+ $("pp").textContent=s.popped+" / "+s.N;$("ppb").style.width=(s.popped/s.N*100)+"%";
+ $("sq").textContent=s.qpass;$("sb").textContent=s.best||"—";
+ $("st").textContent=TOPV?TOPV.i+"  "+TOPV.s:"—";
+ $("rd").innerHTML=s.read.map(function(a){return '<li><a href="'+esc(a.u)+'" target="_blank" rel="noopener">'+esc(a.t)+'</a></li>'}).join("");
+ $("rde").style.display=s.read.length?"none":"block"}
+function loadTop(s){if(!s.hs||Date.now()-topAt<60000)return;topAt=Date.now();
+ fetch(s.hs.replace(/\/$/,"")+"/top.json?"+Date.now()).then(function(r){return r.ok?r.json():null}).then(function(d){TOPV=d&&typeof d.s==="number"&&/^[A-Z]{3}$/.test(d.i||"")?d:null}).catch(function(){})}
+setInterval(function(){try{var s=fr.contentWindow.__ptf&&fr.contentWindow.__ptf();if(s){loadTop(s);render(s)}}catch(e){}},500);
+</script>
+</body></html>
