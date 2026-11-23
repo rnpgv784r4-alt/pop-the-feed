@@ -45,7 +45,7 @@ html,body{height:100%;margin:0;background:#35024a;overflow:hidden;overscroll-beh
 #rdn{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #rdx{flex:none;height:36px;min-width:84px;padding:0 12px;border:1px solid #fff;border-radius:6px;background:linear-gradient(#e9876b,#c9391a);color:#fff;font:800 14px Tahoma,Verdana,sans-serif;text-shadow:1px 1px 0 rgba(0,0,0,.4);cursor:pointer}
 #rdx:active{background:#a82d12}
-#rdc{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y;padding:16px 18px calc(28px + env(safe-area-inset-bottom,0px));color:#111}
+#rdc{overflow-anchor:none;flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y;padding:16px 18px calc(28px + env(safe-area-inset-bottom,0px));color:#111}
 #rds{display:block;font:700 11px Tahoma,Verdana,sans-serif;color:#0a3fd6;text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px}
 #rdh{margin:0 0 14px;font:700 24px/1.18 'Trebuchet MS',Tahoma,sans-serif}
 #rdi{display:block;width:100%;max-height:300px;object-fit:cover;border:1px solid #7a96d8;border-radius:4px;background:#d9d6c3;margin:0 0 16px}
@@ -217,7 +217,7 @@ body.gaming #oglow{display:none}
 @keyframes oglowr{0%,100%{transform:scale(1.05);opacity:.17}50%{transform:scale(1.05);opacity:.77}}
 
 </style><script data-goatcounter="https://popthefeed.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 </head><body>
 <div id="scroll"><div id="inner">
 <svg id="svg" viewBox="0 0 1179 5112" preserveAspectRatio="xMidYMin meet" xmlns="http://www.w3.org/2000/svg">
@@ -357,16 +357,16 @@ function restorePop(){let a=[];try{a=JSON.parse(localStorage.getItem('ptf_curren
  if(!Array.isArray(a)||a.length>=N){popIdx=[];savePop();return}
  a.forEach(i=>{if(!Number.isInteger(i)||i<0||i>=N||popIdx.includes(i))return;$('p'+i).classList.add('on');if($('q'+i))$('q'+i).classList.add('on');$('h'+i).classList.add('done');popped++;catN[B[i][4]]++;popIdx.push(i)})}
 function makeAch(){let n=getSheets()+1;
- if(lvlOf(n)>=20&&getPres()<RK.length){const pr=getPres()+1;return{promo:true,rank:pr,lvl:1,n:0,commit(){try{localStorage.setItem('ptf_prestige',String(pr));localStorage.setItem('ptf_sheets_cleared','0');localStorage.removeItem('ptf_qzdue')}catch(e){}sheetsMem=0}}}
- return{lvl:lvlOf(n),n,commit(){sheetsMem=n;try{localStorage.setItem('ptf_sheets_cleared',String(n));localStorage.removeItem('ptf_qzdue')}catch(e){}}}}
-function sheetDone(){popIdx=[];savePop();try{localStorage.setItem('ptf_qzdue','1')}catch(e){}pendingAch=makeAch()}
+ if(lvlOf(n)>=20&&getPres()<RK.length){const pr=getPres()+1;return{promo:true,rank:pr,lvl:1,n:0,commit(){try{localStorage.setItem('ptf_prestige',String(pr));localStorage.setItem('ptf_sheets_cleared','0')}catch(e){}sheetsMem=0}}}
+ return{lvl:lvlOf(n),n,commit(){sheetsMem=n;try{localStorage.setItem('ptf_sheets_cleared',String(n))}catch(e){}}}}
+function sheetDone(){popIdx=[];savePop()}
 function showAch(a){gmode=null;renderRank();
  if(a.promo){const r=RK[a.rank-1];$('attl').textContent='PROMOTION!';$('ayes').style.display='none';document.querySelector('#achcard .trophy').innerHTML=rkI(a.rank,92);
   $('ark').style.display='';$('ark').textContent='RANK '+a.rank+' OF '+RK.length;$('avl').textContent=r[1].toUpperCase();$('avl').classList.add('sm');$('aok').textContent='Salute!';
   $('apt').textContent='You beat Level 20, a true Pop Deity! Your levels reset to Level 1, but your rank stays. '+r[2]+(a.rank===RK.length?' You hold the highest rank.':'');
   $('achov').classList.add('show');return}$('attl').textContent='Achievement Unlocked!';$('ayes').style.display='none';document.querySelector('#achcard .trophy').innerHTML='&#127942;';$('ark').style.display='';$('aok').textContent='Keep Popping';$('avl').classList.remove('sm');$('avl').textContent='LEVEL '+a.lvl;$('ark').textContent=RANKS[a.lvl-1];
  const up=LT.indexOf(a.n)>=0;
- $('apt').textContent=a.lvl>=20?(up?'Maximum level reached. You are a legend.':'Another sheet cleared. Still a Pop Deity.'):(up?'Sheet cleared! All 39 bubbles popped. Next rank: '+RANKS[a.lvl]+'.':'Sheet cleared! '+(LT[a.lvl]-a.n)+' more to reach '+RANKS[a.lvl]+'.');
+ $('apt').textContent=a.lvl>=20?(up?'Maximum level reached. You are a legend.':'Another quiz passed. Still a Pop Deity.'):(up?'Quiz passed! Next rank: '+RANKS[a.lvl]+'.':'Quiz passed! '+(LT[a.lvl]-a.n)+' more to reach '+RANKS[a.lvl]+'.');
  $('achov').classList.add('show')}
 /* ===== pop quiz: 3 fill-in-the-blank questions built from stories read in the Reader ===== */
 const QSTOP=new Set('The A An This That These Those It Its In On At For From With By As And But Or If When While After Before During Although However Because Since He She They We You I His Her Their Our Your There Here What Who Which Where Why How Some Many Most More Such Both Each One Two Three New Other Also Still Even Only Just Then Now Not No Yes So To Of Is Was Were Are Be Has Have Had Do Does Did Can Could Will Would Should May Might Mr Mrs Ms Dr St'.split(' '));
@@ -383,10 +383,10 @@ function qzCands(s){const out=[],seen=new Set();
  while((m=nm.exec(s))){let v=m[0];if(m.index===0)continue;const w=v.split(/\s+/);while(w.length&&QSTOP.has(w[0]))w.shift();if(!w.length)continue;v=w.join(' ');
   if(v.length<4||QSTOP.has(v)||seen.has(v)||s.split(v).length!==2)continue;seen.add(v);out.push({v,k:'name'})}
  return out}
-function qzMake(avoid){
+function qzMake(avoid,only){
  const shufq=a=>shuf(a),pool={year:[],num:[],name:[]};
  QL.forEach(a=>a.s.forEach(s=>qzCands(s).forEach(c=>{if(!pool[c.k].includes(c.v))pool[c.k].push(c.v)})));
- const arts=shufq(QL),qs=[],used=new Set(),tries=[];
+ const arts=shufq(only?QL.filter(a=>a.u===only):QL),qs=[],used=new Set(),tries=[];
  arts.forEach(a=>tries.push(shufq(a.s.map(s=>[a,s]))));
  let guard=0,ai=0;
  while(qs.length<3&&guard++<400){
@@ -403,17 +403,13 @@ function qzMake(avoid){
   qs.push({f:a.t,q:s.replace(made.c.v,'_____'),o:opts,a:opts.indexOf(made.c.v),s})}
  return qs.length===3?qs:null}
 let QZ=null;
-let QZbusy=false;
-function quizThen(a){
- if(QZbusy)return;QZbusy=true;
- const qs=qzMake();if(!qs){qzGate();return}
- QZ={a,qs,i:0,ok:0,asked:new Set(qs.map(q=>q.s))};qzShow()}
-/* no readable articles yet: the level-up stays locked until the player reads some in the Reader */
-function qzGate(){$('qzp').innerHTML='';$('qzq0').style.display='none';const s=$('qzs');s.style.display='';s.className='f';
- $('qzi').textContent='\u{1F4D6}';$('qzh').textContent='READ FIRST!';
- $('qzm').textContent='Your Pop Quiz is built from stories you read. Open any story, tap Reader, and read an article. The quiz starts when you come back, and then you level up.';
- $('qzno').style.display='none';$('qzgo').textContent='Got it';$('qzgo').onclick=()=>{clk();$('qzov').classList.remove('show');QZbusy=false};$('qzov').classList.add('show')}
-function qzCheckDue(){try{if(localStorage.getItem('ptf_qzdue')==='1'&&!QZbusy&&!G&&qzMake())quizThen(makeAch())}catch(e){}}
+let QZbusy=false,QD=[];try{QD=JSON.parse(localStorage.getItem('ptf_qzdone')||'[]');if(!Array.isArray(QD))QD=[]}catch(e){QD=[]}
+function qzMarkDone(u){if(!u||QD.includes(u))return;QD.push(u);if(QD.length>500)QD=QD.slice(-500);try{localStorage.setItem('ptf_qzdone',JSON.stringify(QD))}catch(e){}}
+/* quiz for one article the player finished reading; passing it is the only way to level up */
+function artQuiz(st){
+ if(QZbusy||G||!st||QD.includes(st[3]))return;
+ const qs=qzMake(null,st[3])||qzMake(null);if(!qs)return;
+ QZbusy=true;QZ={a:makeAch(),qs,u:st[3],i:0,ok:0,asked:new Set(qs.map(q=>q.s))};qzShow()}
 function qzProg(){const pr=$('qzp');pr.innerHTML='';QZ.qs.forEach((q,k)=>{const b=document.createElement('b');b.className=k<QZ.i?(q.res?'ok':'no'):k===QZ.i?'on':'';pr.appendChild(b)})}
 function qzShow(){const q=QZ.qs[QZ.i];$('qzs').style.display='none';$('qzq0').style.display='';
  $('qzf').textContent='Question '+(QZ.i+1)+' of 3 · from "'+(q.f.length>46?q.f.slice(0,44)+'…':q.f)+'"';$('qzq').textContent=q.q;
@@ -425,8 +421,8 @@ function qzEnd(){qzProg();$('qzq0').style.display='none';const s=$('qzs'),pass=Q
  $('qzi').textContent=pass?'\u{1F393}':'\u{1F4DA}';$('qzh').textContent=pass?'3 / 3 PASSED!':QZ.ok+' / 3';
  $('qzm').textContent=pass?'Quiz passed! Your level-up is unlocked.':'You need all 3 right to level up. Retake with fresh questions, or skip and keep your current level.';
  $('qzgo').textContent=pass?'Claim Level Up':'Retake Quiz';$('qzno').style.display=pass?'none':'block';
- $('qzno').onclick=()=>{clk();$('qzov').classList.remove('show');$('qzno').style.display='none';QZ=null;QZbusy=false;try{localStorage.removeItem('ptf_qzdue')}catch(e){}};
- $('qzgo').onclick=()=>{clk();if(pass){$('qzov').classList.remove('show');const a=QZ.a;QZ=null;QZbusy=false;a.commit();showAch(a)}else{const qs=qzMake(QZ.asked)||QZ.qs.map(q=>({...q,res:undefined}));qs.forEach(q=>QZ.asked.add(q.s));QZ.qs=qs;QZ.i=0;QZ.ok=0;qzShow()}}}
+ $('qzno').onclick=()=>{clk();$('qzov').classList.remove('show');$('qzno').style.display='none';qzMarkDone(QZ.u);QZ=null;QZbusy=false};
+ $('qzgo').onclick=()=>{clk();if(pass){$('qzov').classList.remove('show');const a=QZ.a;qzMarkDone(QZ.u);QZ=null;QZbusy=false;a.commit();showAch(a)}else{const qs=qzMake(QZ.asked,QZ.u)||qzMake(QZ.asked)||QZ.qs.map(q=>({...q,res:undefined}));qs.forEach(q=>QZ.asked.add(q.s));QZ.qs=qs;QZ.i=0;QZ.ok=0;qzShow()}}}
 function askReset(){
  if(G)return false;
  if(popped<1||popped>=N){doReset();return false}
@@ -457,9 +453,9 @@ function showStory(st){cur=st;markRead(st[3]);$('rdo').classList.toggle('has',Ar
  const th=$('thumb'),fs=$('fbsvg');const noimg=()=>{th.style.display='none';fs.style.display='block'};th.style.display='block';fs.style.display='none';th.onerror=noimg;if(cur[5])th.src=cur[5];else noimg();
  setTimeout(()=>$('ov').classList.add('show'),90);
 }
-function closeCard(){closedAt=Date.now();setTimeout(qzCheckDue,1300);if(G&&G.state==='card'){G.state='next';setTimeout(nextRound,200)}$('ov').classList.remove('show');cur=null;const pc=pendingCat;pendingCat=null;if(popped>=N){$('reset').classList.add('ready');$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',3500)}if(pc)celebrate(pc,popped>=N);if(pendingAch){const a=pendingAch;pendingAch=null;setTimeout(()=>quizThen(a),pc?900:250)}}
+function closeCard(){closedAt=Date.now();if(G&&G.state==='card'){G.state='next';setTimeout(nextRound,200)}$('ov').classList.remove('show');cur=null;const pc=pendingCat;pendingCat=null;if(popped>=N){$('reset').classList.add('ready');$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',3500)}if(pc)celebrate(pc,popped>=N);if(pendingAch){const a=pendingAch;pendingAch=null;setTimeout(()=>showAch(a),pc?900:250)}}
 /* Reader view: the story popup grows into a full-screen, scrollable reader (transform + opacity only) */
-let rdOpen=false,rdAt=0,rdTm=0;
+let rdOpen=false,rdAt=0,rdTm=0,rdDone=false,rdSt=null;
 function rdFill(st){
  $('rdn').textContent=st[0];$('rds').textContent=st[0];$('rdh').textContent=st[1];$('rdl').textContent=st[2]&&!/^Tap the button/.test(st[2])?st[2]:'';
  const im=$('rdi');im.style.display='none';im.onerror=()=>{im.style.display='none'};im.onload=()=>{im.style.display='block'};if(st[5]){im.referrerPolicy='no-referrer';im.src=st[5]}else im.removeAttribute('src');
@@ -473,9 +469,9 @@ function rdFill(st){
  $('rdat').textContent='From '+st[0]+'. Text and pictures belong to the publisher.';
  $('rdc').scrollTop=0;rsStop()}
 function openReader(){
- if(rdOpen||!cur)return;try{qzRemember(cur)}catch(e){}rdOpen=true;rdAt=Date.now();clearTimeout(rdTm);rdFill(cur);
+ if(rdOpen||!cur)return;try{qzRemember(cur)}catch(e){}rdOpen=true;rdDone=false;rdUser=false;rdSt=cur;rdAt=Date.now();clearTimeout(rdTm);rdFill(cur);
  const rd=$('rd'),p=$('rdp'),c=$('card').getBoundingClientRect();
- rd.classList.add('on');p.style.setProperty('--tx','0px');p.style.setProperty('--ty','0px');p.style.setProperty('--sc','1');
+ rd.classList.add('on');$('rdc').scrollTop=0;[60,300,700].forEach(t=>setTimeout(()=>{if(rdOpen&&!rdUser){$('rdc').scrollTop=0}},t));setTimeout(rdChk,900);p.style.setProperty('--tx','0px');p.style.setProperty('--ty','0px');p.style.setProperty('--sc','1');
  const r=p.getBoundingClientRect();
  const sc=Math.max(.2,Math.min(1,c.width/r.width));
  p.style.setProperty('--sc',sc.toFixed(3));p.style.setProperty('--tx',((c.left+c.width/2)-(r.left+r.width/2)).toFixed(1)+'px');p.style.setProperty('--ty',((c.top+c.height/2)-(r.top+r.height/2)).toFixed(1)+'px');
@@ -503,8 +499,12 @@ const rsRel=ms=>{clearTimeout(rsTm);rsTm=setTimeout(()=>{if(!rsDown){rsHold=fals
 $('rdc').addEventListener('wheel',()=>{if(rsOn){rsHold=true;rsRel(500)}},{passive:true});
 $('rdc').addEventListener('scroll',()=>{if(rsHold&&!rsDown)rsRel(250)},{passive:true});
 rsUi();
+let rdUser=false;
+function rdChk(){const c=$('rdc');if(!rdOpen)return;if(c.scrollHeight-c.clientHeight<40||c.scrollTop+c.clientHeight>=c.scrollHeight*.92-8)rdDone=true}
+$('rdc').addEventListener('scroll',rdChk,{passive:true});
+['touchstart','wheel','pointerdown'].forEach(ev=>$('rdc').addEventListener(ev,()=>{rdUser=true},{passive:true}));
 function closeReader(){rsStop();
- if(!rdOpen)return;rdOpen=false;$('rd').classList.remove('open');
+ if(!rdOpen)return;rdOpen=false;rdUser=false;{const st=rdSt,dn=rdDone;if(dn&&st&&Array.isArray(st[7])&&st[7].length)setTimeout(()=>artQuiz(st),650)}$('rd').classList.remove('open');
  rdTm=setTimeout(()=>$('rd').classList.remove('on'),440)}
 $('rdx').addEventListener('click',()=>{clk();closeReader()});
 $('rdb').addEventListener('click',()=>{if(Date.now()-rdAt>500){clk();closeReader()}});
@@ -814,5 +814,4 @@ fetch('music.json?'+Date.now()).then(r=>r.ok?r.json():null).then(d=>{if(d&&d.son
   $('a2b').dataset.s=1;$('a2b').textContent='Got it';
   $('a2t').innerHTML='Tap <svg width="12" height="14" viewBox="0 0 12 14" style="vertical-align:-2px"><path d="M6 1v8M3 4l3-3 3 3M2 7v5h8V7" fill="none" stroke="#ffe27a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Share, then &ldquo;Add to Home Screen&rdquo;'})})();
 restorePop();renderRank();setCnt();setNs();loadStories();
-try{if(localStorage.getItem('ptf_qzdue')==='1'&&popped===0)setTimeout(()=>quizThen(makeAch()),1200)}catch(e){}
 </script></body></html>
