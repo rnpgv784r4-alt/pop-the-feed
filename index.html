@@ -404,18 +404,24 @@ function openReader(){
 const RSP=[14,24,38,56,84,124];let rsi=2,rsOn=false,rsRaf=0,rsPos=0,rsLast=0;
 try{const v=parseInt(localStorage.getItem('ptf_rdspeed'));if(v>=0&&v<RSP.length)rsi=v}catch(e){}
 function rsUi(){$('rdsn').textContent=rsi+1;$('rdap').innerHTML=rsOn?'&#10073;&#10073; Pause':'&#9654; Auto'}
-function rsStop(){rsOn=false;cancelAnimationFrame(rsRaf);rsUi()}
+function rsStop(){rsOn=false;rsHold=false;cancelAnimationFrame(rsRaf);rsUi()}
 function rsTick(t){
  if(!rsOn)return;rsRaf=requestAnimationFrame(rsTick);
- const c=$('rdc'),dt=Math.min(.05,(t-rsLast)/1000);rsLast=t;
+ const c=$('rdc');if(rsHold){rsLast=t;return}const dt=Math.min(.05,(t-rsLast)/1000);rsLast=t;
  rsPos+=RSP[rsi]*dt;const mx=c.scrollHeight-c.clientHeight;
  if(rsPos>=mx){c.scrollTop=mx;rsStop();return}
  c.scrollTop=rsPos}
-function rsStart(){const c=$('rdc');if(c.scrollHeight-c.clientHeight<20)return;rsPos=c.scrollTop;rsLast=performance.now();rsOn=true;rsUi();rsRaf=requestAnimationFrame(rsTick)}
+function rsStart(){const c=$('rdc');if(c.scrollHeight-c.clientHeight<20)return;rsHold=false;rsPos=c.scrollTop;rsLast=performance.now();rsOn=true;rsUi();rsRaf=requestAnimationFrame(rsTick)}
 $('rdap').addEventListener('click',()=>{rsOn?rsStop():rsStart()});
 const rsSet=d=>{rsi=Math.max(0,Math.min(RSP.length-1,rsi+d));try{localStorage.setItem('ptf_rdspeed',String(rsi))}catch(e){}rsUi()};
 $('rdam').addEventListener('click',()=>rsSet(-1));$('rdaa').addEventListener('click',()=>rsSet(1));
-['touchstart','wheel','pointerdown'].forEach(ev=>$('rdc').addEventListener(ev,()=>{if(rsOn)rsStop()},{passive:true}));
+/* touching or scrolling only holds auto-scroll; it resumes by itself when the reader is let go and has settled. Only the Pause button stops it. */
+let rsHold=false,rsDown=false,rsTm=0;
+const rsRel=ms=>{clearTimeout(rsTm);rsTm=setTimeout(()=>{if(!rsDown){rsHold=false;rsPos=$('rdc').scrollTop;rsLast=performance.now()}},ms)};
+['touchstart','pointerdown'].forEach(ev=>$('rdc').addEventListener(ev,()=>{rsDown=true;if(rsOn){rsHold=true;clearTimeout(rsTm)}},{passive:true}));
+['touchend','touchcancel','pointerup','pointercancel'].forEach(ev=>$('rdc').addEventListener(ev,()=>{rsDown=false;if(rsHold)rsRel(350)},{passive:true}));
+$('rdc').addEventListener('wheel',()=>{if(rsOn){rsHold=true;rsRel(500)}},{passive:true});
+$('rdc').addEventListener('scroll',()=>{if(rsHold&&!rsDown)rsRel(250)},{passive:true});
 rsUi();
 function closeReader(){rsStop();
  if(!rdOpen)return;rdOpen=false;$('rd').classList.remove('open');
