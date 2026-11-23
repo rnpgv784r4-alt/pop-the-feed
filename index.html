@@ -93,6 +93,20 @@ html,body{height:100%;margin:0;background:#35024a;overflow:hidden;overscroll-beh
 #ov #card,#achov #achcard{position:absolute;left:50%;top:43%;width:min(88vw,400px)!important;max-width:88vw;margin:0;border-bottom:3px solid #0a3fd6;border-radius:12px;transform:translate(-50%,70vh)}
 #ov.show #card,#achov.show #achcard{transform:translate(-50%,0)}
 #achcard #abd{padding-bottom:14px}
+#qzov{position:fixed;inset:0;background:rgba(20,5,35,.55);display:none;align-items:center;justify-content:center;z-index:12;touch-action:manipulation}
+#qzov.show{display:flex}
+#qzc{width:min(90vw,420px);box-sizing:border-box;background:#ece9d8;border:3px solid #0a3fd6;border-top:0;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,.6);font:13px Tahoma,Verdana,sans-serif;color:#000;max-height:92vh;overflow:auto}
+#qzt{display:flex;align-items:center;gap:6px;height:30px;margin:0 -3px;padding:0 8px;border-radius:9px 9px 0 0;background:linear-gradient(#3c8cf5,#0a5be0 12%,#0553d8 85%,#0a3fd6);color:#fff;font:700 15px 'Trebuchet MS',Tahoma,sans-serif;text-shadow:1px 1px #0a1f78}
+#qzt i{display:grid;grid-template:1fr 1fr/1fr 1fr;gap:1px;width:16px;height:16px;transform:skew(-4deg)}#qzt u{display:block}#qzt u:nth-child(1){background:#f35325}#qzt u:nth-child(2){background:#81bc06}#qzt u:nth-child(3){background:#05a6f0}#qzt u:nth-child(4){background:#ffba08}
+#qzt span{flex:1}#qzb{padding:14px 16px calc(14px + env(safe-area-inset-bottom,0px))}
+#qzp{display:flex;gap:6px;justify-content:center;margin-bottom:10px}#qzp b{width:34px;height:8px;border-radius:4px;background:#c9c4b0;border:1px solid #8c876f}#qzp b.on{background:#0a5be0;border-color:#0a3fd6}#qzp b.ok{background:#3aa635;border-color:#287a24}#qzp b.no{background:#d9472b;border-color:#a82d12}
+#qzf{font:700 11px Tahoma,sans-serif;color:#0a3fd6;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+#qzq{font:600 16px/1.4 Georgia,'Times New Roman',serif;margin:0 0 12px}
+#qzo button,#qzgo{display:block;width:100%;margin:0 0 8px;min-height:44px;padding:8px 12px;border:1px solid #003c74;border-radius:3px;background:linear-gradient(#fff,#ecebe5 85%,#d6d0c5);font:700 14px Tahoma,Verdana,sans-serif;text-align:left;cursor:pointer;box-shadow:inset 0 0 0 1px #8ab0f0;color:#000}
+#qzgo{text-align:center;margin:14px auto 0;min-width:min(260px,80%);width:auto}
+#qzo button.ok{background:#bdf0b8;border-color:#287a24}#qzo button.no{background:#f6b8ab;border-color:#a82d12}
+#qzo.lock button{pointer-events:none}
+#qzs{text-align:center}#qzs .big{font:800 30px/1.1 'Trebuchet MS',Tahoma,sans-serif;color:#0a3fd6;margin:6px 0}#qzs.f .big{color:#c8401f}#qzs p{margin:8px 0;font-size:13px;line-height:1.45}
 #hsrow{display:none;gap:8px;justify-content:center;align-items:center;margin:0 0 10px}#hsi{width:76px;font:800 22px/1 ui-monospace,Menlo,monospace;letter-spacing:5px;text-align:center;text-transform:uppercase;padding:7px 4px 7px 9px;border:2px solid #0a3fd6;border-radius:6px;background:#fff;color:#0a3fd6}#hsv{font:700 14px system-ui;padding:9px 12px;border:2px solid #0a3fd6;border-radius:6px;background:#ffe9a8;color:#2a1a00}
 #tb,#atb{display:flex;align-items:center;gap:6px;height:30px;margin:0 -3px;padding:0 5px;border-radius:9px 9px 0 0;background:linear-gradient(#3c8cf5,#0a5be0 12%,#0553d8 85%,#0a3fd6)}
 #logo,#alogo{display:grid;grid-template:1fr 1fr/1fr 1fr;gap:1px;width:16px;height:16px;transform:skew(-4deg)}
@@ -219,7 +233,7 @@ body.gaming #oglow{display:none}
 <div id="toast">All popped! Tap Refresh for more.</div>
 <div id="stat"><span id="stk">Status:</span><span id="stl">Lvl 1 - Bubble Wrap Beginner</span><div id="sdots"></div></div>
 <div id="nes"><div id="nesc"><div class="pn"></div><div class="dp"><svg viewBox="-1 -1 32 32"><polygon points="10,0 20,0 20,10 30,10 30,20 20,20 20,30 10,30 10,20 0,20 0,10 10,10" fill="#3a3834" stroke="#e8e6e0" stroke-width="1.3" stroke-linejoin="round"/><circle cx="15" cy="15" r="4.2" fill="#2c2a27"/></svg></div><div class="bar b1" id="npl"></div><div class="bar b2" id="nbest"></div><div class="lg" id="nlg"></div><div class="ab"><button id="nb"><span></span>B</button><button id="na"><span></span>A</button></div></div></div>
-<div id="achov"><div id="achcard"><div id="atb"><i id="alogo"><u></u><u></u><u></u><u></u></i><span id="attl">Achievement Unlocked!</span><b id="ax">&#10005;</b></div><div id="abd"><div class="trophy">&#127942;</div><div class="lvbig" id="avl">LEVEL 2</div><div class="rknm" id="ark">Thumb Warmup</div><p id="apt"></p><div id="hsrow"><input id="hsi" maxlength="3" placeholder="AAA" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false"><button id="hsv">Save top score</button></div><button id="aok">Keep Popping</button><button id="ayes" style="display:none;margin-top:10px">New Sheet</button></div></div></div>
+<div id="qzov"><div id="qzc"><div id="qzt"><i><u></u><u></u><u></u><u></u></i><span>Pop Quiz!</span></div><div id="qzb"><div id="qzp"></div><div id="qzq0"><div id="qzf"></div><p id="qzq"></p><div id="qzo"></div></div><div id="qzs" style="display:none"><div class="trophy" id="qzi"></div><div class="big" id="qzh"></div><p id="qzm"></p><button id="qzgo"></button></div></div></div></div><div id="achov"><div id="achcard"><div id="atb"><i id="alogo"><u></u><u></u><u></u><u></u></i><span id="attl">Achievement Unlocked!</span><b id="ax">&#10005;</b></div><div id="abd"><div class="trophy">&#127942;</div><div class="lvbig" id="avl">LEVEL 2</div><div class="rknm" id="ark">Thumb Warmup</div><p id="apt"></p><div id="hsrow"><input id="hsi" maxlength="3" placeholder="AAA" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false"><button id="hsv">Save top score</button></div><button id="aok">Keep Popping</button><button id="ayes" style="display:none;margin-top:10px">New Sheet</button></div></div></div>
 <div id="ov"><div id="card"><div id="tb"><i id="logo"><u></u><u></u><u></u><u></u></i><span id="ttl">Pop The Feed</span><b id="x">&#10005;</b></div><div id="bd"><div id="row"><svg id="fbsvg" viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="12" y="1" width="1" height="1" fill="#ffffff"/><rect x="10" y="3" width="1" height="1" fill="#c9a2ff"/><rect x="13" y="4" width="1" height="1" fill="#c9a2ff"/><rect x="3" y="5" width="4" height="1" fill="#3a1670"/><rect x="2" y="6" width="1" height="1" fill="#3a1670"/><rect x="3" y="6" width="2" height="1" fill="#c9a2ff"/><rect x="5" y="6" width="3" height="1" fill="#9a5bec"/><rect x="1" y="7" width="1" height="1" fill="#3a1670"/><rect x="2" y="7" width="1" height="1" fill="#c9a2ff"/><rect x="3" y="7" width="2" height="1" fill="#ffffff"/><rect x="5" y="7" width="4" height="1" fill="#9a5bec"/><rect x="0" y="8" width="1" height="1" fill="#3a1670"/><rect x="1" y="8" width="1" height="1" fill="#c9a2ff"/><rect x="2" y="8" width="2" height="1" fill="#ffffff"/><rect x="4" y="8" width="6" height="1" fill="#9a5bec"/><rect x="10" y="8" width="1" height="1" fill="#3a1670"/><rect x="0" y="9" width="1" height="1" fill="#3a1670"/><rect x="1" y="9" width="1" height="1" fill="#c9a2ff"/><rect x="2" y="9" width="1" height="1" fill="#ffffff"/><rect x="3" y="9" width="7" height="1" fill="#9a5bec"/><rect x="10" y="9" width="1" height="1" fill="#3a1670"/><rect x="0" y="10" width="1" height="1" fill="#3a1670"/><rect x="1" y="10" width="8" height="1" fill="#9a5bec"/><rect x="9" y="10" width="1" height="1" fill="#7a3dc8"/><rect x="10" y="10" width="1" height="1" fill="#3a1670"/><rect x="0" y="11" width="1" height="1" fill="#3a1670"/><rect x="1" y="11" width="8" height="1" fill="#9a5bec"/><rect x="9" y="11" width="1" height="1" fill="#7a3dc8"/><rect x="10" y="11" width="1" height="1" fill="#3a1670"/><rect x="0" y="12" width="1" height="1" fill="#3a1670"/><rect x="1" y="12" width="7" height="1" fill="#9a5bec"/><rect x="8" y="12" width="2" height="1" fill="#7a3dc8"/><rect x="10" y="12" width="1" height="1" fill="#3a1670"/><rect x="1" y="13" width="1" height="1" fill="#3a1670"/><rect x="2" y="13" width="4" height="1" fill="#9a5bec"/><rect x="6" y="13" width="3" height="1" fill="#7a3dc8"/><rect x="9" y="13" width="1" height="1" fill="#3a1670"/><rect x="2" y="14" width="1" height="1" fill="#3a1670"/><rect x="3" y="14" width="5" height="1" fill="#7a3dc8"/><rect x="8" y="14" width="1" height="1" fill="#3a1670"/><rect x="3" y="15" width="5" height="1" fill="#3a1670"/></svg><img id="thumb" alt="" referrerpolicy="no-referrer" style="display:none"><div id="msg"><span id="src"></span><b id="hl"></b></div></div><p id="sm"></p><div id="btns"><button id="rdo">Reader</button><a id="more" href="#" target="_blank" rel="noopener noreferrer">Read More</a></div></div></div></div>
 <script>
 const B=[[128, 9, 215, 198, "Art"], [606, 9, 215, 198, "Entertainment"], [1084, 9, 215, 198, "Oddities"], [128, 448, 215, 198, "Oddities"], [606, 448, 215, 198, "Science"], [1084, 448, 215, 198, "History"], [128, 881, 215, 198, "History"], [606, 881, 215, 198, "Art"], [1084, 881, 215, 198, "Entertainment"], [128, 1313, 215, 198, "Entertainment"], [606, 1313, 215, 198, "Oddities"], [1084, 1313, 215, 198, "Science"], [128, 1727, 215, 198, "Science"], [606, 1727, 215, 198, "History"], [1084, 1727, 215, 198, "Art"], [128, 2143, 215, 198, "Art"], [606, 2143, 215, 198, "Entertainment"], [1084, 2143, 215, 198, "Oddities"], [128, 2586, 215, 198, "Oddities"], [606, 2586, 215, 198, "Science"], [1084, 2586, 215, 198, "History"], [128, 3020, 215, 198, "History"], [606, 3020, 215, 198, "Art"], [1084, 3020, 215, 198, "Entertainment"], [128, 3452, 215, 198, "Entertainment"], [606, 3452, 215, 198, "Oddities"], [1084, 3452, 215, 198, "Science"], [128, 3866, 215, 198, "Science"], [606, 3866, 215, 198, "History"], [1084, 3866, 215, 198, "Art"], [128, 4280, 215, 198, "Art"], [606, 4280, 215, 198, "Entertainment"], [1084, 4280, 215, 198, "Oddities"], [128, 4725, 215, 198, "Oddities"], [606, 4725, 215, 198, "Science"], [1084, 4725, 215, 198, "History"], [128, 5155, 215, 198, "History"], [606, 5155, 215, 198, "Art"], [1084, 5155, 215, 198, "Entertainment"]];
@@ -340,9 +354,10 @@ function savePop(){try{localStorage.setItem('ptf_current_popped',JSON.stringify(
 function restorePop(){let a=[];try{a=JSON.parse(localStorage.getItem('ptf_current_popped')||'[]')}catch(e){}
  if(!Array.isArray(a)||a.length>=N){popIdx=[];savePop();return}
  a.forEach(i=>{if(!Number.isInteger(i)||i<0||i>=N||popIdx.includes(i))return;$('p'+i).classList.add('on');if($('q'+i))$('q'+i).classList.add('on');$('h'+i).classList.add('done');popped++;catN[B[i][4]]++;popIdx.push(i)})}
-function sheetDone(){let n=getSheets()+1;popIdx=[];savePop();
- if(lvlOf(n)>=20&&getPres()<RK.length){const pr=getPres()+1;try{localStorage.setItem('ptf_prestige',String(pr))}catch(e){}n=0;sheetsMem=0;try{localStorage.setItem('ptf_sheets_cleared','0')}catch(e){}pendingAch={promo:true,rank:pr,lvl:1,n:0};return}
- sheetsMem=n;try{localStorage.setItem('ptf_sheets_cleared',String(n))}catch(e){}pendingAch={lvl:lvlOf(n),n}}
+function makeAch(){let n=getSheets()+1;
+ if(lvlOf(n)>=20&&getPres()<RK.length){const pr=getPres()+1;return{promo:true,rank:pr,lvl:1,n:0,commit(){try{localStorage.setItem('ptf_prestige',String(pr));localStorage.setItem('ptf_sheets_cleared','0');localStorage.removeItem('ptf_qzdue')}catch(e){}sheetsMem=0}}}
+ return{lvl:lvlOf(n),n,commit(){sheetsMem=n;try{localStorage.setItem('ptf_sheets_cleared',String(n));localStorage.removeItem('ptf_qzdue')}catch(e){}}}}
+function sheetDone(){popIdx=[];savePop();try{localStorage.setItem('ptf_qzdue','1')}catch(e){}pendingAch=makeAch()}
 function showAch(a){gmode=null;renderRank();
  if(a.promo){const r=RK[a.rank-1];$('attl').textContent='PROMOTION!';$('ayes').style.display='none';document.querySelector('#achcard .trophy').innerHTML=rkI(a.rank,92);
   $('ark').style.display='';$('ark').textContent='RANK '+a.rank+' OF '+RK.length;$('avl').textContent=r[1].toUpperCase();$('avl').classList.add('sm');$('aok').textContent='Salute!';
@@ -351,6 +366,64 @@ function showAch(a){gmode=null;renderRank();
  const up=LT.indexOf(a.n)>=0;
  $('apt').textContent=a.lvl>=20?(up?'Maximum level reached. You are a legend.':'Another sheet cleared. Still a Pop Deity.'):(up?'Sheet cleared! All 39 bubbles popped. Next rank: '+RANKS[a.lvl]+'.':'Sheet cleared! '+(LT[a.lvl]-a.n)+' more to reach '+RANKS[a.lvl]+'.');
  $('achov').classList.add('show')}
+/* ===== pop quiz: 3 fill-in-the-blank questions built from stories read in the Reader ===== */
+const QSTOP=new Set('The A An This That These Those It Its In On At For From With By As And But Or If When While After Before During Although However Because Since He She They We You I His Her Their Our Your There Here What Who Which Where Why How Some Many Most More Such Both Each One Two Three New Other Also Still Even Only Just Then Now Not No Yes So To Of Is Was Were Are Be Has Have Had Do Does Did Can Could Will Would Should May Might Mr Mrs Ms Dr St'.split(' '));
+let QL=[];try{QL=JSON.parse(localStorage.getItem('ptf_qz')||'[]');if(!Array.isArray(QL))QL=[]}catch(e){QL=[]}
+function qzSave(){try{localStorage.setItem('ptf_qz',JSON.stringify(QL))}catch(e){QL=QL.slice(-4);try{localStorage.setItem('ptf_qz',JSON.stringify(QL))}catch(x){}}}
+function qzRemember(st){
+ const bl=Array.isArray(st[7])?st[7]:[],ss=[];
+ bl.forEach(b=>{if(b[0]!=='p')return;String(b[1]).replace(/\s+/g,' ').split(/(?<=[.!?])\s+(?=[A-Z"“‘'])/).forEach(s=>{s=s.trim();if(s.length>=45&&s.length<=230&&ss.length<30)ss.push(s)})});
+ if(ss.length<3)return;QL=QL.filter(a=>a.u!==st[3]);QL.push({u:st[3],t:st[1],s:ss});if(QL.length>10)QL=QL.slice(-10);qzSave()}
+function qzCands(s){const out=[],seen=new Set();
+ const num=/\b(1[0-9]{3}|20[0-9]{2}|\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?)\b/g;let m;
+ while((m=num.exec(s))){const v=m[1];if(seen.has(v)||s.split(v).length!==2)continue;seen.add(v);out.push({v,k:/^(1[0-9]{3}|20[0-9]{2})$/.test(v)?'year':'num'})}
+ const nm=/\b[A-Z][\p{L}'’-]{2,}(?:\s+(?:(?:of|de|del|la|van|von|the|and)\s+)?[A-Z][\p{L}'’-]+)*/gu;
+ while((m=nm.exec(s))){let v=m[0];if(m.index===0)continue;const w=v.split(/\s+/);while(w.length&&QSTOP.has(w[0]))w.shift();if(!w.length)continue;v=w.join(' ');
+  if(v.length<4||QSTOP.has(v)||seen.has(v)||s.split(v).length!==2)continue;seen.add(v);out.push({v,k:'name'})}
+ return out}
+function qzMake(avoid){
+ const shufq=a=>shuf(a),pool={year:[],num:[],name:[]};
+ QL.forEach(a=>a.s.forEach(s=>qzCands(s).forEach(c=>{if(!pool[c.k].includes(c.v))pool[c.k].push(c.v)})));
+ const arts=shufq(QL),qs=[],used=new Set(),tries=[];
+ arts.forEach(a=>tries.push(shufq(a.s.map(s=>[a,s]))));
+ let guard=0,ai=0;
+ while(qs.length<3&&guard++<400){
+  const list=tries[ai%tries.length];ai++;if(!list||!list.length){if(tries.every(l=>!l.length))break;continue}
+  const [a,s]=list.pop();if(used.has(s)||(avoid&&avoid.has(s)&&guard<150))continue;
+  const cs=shufq(qzCands(s));let made=null;
+  for(const c of cs){let ds=[];
+   if(c.k==='year'){const y=+c.v;[-3,-7,5,12,-12,9,-20,20].forEach(d=>{if(ds.length<3&&y+d>0&&y+d<=2100&&!ds.includes(String(y+d)))ds.push(String(y+d))});}
+   else if(c.k==='num'){const f=parseFloat(c.v.replace(/,/g,'')),dec=(c.v.split('.')[1]||'').length,cm=c.v.indexOf(',')>=0;[.5,2,1.3,.75,3,1.6].forEach(r=>{if(ds.length>=3)return;let x=f*r;x=dec?x.toFixed(dec):String(Math.round(x));if(cm)x=Number(x).toLocaleString('en-US');if(x!==c.v&&!ds.includes(x)&&parseFloat(x)>0)ds.push(x)})}
+   else{const other=pool.name.filter(v=>v!==c.v&&!c.v.includes(v)&&!v.includes(c.v)&&!s.includes(v));ds=shufq(other).slice(0,3)}
+   if(ds.length>=3){made={c,ds:ds.slice(0,3)};break}}
+  if(!made)continue;used.add(s);
+  const opts=shufq([made.c.v].concat(made.ds));
+  qs.push({f:a.t,q:s.replace(made.c.v,'_____'),o:opts,a:opts.indexOf(made.c.v),s})}
+ return qs.length===3?qs:null}
+let QZ=null;
+let QZbusy=false;
+function quizThen(a){
+ if(QZbusy)return;QZbusy=true;
+ const qs=qzMake();if(!qs){qzGate();return}
+ QZ={a,qs,i:0,ok:0,asked:new Set(qs.map(q=>q.s))};qzShow()}
+/* no readable articles yet: the level-up stays locked until the player reads some in the Reader */
+function qzGate(){$('qzp').innerHTML='';$('qzq0').style.display='none';const s=$('qzs');s.style.display='';s.className='f';
+ $('qzi').textContent='\u{1F4D6}';$('qzh').textContent='READ FIRST!';
+ $('qzm').textContent='Your Pop Quiz is built from stories you read. Open any story, tap Reader, and read an article. The quiz starts when you come back, and then you level up.';
+ $('qzgo').textContent='Got it';$('qzgo').onclick=()=>{clk();$('qzov').classList.remove('show');QZbusy=false};$('qzov').classList.add('show')}
+function qzCheckDue(){try{if(localStorage.getItem('ptf_qzdue')==='1'&&!QZbusy&&!G&&qzMake())quizThen(makeAch())}catch(e){}}
+function qzProg(){const pr=$('qzp');pr.innerHTML='';QZ.qs.forEach((q,k)=>{const b=document.createElement('b');b.className=k<QZ.i?(q.res?'ok':'no'):k===QZ.i?'on':'';pr.appendChild(b)})}
+function qzShow(){const q=QZ.qs[QZ.i];$('qzs').style.display='none';$('qzq0').style.display='';
+ $('qzf').textContent='Question '+(QZ.i+1)+' of 3 · from "'+(q.f.length>46?q.f.slice(0,44)+'…':q.f)+'"';$('qzq').textContent=q.q;
+ const o=$('qzo');o.className='';o.innerHTML='';q.o.forEach((t,k)=>{const b=document.createElement('button');b.textContent=t;b.addEventListener('click',()=>qzAns(k,b));o.appendChild(b)});
+ qzProg();$('qzov').classList.add('show')}
+function qzAns(k,btn){const q=QZ.qs[QZ.i],o=$('qzo');if(o.classList.contains('lock'))return;o.classList.add('lock');q.res=k===q.a;if(q.res){QZ.ok++;btn.classList.add('ok');snd()}else{btn.classList.add('no');o.children[q.a].classList.add('ok');clk()}
+ setTimeout(()=>{QZ.i++;if(QZ.i<3)qzShow();else qzEnd()},q.res?650:1500)}
+function qzEnd(){qzProg();$('qzq0').style.display='none';const s=$('qzs'),pass=QZ.ok===3;s.style.display='';s.className=pass?'':'f';
+ $('qzi').textContent=pass?'\u{1F393}':'\u{1F4DA}';$('qzh').textContent=pass?'3 / 3 PASSED!':QZ.ok+' / 3';
+ $('qzm').textContent=pass?'Quiz passed! Your level-up is unlocked.':'You need all 3 right to level up. Try a fresh set of questions!';
+ $('qzgo').textContent=pass?'Claim Level Up':'Retake Quiz';
+ $('qzgo').onclick=()=>{clk();if(pass){$('qzov').classList.remove('show');const a=QZ.a;QZ=null;QZbusy=false;a.commit();showAch(a)}else{const qs=qzMake(QZ.asked)||QZ.qs.map(q=>({...q,res:undefined}));qs.forEach(q=>QZ.asked.add(q.s));QZ.qs=qs;QZ.i=0;QZ.ok=0;qzShow()}}}
 function askReset(){
  if(G)return false;
  if(popped<1||popped>=N){doReset();return false}
@@ -381,7 +454,7 @@ function showStory(st){cur=st;markRead(st[3]);$('rdo').classList.toggle('has',Ar
  const th=$('thumb'),fs=$('fbsvg');const noimg=()=>{th.style.display='none';fs.style.display='block'};th.style.display='block';fs.style.display='none';th.onerror=noimg;if(cur[5])th.src=cur[5];else noimg();
  setTimeout(()=>$('ov').classList.add('show'),90);
 }
-function closeCard(){closedAt=Date.now();if(G&&G.state==='card'){G.state='next';setTimeout(nextRound,200)}$('ov').classList.remove('show');cur=null;const pc=pendingCat;pendingCat=null;if(popped>=N){$('reset').classList.add('ready');$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',3500)}if(pc)celebrate(pc,popped>=N);if(pendingAch){const a=pendingAch;pendingAch=null;setTimeout(()=>showAch(a),pc?900:250)}}
+function closeCard(){closedAt=Date.now();setTimeout(qzCheckDue,1300);if(G&&G.state==='card'){G.state='next';setTimeout(nextRound,200)}$('ov').classList.remove('show');cur=null;const pc=pendingCat;pendingCat=null;if(popped>=N){$('reset').classList.add('ready');$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',3500)}if(pc)celebrate(pc,popped>=N);if(pendingAch){const a=pendingAch;pendingAch=null;setTimeout(()=>quizThen(a),pc?900:250)}}
 /* Reader view: the story popup grows into a full-screen, scrollable reader (transform + opacity only) */
 let rdOpen=false,rdAt=0,rdTm=0;
 function rdFill(st){
@@ -397,7 +470,7 @@ function rdFill(st){
  $('rdat').textContent='From '+st[0]+'. Text and pictures belong to the publisher.';
  $('rdc').scrollTop=0;rsStop()}
 function openReader(){
- if(rdOpen||!cur)return;rdOpen=true;rdAt=Date.now();clearTimeout(rdTm);rdFill(cur);
+ if(rdOpen||!cur)return;try{qzRemember(cur)}catch(e){}rdOpen=true;rdAt=Date.now();clearTimeout(rdTm);rdFill(cur);
  const rd=$('rd'),p=$('rdp'),c=$('card').getBoundingClientRect();
  rd.classList.add('on');p.style.setProperty('--tx','0px');p.style.setProperty('--ty','0px');p.style.setProperty('--sc','1');
  const r=p.getBoundingClientRect();
@@ -738,4 +811,5 @@ fetch('music.json?'+Date.now()).then(r=>r.ok?r.json():null).then(d=>{if(d&&d.son
   $('a2b').dataset.s=1;$('a2b').textContent='Got it';
   $('a2t').innerHTML='Tap <svg width="12" height="14" viewBox="0 0 12 14" style="vertical-align:-2px"><path d="M6 1v8M3 4l3-3 3 3M2 7v5h8V7" fill="none" stroke="#ffe27a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Share, then &ldquo;Add to Home Screen&rdquo;'})})();
 restorePop();renderRank();setCnt();setNs();loadStories();
+try{if(localStorage.getItem('ptf_qzdue')==='1'&&popped===0)setTimeout(()=>quizThen(makeAch()),1200)}catch(e){}
 </script></body></html>
