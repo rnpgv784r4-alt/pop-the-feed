@@ -343,8 +343,8 @@ SB.forEach((b,i)=>{const rx=b[2]-8,ry=b[3]-8,inp=document.createElement('input')
 /* ?dbg=1 shows an on-screen log of what each tap does (for diagnosing iOS) */
 if(/[?&]dbg=1/.test(location.search)){const box=document.createElement('div');box.style.cssText='position:fixed;left:0;right:0;bottom:0;max-height:34vh;overflow:hidden;z-index:99999;background:rgba(0,0,0,.82);color:#7CFC9A;font:11px/1.25 ui-monospace,monospace;padding:4px 6px;pointer-events:none;white-space:pre-wrap';document.body.appendChild(box);const lines=[];
  const L=m=>{lines.push(((Date.now()%100000)+'').padStart(5,'0')+' '+m);if(lines.length>14)lines.shift();box.textContent=lines.join('\n')};
- window.__L=L;L('debug on; cur='+(!!cur)+' popped='+popped);
- ['pointerdown','pointerup','pointercancel','touchstart','touchend','click','change'].forEach(t=>document.addEventListener(t,e=>{const x=e.target&&e.target.closest&&e.target.closest('#hsws input');if(!x)return;const i=sw.indexOf(x);L(t+' #'+i+' done='+x.classList.contains('done')+' cur='+(!!cur)+(t==='pointerdown'||t==='pointerup'?' '+Math.round(e.clientX)+','+Math.round(e.clientY):''))},true));
+ window.__L=L;L('debug on; build 28; cur='+(!!cur)+' popped='+popped);
+ ['pointerdown','pointerup','pointercancel','touchstart','touchend','click','change'].forEach(t=>document.addEventListener(t,e=>{const x=e.target&&e.target.closest&&e.target.closest('#hsws input,#osw,.gb');if(!x)return;const i=x.id==='osw'?'O':(x.classList.contains('gb')?'G'+(x.dataset.l||x.dataset.e)+(e.target.tagName==='INPUT'?'i':''):sw.indexOf(x));L(t+' #'+i+' done='+x.classList.contains('done')+' cur='+(!!cur)+(t==='pointerdown'||t==='pointerup'?' '+Math.round(e.clientX)+','+Math.round(e.clientY):''))},true));
  const _p=pop;window.pop=pop=function(i){L('POP('+i+') cur='+(!!cur));try{return _p(i)}catch(err){L('POP ERR '+err.message);throw err}};
  addEventListener('error',e=>L('ERR '+e.message))}
 const sync=()=>sw.forEach((x,i)=>x.classList.toggle('done',$('h'+i).classList.contains('done')));
@@ -722,7 +722,7 @@ function gameOver(win){
  window.zoomLock=function(){};
  const g=e=>{if(document.body.classList.contains('gaming'))e.preventDefault()};
  ['gesturestart','gesturechange','gestureend'].forEach(t=>document.addEventListener(t,g,{passive:false}));
- document.addEventListener('touchend',e=>{if(!document.body.classList.contains('gaming'))return;const n=Date.now();if(n-lt<400)e.preventDefault();lt=n},{passive:false});
+ document.addEventListener('touchend',e=>{if(!document.body.classList.contains('gaming'))return;if(e.target.closest&&e.target.closest('.gb,#osw'))return;const n=Date.now();if(n-lt<400)e.preventDefault();lt=n},{passive:false});
  document.addEventListener('touchmove',e=>{if(document.body.classList.contains('gaming')&&e.touches.length>1)e.preventDefault()},{passive:false});
  document.addEventListener('dblclick',g,{passive:false})})();
 function startGame(){
