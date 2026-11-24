@@ -717,7 +717,7 @@ function startRound(r){
  const c=G.order[r-1];const g=GR[r-1];G.r=r;G.cat=c;G.dir=g.vy<0?1:-1;G.sp=g.sp*(GD/393);G.time=G.tmax=g.t;G.mode=(g.vx||WIDE||IPAD)?'l':'v';G.tvx=g.vx*G.sp;G.tvy=g.vy*G.sp;G.vx=0;G.vy=0;G.v=0;if(G.lx==null){G.lx=0;G.ly=0}
   gart.style.display=gbs.style.display=G.mode==='v'?'':'none';glt.style.display=gfl.style.display=G.mode==='l'?'block':'none';GL.forEach(s=>{s.idx=-1});G.hits=0;G.popped=new Set();G.state='intro';G.itm=1.5;
  const X=LX[r]||{};G.cats=[c];if(X.two){let c2;do{c2=CL[Math.floor(Math.random()*CL.length)]}while(c2===c);G.cats.push(c2)}
- G.q=(X.two||0)*IPM;G.goal=X.two?2*G.q:5*IPM;G.cnt={};G.cats.forEach(k=>G.cnt[k]=0);G.gold=!!X.gold;G.hide=!!X.hide;G.hidden=false;G.lt=0;G.flipped=false;G.fw=false;G.flipAt=X.flip?g.t*(.4+.2*Math.random()):null;G.streak=0;G.lastPop=-9;
+ G.q=(X.two||0)*IPM;G.goal=X.two?2*G.q:5*IPM;G.cnt={};G.cats.forEach(k=>G.cnt[k]=0);G.gold=!!X.gold;G.hide=!!X.hide;G.hidden=false;G.lt=0;G.flipped=false;G.fw=false;G.flipAt=X.flip?g.t*(.4+.2*Math.random()):null;G.cts=[];
  gm.classList.remove('hid');if(r===21)G.shield=1;
  gm.style.setProperty('--gc',GC[c]);GE.forEach(e=>{const bc=B[e.k][4];e.el.classList.toggle('tg',G.cats.includes(bc));e.el.style.setProperty('--gc',GC[bc])});
  const gi=$('gint');const fu=(t,m)=>Math.min(m,(GW*.9)/(t.length*8));
@@ -778,9 +778,9 @@ gm.addEventListener('pointerdown',e=>{
  if(gd){G.time+=3;G.score+=50;gFlash('#ffd54a');gBanner('BONUS TIME','#ffd54a',700);gHud();gTimer();return}
  if(G.cats.includes(cat)){const now=performance.now()/1000,pts=10*(1+Math.floor((G.r-1)/5));G.score+=pts;
   if(G.cnt[cat]<(G.q||5*IPM)){G.cnt[cat]++;G.hits++}
-  {G.streak=now-G.lastPop<1.6?G.streak+1:1;G.lastPop=now;if(G.streak>=5){G.streak=0;G.score+=50;gFlash('#7dff9a');gBanner('COMBO!','#7dff9a',800)}}
+  {const need=IPAD?7:5,win=G.r<=10?3:G.r<=20?2.6:2.2;(G.cts=G.cts||[]).push(now);if(G.cts.length>need)G.cts.shift();if(G.cts.length===need&&now-G.cts[0]<=win){G.cts=[];G.score+=50;gFlash('#7dff9a');gBanner('COMBO!','#7dff9a',800)}}
   gHud();if(G.cats.every(k=>G.cnt[k]>=(G.q||5*IPM)))roundDone()}
- else if(G.shield>0){G.shield--;G.streak=0;gFlash('#7fd8ff');gBanner('SHIELD SAVED','#7fd8ff',900);gHud()}
+ else if(G.shield>0){G.shield--;G.cts=[];gFlash('#7fd8ff');gBanner('SHIELD SAVED','#7fd8ff',900);gHud()}
  else{gFlash();G.wrong=true;gameOver(false)}
 });
 $('gq').addEventListener('click',()=>{if(!G||G.state==='over'||G.state==='card')return;clk();G.prev=G.state;G.state='quit';gmode='quit';
