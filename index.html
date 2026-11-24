@@ -13,6 +13,8 @@ html,body{height:100%;margin:0;background:#35024a;overflow:hidden;overscroll-beh
 #svg{width:100%;height:auto;aspect-ratio:1179/5112;display:block;touch-action:pan-y}
 .pop{opacity:0;transition:opacity .12s}.pop.on{opacity:1}
 .hit{fill:transparent;cursor:pointer}
+#osw{position:absolute;margin:0;opacity:.02;border-radius:50%;z-index:3;touch-action:manipulation;-webkit-tap-highlight-color:transparent}body.gaming #osw{display:none}
+.gb input{position:absolute;left:0;top:0;width:100%;height:100%;margin:0;opacity:.02;border-radius:50%;z-index:3;touch-action:none;-webkit-tap-highlight-color:transparent}.gb .gu,.gb .gp{pointer-events:none}
 #sheet{position:relative}#hsws{position:absolute;inset:0;pointer-events:none}#hsws input{position:absolute;margin:0;opacity:.02;border-radius:50%;pointer-events:auto;touch-action:pan-y;cursor:pointer;-webkit-tap-highlight-color:transparent}#hsws input.done{pointer-events:none}body.gaming #hsws{display:none}
 #svg.wide .glow{stroke-width:13}#svg.wide .pspring{stroke-width:3}.hit.done{pointer-events:none}
 .glow{fill:none;stroke-width:34;opacity:0;transition:opacity .15s;pointer-events:none;filter:url(#gb)}.glow.on{opacity:.95}
@@ -650,7 +652,7 @@ let GD=0,G=null,GE=[],GL=[],GS=1,GPp=0,GW=0,GH=0,GNc=0,GNr=0;const glt=$('glt'),
 function gLayout(){
  GW=gm.clientWidth;GH=gm.clientHeight;GD=WIDE?Math.min(GW,460):GW;GS=GD/1179;GPp=2138*GS;
  gart.style.height=(GH+GPp+6)+'px';gart.style.backgroundSize=GD+'px auto';gart.style.backgroundPositionY=(-(250+400)*GS)+'px';
- if(!GE.length){GP.forEach(k=>{[0,1].forEach(j=>{const d=document.createElement('div');d.className='gb';d.dataset.e=GE.length;d.innerHTML='<div class="gp"></div>';gbs.appendChild(d);GE.push({el:d,k,j,n:0,pp:false})})})}
+ if(!GE.length){GP.forEach(k=>{[0,1].forEach(j=>{const d=document.createElement('div');d.className='gb';d.dataset.e=GE.length;d.innerHTML='<div class="gp"></div><input type="checkbox" switch tabindex="-1" aria-hidden="true">';gbs.appendChild(d);GE.push({el:d,k,j,n:0,pp:false})})})}
  gLayoutL();
  GE.forEach(e=>{const b=B[e.k];e.w=2*b[2]*GS;e.h=2*b[3]*GS;e.x=b[0]*GS-e.w/2;e.el.style.width=e.w+'px';e.el.style.height=e.h+'px';const p=e.el.firstChild;p.style.backgroundSize=GD+'px auto';p.style.backgroundPosition=(-(b[0]-b[2])*GS)+'px '+(-(b[1]+400-b[3])*GS)+'px'})
 }
@@ -658,7 +660,7 @@ const GPAT=B.slice(0,15),GSRC={Entertainment:1,Science:4,Art:7,Oddities:10,Histo
 function gLayoutL(){
  const dx=GDX*GS,dy=GDY*GS,nc=Math.ceil(GW/dx)+2,nr=Math.ceil(GH/dy)+2;
  if(nc!==GNc||nr!==GNr){glt.textContent='';GL=[];GNc=nc;GNr=nr;
-  for(let a=0;a<nc;a++)for(let b=0;b<nr;b++){const d=document.createElement('div');d.className='gb gl';d.dataset.l=GL.length;d.innerHTML='<div class="gu"></div><div class="gp"></div>';glt.appendChild(d);GL.push({el:d,a,b,idx:-1,i:0,j:0,pp:false,u:d.firstChild,p:d.lastChild})}}
+  for(let a=0;a<nc;a++)for(let b=0;b<nr;b++){const d=document.createElement('div');d.className='gb gl';d.dataset.l=GL.length;d.innerHTML='<div class="gu"></div><input type="checkbox" switch tabindex="-1" aria-hidden="true"><div class="gp"></div>';glt.appendChild(d);GL.push({el:d,a,b,idx:-1,i:0,j:0,pp:false,u:d.firstChild,p:d.lastChild})}}
  GL.forEach(s=>{s.idx=-1})}
 function gRenderL(){
  const dx=GDX*GS,dy=GDY*GS,W=GNc*dx,H=GNr*dy,x0=GX0*GS,y0=(GPAT[0][1]-250)*GS;
@@ -800,9 +802,13 @@ if(/dbg/.test(location.search)){const d=document.createElement('div');d.style.cs
 (function(){const tp=$('top');let lastT=0,sx0=0,sy0=0,ok=false;
  const open=()=>{hap();let best=0;try{best=parseInt(localStorage.getItem('ptf_game_best'))||0}catch(e){}setNBest(best);hsLoad().then(()=>setNBest(best));$('nes').classList.add('show')};
  const inSpot=(x,y)=>{const o=OSPOT();return Math.hypot(x-o.x,y-o.y)<=o.r};
+ const osw=document.createElement('input');osw.type='checkbox';osw.setAttribute('switch','');osw.id='osw';osw.tabIndex=-1;osw.setAttribute('aria-hidden','true');$('bar').appendChild(osw);
+ const place=()=>{const o=OSPOT();osw.style.left=(o.x-o.r)+'px';osw.style.top=(o.y-o.r)+'px';osw.style.width=osw.style.height=(o.r*2)+'px'};place();addEventListener('resize',place);addEventListener('load',place);$('logoimg').addEventListener('load',place);setInterval(place,1500);
+ let lo=0;const gogame=e=>{if(Date.now()-lo<600)return;if(G||cur||$('nes').classList.contains('show')||$('achov').classList.contains('show'))return;lo=Date.now();open()};
+ osw.addEventListener('change',gogame);osw.addEventListener('click',gogame);
  tp.addEventListener('pointerdown',e=>{if(G||cur||$('nes').classList.contains('show')||$('achov').classList.contains('show')){ok=false;return}ok=inSpot(e.clientX,e.clientY);sx0=e.clientX;sy0=e.clientY});
  tp.addEventListener('pointerup',e=>{if(!ok)return;ok=false;if(Math.hypot(e.clientX-sx0,e.clientY-sy0)>12||!inSpot(e.clientX,e.clientY)){lastT=0;return}
-  open()});
+  if(Date.now()-lo>=600){lo=Date.now();open()}});
  tp.addEventListener('contextmenu',e=>e.preventDefault())})();
 
 
