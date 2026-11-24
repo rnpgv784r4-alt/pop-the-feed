@@ -363,8 +363,7 @@ function renderRank(){const n=getSheets(),l=lvlOf(n),pr=getPres();const st=$('st
  const need=l<20?LT[l]-LT[l-1]:0,d=$('sdots');d.innerHTML='';
  if(need>=2){const done=n-LT[l-1];for(let i=0;i<need;i++){const e=document.createElement('i');if(i<done)e.className='f';d.appendChild(e)}}}
 function savePop(){try{localStorage.setItem(PKEY,JSON.stringify(popIdx))}catch(e){}}
-function restorePop(){let a=[];try{a=JSON.parse(localStorage.getItem(PKEY)||'[]')}catch(e){}
- if(!Array.isArray(a)||a.length>=N){popIdx=[];savePop();return}
+function restorePop(){let a=[];/* every launch starts on a fresh sheet; progress lives in levels and quizzes */popIdx=[];savePop();return;
  a.forEach(i=>{if(!Number.isInteger(i)||i<0||i>=N||popIdx.includes(i))return;$('p'+i).classList.add('on');if($('q'+i))$('q'+i).classList.add('on');$('h'+i).classList.add('done');popped++;catN[SB[i][4]]++;popIdx.push(i)})}
 function makeAch(){let n=getSheets()+1;
  if(lvlOf(n)>=20&&getPres()<RK.length){const pr=getPres()+1;return{promo:true,rank:pr,lvl:1,n:0,commit(){try{localStorage.setItem('ptf_prestige',String(pr));localStorage.setItem('ptf_sheets_cleared','0')}catch(e){}sheetsMem=0}}}
@@ -751,6 +750,9 @@ $('nlg').innerHTML=pixB('STREAM','#ff5a4a','#2a0a08')+pixB('MODE','#ff5a4a','#2a
 $('npl').innerHTML=pixB('PLAY?','#2e2c28','#b7c0bd');
 /* read-only snapshot for the desktop side panels (desktop.html reads this from the framed page) */
 addEventListener('resize',()=>{if(window.__dt()!==WIDE){clearTimeout(window.__rz);window.__rz=setTimeout(()=>{if(!document.body.classList.contains('gaming'))location.reload()},400)}});
+/* coming back after a while: show a fresh sheet, not the used one */
+let awayAt=0;document.addEventListener('visibilitychange',()=>{if(document.hidden){awayAt=Date.now();return}
+ if(awayAt&&Date.now()-awayAt>90000&&popped>0&&!G&&!cur&&!rdOpen){try{doReset()}catch(e){}}awayAt=0});
 window.__ptf=function(){const n=getSheets(),l=lvlOf(n),pr=getPres(),g=k=>{try{return parseInt(localStorage.getItem(k))||0}catch(e){return 0}};
  return{popped,N,n,lvl:l,lvlName:RANKS[l-1],lo:LT[l-1],hi:l<20?LT[l]:null,pres:pr,rk:pr?RK[pr-1]:null,nextRk:pr<RK.length?RK[pr]:null,rkCount:RK.length,top:TOP,hs:HS_URL,best:g('ptf_game_best'),qpass:g('ptf_qpass'),read:QL.slice(-8).reverse().map(a=>({t:a.t,u:a.u}))}};
 const HS_URL='https://pop-the-feed-default-rtdb.firebaseio.com';let TOP=null;
