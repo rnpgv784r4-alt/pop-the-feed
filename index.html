@@ -13,6 +13,7 @@ html,body{height:100%;margin:0;background:#35024a;overflow:hidden;overscroll-beh
 #svg{width:100%;height:auto;aspect-ratio:1179/5112;display:block;touch-action:pan-y}
 .pop{opacity:0;transition:opacity .12s}.pop.on{opacity:1}
 .hit{fill:transparent;cursor:pointer}
+#sheet{position:relative}#hsws{position:absolute;inset:0;pointer-events:none}#hsws input{position:absolute;margin:0;opacity:.02;border-radius:50%;pointer-events:auto;touch-action:pan-y;cursor:pointer;-webkit-tap-highlight-color:transparent}#hsws input.done{pointer-events:none}body.gaming #hsws{display:none}
 #svg.wide .glow{stroke-width:13}#svg.wide .pspring{stroke-width:3}.hit.done{pointer-events:none}
 .glow{fill:none;stroke-width:34;opacity:0;transition:opacity .15s;pointer-events:none;filter:url(#gb)}.glow.on{opacity:.95}
 #bar{position:fixed;top:0;left:0;right:0;z-index:5;background:#35024a;color:#fff;padding:calc(env(safe-area-inset-top,0px) + 4px) 10px 8px;box-sizing:border-box}
@@ -327,6 +328,15 @@ SB.forEach((b,i)=>{
  h.addEventListener('pointerup',e=>{const s=ps[i];ps[i]=0;if(s&&Math.hypot(e.clientX-s[0],e.clientY-s[1])<12&&Date.now()-s[2]<700){tapXY=[e.clientX,e.clientY];pop(i)}});
  layer.appendChild(h);
 });
+/* iOS only plays a haptic when a finger toggles a REAL <input switch>, so each bubble gets an invisible one on top */
+(function(){const sv=$('svg'),vb=sv.viewBox.baseVal,wrap=document.createElement('div');wrap.id='sheet';sv.parentNode.insertBefore(wrap,sv);wrap.appendChild(sv);
+const ov=document.createElement('div');ov.id='hsws';wrap.appendChild(ov);const sw=[];
+SB.forEach((b,i)=>{const rx=b[2]-8,ry=b[3]-8,inp=document.createElement('input');inp.type='checkbox';inp.setAttribute('switch','');inp.setAttribute('aria-hidden','true');inp.tabIndex=-1;
+ inp.style.cssText='left:'+((b[0]-rx)/vb.width*100)+'%;top:'+((b[1]-ry)/vb.height*100)+'%;width:'+(2*rx/vb.width*100)+'%;height:'+(2*ry/vb.height*100)+'%';
+ let dn=null;inp.addEventListener('pointerdown',e=>{dn=[e.clientX,e.clientY]});
+ inp.addEventListener('click',e=>{if($('h'+i).classList.contains('done'))return;if(dn&&Math.hypot(e.clientX-dn[0],e.clientY-dn[1])>12)return;tapXY=[e.clientX,e.clientY];pop(i)});ov.appendChild(inp);sw.push(inp)});
+const sync=()=>sw.forEach((x,i)=>x.classList.toggle('done',$('h'+i).classList.contains('done')));
+new MutationObserver(sync).observe($('layer'),{subtree:true,attributes:true,attributeFilter:['class']});sync()})();
 const CL=['Art','Entertainment','Oddities','History','Science'],CC={Art:'#D63384',Entertainment:'#E8603C',Oddities:'#E8A020',History:'#8E7BE0',Science:'#1FA58C'},catT={},catN={};let pendingCat=null;
 CL.forEach(c=>{catT[c]=SB.filter(b=>b[4]===c).length;catN[c]=0});
 function setNs(){document.querySelectorAll('.cat').forEach(b=>b.classList.toggle('done',catN[b.dataset.c]>=catT[b.dataset.c]))}
