@@ -1,5 +1,14 @@
 [
  [
+  "The New York Times",
+  "They Heard. They Saw. They Reviewed.",
+  "Tap the button below for the full story.",
+  "https://www.nytimes.com/interactive/2026/11/23/arts/nyt-critics-175-anniversary.html",
+  "Art",
+  "",
+  1795481121
+ ],
+ [
   "mxdwn Music",
   "Clairo Teams Up With El Michels Affair To Cover MF Doom’s “Lavender Buds”",
   "According to Pitchfork.com, musical artist Clairo lends vocals to one of two new MF DOOM covers from the El Michels Affair. She handles the hook (lifted from the Blackbyrds’ “April…",
@@ -80,6 +89,15 @@
     "His skill excites us with the idea that art can communicate to the rest of the world an inner reality negotiated through medium, history, and word play. Sometimes those elements feel meme-like, harvesting popular discourse in a way that frames it for more rarefied spaces like the art museum — his playfulness with All Li v es Matter is a prime example. Other times he’s tapping historical veins for conceptual moments he can elevate or criticize with a little tweak, like the I Am a Man series (2012) that riffs on the Civil Rights protest sign."
    ]
   ]
+ ],
+ [
+  "RTE.ie",
+  "Madra Salach reflect on Rolling Stone UK Awards win",
+  "Madra Salach frontman Paul Banks has spoken about the band's rapid rise and the privilege of making music for a living following the Dublin folk group's Breakthrough Award win at the…",
+  "https://www.rte.ie/entertainment/music/2026/1120/1599943-madra-salach-wins-rolling-stone-breakthrough-award/",
+  "Art",
+  "https://www.rte.ie/images/00255f54-1600.jpg",
+  1795467805
  ],
  [
   "Colossal",
@@ -511,15 +529,6 @@
   1795380716
  ],
  [
-  "The Guardian",
-  "Interpol and Bloc Party review – two of 00s indie’s most revered acts go toe-to-toe",
-  "Kele Okereke has a tough challenge selling Bloc Party’s trite latest album – a far cry from Interpol’s ‘masterpiece’ eighth record, performed here to darkly hypnotic effect",
-  "https://www.theguardian.com/music/2026/nov/22/interpol-bloc-party-review-utilita-arena-cardiff",
-  "Art",
-  "https://i.guim.co.uk/img/media/25411d3039e02097f6d2f8b3bc6d80133a537095/696_366_4543_3634/master/4543.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctcmV2aWV3LTMucG5n&enable=upscale&s=9185203324ceb0bb172b13af34b83373",
-  1795356180
- ],
- [
   "GraffitiStreet",
   "Helen Bur’s Monumental Bordeaux Mural Celebrates Motherhood and Female Solidarity, France",
   "British street artist Helen Bur completes her largest mural to date in Bordeaux's Grand Parc neighbourhood, celebrating motherhood, female solidarity and community connection through EXIT's…",
@@ -621,15 +630,6 @@
     ""
    ]
   ]
- ],
- [
-  "Northern Transmissions",
-  "Tycho releases new single “Forge”",
-  "Tap the button below for the full story.",
-  "https://northerntransmissions.com/tycho-releases-new-single-forge/",
-  "Art",
-  "",
-  1795270761
  ],
  [
   "bonart.cat",
@@ -1366,6 +1366,24 @@
   ]
  ],
  [
+  "Gizmodo",
+  "San Francisco Airport Could Flood This Week Before Thanksgiving",
+  "\"This Thanksgiving week, we are expecting extremely high tides, heavy rain, strong winds, and potential flooding,\" said the mayor.",
+  "https://gizmodo.com/san-francisco-airport-could-flood-this-week-before-thanksgiving-2000844340",
+  "Entertainment",
+  "https://gizmodo.com/app/uploads/2026/11/SFO-airport-water-1280x830.jpg",
+  1795484344
+ ],
+ [
+  "Gizmodo",
+  "Google Wants to Make AI TV Shows Starring You",
+  "A patent filing provides a glimpse into how Google might view the future of content.",
+  "https://gizmodo.com/google-wants-to-make-ai-tv-shows-starring-you-2000844299",
+  "Entertainment",
+  "https://gizmodo.com/app/uploads/2026/11/google-patent-filing-1280x849.jpg",
+  1795479722
+ ],
+ [
   "Bloody Disgusting",
   "‘Nightwaves’: A Late-Night Drive Becomes a Nightmare in New Psychological Thriller",
   "Anyone old enough to have a driver’s license knows that there are few things as peaceful or as therapeutic as a late-night drive on the open road. .",
@@ -1553,6 +1571,15 @@
     ""
    ]
   ]
+ ],
+ [
+  "Gizmodo",
+  "Alcohol Has a Surprising Effect on This Popular Cancer Treatment",
+  "Alcohol can affect the immune system of cancer patients in important ways, research has found.",
+  "https://gizmodo.com/alcohol-has-a-surprising-effect-on-this-popular-cancer-treatment-2000844108",
+  "Entertainment",
+  "https://gizmodo.com/app/uploads/2026/11/Empty-wine-bottle-1280x853.jpg",
+  1795473936
  ],
  [
   "Bloody Disgusting",
@@ -1885,6 +1912,15 @@
   1795371904
  ],
  [
+  "Cork Beo",
+  "Gardaí hunting masked gang of four after Meath home burglary",
+  "Possible mobile gang travelling on motorways to target different areas",
+  "https://www.corkbeo.ie/news/local-news/gardai-hunting-masked-gang-four-34950159",
+  "Entertainment",
+  "https://i2-prod.corkbeo.ie/article34950158.ece/ALTERNATES/s1200d/0_One-man-was-taken-to-hospital.jpg",
+  1795362371
+ ],
+ [
   "Sports Illustrated",
   "Why Erling Haaland’s Goal Against Fulham Was Controversially Disallowed",
   "Manchester City are without victory in four Premier League matches following Saturday’s draw.",
@@ -1892,6 +1928,15 @@
   "Entertainment",
   "https://images2.minutemediacdn.com/image/upload/c_crop,x_0,y_72,w_1024,h_576/c_fill,w_1440,ar_1440:810,f_auto,q_auto,g_auto/images/voltaxMediaLibrary/mmsport/si/01m81hwx80rtw31n7syz.jpg",
   1795354200
+ ],
+ [
+  "Extra.ie",
+  "Gardai hunt masked gang of four after brutal home attack leaves man hospitalised",
+  "Gardaí are seeking to hunt down a masked gang of men who brutally attacked someone at their home during the week.",
+  "https://extra.ie/2026/11/22/news/gardai-masked-gang-home-attack-navan",
+  "Entertainment",
+  "https://extra.ie/wp-content/uploads/2026/06/Garda-2.jpg",
+  1795345725
  ],
  [
   "Hilltop Views",
@@ -2094,51 +2139,6 @@
   "Entertainment",
   "https://www.baltimoresun.com/wp-content/uploads/migration/2023/10/12/2ECM3BFYVBDZNHXQI6QYHMLRTA.jpg?w=1200&h=785",
   1795214400
- ],
- [
-  "The Baltimore Banner",
-  "Baltimore comedian Stavros Halkias joins voice cast of ‘Grand Theft Auto VI’",
-  "Comedian Stavros Halkias, a Greektown native and die-hard Ravens fan, announced Friday he voiced the character of Dominic ‘The Brick’ Brizzolato in “Grand Theft Auto VI.”",
-  "https://www.thebanner.com/culture/stavros-halkias-gta-v1-baltimore-BVFN4U7WDBCDVEI67XI3B2TFGY/",
-  "Entertainment",
-  "https://www.thebanner.com/resizer/v2/FXWAMT7R2RBUVIKMWK5YRZFD64.jpg?auth=710644af7c3a9371b38bf72d1e747275dab1567f22de66963e5165f25d4f5847&width=1280&height=720&smart=true&quality=85",
-  1795213560
- ],
- [
-  "National News Desk",
-  "Sir Patrick Stewart’s cause of death confirmed",
-  "The \"X-Men\" and \"Star Trek: The Next Generation\" star's death was announced on Oct 29.",
-  "https://thenationaldesk.com/news/entertainment/sir-patrick-stewarts-cause-of-death-confirmed",
-  "Entertainment",
-  "https://thenationaldesk.com/resources/media2/16x9/5960/986/0x307/90/d42d1b6f-19af-4a0b-af94-f1bdcc11d177-GettyImages1464675306.jpg",
-  1795196504
- ],
- [
-  "Deadline",
-  "Patrick Stewart Cause Of Death Revealed",
-  "We now have the official cause of death for Sir Patrick Stewart.",
-  "https://deadline.com/2026/11/patrick-stewart-cause-of-death-1237229735/",
-  "Entertainment",
-  "",
-  1795137360
- ],
- [
-  "XKCD",
-  "Plate Maintenance",
-  "Tap the button below for the full story.",
-  "https://xkcd.com/3327/",
-  "Entertainment",
-  "https://imgs.xkcd.com/comics/plate_maintenance.png",
-  1795132800
- ],
- [
-  "Awful Announcing",
-  "Stavros Halkias revealed as conservative sports talk radio host in ‘Grand Theft Auto VI’",
-  "Tap the button below for the full story.",
-  "https://awfulannouncing.com/gaming/stavros-halkias-conservative-talk-radio-host-grand-theft-auto-iv.html",
-  "Entertainment",
-  "",
-  1795126016
  ],
  [
   "Beat In My Bones",
@@ -2571,6 +2571,103 @@
  ],
  [
   "Boing Boing",
+  "Asked her favorite book, Melania said it was 'Melania'",
+  "Amazon paid $75 million for Melania, The Series. At least $10 million of it went to the first lady herself. From 'utter garbage' to 'entirely skippable,' the two-part series is what we've…",
+  "https://boingboing.net/2026/11/23/melania-the-series-reviews.html",
+  "Oddities",
+  "https://i0.wp.com/boingboing.net/wp-content/uploads/2018/11/melania-beschizza.jpg?fit=1786%2C1195&quality=60&ssl=1",
+  1795487190
+ ],
+ [
+  "Reader's Digest",
+  "Here’s Why We All Revert to Our Middle School Selves at a Family Holiday Dinner—And How to Cut It Out",
+  "These expert-approved tips will help you break the cycle of emotional regression and handle whatever your relatives throw your way.",
+  "https://www.rd.com/article/emotional-regression-holidays/",
+  "Oddities",
+  "https://www.rd.com/wp-content/uploads/2026/11/GettyImages-1363979797.jpg?fit=700,1024",
+  1795486940,
+  [
+   [
+    "p",
+    "The turkey hasn’t even been carved yet and your mom is already complaining that your father “breathes too loud,” your father is giving a dissertation on why you should have bought your car instead of leasing it, and your brother is piling his plate so high with the mashed potatoes that you know there will be none left by the time the bowl makes it to your side of the table. And before you know it, you’re rolling your eyes so hard you can practically see your frontal lobe, you’ve hurled your napkin at your brother, and “Oh! My! God!” has come flying out of your mouth as you resist the urge to stomp away from the table."
+   ],
+   [
+    "p",
+    "You’re an adult. You run meetings, pay bills, have kids of your own. So how did you end up 12 again in less than 30 seconds?"
+   ],
+   [
+    "p",
+    "If it makes you feel any better, you’re in good company … and there’s plenty you can do about it. To find out what, exactly, we talked to Tasha Seiter, PhD, a licensed marriage and family therapist and the founder of Heart of the Matter Therapy in Fort Collins, Colorado, and John Mayer, PhD, a clinical psychologist and the author of Family Fit ."
+   ],
+   [
+    "p",
+    "Read on to find out why your family can still push your buttons like no one else, what this emotional regression is all about and how to stay the grown-up at the table this year."
+   ],
+   [
+    "h",
+    "Why do we revert to our childhood selves when we’re with family for the holidays?"
+   ],
+   [
+    "i",
+    "https://www.rd.com/wp-content/uploads/2026/11/GettyImages-1770305412-b.jpg?fit=680%2C995"
+   ],
+   [
+    "p",
+    "Short answer: You’re back with the people who knew you at 12, and part of you is still stuck in that phase. Yes, even all these years later. “The holidays evoke such strong, visceral regressive emotions in all of us,” Mayer says. “These intense emotions have been imprinted inside us since we were toddlers, so we can’t help but re-experience them throughout our lives.” His name for it? Imprinted regression."
+   ],
+   [
+    "p",
+    "Seiter calls it role regression. “It is also a subtle form of a trauma response—whether it’s big T or little t trauma—where our bodies remember the old roles and scripts we played in our families,” she says. “For example, you might become the responsible one again as you do all of the chores, or the baby, who finds themselves asking for help that they don’t need, or the rebel, breaking the hidden family rules.”"
+   ],
+   [
+    "p",
+    "But why do we slip into those parts, even when we know better? “We learned when we were young how to protect ourselves from harm, and our body still has the feeling that we need to play out our adaptations, even when we are adults and no longer need to,” Seiter says."
+   ],
+   [
+    "p",
+    "And no amount of personal growth makes you immune. As Seiter points out, the spiritual teacher Ram Dass famously said, “If you think you’re so enlightened, go spend a week with your family.”"
+   ],
+   [
+    "h",
+    "How do we let this happen in the moment?"
+   ],
+   [
+    "p",
+    "“Let” is doing a lot of heavy lifting there. There’s a confluence of things happening that contribute to this perfect storm of family drama."
+   ],
+   [
+    "p",
+    "Your family pulls you back into these roles. “It is important to understand the power of families,” Mayer says. “As a coping mechanism, families place members in such categories, and often they are immovable.” No matter what you’ve accomplished since you moved out, he explains, “the power of the family forces you in that role.” In fact, if you’ve become more educated, accomplished or social than the rest of your family, keeping you in your childhood role may be how they cope with the difference."
+   ],
+   [
+    "p",
+    "Big events exacerbate issues. It’s not just holidays. Weddings and other family gatherings can trigger this regression too. “It is just that the holidays come around predictably and regularly,” Mayer says, “and these other events don’t.”"
+   ],
+   [
+    "p",
+    "Family pecking order can influence how this all plays out. Mayer notes that research hasn’t backed up the famous birth-order personality types . But some families do develop their own patterns around who’s oldest or youngest, and those patterns are “idiosyncratic to families, not any biological imperative,” he says."
+   ],
+   [
+    "p",
+    "Slights sting more when they come from family. “Our relationships with our parents and siblings are our first attachment relationships,” Seiter explains. “When we were young, our very survival depended on these people. If we were not approved of, our brain registered this as a threat to our survival. We still feel these raw…"
+   ],
+   [
+    "m",
+    ""
+   ]
+  ]
+ ],
+ [
+  "Boing Boing",
+  "Many Britons dislike their famously grim national anthem",
+  "Britons are much more likely to dislike their national anthem than people in other Western countries polled by YouGov. Only 16% of them like God Save the King/Queen a lot, with just as many…",
+  "https://boingboing.net/2026/11/23/brits-dislike-their-famously-grim-national-anthem.html",
+  "Oddities",
+  "https://i0.wp.com/boingboing.net/wp-content/uploads/2018/03/union_jack_flag_flying_waving_breeze_flag_pole_british_great_britain-626624.jpg?fit=640%2C480&quality=60&ssl=1",
+  1795485970
+ ],
+ [
+  "Boing Boing",
   "A table-top RPG based on the Bayeux Tapestry",
   "RPG legends Chaosium made a tabletop game based on the Bayeux Tapestry for The British Museum. The 70 meter-long tapestry was embroidered in the 11th century and depicts the events leading…",
   "https://boingboing.net/2026/11/23/a-table-top-rpg-based-on-the-bayeax-tapestry.html",
@@ -2660,15 +2757,6 @@
     ""
    ]
   ]
- ],
- [
-  "Boing Boing",
-  "A single nuke in orbit could disable most satellites within days",
-  "In Effects of a Nuclear Detonation in Low Earth Orbit , authors Zachary Petersen et al. describe how very effective nuclear weapons could be if set off in space. Almost all of the 13,000 or…",
-  "https://boingboing.net/2026/11/23/a-single-nuke-in-orbit-could-disable-most-satellites-within-days.html",
-  "Oddities",
-  "https://i0.wp.com/boingboing.net/wp-content/uploads/2020/12/nasa-satellites.jpg?fit=1266%2C844&quality=60&ssl=1",
-  1795475668
  ],
  [
   "Good News Network",
@@ -2782,10 +2870,10 @@
  [
   "Ranker",
   "50+ Celebrities Born on October 5",
-  "October 5 isn't just another day on the calendar—it's a star-studded birthday bash! From movie legends, such as Kate Winslet and Bernie Mac, to chart-topping ...",
+  "Tap the button below for the full story.",
   "https://www.ranker.com/list/celebrities-born-on-october-5",
   "Oddities",
-  "https://imgix.ranker.com/list_img_v2/6830/3266830/original/3266830?w=1200&h=675&fm=pjpg&q=80&fit=crop&dpr=1",
+  "",
   1795468941
  ],
  [
@@ -2796,102 +2884,6 @@
   "Oddities",
   "https://img.atlasobscura.com/FkiaoKhtpqMs3ezbvAJIOw0DBDAq6QD9pjA0_9sGmPE/rs:fill:300:200:1/g:ce/q:81/sm:1/scp:1/ar:1/aHR0cHM6Ly9hdGxh/cy1kZXYuczMuYW1h/em9uYXdzLmNvbS91/cGxvYWRzL3BsYWNl/X2ltYWdlcy85ZDQx/NmI4OC00MTY4LTRj/ZmUtYjkyNy03ZWUw/ZDBiMGMzOTM4ZThk/ZmVmNTRjN2E5Mjg4/OWFfOTk1QTAwNzct/NkNCQy00MDFCLUEz/MDYtRjNENEYxOUI2/OEJEXzFfMTA1X2Mu/anBlZw.jpg",
   1795467600
- ],
- [
-  "Boing Boing",
-  "AI slop will always look like slop, and it will also be good",
-  "Kevin Kelly writes that AI-generated content will always be slop and always be recognizable as being AI-generated, but it will also sometimes be fantastic. He writes, \"The great surprise…",
-  "https://boingboing.net/2026/11/23/fountain-pen-kevin-kelly-slop-style.html",
-  "Oddities",
-  "https://i0.wp.com/boingboing.net/wp-content/uploads/2026/11/fountain-pen-kevin-kelly-slop-style.jpg?fit=1200%2C942&quality=60&ssl=1",
-  1795465924
- ],
- [
-  "Reader's Digest",
-  "Thousands of Units of Toothpaste and Mouthwash Are Being Recalled Due to Unwanted Hormones Found in Product…",
-  "More than 51,000 units of toothpaste and mouthwash products made for children and adults are being recalled.",
-  "https://www.rd.com/article/toothpaste-mouthwash-recalled-hormones/",
-  "Oddities",
-  "https://www.rd.com/wp-content/uploads/2026/11/GettyImages-2224641329-2.jpg?fit=700,1024",
-  1795463979,
-  [
-   [
-    "p",
-    "When you think about product recalls, toothpaste and mouthwash probably aren’t the first things that come to mind. We’re used to hearing about recalls involving food , cars and household products, but everyday oral care items can make the list, too. This latest recall is a reminder that even products families use as part of their daily routines aren’t automatically free from safety concerns."
-   ],
-   [
-    "p",
-    "Thousands of toothpaste and mouthwash products made for children and adults are being recalled after testing uncovered hormone contamination, according to the Food and Drug Administration (FDA)."
-   ],
-   [
-    "p",
-    "The voluntary recall involves 51,762 units of six ORL Organic Oral Care products distributed nationwide. The FDA notified ORL Labs after testing found hormones in samples of the products, according to its enforcement report."
-   ],
-   [
-    "p",
-    "The recall began Oct. 12 but was classified as a Class II recall earlier this month. That designation means the products may “cause temporary or medically reversible adverse health consequences,” according to the FDA’s recall definitions."
-   ],
-   [
-    "h",
-    "Which toothpaste and mouthwash products are included?"
-   ],
-   [
-    "i",
-    "https://www.rd.com/wp-content/uploads/2026/11/GettyImages-525430389-1.jpg?fit=680%2C995"
-   ],
-   [
-    "p",
-    "The recall covers the following products. All of the items have expiration dates between September 2026 and August 2028."
-   ],
-   [
-    "p",
-    "Bubblegum Kids natural toothpaste"
-   ],
-   [
-    "p",
-    "Lots: 241029P4, 250414P4, 250520P4, 260406P4, 260511P4"
-   ],
-   [
-    "p",
-    "Lots: 241209P3, 250129P3, 250508P3, 25112P3, 260511P3"
-   ],
-   [
-    "p",
-    "Lots: 250121P7, 250505P7, 250508P7, 250516P7, 250707P7, 251105P7, 260126P7, 260309P7, 260422P7, 260618P7, 260804P7"
-   ],
-   [
-    "p",
-    "Lots: 241029P9, 250505P9, 250520P9, 260406P9"
-   ],
-   [
-    "p",
-    "Lots: 240710P6, 240711P6, 240807P6, 241118P6, 241121P6, 250120P6, 250505P11, 250516P6, 251105P6, 260618P6"
-   ],
-   [
-    "p",
-    "The FDA report says samples contained progesterone, estradiol or dehydroepiandrosterone (DHEA). It doesn’t identify the amounts found or explain how the cross-contamination happened. It’s the second toothpaste recall as of late, too."
-   ],
-   [
-    "p",
-    "The report also doesn’t specify what consumers should do with products they purchased. Anyone with questions can contact ORL Labs at 844-675-5227 or email orl@orlcares.com."
-   ],
-   [
-    "p",
-    "Add Reader’s Digest on Google!"
-   ],
-   [
-    "h",
-    "Sources:"
-   ],
-   [
-    "p",
-    "FDA : “Recall Enforcement Report”"
-   ],
-   [
-    "p",
-    "FDA : “Recalls Background and Definitions”"
-   ]
-  ]
  ],
  [
   "Atlas Obscura",
@@ -2979,15 +2971,6 @@
   1795391325
  ],
  [
-  "RadioToday",
-  "BBC Radio 6 Music concludes Nottingham live series",
-  "<a href=\"https://radiotoday.co.uk/2026/11/bbc-radio-6-music-concludes-nottingham-live-series/\" title=\"BBC Radio 6 Music concludes Nottingham live series\" rel=\"nofollow\"><img width=\"1280\"…",
-  "https://www.radiotoday.uk/2026/11/bbc-radio-6-music-concludes-nottingham-live-series/",
-  "Oddities",
-  "https://radiotoday.co.uk/wp-content/uploads/2026/11/nmfl-divorce-credit-bbc-radio-music-dark-orange.png",
-  1795265898
- ],
- [
   "Kottke",
   "Fragmented Landscapes",
   "I don’t think it’s a surprise at this point when I tell you that I love these artworks by Antwerp-based artist Joost Vandebrug . (I mean, tell me they don’t aesthetically rhyme with the KDO…",
@@ -3065,24 +3048,6 @@
   ]
  ],
  [
-  "RadioToday",
-  "BBC Radio 6 Music begins New Music Fix Live event",
-  "<a href=\"https://radiotoday.co.uk/2026/11/bbc-radio-6-music-begins-new-music-fix-live-event/\" title=\"BBC Radio 6 Music begins New Music Fix Live event\" rel=\"nofollow\"><img width=\"1280\"…",
-  "https://www.radiotoday.uk/2026/11/bbc-radio-6-music-begins-new-music-fix-live-event/",
-  "Oddities",
-  "https://radiotoday.co.uk/wp-content/uploads/2026/11/nathan-shepherd-and-deb-grant-at-purple.png",
-  1795178690
- ],
- [
-  "Eurovisionworld",
-  "Latvia: Listen to the first 16 songs for Supernova 2027",
-  "Latvian broadcaster LSM has revealed the first 16 acts competing in Supernova 2027 and released their songs in full. One more act will join the lineup through a wildcard selection",
-  "https://eurovisionworld.com/esc/latvia-listen-to-the-first-16-songs-for-supernova-2027",
-  "Oddities",
-  "https://pix.eurovisionworld.com/pix/latvia-supernova-2027-artists.jpg",
-  1795157640
- ],
- [
   "Music Connection Magazine",
   "Best Career Tips and Musings 2026, including Sleaford Mods",
   "FOR THE ARTISTS Lorraine Lewis, Femme Fatale “I work every day with vocal tapes by the late great vocal coach Ron Anderson. I sing every day to stay in shape. When I’m on tour I do my best…",
@@ -3120,15 +3085,6 @@
   1795100520
  ],
  [
-  "NME",
-  "Asia’s Clockenflap reveals full 2026 line-up with Turnstile, Jane Remover and more",
-  "Asia’s Clockenflap festival has announced the final names for its 2026 line-up, with Turnstile, Jane Remover and more joining the line-up.",
-  "https://www.nme.com/news/music/asias-clockenflap-reveals-full-2026-line-up-with-turnstile-jane-remover-and-more-3976389",
-  "Oddities",
-  "https://www.nme.com/wp-content/uploads/2026/11/turnstile-jane-remover@2000x1270.jpg",
-  1795089358
- ],
- [
   "Get Your…",
   "Psychedelic Thriller, Game, Starring Sleaford Mods’ Jason Williamson Gets December US Release",
   "Oscilloscope Laboratories has announced that director John Minton’s acclaimed psychedelic thriller Game will arrive in U.S. cinemas on Friday 4th December 2026.",
@@ -3156,15 +3112,6 @@
   1795008200
  ],
  [
-  "The Note",
-  "Clockenflap Reveals Full 2027 Lineup",
-  "Tap the button below for the full story.",
-  "https://www.thenote.com.au/news/clockenflap-reveals-full-2026-lineup",
-  "Oddities",
-  "",
-  1794964453
- ],
- [
   "Isthmus | Madison, Wisconsin",
   "‘Midwestern Death Trip’ is Meaghan Garvey’s ode to Wisconsin",
   "Garvey, a journalist based in Chicago, has written what constitutes a journey into our region’s bizarre and inebriated underbelly; it almost reads as a travelogue.",
@@ -3172,6 +3119,15 @@
   "Oddities",
   "https://isthmus.com/downloads/76063/download/Books-Meagan-Garvey-Midwestern-Death-Trip-11172026.jpg?cb=322548e6aac8099f2724b473aed08af4&w=1200",
   1794949200
+ ],
+ [
+  "That Eric Alper",
+  "Sabatta Bring Rick James-Level Funk And Rock Mayhem To \"Rick James (Good Times)\"",
+  "Rick James probably never imagined that one of his old interviews would inspire a South London guitarist to unleash a monster bassline, a thumping dance beat and enough rock ‘n’ roll…",
+  "https://www.thatericalper.com/2026/11/17/sabatta-bring-rick-james-level-funk-and-rock-mayhem-to-rick-james-good-times/",
+  "Oddities",
+  "https://www.thatericalper.com/wp-content/uploads/2026/11/download-2026-11-17T110306.783.jpg",
+  1794931461
  ],
  [
   "BeachGrit.com",
@@ -3190,6 +3146,15 @@
   "Oddities",
   "https://knews.kathimerini.com.cy/assets/modules/wnp/articles/202611/31120/images/b_unidog_restaurant.png",
   1794924240
+ ],
+ [
+  "Horror Obsessive",
+  "Game Turns a Car Crash Into a Psychedelic Deliverance",
+  "The Game movie trailer pits a crashed raver against a silent poacher in a lean survival horror from Oscilloscope, with Sleaford Mods' Jason Williamson.",
+  "https://horrorobsessive.com/2026/11/16/game-movie-trailer-psychedelic-deliverance/",
+  "Oddities",
+  "https://horrorobsessive.com/wp-content/uploads/2026/11/game-movie-trailer-psychedelic-deliverance-featured-scaled.webp",
+  1794854239
  ],
  [
   "News 5 Cleveland WEWS",
@@ -3228,12 +3193,30 @@
   1794604160
  ],
  [
+  "The Concert…",
+  "Limp Bizkit joins Robbie Williams and The Chemical Brothers as PHILLGOOD 2027 headliners",
+  "Limp Bizkit has been announced as the final headliner for PHILLGOOD Festival 2027 in Plovdiv, Bulgaria. The nu-metal pioneers will close the three day event on July 18th, joining Robbie…",
+  "https://theconcertchronicles.com/2026/11/13/phillgood-festival-2027-limp-bizkit-robbie-williams-chemical-brothers/",
+  "Oddities",
+  "https://tcc-full-backup.s3.us-east-2.amazonaws.com/2026/11/q5FfkK6X-unnamed-16.jpg",
+  1794603600
+ ],
+ [
   "BLABBERMOUTH.NET",
   "Official THE CRAMPS Merchandise Available Via Killer Collaboration Drop From KREEPSVILLE",
   "Kreepsville, the long-established fashion brand synonymous with horror, goth, punk and psychobilly style, has unleashed its first official merchandise collection for legendary punk band THE…",
   "https://blabbermouth.net/news/official-the-cramps-merchandise-available-via-killer-collaboration-drop-from-kreepsville",
   "Oddities",
   "https://assets.blabbermouth.net/media/crampskreepnov2026_638.jpg",
+  1794556800
+ ],
+ [
+  "Search: Hunter S Thompson",
+  "Johnny Depp has reportedly earned $650 million throughout his career. Here's how he makes and spends his…",
+  "Johnny Depp has reportedly earned $650 million throughout his career. Here's how he makes and spends his money. Business Insider",
+  "https://www.businessinsider.com/johnny-depp-net-worth",
+  "Oddities",
+  "https://i.insider.com/6af6f9c9cbe212047073518a?width=1200&format=jpeg",
   1794556800
  ],
  [
@@ -3246,6 +3229,15 @@
   1794556800
  ],
  [
+  "Bloody Disgusting",
+  "The Psychedelic Nightmare of ‘Game’ Is on in Exclusive New Trailer",
+  "Some horror movies can find success by entirely reinventing the genre, finding ways to completely circumvent expectations to thrust viewers into uncharted",
+  "https://bloody-disgusting.com/movie/3975608/game-movie-trailer/",
+  "Oddities",
+  "https://bloody-disgusting.com/wp-content/uploads/2026/11/Game-Movie.jpg",
+  1794517184
+ ],
+ [
   "Haaretz",
   "After a Boy's Killing Outside His School , Fear of Revenge Hangs Over East Jerusalem Refugee Camp",
   "Qusai al-Julani was shot and killed outside an elementary school. Residents of Shuafat refugee camp blame years of police neglect for a deadly family feud, as parents fear sending their…",
@@ -3253,15 +3245,6 @@
   "History",
   "https://img.haarets.co.il/bs/000001a2-079a-d17b-a1b3-5fbb236f0000/04/ef/327b00f64f5a90d5b7be7ed536fe/266461.jpg?&width=1200&height=630&cmsprod",
   1795453440
- ],
- [
-  "Chatham House",
-  "Spain’s election could see Europe’s far-right ‘firewall’ begin to fall apart",
-  "Tap the button below for the full story.",
-  "https://www.chathamhouse.org/2026/11/spains-election-could-see-europes-far-right-firewall-begin-fall-apart",
-  "History",
-  "",
-  1795444172
  ],
  [
   "Smithsonian History",
@@ -3548,24 +3531,6 @@
   ]
  ],
  [
-  "The Peninsula Qatar",
-  "Sheikh Hamad Award promotes Arabic-Japanese translation",
-  "Doha, Qatar: The Sheikh Hamad Award for Translation and International Understanding has concluded an extensive promotional tour of Japan, visiting fiv...",
-  "https://thepeninsulaqatar.com/article/20/11/2026/sheikh-hamad-award-promotes-arabic-japanese-translation",
-  "History",
-  "https://thepeninsulaqatar.com/get/maximage/20261120_1795150823-842.jpeg?1795150823",
-  1795150903
- ],
- [
-  "Reuters",
-  "Japan's core inflation accelerates in October, cementing rate hike expectations",
-  "Tap the button below for the full story.",
-  "https://www.reuters.com/business/japans-core-inflation-accelerates-october-cementing-rate-hike-expectations-2026-11-19/",
-  "History",
-  "",
-  1795131780
- ],
- [
   "Bloomberg.com",
   "The AI Trade Has a New Main Character",
   "Tap the button below for the full story.",
@@ -3573,6 +3538,15 @@
   "History",
   "",
   1795127382
+ ],
+ [
+  "The Guardian",
+  "China gives Japan PM frosty welcome at Apec amid fanfare for other leaders",
+  "Sanae Takaichi cuts lonely figure at airport, a move by China that is being linked to the simmering row over Taiwan",
+  "https://www.theguardian.com/world/2026/nov/19/china-gives-japan-pm-frosty-welcome-apec",
+  "History",
+  "https://i.guim.co.uk/img/media/a1af0b25b7afdb4ccaa6c1973633ad2d8f68b4b8/0_0_5160_4129/master/5160.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=6fcd7f0eacf69900ec2c05ce4f8a2651",
+  1795119300
  ],
  [
   "European Council on Foreign Relations",
@@ -3711,15 +3685,6 @@
   ]
  ],
  [
-  "USNI News",
-  "Suspected Russian Aircraft Violated Japan’s Airspace, Says Defense Minister",
-  "Tap the button below for the full story.",
-  "https://news.usni.org/2026/11/17/suspected-russian-aircraft-violated-japans-airspace-says-defense-minister",
-  "History",
-  "",
-  1794941280
- ],
- [
   "Ynetnews",
   "Helen Mirren on playing Golda Meir, becoming Patricia Highsmith and why she wishes she were younger",
   "At 81, Helen Mirren takes on the bitter, reclusive Patricia Highsmith in 'A Talent for Murder'; she reflects on playing Golda Meir, her marriage to director Taylor Hackford and the…",
@@ -3754,6 +3719,15 @@
   "History",
   "https://images.ctfassets.net/0gg9pgt9u0k4/6jFl5uvX1ZlhMFz9fQ38eT/b2968d4ae3a3d8c1820efc612240b402/Alcaraz_withdrawal.png?w=1200&h=630&fit=crop&f=face",
   1794902400
+ ],
+ [
+  "The Japan Times",
+  "Japan scrambles fighters after suspected Russian military planes enter airspace",
+  "ASDF fighters issued warnings to the apparent Russian aircraft after they separately entered Japanese airspace near Fukuoka’s Okinoshima island.",
+  "https://www.japantimes.co.jp/news/2026/11/17/japan/russia-japan-airspace-violation-defense/",
+  "History",
+  "https://www.japantimes.co.jp/japantimes/uploads/images/2026/11/17/574439.jpg?v=3.1",
+  1794901414
  ],
  [
   "Pirate Wires",
@@ -4006,6 +3980,33 @@
   ]
  ],
  [
+  "CNBC",
+  "Japan's economy unexpectedly contracts in third-quarter as elevated energy costs bite",
+  "Energy subsidies for households had reportedly expired in September, exposing the economy to the higher energy prices brought about by the Iran war.",
+  "https://www.cnbc.com/2026/11/16/japan-q3-gdp-energy-oil-prices.html",
+  "History",
+  "https://image.cnbcfm.com/api/v1/image/108551661-1794785886757-gettyimages-2288262163-Stanislav-Kogiku-1440900.jpeg?v=1794787901&w=1920&h=1080",
+  1794729600
+ ],
+ [
+  "Trending on…",
+  "Fight Poison With Poison: How China's Arsenic Protocol Became a Global Standard for Leukemia",
+  "A viral CCTV retrospective on China's acute promyelocytic leukemia research — including the 1986 case of a five-year-old girl, now 45 and healthy — has reminded Chinese social media that…",
+  "https://www.trendingonweibo.com/hotwords/arsenic-leukemia-shanghai-protocol-global-standard/",
+  "History",
+  "https://tvax4.sinaimg.cn/mw2000/68bf82afly1ij2s1gugd7j20z0240hdt.jpg",
+  1794728746
+ ],
+ [
+  "Phys.org",
+  "AI has solved a host of big math problems—here's why this threatens the whole field of mathematics",
+  "Frontier (cutting-edge) AI models made by OpenAI and Anthropic made stunning progress on hundreds of open problems that have baffled mathematicians for decades—and centuries in some cases.",
+  "https://phys.org/news/2026-11-ai-host-big-math-problems.html",
+  "Science",
+  "https://scx1.b-cdn.net/csz/news/tmb/2025/mathematical-proof-deb.jpg",
+  1795488001
+ ],
+ [
   "Phys.org",
   "Do a violin's physical characteristics really improve with regular playing?",
   "There is a widespread notion among violinists: A violin \"opens up\" as it is played, which is to say its sound gradually improves. However, an experiment conducted by a team led by a CNRS…",
@@ -4031,15 +4032,6 @@
   "Science",
   "https://media.audubon.org/2026-11/Taken%20by%20Robyn%20Thomas%20%283%29.jpg?width=1200&height=630&auto=webp&quality=90&fit=crop&enable=upscale",
   1795480688
- ],
- [
-  "Phys.org",
-  "Recipe for one of the world's most important cancer drugs uncovered: Tobacco plants could produce the medicine",
-  "More people around the world will receive a cancer diagnosis at some point in their lives. As this trend is expected to continue, researchers have been working to crack the code of how the…",
-  "https://phys.org/news/2026-11-recipe-world-important-cancer-drugs.html",
-  "Science",
-  "https://scx1.b-cdn.net/csz/news/tmb/2026/recipe-for-one-of-the.jpg",
-  1795479601
  ],
  [
   "Tech Spot",
