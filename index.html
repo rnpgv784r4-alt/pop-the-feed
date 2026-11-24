@@ -337,6 +337,8 @@ SB.forEach((b,i)=>{const rx=b[2]-8,ry=b[3]-8,inp=document.createElement('input')
  /* iOS may toggle a switch without sending a click, so pop on whichever of change/click arrives first */
  const go=e=>{if($('h'+i).classList.contains('done'))return;const n=Date.now();if(n-lt<500)return;lt=n;const r=inp.getBoundingClientRect();tapXY=dn||[r.x+r.width/2,r.y+r.height/2];dn=null;pop(i)};
  inp.addEventListener('change',go);inp.addEventListener('click',go);
+ let t0=0;inp.addEventListener('pointerdown',e=>{t0=Date.now()});
+ inp.addEventListener('pointerup',e=>{if(!dn||!t0)return;if(Math.hypot(e.clientX-dn[0],e.clientY-dn[1])<12&&Date.now()-t0<700)go(e);t0=0});
  ov.appendChild(inp);sw.push(inp)});
 const sync=()=>sw.forEach((x,i)=>x.classList.toggle('done',$('h'+i).classList.contains('done')));
 new MutationObserver(sync).observe($('layer'),{subtree:true,attributes:true,attributeFilter:['class']});sync()})();
