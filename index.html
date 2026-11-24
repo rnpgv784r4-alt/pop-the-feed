@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>/* wide screens (desktop, large tablets) get the phone-sized layout inside a framed column */try{if(self===top&&innerWidth>=700&&!/[?&]nf=1/.test(location.search)){location.replace("desktop.html"+location.search)}}catch(e){}</script>
+<script>/* wide mouse-and-keyboard screens (laptops/desktops) get the framed desktop layout; touch devices incl. iPads keep the phone layout */window.__dt=(function(){try{return innerWidth>=700&&matchMedia('(hover:hover) and (pointer:fine)').matches}catch(e){return innerWidth>=700}});try{if(self===top&&window.__dt()&&!/[?&]nf=1/.test(location.search)){location.replace("desktop.html"+location.search)}}catch(e){}</script>
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="apple-touch-icon.png">
 <meta name="apple-mobile-web-app-title" content="Pop The Feed">
@@ -267,7 +267,7 @@ const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg';
 const layer=$('layer'),gl=$('gl'),defs=$('defs');
 /* wide windows get a dedicated 6x8 sheet (48 bubbles); phones keep the 3-column sheet. The game keeps using B. */
 const BW=[[94,130,80,80,"Art"],[262,130,80,80,"Entertainment"],[430,130,80,80,"Oddities"],[594,130,80,80,"History"],[761,130,80,80,"Science"],[930,130,80,80,"Art"],[94,318,80,80,"Oddities"],[262,318,80,80,"History"],[430,318,80,80,"Science"],[594,318,80,80,"Art"],[761,318,80,80,"Entertainment"],[930,318,80,80,"Oddities"],[94,507,80,80,"Science"],[262,507,80,80,"Art"],[430,507,80,80,"Entertainment"],[594,507,80,80,"Oddities"],[761,507,80,80,"History"],[930,507,80,80,"Science"],[94,696,80,80,"Entertainment"],[262,696,80,80,"Oddities"],[430,696,80,80,"History"],[594,696,80,80,"Science"],[761,696,80,80,"Art"],[930,696,80,80,"Entertainment"],[94,883,80,80,"History"],[262,883,80,80,"Science"],[430,883,80,80,"Art"],[594,883,80,80,"Entertainment"],[761,883,80,80,"Oddities"],[930,883,80,80,"History"],[94,1071,80,80,"Art"],[262,1071,80,80,"Entertainment"],[430,1071,80,80,"Oddities"],[594,1071,80,80,"History"],[761,1071,80,80,"Science"],[930,1071,80,80,"Art"],[94,1253,80,80,"Oddities"],[262,1253,80,80,"History"],[430,1253,80,80,"Science"],[594,1253,80,80,"Art"],[761,1253,80,80,"Entertainment"],[930,1253,80,80,"Oddities"],[94,1429,80,80,"Science"],[262,1429,80,80,"Art"],[430,1429,80,80,"Entertainment"],[594,1429,80,80,"Oddities"],[761,1429,80,80,"History"],[930,1429,80,80,"Science"]];
-const WIDE=innerWidth>=700,SB=WIDE?BW:B,N=SB.length,PKEY='ptf_current_popped'+(WIDE?'_w':'');
+const WIDE=window.__dt(),SB=WIDE?BW:B,N=SB.length,PKEY='ptf_current_popped'+(WIDE?'_w':'');
 const SH=WIDE?{img:'bubbles-wide.JPG',pop:'bubbles-wide-popped.JPG',x:0,y:0,w:1024,h:1536}:{img:'bubbles-v2.jpg',pop:'bubbles-popped-v2.jpg',x:0,y:-400,w:1179,h:5512};
 if(WIDE){const sv=$('svg'),im=sv.querySelector('image');sv.classList.add('wide');sv.setAttribute('viewBox','0 0 1024 1536');sv.style.aspectRatio='1024/1536';
  im.setAttribute('href',SH.img);im.setAttribute('x',0);im.setAttribute('y',0);im.setAttribute('width',1024);im.setAttribute('height',1536);
@@ -750,7 +750,7 @@ function pixT(t,fill,u){t=String(t).toUpperCase();const on=new Set(),cols=t.leng
 $('nlg').innerHTML=pixB('STREAM','#ff5a4a','#2a0a08')+pixB('MODE','#ff5a4a','#2a0a08').replace('<svg ','<svg style="width:66%;margin:9% auto 0" ');
 $('npl').innerHTML=pixB('PLAY?','#2e2c28','#b7c0bd');
 /* read-only snapshot for the desktop side panels (desktop.html reads this from the framed page) */
-addEventListener('resize',()=>{if((innerWidth>=700)!==WIDE){clearTimeout(window.__rz);window.__rz=setTimeout(()=>{if(!document.body.classList.contains('gaming'))location.reload()},400)}});
+addEventListener('resize',()=>{if(window.__dt()!==WIDE){clearTimeout(window.__rz);window.__rz=setTimeout(()=>{if(!document.body.classList.contains('gaming'))location.reload()},400)}});
 window.__ptf=function(){const n=getSheets(),l=lvlOf(n),pr=getPres(),g=k=>{try{return parseInt(localStorage.getItem(k))||0}catch(e){return 0}};
  return{popped,N,n,lvl:l,lvlName:RANKS[l-1],lo:LT[l-1],hi:l<20?LT[l]:null,pres:pr,rk:pr?RK[pr-1]:null,nextRk:pr<RK.length?RK[pr]:null,rkCount:RK.length,top:TOP,hs:HS_URL,best:g('ptf_game_best'),qpass:g('ptf_qpass'),read:QL.slice(-8).reverse().map(a=>({t:a.t,u:a.u}))}};
 const HS_URL='https://pop-the-feed-default-rtdb.firebaseio.com';let TOP=null;
