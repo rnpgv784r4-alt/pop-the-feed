@@ -333,8 +333,11 @@ SB.forEach((b,i)=>{
 const ov=document.createElement('div');ov.id='hsws';wrap.appendChild(ov);const sw=[];
 SB.forEach((b,i)=>{const rx=b[2]-8,ry=b[3]-8,inp=document.createElement('input');inp.type='checkbox';inp.setAttribute('switch','');inp.setAttribute('aria-hidden','true');inp.tabIndex=-1;
  inp.style.cssText='left:'+((b[0]-rx)/vb.width*100)+'%;top:'+((b[1]-ry)/vb.height*100)+'%;width:'+(2*rx/vb.width*100)+'%;height:'+(2*ry/vb.height*100)+'%';
- let dn=null;inp.addEventListener('pointerdown',e=>{dn=[e.clientX,e.clientY]});
- inp.addEventListener('click',e=>{if($('h'+i).classList.contains('done'))return;if(dn&&Math.hypot(e.clientX-dn[0],e.clientY-dn[1])>12)return;tapXY=[e.clientX,e.clientY];pop(i)});ov.appendChild(inp);sw.push(inp)});
+ let dn=null,lt=0;inp.addEventListener('pointerdown',e=>{dn=[e.clientX,e.clientY]});
+ /* iOS may toggle a switch without sending a click, so pop on whichever of change/click arrives first */
+ const go=e=>{if($('h'+i).classList.contains('done'))return;const n=Date.now();if(n-lt<500)return;lt=n;const r=inp.getBoundingClientRect();tapXY=dn||[r.x+r.width/2,r.y+r.height/2];dn=null;pop(i)};
+ inp.addEventListener('change',go);inp.addEventListener('click',go);
+ ov.appendChild(inp);sw.push(inp)});
 const sync=()=>sw.forEach((x,i)=>x.classList.toggle('done',$('h'+i).classList.contains('done')));
 new MutationObserver(sync).observe($('layer'),{subtree:true,attributes:true,attributeFilter:['class']});sync()})();
 const CL=['Art','Entertainment','Oddities','History','Science'],CC={Art:'#D63384',Entertainment:'#E8603C',Oddities:'#E8A020',History:'#8E7BE0',Science:'#1FA58C'},catT={},catN={};let pendingCat=null;
