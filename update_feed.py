@@ -451,6 +451,10 @@ def main():
                     s[1], s[0] = m.group(1), m.group(2).strip()
                     if s[2].startswith(s[1]):
                         s[2] = "Tap the button below for the full story."
+        if name.lower().startswith("deviantart"):
+            # tag feeds are full of auctions, adoptables, commissions and mature posts: keep plain artwork only
+            bad = re.compile(r"auction|adoptable|\badopt\b|commission|paypal|\bsb:|\bbids?\b|autobuy|nsfw|nude|18\+|mature|for sale|\bytp\b|\bpoints?\b|ko-?fi|patreon", re.I)
+            got = [g for g in got if not bad.search(g[1] + " " + g[2])]
         stories += got
     stories = [s for s in stories if not any(b in s[3].lower() or b in s[1].lower() for b in blocked)]
     cutoff = int(time.time()) - MAX_AGE_DAYS * 86400
