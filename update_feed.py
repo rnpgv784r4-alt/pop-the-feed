@@ -87,8 +87,26 @@ def text(e, *names):
             return x.text
     return ""
 
-def get(url):
-    return urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=25).read()
+def _get(url):
+    return urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=25).read(3000000)
+
+def get(url, limit=40):
+    # hard time limit per feed: a slow or stuck site is skipped instead of holding up the whole run
+    import threading
+    box = {}
+    def run():
+        try:
+            box["d"] = _get(url)
+        except Exception as e:
+            box["e"] = e
+    th = threading.Thread(target=run, daemon=True)
+    th.start()
+    th.join(limit)
+    if th.is_alive():
+        raise TimeoutError("feed took longer than %ds" % limit)
+    if "e" in box:
+        raise box["e"]
+    return box["d"]
 
 def parse_date(s):
     s = (s or "").strip()
