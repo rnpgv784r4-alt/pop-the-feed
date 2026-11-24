@@ -778,7 +778,7 @@ gm.addEventListener('pointerdown',e=>{
  if(gd){G.time+=3;G.score+=50;gFlash('#ffd54a');gBanner('BONUS TIME','#ffd54a',700);gHud();gTimer();return}
  if(G.cats.includes(cat)){const now=performance.now()/1000,pts=10*(1+Math.floor((G.r-1)/5));G.score+=pts;
   if(G.cnt[cat]<(G.q||5*IPM)){G.cnt[cat]++;G.hits++}
-  {const need=IPAD?7:5,win=G.r<=10?3:G.r<=20?2.6:2.2;(G.cts=G.cts||[]).push(now);if(G.cts.length>need)G.cts.shift();if(G.cts.length===need&&now-G.cts[0]<=win){G.cts=[];G.score+=50;gFlash('#7dff9a');gBanner('COMBO!','#7dff9a',800)}}
+  {const need=IPAD?7:5,win=G.r<=10?0:G.r<=20?1.8:1.5;if(win)(G.cts=G.cts||[]).push(now);if(win&&G.cts.length>need)G.cts.shift();if(win&&G.cts.length===need&&now-G.cts[0]<=win){G.cts=[];G.score+=50;gFlash('#7dff9a');gBanner('COMBO!','#7dff9a',800)}}
   gHud();if(G.cats.every(k=>G.cnt[k]>=(G.q||5*IPM)))roundDone()}
  else if(G.shield>0){G.shield--;G.cts=[];gFlash('#7fd8ff');gBanner('SHIELD SAVED','#7fd8ff',900);gHud()}
  else{gFlash();G.wrong=true;gameOver(false)}
