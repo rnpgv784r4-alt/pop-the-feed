@@ -205,6 +205,7 @@ body.gaming #gm{display:block}body.gaming #cats,body.gaming #tag{display:none}bo
 @keyframes ospk{0%,12%{opacity:0;transform:scale(0)}16%{opacity:1;transform:scale(1.25)}22%{opacity:1;transform:scale(.9)}28%,100%{opacity:0;transform:scale(.3)}}
 body.gaming #oglint,body.gaming #osp{display:none}
 
+#mute{position:absolute;right:8px;top:calc(env(safe-area-inset-top,0px) + 6px);width:30px;height:30px;padding:5px;border:0;background:none;color:#d9c4f0;opacity:.55;z-index:4;-webkit-tap-highlight-color:transparent;transition:opacity .25s}#mute.off{opacity:.9;color:#ffe9a8}#mute svg{display:block;width:100%;height:100%}#mute .x{display:none}#mute.off .x{display:inline}#mute.off .w{display:none}
 #mnote{position:absolute;left:8px;top:calc(env(safe-area-inset-top,0px) + 6px);width:30px;height:30px;padding:5px;border:0;background:none;color:#d9c4f0;opacity:.3;z-index:4;display:none;-webkit-tap-highlight-color:transparent;transition:opacity .25s}
 #mnote svg{display:block;width:100%;height:100%}
 #mnote.has{display:block}#mnote.on{opacity:.8;animation:nbeat 1.6s ease-in-out infinite}
@@ -229,7 +230,7 @@ body.gaming #oglow{display:none}
 <g id="gl"></g><g id="layer"></g>
 </svg></div></div>
 <div id="gm"><div id="gart"></div><div id="gbs"></div><div id="gfl"></div><div id="glt"></div><div id="gtime"></div><div id="gint"></div><div id="gflash"></div></div>
-<div id="bar"><button id="mnote" aria-label="Music"><svg viewBox="0 0 16 16" shape-rendering="crispEdges" fill="currentColor"><path d="M6 1h8v2H8v8H6zM4 10h3v1h1v3H7v1H4v-1H3v-3h1z"/></svg></button><div id="top"><div id="side"><div id="cn"><span id="cnt">0 / 39</span><small>popped</small></div></div><div id="lgw"><img id="logoimg" src="logo-banner.png" alt="Pop The Feed"><div id="oglow"></div><div id="oglint"></div><div id="osp"></div></div><button id="reset" aria-label="Refresh"><img src="refresh.png" alt="Refresh"></button></div>
+<div id="bar"><button id="mute" aria-label="Mute sound effects" aria-pressed="false"><svg viewBox="0 0 16 16" shape-rendering="crispEdges" fill="currentColor"><path d="M2 6h3l4-3v10l-4-3H2z"/><path class="w" d="M11 5h1v1h1v4h-1v1h-1v-1h1V6h-1zM13 3h1v1h1v8h-1v1h-1v-1h1V4h-1z"/><path class="x" d="M11 6h1v1h1V6h1v1h-1v1h1v1h-1v1h-1V9h-1V8h1V7h-1z"/></svg></button><button id="mnote" aria-label="Music"><svg viewBox="0 0 16 16" shape-rendering="crispEdges" fill="currentColor"><path d="M6 1h8v2H8v8H6zM4 10h3v1h1v3H7v1H4v-1H3v-3h1z"/></svg></button><div id="top"><div id="side"><div id="cn"><span id="cnt">0 / 39</span><small>popped</small></div></div><div id="lgw"><img id="logoimg" src="logo-banner.png" alt="Pop The Feed"><div id="oglow"></div><div id="oglint"></div><div id="osp"></div></div><button id="reset" aria-label="Refresh"><img src="refresh.png" alt="Refresh"></button></div>
 <div id="tag">Pop a bubble. Find a story.</div><div id="cats"><button class="cat" data-c="Art"><span>Art</span></button><button class="cat" data-c="Entertainment"><span>Entertainment</span></button><button class="cat" data-c="Oddities"><span>Oddities</span></button><button class="cat" data-c="History"><span>History</span></button><button class="cat" data-c="Science"><span>Science</span></button></div><div id="ghud"><span id="grd">R1/5</span><span id="gcat"><span id="garr">&#8593;</span> <span id="gcn">Art</span></span><span id="gdots"><i></i><i></i><i></i><i></i><i></i></span><span id="gtm">0:30</span><button id="gq">Quit</button></div></div>
 <div id="a2h"><img src="apple-touch-icon.png" alt=""><span><b>Pop The Feed</b><i id="a2t" style="font-style:normal">Add us to your Home Screen.</i></span><button id="a2b">Add</button><button id="a2x" aria-label="Close">&#10005;</button></div><div id="rd"><div id="rdb"></div><div id="rdp" role="dialog" aria-modal="true" aria-label="Reader"><div id="rdt"><span id="rdn">Reader</span><button id="rdx" aria-label="Close reader">&#10005; Close</button></div><div id="rdau" aria-label="Auto scroll"><button id="rdam" aria-label="Slower">&minus;</button><button id="rdap">&#9654; Auto</button><span id="rdsp"><b id="rdsn">3</b>speed</span><button id="rdaa" aria-label="Faster">+</button></div><div id="rdc"><span id="rds"></span><h2 id="rdh"></h2><img id="rdi" alt=""><p id="rdl"></p><div id="rdbd"></div><a id="rdm" target="_blank" rel="noopener"></a><small id="rdat"></small></div></div></div><div id="spw"></div><div id="ytw"></div>
 <label id="hp" style="position:fixed;bottom:2px;left:2px;width:44px;height:26px;opacity:.01;pointer-events:none;z-index:-1"><input type="checkbox" switch></label>
@@ -274,8 +275,10 @@ if(WIDE){const sv=$('svg'),im=sv.querySelector('image');sv.classList.add('wide')
  const gb=document.querySelector('#gb feGaussianBlur');if(gb)gb.setAttribute('stdDeviation','6')}
 let popped=0,pools={},cur=null,AC=null,closedAt=0,lastPop=0;
 let lastHap=0;
+let MUTED=false;try{MUTED=localStorage.getItem('ptf_mute')==='1'}catch(e){}
+function muteUi(){const m=document.getElementById('mute');if(!m)return;m.classList.toggle('off',MUTED);m.setAttribute('aria-pressed',MUTED?'true':'false');m.setAttribute('aria-label',MUTED?'Unmute sound effects':'Mute sound effects')}
 function hap(){const n=Date.now();if(n-lastHap<150)return;lastHap=n;try{if(navigator.vibrate){navigator.vibrate(18);return}}catch(e){}try{document.getElementById('hp').click()}catch(e){}}
-function snd(){hap();try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state!=='running')AC.resume();
+function snd(){hap();if(MUTED)return;try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state!=='running')AC.resume();
 const t=AC.currentTime,sr=AC.sampleRate,v=.85+Math.random()*.3;
 const m=AC.createGain();m.gain.value=.85;const lp=AC.createBiquadFilter();lp.type='lowpass';lp.frequency.value=5000;m.connect(lp);lp.connect(AC.destination);
 function burst(at,len,ty,f,q,gain,pw){const n=Math.floor(sr*len),bf=AC.createBuffer(1,n,sr),d=bf.getChannelData(0);for(let i=0;i<n;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/n,pw);const s=AC.createBufferSource();s.buffer=bf;const fl=AC.createBiquadFilter();fl.type=ty;fl.frequency.value=f;fl.Q.value=q;const g=AC.createGain();g.gain.value=gain;s.connect(fl);fl.connect(g);g.connect(m);s.start(at)}
@@ -284,7 +287,7 @@ burst(t,.06,'bandpass',1400*v,3,1.6,3);
 burst(t+.015+Math.random()*.012,.03,'bandpass',2200,1.5,.35,3);
 const o=AC.createOscillator(),og=AC.createGain();o.frequency.setValueAtTime(200*v,t);o.frequency.exponentialRampToValueAtTime(80,t+.05);og.gain.setValueAtTime(.5,t);og.gain.exponentialRampToValueAtTime(.001,t+.07);o.connect(og);og.connect(m);o.start(t);o.stop(t+.08);
 }catch(e){}}
-function clk(){hap();try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state!=='running')AC.resume();const t=AC.currentTime,o=AC.createOscillator(),g=AC.createGain();o.type='square';o.frequency.setValueAtTime(2200,t);o.frequency.exponentialRampToValueAtTime(900,t+.025);g.gain.setValueAtTime(.18,t);g.gain.exponentialRampToValueAtTime(.001,t+.03);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+.04)}catch(e){}}
+function clk(){hap();if(MUTED)return;try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state!=='running')AC.resume();const t=AC.currentTime,o=AC.createOscillator(),g=AC.createGain();o.type='square';o.frequency.setValueAtTime(2200,t);o.frequency.exponentialRampToValueAtTime(900,t+.025);g.gain.setValueAtTime(.18,t);g.gain.exponentialRampToValueAtTime(.001,t+.03);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+.04)}catch(e){}}
 function el(n,a){const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e}
 
 const catOf=s=>s[4]||SRC[s[0]]||null;
@@ -327,7 +330,7 @@ SB.forEach((b,i)=>{
 const CL=['Art','Entertainment','Oddities','History','Science'],CC={Art:'#D63384',Entertainment:'#E8603C',Oddities:'#E8A020',History:'#8E7BE0',Science:'#1FA58C'},catT={},catN={};let pendingCat=null;
 CL.forEach(c=>{catT[c]=SB.filter(b=>b[4]===c).length;catN[c]=0});
 function setNs(){document.querySelectorAll('.cat').forEach(b=>b.classList.toggle('done',catN[b.dataset.c]>=catT[b.dataset.c]))}
-function chime(big){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state!=='running')AC.resume();const t=AC.currentTime,ns=big?[523.25,659.25,783.99,1046.5,1318.5]:[587.33,739.99,880];ns.forEach((f,k)=>{const o=AC.createOscillator(),g=AC.createGain();o.type='triangle';o.frequency.value=f;const st=t+k*.085;g.gain.setValueAtTime(.0001,st);g.gain.exponentialRampToValueAtTime(.22,st+.015);g.gain.exponentialRampToValueAtTime(.001,st+.35);o.connect(g);g.connect(AC.destination);o.start(st);o.stop(st+.4)})}catch(e){}}
+function chime(big){if(MUTED)return;try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state!=='running')AC.resume();const t=AC.currentTime,ns=big?[523.25,659.25,783.99,1046.5,1318.5]:[587.33,739.99,880];ns.forEach((f,k)=>{const o=AC.createOscillator(),g=AC.createGain();o.type='triangle';o.frequency.value=f;const st=t+k*.085;g.gain.setValueAtTime(.0001,st);g.gain.exponentialRampToValueAtTime(.22,st+.015);g.gain.exponentialRampToValueAtTime(.001,st+.35);o.connect(g);g.connect(AC.destination);o.start(st);o.stop(st+.4)})}catch(e){}}
 function celebrate(c,big){
  const r=document.querySelector('.cat[data-c="'+c+'"]').getBoundingClientRect(),ox=r.left+r.width/2,oy=r.top+r.height/2;
  chime(big);hap();setTimeout(hap,170);
@@ -596,7 +599,7 @@ const Music=(()=>{
   tmr=setTimeout(sched,60)
  }
  return{
-  start(){try{ctx=AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(ctx.state!=='running')ctx.resume();ctx=AC;
+  start(){if(MUTED)return;try{ctx=AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(ctx.state!=='running')ctx.resume();ctx=AC;
    out=ctx.createGain();out.gain.value=.5;const lp=ctx.createBiquadFilter();lp.type='lowpass';lp.frequency.value=6500;out.connect(lp);lp.connect(ctx.destination);
    on=true;step=0;round=1;next=ctx.currentTime+.1;sched()}catch(e){}},
   setRound(r){round=r},
@@ -818,6 +821,8 @@ function songPlay(){Song.want=true;
    clearTimeout(Song.t2);Song.t2=setTimeout(()=>{if(Song.want&&!Song.playing){try{Song.ctl.play()}catch(e){}}},1200);
    clearTimeout(Song.t);Song.t=setTimeout(()=>{if(Song.want&&!Song.playing)$('spw').classList.add('show')},3200)})}}
 function songPause(){Song.want=false;if(Song.kind==='yt'){clearTimeout(Song.t);clearTimeout(Song.t2);$('ytw').classList.remove('show');try{Song.yt&&Song.yt.pauseVideo()}catch(e){}songUi(false);return}if(Song.kind==='audio'&&Song.audio){Song.audio.pause();songUi(false)}else if(Song.kind==='spotify'){clearTimeout(Song.t);clearTimeout(Song.t2);$('spw').classList.remove('show');try{Song.ctl&&Song.ctl.pause()}catch(e){}songUi(false)}}
+$('mute').addEventListener('click',e=>{e.stopPropagation();MUTED=!MUTED;try{localStorage.setItem('ptf_mute',MUTED?'1':'0')}catch(x){}muteUi();hap();
+ if(MUTED){try{Music.stop()}catch(x){}}else{if(G&&G.state!=='over'){try{Music.start();Music.setRound(1+Math.round((G.r-1)*6/(GLV-1)))}catch(x){}}else clk()}});muteUi();
 $('mnote').addEventListener('click',()=>{if(Song.playing||Song.want)songPause();else songPlay()});
 fetch('music.json?'+Date.now()).then(r=>r.ok?r.json():null).then(d=>{if(d&&d.song)songSet(d.song)}).catch(()=>{});
 (function(){const A=$('a2h');let dp=null;
