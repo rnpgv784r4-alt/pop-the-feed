@@ -10,7 +10,7 @@
 html,body{height:100%;margin:0;background:#35024a;overflow:hidden;overscroll-behavior:none;touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;font-family:system-ui,sans-serif}
 #scroll{position:fixed;inset:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:none}
 #inner{padding-top:var(--bh,210px)}
-#svg{width:100%;height:auto;aspect-ratio:1179/5112;display:block;touch-action:pan-y}
+#svg{width:100%;height:auto;aspect-ratio:1179/4387;display:block;touch-action:pan-y}
 .pop{opacity:0;transition:opacity .12s}.pop.on{opacity:1}
 .hit{fill:transparent;cursor:pointer}
 #osw{position:absolute;margin:0;opacity:.02;border-radius:50%;z-index:3;touch-action:manipulation;-webkit-tap-highlight-color:transparent}body.gaming #osw{display:none}
@@ -140,11 +140,7 @@ a#more{box-sizing:border-box;width:min(260px,80%);text-align:center;line-height:
 .lvbig{font:800 34px/1.1 'Trebuchet MS',Tahoma,sans-serif;text-align:center;color:#0a3fd6;margin:6px 0 4px}
 .rknm{font:700 20px/1.2 'Trebuchet MS',Tahoma,sans-serif;text-align:center}
 /* arcade font on the achievement / promotion / game-over box */
-#achcard #attl{font:400 12px 'Press Start 2P','Courier New',monospace;letter-spacing:0;text-shadow:1px 1px #0a1f78}
 #achcard .lvbig{font:400 20px/1.4 'Press Start 2P','Courier New',monospace;letter-spacing:0;text-shadow:2px 2px 0 rgba(10,63,214,.2)}#achcard .lvbig.sm{font-size:14px;line-height:1.5}
-#achcard .rknm{font:400 11px/1.6 'Press Start 2P','Courier New',monospace;letter-spacing:0}
-#achcard #apt{font:400 9px/2 'Press Start 2P','Courier New',monospace;letter-spacing:0}
-#achcard #aok,#achcard #ayes{font:400 11px 'Press Start 2P','Courier New',monospace;letter-spacing:0;height:50px}
 #ark{margin-top:8px}#apt{text-align:center;margin:12px 0 16px;font-size:13px;line-height:1.4}
 #ptr{position:fixed;left:50%;top:calc(var(--bh,210px) + 6px);transform:translateX(-50%);opacity:0;z-index:4;pointer-events:none;background:rgba(53,2,74,.92);color:#fff;font:600 13px system-ui,sans-serif;padding:6px 14px;border-radius:16px;transition:opacity .15s}
 .cat.done span::after{content:'\2713';margin-left:2px}
@@ -157,13 +153,13 @@ a#more{box-sizing:border-box;width:min(260px,80%);text-align:center;line-height:
 
 #gm{position:fixed;left:0;right:0;bottom:0;top:var(--bh,210px);overflow:hidden;background:#35024a;display:none;z-index:3;touch-action:none;-webkit-user-select:none}
 body.gaming #gm{display:block}body.gaming #cats,body.gaming #tag{display:none}body.gaming #ghud{display:flex}body.gaming #stat{display:none}body.gaming #reset{visibility:hidden}
-#gart{position:absolute;left:0;top:0;width:100%;background:url(bubbles-v2.jpg) no-repeat;will-change:transform}
+#gart{position:absolute;left:0;top:0;width:100%;background:url(bubbles-v3.jpg) no-repeat;will-change:transform}
 #gbs{position:absolute;inset:0}
 .gb{position:absolute;left:0;top:0;border-radius:50%;will-change:transform;touch-action:none}
-.gb .gp{position:absolute;inset:0;border-radius:50%;background:url(bubbles-popped-v2.jpg) no-repeat;opacity:0}
+.gb .gp{position:absolute;inset:0;border-radius:50%;background:url(bubbles-popped-v3.jpg) no-repeat;opacity:0}
 .gb.p .gp{opacity:1}
-.gb.gl .gu,.gb.gl .gp{position:absolute;inset:0;border-radius:50%;background:url(bubbles-v2.jpg) no-repeat}
-.gb.gl .gp{background-image:url(bubbles-popped-v2.jpg)}
+.gb.gl .gu,.gb.gl .gp{position:absolute;inset:0;border-radius:50%;background:url(bubbles-v3.jpg) no-repeat}
+.gb.gl .gp{background-image:url(bubbles-popped-v3.jpg)}
 #gfl{position:absolute;left:-80px;top:-80px;right:-80px;bottom:-80px;display:none;will-change:transform;pointer-events:none;
  background:radial-gradient(circle at 28% 30%,rgba(255,255,255,.13) 0 5px,transparent 6px) 0 0/64px 64px,radial-gradient(circle at 72% 68%,rgba(20,0,40,.16) 0 9px,transparent 10px) 0 0/64px 64px,linear-gradient(115deg,rgba(255,255,255,.035) 0 18%,transparent 19% 60%,rgba(255,255,255,.03) 61% 66%,transparent 67%) 0 0/64px 64px,#7a1aa0}
 #glt{position:absolute;inset:0;display:none}
@@ -236,9 +232,9 @@ body.gaming #oglow{display:none}
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 </head><body>
 <div id="scroll"><div id="inner">
-<svg id="svg" viewBox="0 0 1179 5112" preserveAspectRatio="xMidYMin meet" xmlns="http://www.w3.org/2000/svg">
+<svg id="svg" viewBox="0 0 1179 4387" preserveAspectRatio="xMidYMin meet" xmlns="http://www.w3.org/2000/svg">
 <defs id="defs"><filter id="gb" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="16"/></filter></defs>
-<image href="bubbles-v2.jpg" x="0" y="-400" width="1179" height="5512"/>
+<image href="bubbles-v3.jpg" x="0" y="0" width="1179" height="4387"/>
 <g id="gl"></g><g id="layer"></g>
 </svg></div></div>
 <div id="gm"><div id="gart"></div><div id="gbs"></div><div id="gfl"></div><div id="glt"></div><div id="gtime"></div><div id="gint"></div><div id="gflash"></div></div>
@@ -254,7 +250,7 @@ body.gaming #oglow{display:none}
 <div id="qzov"><div id="qzc"><div id="qzt"><i><u></u><u></u><u></u><u></u></i><span>Pop Quiz!</span><b id="qzx" aria-label="Close">&#10005;</b></div><div id="qzb"><div id="qzp"></div><div id="qzq0"><div id="qzf"></div><p id="qzq"></p><div id="qzo"></div></div><div id="qzs" style="display:none"><div class="trophy" id="qzi"></div><div class="big" id="qzh"></div><p id="qzm"></p><button id="qzgo"></button><button id="qzno" style="display:none">No thanks, skip level-up</button></div></div></div></div><div id="achov"><div id="achcard"><div id="atb"><i id="alogo"><u></u><u></u><u></u><u></u></i><span id="attl">Achievement Unlocked!</span><b id="ax">&#10005;</b></div><div id="abd"><div class="trophy">&#127942;</div><div class="lvbig" id="avl">LEVEL 2</div><div class="rknm" id="ark">Thumb Warmup</div><p id="apt"></p><div id="hsrow"><input id="hsi" maxlength="3" placeholder="AAA" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false"><button id="hsv">Save top score</button></div><button id="aok">Keep Popping</button><button id="ayes" style="display:none;margin-top:10px">New Sheet</button></div></div></div>
 <div id="ov"><div id="card"><div id="tb"><i id="logo"><u></u><u></u><u></u><u></u></i><span id="ttl">Pop The Feed</span><b id="x">&#10005;</b></div><div id="bd"><div id="row"><svg id="fbsvg" viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="12" y="1" width="1" height="1" fill="#ffffff"/><rect x="10" y="3" width="1" height="1" fill="#c9a2ff"/><rect x="13" y="4" width="1" height="1" fill="#c9a2ff"/><rect x="3" y="5" width="4" height="1" fill="#3a1670"/><rect x="2" y="6" width="1" height="1" fill="#3a1670"/><rect x="3" y="6" width="2" height="1" fill="#c9a2ff"/><rect x="5" y="6" width="3" height="1" fill="#9a5bec"/><rect x="1" y="7" width="1" height="1" fill="#3a1670"/><rect x="2" y="7" width="1" height="1" fill="#c9a2ff"/><rect x="3" y="7" width="2" height="1" fill="#ffffff"/><rect x="5" y="7" width="4" height="1" fill="#9a5bec"/><rect x="0" y="8" width="1" height="1" fill="#3a1670"/><rect x="1" y="8" width="1" height="1" fill="#c9a2ff"/><rect x="2" y="8" width="2" height="1" fill="#ffffff"/><rect x="4" y="8" width="6" height="1" fill="#9a5bec"/><rect x="10" y="8" width="1" height="1" fill="#3a1670"/><rect x="0" y="9" width="1" height="1" fill="#3a1670"/><rect x="1" y="9" width="1" height="1" fill="#c9a2ff"/><rect x="2" y="9" width="1" height="1" fill="#ffffff"/><rect x="3" y="9" width="7" height="1" fill="#9a5bec"/><rect x="10" y="9" width="1" height="1" fill="#3a1670"/><rect x="0" y="10" width="1" height="1" fill="#3a1670"/><rect x="1" y="10" width="8" height="1" fill="#9a5bec"/><rect x="9" y="10" width="1" height="1" fill="#7a3dc8"/><rect x="10" y="10" width="1" height="1" fill="#3a1670"/><rect x="0" y="11" width="1" height="1" fill="#3a1670"/><rect x="1" y="11" width="8" height="1" fill="#9a5bec"/><rect x="9" y="11" width="1" height="1" fill="#7a3dc8"/><rect x="10" y="11" width="1" height="1" fill="#3a1670"/><rect x="0" y="12" width="1" height="1" fill="#3a1670"/><rect x="1" y="12" width="7" height="1" fill="#9a5bec"/><rect x="8" y="12" width="2" height="1" fill="#7a3dc8"/><rect x="10" y="12" width="1" height="1" fill="#3a1670"/><rect x="1" y="13" width="1" height="1" fill="#3a1670"/><rect x="2" y="13" width="4" height="1" fill="#9a5bec"/><rect x="6" y="13" width="3" height="1" fill="#7a3dc8"/><rect x="9" y="13" width="1" height="1" fill="#3a1670"/><rect x="2" y="14" width="1" height="1" fill="#3a1670"/><rect x="3" y="14" width="5" height="1" fill="#7a3dc8"/><rect x="8" y="14" width="1" height="1" fill="#3a1670"/><rect x="3" y="15" width="5" height="1" fill="#3a1670"/></svg><img id="thumb" alt="" referrerpolicy="no-referrer" style="display:none"><div id="msg"><span id="src"></span><b id="hl"></b></div></div><p id="sm"></p><div id="btns"><button id="rdo">Reader</button><a id="more" href="#" target="_blank" rel="noopener noreferrer">Read More</a></div></div></div></div>
 <script>
-const B=[[128, 9, 215, 198, "Art"], [606, 9, 215, 198, "Entertainment"], [1084, 9, 215, 198, "Oddities"], [128, 448, 215, 198, "Oddities"], [606, 448, 215, 198, "Science"], [1084, 448, 215, 198, "History"], [128, 881, 215, 198, "History"], [606, 881, 215, 198, "Art"], [1084, 881, 215, 198, "Entertainment"], [128, 1313, 215, 198, "Entertainment"], [606, 1313, 215, 198, "Oddities"], [1084, 1313, 215, 198, "Science"], [128, 1727, 215, 198, "Science"], [606, 1727, 215, 198, "History"], [1084, 1727, 215, 198, "Art"], [128, 2143, 215, 198, "Art"], [606, 2143, 215, 198, "Entertainment"], [1084, 2143, 215, 198, "Oddities"], [128, 2586, 215, 198, "Oddities"], [606, 2586, 215, 198, "Science"], [1084, 2586, 215, 198, "History"], [128, 3020, 215, 198, "History"], [606, 3020, 215, 198, "Art"], [1084, 3020, 215, 198, "Entertainment"], [128, 3452, 215, 198, "Entertainment"], [606, 3452, 215, 198, "Oddities"], [1084, 3452, 215, 198, "Science"], [128, 3866, 215, 198, "Science"], [606, 3866, 215, 198, "History"], [1084, 3866, 215, 198, "Art"], [128, 4280, 215, 198, "Art"], [606, 4280, 215, 198, "Entertainment"], [1084, 4280, 215, 198, "Oddities"], [128, 4725, 215, 198, "Oddities"], [606, 4725, 215, 198, "Science"], [1084, 4725, 215, 198, "History"], [128, 5155, 215, 198, "History"], [606, 5155, 215, 198, "Art"], [1084, 5155, 215, 198, "Entertainment"]];
+const B=[[150,146,141,141,"Art"],[442,146,141,141,"Entertainment"],[735,146,141,141,"Oddities"],[1027,146,141,141,"History"],[150,439,141,141,"Science"],[442,439,141,141,"Art"],[735,439,141,141,"Entertainment"],[1027,439,141,141,"Oddities"],[150,731,141,141,"History"],[442,731,141,141,"Science"],[735,731,141,141,"Art"],[1027,731,141,141,"Entertainment"],[150,1024,141,141,"Oddities"],[442,1024,141,141,"History"],[735,1024,141,141,"Science"],[1027,1024,141,141,"Art"],[150,1316,141,141,"Entertainment"],[442,1316,141,141,"Oddities"],[735,1316,141,141,"History"],[1027,1316,141,141,"Science"],[150,1609,141,141,"Art"],[442,1609,141,141,"Entertainment"],[735,1609,141,141,"Oddities"],[1027,1609,141,141,"History"],[150,1901,141,141,"Science"],[442,1901,141,141,"Art"],[735,1901,141,141,"Entertainment"],[1027,1901,141,141,"Oddities"],[150,2194,141,141,"History"],[442,2194,141,141,"Science"],[735,2194,141,141,"Art"],[1027,2194,141,141,"Entertainment"],[150,2486,141,141,"Oddities"],[442,2486,141,141,"History"],[735,2486,141,141,"Science"],[1027,2486,141,141,"Art"],[150,2778,141,141,"Entertainment"],[442,2778,141,141,"Oddities"],[735,2778,141,141,"History"],[1027,2778,141,141,"Science"],[150,3071,141,141,"Art"],[442,3071,141,141,"Entertainment"],[735,3071,141,141,"Oddities"],[1027,3071,141,141,"History"],[150,3363,141,141,"Science"],[442,3363,141,141,"Art"],[735,3363,141,141,"Entertainment"],[1027,3363,141,141,"Oddities"],[150,3656,141,141,"History"],[442,3656,141,141,"Science"],[735,3656,141,141,"Art"],[1027,3656,141,141,"Entertainment"],[150,3948,141,141,"Oddities"],[442,3948,141,141,"History"],[735,3948,141,141,"Science"],[1027,3948,141,141,"Art"],[150,4241,141,141,"Entertainment"],[442,4241,141,141,"Oddities"],[735,4241,141,141,"History"],[1027,4241,141,141,"Science"]];
 const GC={Art:'#ff8ac8',Entertainment:'#ffa98a',Oddities:'#ffd36b',History:'#c9baff',Science:'#8ff5e0'};
 const SRC={"Boing Boing": "Oddities", "Kottke": "Oddities", "Atlas Obscura": "Oddities", "Good News Network": "Oddities", "Reader's Digest": "Oddities", "Louder Than War": "Entertainment", "Bandcamp Daily": "Entertainment", "Dangerous Minds": "Entertainment", "Pitchfork": "Entertainment", "Post-Punk.com": "Entertainment", "Bloody Disgusting": "Entertainment", "Little White Lies": "Entertainment", "BrooklynVegan": "Entertainment", "Aquarium Drunkard": "Entertainment", "Beautiful Bizarre Magazine": "Art", "StreetArtNews": "Art", "GraffitiStreet": "Art", "Sour Harvest": "Art", "DailyArt Magazine": "Art", "Creative Boom": "Art", "Colossal": "Art", "Hyperallergic": "Art", "It's Nice That": "Art", "Please Kill Me": "History", "The Public Domain Review": "History", "Open Culture": "History", "Smithsonian History": "History", "The Kid Should See This": "Science", "Phys.org": "Science", "Biographic": "Science", "Mongabay": "Science", "Smithsonian Ocean": "Science", "NASA Earth Observatory": "Science", "Audubon": "Science"};
 const BB=u=>'https://boingboing.net/tag/'+u;
@@ -281,7 +277,7 @@ const layer=$('layer'),gl=$('gl'),defs=$('defs');
 /* wide windows get a dedicated 6x8 sheet (48 bubbles); phones keep the 3-column sheet. The game keeps using B. */
 const BW=[[94,130,80,80,"Art"],[262,130,80,80,"Entertainment"],[430,130,80,80,"Oddities"],[594,130,80,80,"History"],[761,130,80,80,"Science"],[930,130,80,80,"Art"],[94,318,80,80,"Oddities"],[262,318,80,80,"History"],[430,318,80,80,"Science"],[594,318,80,80,"Art"],[761,318,80,80,"Entertainment"],[930,318,80,80,"Oddities"],[94,507,80,80,"Science"],[262,507,80,80,"Art"],[430,507,80,80,"Entertainment"],[594,507,80,80,"Oddities"],[761,507,80,80,"History"],[930,507,80,80,"Science"],[94,696,80,80,"Entertainment"],[262,696,80,80,"Oddities"],[430,696,80,80,"History"],[594,696,80,80,"Science"],[761,696,80,80,"Art"],[930,696,80,80,"Entertainment"],[94,883,80,80,"History"],[262,883,80,80,"Science"],[430,883,80,80,"Art"],[594,883,80,80,"Entertainment"],[761,883,80,80,"Oddities"],[930,883,80,80,"History"],[94,1071,80,80,"Art"],[262,1071,80,80,"Entertainment"],[430,1071,80,80,"Oddities"],[594,1071,80,80,"History"],[761,1071,80,80,"Science"],[930,1071,80,80,"Art"],[94,1253,80,80,"Oddities"],[262,1253,80,80,"History"],[430,1253,80,80,"Science"],[594,1253,80,80,"Art"],[761,1253,80,80,"Entertainment"],[930,1253,80,80,"Oddities"],[94,1429,80,80,"Science"],[262,1429,80,80,"Art"],[430,1429,80,80,"Entertainment"],[594,1429,80,80,"Oddities"],[761,1429,80,80,"History"],[930,1429,80,80,"Science"]];
 const WIDE=window.__dt(),SB=WIDE?BW:B,N=SB.length,PKEY='ptf_current_popped'+(WIDE?'_w':'');
-const SH=WIDE?{img:'bubbles-wide.JPG',pop:'bubbles-wide-popped.JPG',x:0,y:0,w:1024,h:1536}:{img:'bubbles-v2.jpg',pop:'bubbles-popped-v2.jpg',x:0,y:-400,w:1179,h:5512};
+const SH=WIDE?{img:'bubbles-wide.JPG',pop:'bubbles-wide-popped.JPG',x:0,y:0,w:1024,h:1536}:{img:'bubbles-v3.jpg',pop:'bubbles-popped-v3.jpg',x:0,y:0,w:1179,h:4387};
 if(WIDE){const sv=$('svg'),im=sv.querySelector('image');sv.classList.add('wide');sv.setAttribute('viewBox','0 0 1024 1536');sv.style.aspectRatio='1024/1536';
  im.setAttribute('href',SH.img);im.setAttribute('x',0);im.setAttribute('y',0);im.setAttribute('width',1024);im.setAttribute('height',1536);
  const gb=document.querySelector('#gb feGaussianBlur');if(gb)gb.setAttribute('stdDeviation','6')}
@@ -332,8 +328,8 @@ SB.forEach((b,i)=>{
  const cp=el('clipPath',{id:'c'+i});cp.appendChild(el('ellipse',{cx:b[0],cy:b[1],rx:b[2],ry:b[3]}));defs.appendChild(cp);
  gl.appendChild(el('ellipse',{cx:b[0],cy:b[1],rx:b[2]+8,ry:b[3]+8,class:'glow',id:'g'+i,stroke:GC[b[4]]}));
  const g=el('g',{'clip-path':'url(#c'+i+')',class:'pop',id:'p'+i});g.appendChild(el('image',{href:SH.pop,x:SH.x,y:SH.y,width:SH.w,height:SH.h}));layer.appendChild(g);
- if(!WIDE&&b[1]>1500&&b[1]<1900){const cq=el('clipPath',{id:'cq'+i});cq.appendChild(el('ellipse',{cx:b[0],cy:b[1]-2138,rx:b[2],ry:b[3]}));defs.appendChild(cq);
-  const q=el('g',{'clip-path':'url(#cq'+i+')',class:'pop',id:'q'+i});q.appendChild(el('image',{href:'bubbles-popped-v2.jpg',x:0,y:-400,width:1179,height:5512}));layer.appendChild(q)}
+ if(false){const cq=el('clipPath',{id:'cq'+i});cq.appendChild(el('ellipse',{cx:b[0],cy:b[1]-2138,rx:b[2],ry:b[3]}));defs.appendChild(cq);
+  const q=el('g',{'clip-path':'url(#cq'+i+')',class:'pop',id:'q'+i});q.appendChild(el('image',{href:'bubbles-popped-v3.jpg',x:0,y:-400,width:1179,height:5512}));layer.appendChild(q)}
  const h=el('ellipse',{cx:b[0],cy:b[1],rx:b[2]-8,ry:b[3]-8,class:'hit',id:'h'+i});
  h.addEventListener('pointerdown',e=>{ps[i]=[e.clientX,e.clientY,Date.now()]});
  h.addEventListener('pointerup',e=>{const s=ps[i];ps[i]=0;if(s&&Math.hypot(e.clientX-s[0],e.clientY-s[1])<12&&Date.now()-s[2]<700){tapXY=[e.clientX,e.clientY];pop(i)}});
@@ -663,29 +659,29 @@ const dirArrow=g=>{const v=g.vx,y=g.vy;if(!v)return y<0?'\u2191':'\u2193';if(!y)
 const GLV=GR.length;
 const IPAD=!WIDE&&innerWidth>=700,IPM=IPAD?2:1;
 const gm=$('gm'),gart=$('gart'),gbs=$('gbs');
-const GP=B.map((b,i)=>i).filter(i=>B[i][1]>=448&&B[i][1]<=2143);
+const GP=[];
 let GD=0,G=null,GE=[],GL=[],GS=1,GPp=0,GW=0,GH=0,GNc=0,GNr=0;const glt=$('glt'),gfl=$('gfl');
 function gLayout(){
- GW=gm.clientWidth;GH=gm.clientHeight;GD=WIDE?Math.min(GW,460):(IPAD?GW*2.47/6:GW);GS=GD/1179;GPp=2138*GS;
+ GW=gm.clientWidth;GH=gm.clientHeight;GD=WIDE?Math.min(GW,600):(IPAD?GW*4.03/6:GW);GS=GD/1179;GPp=2138*GS;
  gart.style.height=(GH+GPp+6)+'px';gart.style.backgroundSize=GD+'px auto';gart.style.backgroundPositionY=(-(250+400)*GS)+'px';
  if(!GE.length){GP.forEach(k=>{[0,1].forEach(j=>{const d=document.createElement('div');d.className='gb';d.dataset.e=GE.length;d.innerHTML='<div class="gp"></div><input type="checkbox" switch tabindex="-1" aria-hidden="true">';gbs.appendChild(d);GE.push({el:d,k,j,n:0,pp:false})})})}
  gLayoutL();
- GE.forEach(e=>{const b=B[e.k];e.w=2*b[2]*GS;e.h=2*b[3]*GS;e.x=b[0]*GS-e.w/2;e.el.style.width=e.w+'px';e.el.style.height=e.h+'px';const p=e.el.firstChild;p.style.backgroundSize=GD+'px auto';p.style.backgroundPosition=(-(b[0]-b[2])*GS)+'px '+(-(b[1]+400-b[3])*GS)+'px'})
+ GE.forEach(e=>{const b=B[e.k];e.w=2*b[2]*GS;e.h=2*b[3]*GS;e.x=b[0]*GS-e.w/2;e.el.style.width=e.w+'px';e.el.style.height=e.h+'px';const p=e.el.firstChild;p.style.backgroundSize=GD+'px auto';p.style.backgroundPosition=(-(b[0]-b[2])*GS)+'px '+(-(b[1]-b[3])*GS)+'px'})
 }
-const GPAT=B.slice(0,15),GSRC={Entertainment:1,Science:4,Art:7,Oddities:10,History:13}; /* whole bubbles from the centre column */const GDX=478,GDY=2138/5,GX0=128;
+const CYC5=['Art','Entertainment','Oddities','History','Science'],GSRC={Entertainment:1,Oddities:2,History:3,Science:4,Art:5}; /* whole bubbles from the top two rows of the sheet */const GDX=292.5,GDY=292.5,GX0=150;
 function gLayoutL(){
  const dx=GDX*GS,dy=GDY*GS,nc=Math.ceil(GW/dx)+2,nr=Math.ceil(GH/dy)+2;
  if(nc!==GNc||nr!==GNr){glt.textContent='';GL=[];GNc=nc;GNr=nr;
   for(let a=0;a<nc;a++)for(let b=0;b<nr;b++){const d=document.createElement('div');d.className='gb gl';d.dataset.l=GL.length;d.innerHTML='<div class="gu"></div><input type="checkbox" switch tabindex="-1" aria-hidden="true"><div class="gp"></div>';glt.appendChild(d);GL.push({el:d,a,b,idx:-1,i:0,j:0,pp:false,u:d.firstChild,p:d.lastChild})}}
  GL.forEach(s=>{s.idx=-1})}
 function gRenderL(){
- const dx=GDX*GS,dy=GDY*GS,W=GNc*dx,H=GNr*dy,x0=GX0*GS,y0=(GPAT[0][1]-250)*GS;
+ const dx=GDX*GS,dy=GDY*GS,W=GNc*dx,H=GNr*dy,x0=GX0*GS,y0=GX0*GS;
  GL.forEach(s=>{
   const xb=x0+s.a*dx+G.lx,yb=y0+s.b*dy+G.ly;
   const kx=Math.ceil((-dx-xb)/W),ky=Math.ceil((-dy-yb)/H),x=xb+kx*W,y=yb+ky*H,i=s.a+kx*GNc,j=s.b+ky*GNr;
   s.i=i;s.j=j;
-  const idx=(((3*j+i)%15)+15)%15;
-  if(idx!==s.idx){s.idx=idx;s.cat=GPAT[idx][4];const b=B[GSRC[s.cat]],w=2*b[2]*GS,h=2*b[3]*GS,pos=(-(b[0]-b[2])*GS)+'px '+(-(b[1]+400-b[3])*GS)+'px';
+  const idx=(((i-j)%5)+5)%5;
+  if(idx!==s.idx){s.idx=idx;s.cat=CYC5[idx];const b=B[GSRC[s.cat]],w=2*b[2]*GS,h=2*b[3]*GS,pos=(-(b[0]-b[2])*GS)+'px '+(-(b[1]-b[3])*GS)+'px';
    s.el.style.width=w+'px';s.el.style.height=h+'px';s.w=w;s.h=h;
    [s.u,s.p].forEach(q=>{q.style.backgroundSize=GD+'px auto';q.style.backgroundPosition=pos});
    s.el.classList.toggle('tg',G.cats.includes(s.cat));s.el.style.setProperty('--gc',GC[s.cat])}
@@ -714,7 +710,7 @@ function gTimer(){const low=G.time<=5;$('gtm').textContent=fmt(G.time);$('gtm').
 function gFlash(col){const f=$('gflash');f.style.background=col||'';f.getAnimations().forEach(a=>a.cancel());f.animate([{opacity:.45},{opacity:0}],{duration:260})}
 function gBanner(t,col,ms){const gi=$('gint');gi.innerHTML=pixT(t,col,Math.min(3.2,(GW*.85)/(t.length*8)));gi.getAnimations().forEach(a=>a.cancel());gi.animate([{opacity:0,transform:'scale(.8)'},{opacity:1,transform:'scale(1)',offset:.2},{opacity:1,offset:.7},{opacity:0}],{duration:ms||900})}
 function startRound(r){
- const c=G.order[r-1];const g=GR[r-1];G.r=r;G.cat=c;G.dir=g.vy<0?1:-1;G.sp=g.sp*(GD/393);G.time=G.tmax=g.t;G.mode=(g.vx||WIDE||IPAD)?'l':'v';G.tvx=g.vx*G.sp;G.tvy=g.vy*G.sp;G.vx=0;G.vy=0;G.v=0;if(G.lx==null){G.lx=0;G.ly=0}
+ const c=G.order[r-1];const g=GR[r-1];G.r=r;G.cat=c;G.dir=g.vy<0?1:-1;G.sp=g.sp*(GD/393);G.time=G.tmax=g.t;G.mode='l';G.tvx=g.vx*G.sp;G.tvy=g.vy*G.sp;G.vx=0;G.vy=0;G.v=0;if(G.lx==null){G.lx=0;G.ly=0}
   gart.style.display=gbs.style.display=G.mode==='v'?'':'none';glt.style.display=gfl.style.display=G.mode==='l'?'block':'none';GL.forEach(s=>{s.idx=-1});G.hits=0;G.popped=new Set();G.state='intro';G.itm=1.5;
  const X=LX[r]||{};G.cats=[c];if(X.two){let c2;do{c2=CL[Math.floor(Math.random()*CL.length)]}while(c2===c);G.cats.push(c2)}
  G.q=(X.two||0)*IPM;G.goal=X.two?2*G.q:5*IPM;G.cnt={};G.cats.forEach(k=>G.cnt[k]=0);G.gold=!!X.gold;G.hide=!!X.hide;G.hidden=false;G.lt=0;G.flipped=false;G.fw=false;G.flipAt=X.flip?g.t*(.4+.2*Math.random()):null;G.cts=[];
