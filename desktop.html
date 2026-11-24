@@ -63,7 +63,7 @@ ul.rd a{display:block;padding:9px 2px;color:var(--ink);text-decoration:none;font
  <div class="card"><h2>Recently read</h2><ul class="rd" id="rd"></ul><div class="empty" id="rde">Stories you read in the Reader will show up here.</div></div>
 </aside>
 <script>
-var fr=document.getElementById("fr");fr.src="index.html?nf=0"+location.search.replace(/^\?/,"&");
+var fr=document.getElementById("fr");fr.src="index.html?nf=0&_="+Math.floor(Date.now()/600000)+location.search.replace(/^\?/,"&");
 var $=function(i){return document.getElementById(i)},last="",topAt=0,TOPV=null;
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function render(s){
