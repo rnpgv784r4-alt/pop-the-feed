@@ -15,7 +15,7 @@ html,body{height:100%;margin:0;background:#35024a;overflow:hidden;overscroll-beh
 .hit{fill:transparent;cursor:pointer}
 #osw{position:absolute;margin:0;opacity:.02;border-radius:50%;z-index:3;touch-action:manipulation;-webkit-tap-highlight-color:transparent}body.gaming #osw{display:none}
 .gb input{position:absolute;left:0;top:0;width:100%;height:100%;margin:0;opacity:.02;border-radius:50%;z-index:3;touch-action:none;-webkit-tap-highlight-color:transparent}.gb .gu,.gb .gp{pointer-events:none}
-#sheet{position:relative}#hsws{position:absolute;inset:0;pointer-events:none}#hsws input{position:absolute;margin:0;opacity:.02;border-radius:50%;pointer-events:auto;touch-action:pan-y;cursor:pointer;-webkit-tap-highlight-color:transparent}#hsws input.done{pointer-events:none}body.gaming #hsws{display:none}
+#sheet{position:relative}#ovtop{position:absolute;left:0;right:0;bottom:100%;aspect-ratio:1179/1965;overflow:hidden;pointer-events:none}#ovtop img{position:absolute;left:0;top:-100%;width:100%;display:block;-webkit-user-drag:none}#hsws{position:absolute;inset:0;pointer-events:none}#hsws input{position:absolute;margin:0;opacity:.02;border-radius:50%;pointer-events:auto;touch-action:pan-y;cursor:pointer;-webkit-tap-highlight-color:transparent}#hsws input.done{pointer-events:none}body.gaming #hsws{display:none}
 #svg.wide .glow{stroke-width:13}#svg.wide .pspring{stroke-width:3}.hit.done{pointer-events:none}
 .glow{fill:none;stroke-width:34;opacity:0;transition:opacity .15s;pointer-events:none;filter:url(#gb)}.glow.on{opacity:.95}
 #bar{position:fixed;top:0;left:0;right:0;z-index:5;background:#35024a;color:#fff;padding:calc(env(safe-area-inset-top,0px) + 4px) 10px 8px;box-sizing:border-box}
@@ -338,7 +338,7 @@ SB.forEach((b,i)=>{
 });
 /* iOS only plays a haptic when a finger toggles a REAL <input switch>, so each bubble gets an invisible one on top */
 (function(){const sv=$('svg'),vb=sv.viewBox.baseVal,wrap=document.createElement('div');wrap.id='sheet';sv.parentNode.insertBefore(wrap,sv);wrap.appendChild(sv);
-const ov=document.createElement('div');ov.id='hsws';wrap.appendChild(ov);const sw=[];
+const ov=document.createElement('div');ov.id='hsws';wrap.appendChild(ov);const sw=[];if(!WIDE){const o=document.createElement('div');o.id='ovtop';const im=document.createElement('img');im.alt='';im.draggable=false;im.src=SH.img;o.appendChild(im);wrap.insertBefore(o,wrap.firstChild)}
 SB.forEach((b,i)=>{const rx=b[2]-8,ry=b[3]-8,inp=document.createElement('input');inp.type='checkbox';inp.setAttribute('switch','');inp.setAttribute('aria-hidden','true');inp.tabIndex=-1;
  inp.style.cssText='left:'+((b[0]-rx)/vb.width*100)+'%;top:'+((b[1]-ry)/vb.height*100)+'%;width:'+(2*rx/vb.width*100)+'%;height:'+(2*ry/vb.height*100)+'%';
  let dn=null,lt=0;inp.addEventListener('pointerdown',e=>{dn=[e.clientX,e.clientY]});
