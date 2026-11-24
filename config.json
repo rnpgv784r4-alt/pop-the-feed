@@ -402,6 +402,14 @@
    "home": "https://sheets.works/data-viz",
    "feeds": [],
    "cat": "Science"
+  },
+  {
+   "name": "DeviantArt #surrealism",
+   "home": "https://backend.deviantart.com",
+   "feeds": [
+    "https://backend.deviantart.com/rss.xml?type=deviation&q=tag:surrealism"
+   ],
+   "cat": "Art"
   }
  ],
  "topics": [
