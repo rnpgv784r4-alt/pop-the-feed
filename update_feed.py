@@ -150,13 +150,15 @@ def reader_body(raw, desc=""):
             break
         out.append(["h" if head else "p", t])
         chars += len(t)
+    plain = html.unescape(re.sub(r"<[^>]+>", " ", raw))[-500:]
+    preview = bool(re.search(r"(?i)read the (full )?(essay|story|article|piece)|continue reading|read the rest|read more", plain))
     texts = sum(len(v) for k, v in out if k in ("p", "h"))
     if texts < max(500, len(desc) * 2):
         return None
     while out and out[-1][0] == "i":
         out.pop()
-    if cut:
-        out.append(["m", ""])
+    if cut or preview:
+        out.append(["m", "preview" if preview else ""])
     return out
 
 def find_image(it, raw):
