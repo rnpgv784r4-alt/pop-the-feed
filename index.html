@@ -302,7 +302,7 @@ function el(n,a){const e=document.createElementNS(NS,n);for(const k in a)e.setAt
 const catOf=s=>s[4]||SRC[s[0]]||null;
 const byNew=(x,y)=>(y[6]||0)-(x[6]||0);
 const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
-let seen=new Set();try{seen=new Set(JSON.parse(localStorage.getItem('seen')||'[]'))}catch(e){}
+let seen=new Set(); /* only used inside a session now; what you opened is tracked in ptf_read */
 let readL=[];try{readL=JSON.parse(localStorage.getItem('ptf_read')||'[]');if(!Array.isArray(readL))readL=[]}catch(e){}
 function markRead(u){if(!u)return;readL=readL.filter(x=>x!==u);readL.push(u);if(readL.length>800)readL=readL.slice(-800);try{localStorage.setItem('ptf_read',JSON.stringify(readL))}catch(e){}}
 let assign={},SJ=JSON.stringify(S);
@@ -315,13 +315,13 @@ function build(){
   /* order: never shown -> shown but not opened -> opened (least recently read first, so a story you read goes to the back of the line) */
   const hasR=t=>Array.isArray(t[7])&&t[7].length>0,rd=t=>readL.indexOf(t[3]),isR=t=>rd(t)>=0;
   const un=pool.filter(t=>!isR(t)&&!seen.has(t[3])),sn=pool.filter(t=>!isR(t)&&seen.has(t[3])),rl=pool.filter(isR).sort((x,y)=>rd(x)-rd(y));
-  let pick=shuf(un.filter(hasR)).concat(shuf(un.filter(t=>!hasR(t))),shuf(sn.filter(hasR)),shuf(sn.filter(t=>!hasR(t))),rl);
+  const K=idx.length+6,top=un.slice(0,K); /* stories.json is newest-first: take the newest unread ones, reader stories first */
+  let pick=shuf(top.filter(hasR)).concat(shuf(top.filter(t=>!hasR(t))),un.slice(K),shuf(sn.filter(hasR)),shuf(sn.filter(t=>!hasR(t))),rl);
   while(pick.length<idx.length)pick=pick.concat(rl.length?rl:shuf(pool));
   pick=pick.slice(0,idx.length).sort((x,y)=>hasR(y)-hasR(x));
-  idx.forEach((bi,k)=>{assign[bi]=pick[k];seen.add(pick[k][3])});
+  idx.forEach((bi,k)=>{assign[bi]=pick[k]});
  });
- try{localStorage.setItem('seen',JSON.stringify([...seen].slice(-400)))}catch(e){}
-}
+ }
 function storyFor(i){return assign[i]||S[0]}
 build();
 const ps={};let lastScr=0,sdX=0,sdY=0,mvD=0;document.addEventListener('scroll',()=>{lastScr=Date.now()},{capture:true,passive:true});document.addEventListener('pointerdown',e=>{sdX=e.clientX;sdY=e.clientY;mvD=0},true);document.addEventListener('pointermove',e=>{mvD=Math.max(mvD,Math.hypot(e.clientX-sdX,e.clientY-sdY))},true);const calm=()=>Date.now()-lastScr>300&&mvD<10;
@@ -726,7 +726,7 @@ function startRound(r){
 function gOrder(){const o=[];for(let k=0;k<Math.ceil(GLV/5);k++){const x=shuf(CL);if(o.length&&x[0]===o[o.length-1]){const t=x[0];x[0]=x[1];x[1]=t}o.push(...x)}return o}
 function nextRound(){if(!G)return;if(G.r>=GLV)gameOver(true);else startRound(G.r+1)}
 function roundDone(){G.state='card';G.score+=Math.ceil(G.time)*G.r;gHud();chime(false);hap();setTimeout(()=>{if(G&&G.state==='card'){G.state='next';nextRound()}},450)}
-function pickStory(c){let pool=S.filter(t=>catOf(t)===c);if(!pool.length)pool=S;let u=pool.filter(t=>!seen.has(t[3]));const st=shuf(u.length?u:pool)[0];seen.add(st[3]);try{localStorage.setItem('seen',JSON.stringify([...seen].slice(-400)))}catch(e){}return st}
+function pickStory(c){let pool=S.filter(t=>catOf(t)===c);if(!pool.length)pool=S;let u=pool.filter(t=>!seen.has(t[3])&&readL.indexOf(t[3])<0);const st=shuf(u.length?u:pool)[0];seen.add(st[3]);try{localStorage.setItem('seen',JSON.stringify([...seen].slice(-400)))}catch(e){}return st}
 function gameOver(win){
  const wr=G.wrong;G.state='over';Music.stop();gm.classList.remove('hid');if(win){G.score+=1000;chime(true)}
  let best=0;try{best=parseInt(localStorage.getItem('ptf_game_best'))||0}catch(e){}

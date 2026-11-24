@@ -47,8 +47,10 @@ SITES = [
  ("Audubon", "https://www.audubon.org/magazine", ["https://www.audubon.org/magazine/rss.xml", "https://www.audubon.org/rss.xml"], "Science"),
 ]
 CATS = ["Art", "Entertainment", "Oddities", "History", "Science"]
-PER_FEED = 10     # newest items read from each site or search
-PER_CAT = 40      # stories kept per category (the page picks 7-8 per sheet, unseen ones first)
+PER_FEED = 15     # newest items read from each site or search
+PER_CAT = 70      # stories kept per category (the page picks 7-8 per sheet, newest unread first)
+MAX_AGE_DAYS = 21  # stories older than this are dropped (undated ones are kept)
+READER_BONUS = 36 * 3600  # a story with a Reader view counts as this much newer when ranking
 MAX_PER_SITE = 3  # first pass: at most this many per site, so one busy site can't take over
 DROP = {"Smithsonian Ocean"}   # sources that block our servers; skipped even if they are in config.json
 TOPIC_DAYS = 30   # topic searches only look at stories from the last N days
@@ -261,7 +263,7 @@ def pick(stories):
     final = []
     for cat in CATS:
         # stories with a Reader view (full text in the feed) come first, newest first within each group
-        pool = sorted([s for s in uniq if s[4] == cat], key=lambda s: (0 if len(s) > 7 else 1, -s[6]))
+        pool = sorted([s for s in uniq if s[4] == cat], key=lambda s: -(s[6] + (READER_BONUS if len(s) > 7 else 0)))
         chosen, count = [], {}
         for s in pool:
             if len(chosen) < PER_CAT and count.get(s[0], 0) < MAX_PER_SITE:
@@ -451,6 +453,8 @@ def main():
                         s[2] = "Tap the button below for the full story."
         stories += got
     stories = [s for s in stories if not any(b in s[3].lower() or b in s[1].lower() for b in blocked)]
+    cutoff = int(time.time()) - MAX_AGE_DAYS * 86400
+    stories = [s for s in stories if s[6] == 0 or s[6] >= cutoff]
     pins = [pin_story(p["url"], p["cat"]) for p in cfg.get("pins", []) if p.get("url") and p.get("cat") in CATS]
     stories = [p for p in pins if p] + stories
     final = pick(stories)
