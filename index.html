@@ -316,7 +316,7 @@ function build(){
   const hasR=t=>Array.isArray(t[7])&&t[7].length>0,rd=t=>readL.indexOf(t[3]),isR=t=>rd(t)>=0;
   const un=pool.filter(t=>!isR(t)&&!seen.has(t[3])),sn=pool.filter(t=>!isR(t)&&seen.has(t[3])),rl=pool.filter(isR).sort((x,y)=>rd(x)-rd(y));
   const K=idx.length+6,top=un.slice(0,K); /* stories.json is newest-first: take the newest unread ones, reader stories first */
-  let pick=shuf(top.filter(hasR)).concat(shuf(top.filter(t=>!hasR(t))),un.slice(K),shuf(sn.filter(hasR)),shuf(sn.filter(t=>!hasR(t))),rl);
+  const rest=un.slice(K);let pick=shuf(top.filter(hasR)).concat(shuf(rest.filter(hasR)),shuf(top.filter(t=>!hasR(t))),rest.filter(t=>!hasR(t)),shuf(sn.filter(hasR)),shuf(sn.filter(t=>!hasR(t))),rl.filter(hasR),rl.filter(t=>!hasR(t)));
   while(pick.length<idx.length)pick=pick.concat(rl.length?rl:shuf(pool));
   pick=pick.slice(0,idx.length).sort((x,y)=>hasR(y)-hasR(x));
   idx.forEach((bi,k)=>{assign[bi]=pick[k]});
@@ -450,8 +450,8 @@ let QZbusy=false,QD=[];try{QD=JSON.parse(localStorage.getItem('ptf_qzdone')||'[]
 function qzMarkDone(u){if(!u||QD.includes(u))return;QD.push(u);if(QD.length>500)QD=QD.slice(-500);try{localStorage.setItem('ptf_qzdone',JSON.stringify(QD))}catch(e){}}
 /* quiz for one article the player finished reading; passing it is the only way to level up */
 function artQuiz(st){
- if(QZbusy||G||!st||QD.includes(st[3]))return;
- const qs=qzMake(null,st[3]);if(!qs)return;
+ if(QZbusy||G||!st)return;
+ const qs=qzMake(null,st[3])||qzMake(null);if(!qs)return;
  QZbusy=true;QZ={a:makeAch(),qs,u:st[3],i:0,ok:0,asked:new Set(qs.map(q=>q.s))};qzShow()}
 $('qzx').addEventListener('click',()=>{clk();$('qzov').classList.remove('show');QZ=null;QZbusy=false});
 function qzProg(){const pr=$('qzp');pr.innerHTML='';QZ.qs.forEach((q,k)=>{const b=document.createElement('b');b.className=k<QZ.i?(q.res?'ok':'no'):k===QZ.i?'on':'';pr.appendChild(b)})}
