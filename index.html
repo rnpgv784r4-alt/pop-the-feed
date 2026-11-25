@@ -115,7 +115,7 @@ html,body{height:100%;margin:0;background:#35024a;overflow:hidden;overscroll-beh
 #qzo button.ok{background:#bdf0b8;border-color:#287a24}#qzo button.no{background:#f6b8ab;border-color:#a82d12}
 #qzo.lock button{pointer-events:none}#qzo button.dim{opacity:.32;text-decoration:line-through;pointer-events:none;box-shadow:none}#swr{text-align:center;margin-top:8px}#nxt{background:none;border:0;color:#0b4fb8;font:700 13px Tahoma,Verdana,sans-serif;padding:8px 14px;min-height:38px;cursor:pointer;opacity:.85}.sw-d{display:none}@media(hover:hover) and (pointer:fine){.sw-t{display:none}.sw-d{display:inline}}#cats{overflow-x:auto;overflow-y:hidden;justify-content:flex-start;gap:4px;padding:5px 2px;margin-top:3px;scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}#cats::-webkit-scrollbar{display:none;width:0;height:0}#catg{display:flex;gap:4px;flex:0 0 calc(100% - 19px);min-width:0}.cat.dly{flex:0 0 auto;width:74px;box-sizing:border-box;text-align:left;padding:11px 4px 11px 11px;border-color:#37e6d6;background:rgba(55,230,214,.09);box-shadow:0 0 0 1px rgba(55,230,214,.25),0 0 11px rgba(55,230,214,.38)}.cat.dly .mn{font-style:normal;color:#6ff3e6;margin-right:3px;font-weight:700}.cat.dly.shake{animation:dshake .35s}@keyframes dshake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}@media(max-width:375px){#catg{gap:3px}}@media(min-width:600px){#catg{flex:1 1 auto}.cat.dly{width:auto;padding:11px 14px}}.cat.dly .mn{display:inline-block}
 .cat.dly.on{background:linear-gradient(#45f2e2,#14bcab);border-color:#8ffbf2;color:#03302b;box-shadow:0 0 0 1px rgba(143,251,242,.55),0 0 15px rgba(55,230,214,.75)}
-.cat.dly.on .mn{color:#03302b}.cat.dly.on.live .mn{animation:nbob .8s ease-in-out infinite}@keyframes nbob{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-3px) rotate(-14deg)}}
+.cat.dly.on .mn{color:#03302b}.cat.dly.paused{border-color:#8ffbf2;color:#8ffbf2;box-shadow:0 0 0 1px rgba(143,251,242,.5),0 0 13px rgba(55,230,214,.6)}.cat.dly.paused .mn{color:#8ffbf2}.cat.dly.on.live .mn{animation:nbob .8s ease-in-out infinite}@keyframes nbob{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-3px) rotate(-14deg)}}
 #dov{position:fixed;inset:0;background:rgba(20,5,35,.55);display:flex;align-items:center;justify-content:center;z-index:12;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .2s,visibility 0s .2s;touch-action:manipulation}
 #dov.show{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .2s}
 #dc{width:min(90vw,420px);box-sizing:border-box;background:#ece9d8;border:3px solid #0a3fd6;border-top:0;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,.6);font:13px Tahoma,Verdana,sans-serif;color:#000;max-height:92vh;overflow:auto;transform:scale(.96);transition:transform .2s}
@@ -618,12 +618,12 @@ function swipePrev(){if(!swOK())return;const c=$('card');
  if(hp<=0){swBounce(c,1);return}
  swSlide(1,()=>{hp--;curI=hist[hp];cur=null;showStory(storyFor(curI))})}
 /* ===== Daily pill: Bandcamp Album of the Day preview + background playback ===== */
-const DLY={on:false,live:false};
+const DLY={on:false,live:false,paused:false};
 const DLY_NONE={album:'Today\u2019s pick isn\u2019t loaded yet',artist:'',blurb:'Check back after the next update, or open Bandcamp Daily directly.',img:'',player:'',links:[{n:'Open Bandcamp Daily: Album of the Day',u:'https://daily.bandcamp.com/album-of-the-day'}]};
 function dlyData(){const t=S.find(x=>x[4]==='DailyMusic');if(!t)return DLY_NONE;const e=t[8]||{};
  const links=Array.isArray(e.links)?e.links.slice():[];if(/^https?:\/\//.test(t[3]||''))links.push({n:'Read the review',u:t[3]});
  return{album:e.album||t[1],artist:e.artist||'',blurb:e.blurb||t[2]||'',img:t[5]||'',player:e.player||'',links}}
-function dlyUi(){const b=$('dly');b.classList.toggle('on',DLY.on);b.classList.toggle('live',DLY.on&&DLY.live);b.setAttribute('aria-pressed',DLY.on?'true':'false')}
+function dlyUi(){const b=$('dly'),p=DLY.paused&&!DLY.on;b.classList.toggle('on',DLY.on);b.classList.toggle('live',DLY.on&&DLY.live);b.classList.toggle('paused',p);b.setAttribute('aria-pressed',DLY.on?'true':'false');const m=b.querySelector('.mn');if(m)m.textContent=p?'\u25B6\uFE0E':'\u266A'}
 function dlyFill(d){$('dh').textContent=d.album;$('dby').textContent=d.artist?'by '+d.artist:'';$('dbl').textContent=d.blurb;
  const im=$('dimg');if(d.img){im.referrerPolicy='no-referrer';im.src=d.img;im.style.display=''}else{im.removeAttribute('src');im.style.display='none'}
  const lk=$('dlk');lk.textContent='';
@@ -632,8 +632,8 @@ function dlyFill(d){$('dh').textContent=d.album;$('dby').textContent=d.artist?'b
 function dlyStart(){const d=dlyData(),ok=dlyFill(d);$('dov').classList.add('show');
  if(!ok)return;try{if(Song.playing||Song.want)songPause()}catch(x){}
  const f=$('dpl');if(f.dataset.src!==d.player){f.src=d.player;f.dataset.src=d.player}
- DLY.on=true;DLY.live=false;dlyUi()}
-function dlyStop(){const f=$('dpl');f.src='about:blank';f.dataset.src='';DLY.on=false;DLY.live=false;dlyUi();$('dov').classList.remove('show')}
+ DLY.on=true;DLY.live=false;DLY.paused=false;dlyUi()}
+function dlyStop(){const f=$('dpl');f.src='about:blank';f.dataset.src='';DLY.on=false;DLY.live=false;DLY.paused=false;dlyUi();$('dov').classList.remove('show')}
 function dlyClose(){$('dov').classList.remove('show')}
 (function(){const d=$('dly');let lt=0;
  const go=()=>{if(G||swBusy)return;try{d.scrollIntoView({inline:'end',block:'nearest',behavior:'smooth'})}catch(x){}clk();if(DLY.on)dlyStop();else dlyStart()};
@@ -821,13 +821,13 @@ function gameOver(win){
  document.addEventListener('touchmove',e=>{if(document.body.classList.contains('gaming')&&e.touches.length>1)e.preventDefault()},{passive:false});
  document.addEventListener('dblclick',g,{passive:false})})();
 function startGame(){
- if(G)return;zoomLock(true);$('hsrow').style.display='none';audioSess();Song.resume=Song.playing||Song.want;try{if(Song.resume)songPause()}catch(e){}DLY.resume=DLY.on;try{if(DLY.on)dlyStop()}catch(e){}try{if(AC&&AC.state!=='running'){try{AC.close()}catch(e){}AC=null}}catch(e){}document.body.classList.add('gaming');try{gLayout()}catch(e){}
+ if(G)return;zoomLock(true);$('hsrow').style.display='none';audioSess();Song.resume=Song.playing||Song.want;try{if(Song.resume)songPause()}catch(e){}try{if(DLY.on){dlyStop();DLY.paused=true;dlyUi()}}catch(e){}try{if(AC&&AC.state!=='running'){try{AC.close()}catch(e){}AC=null}}catch(e){}document.body.classList.add('gaming');try{gLayout()}catch(e){}
  G={shield:0,cats:['Art'],cnt:{},goal:5,q:0,stage:1,pos:0,v:0,lx:0,ly:0,vx:0,vy:0,mode:'v',score:0,order:gOrder(),last:0,popped:new Set(),state:'intro',prev:'live'};
  $('attl').textContent='Achievement Unlocked!';$('ayes').textContent='New Sheet';
  const sm=$('side').querySelector('small');sm.textContent='score';
  try{Music.start()}catch(e){}startRound(1);gRender();G.raf=requestAnimationFrame(gLoop)
 }
-function exitGame(){if(!G)return;gm.classList.remove('hid');if(Song.resume){Song.resume=false;setTimeout(songPlay,300)}if(DLY.resume){DLY.resume=false;setTimeout(dlyStart,450)}cancelAnimationFrame(G.raf);Music.stop();G=null;zoomLock(false);document.body.classList.remove('gaming');$('side').querySelector('small').textContent='popped';$('ayes').textContent='New Sheet';setCnt()}
+function exitGame(){if(!G)return;gm.classList.remove('hid');if(Song.resume){Song.resume=false;setTimeout(songPlay,300)}cancelAnimationFrame(G.raf);Music.stop();G=null;zoomLock(false);document.body.classList.remove('gaming');$('side').querySelector('small').textContent='popped';$('ayes').textContent='New Sheet';setCnt()}
 function gLoop(t){
  if(!G)return;G.raf=requestAnimationFrame(gLoop);
  if(gm.clientHeight!==GH||gm.clientWidth!==GW){gLayout()}
