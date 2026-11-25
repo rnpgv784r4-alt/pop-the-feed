@@ -459,7 +459,7 @@ def main():
                         break
             except Exception as e:
                 print("  discovery failed", name, e)
-        print(name, len(got) if got else "SKIPPED")
+        print(name, ("%d (%d with Reader text)" % (len(got), sum(1 for g in got if len(g) > 7))) if got else "SKIPPED")
         for s in got:
             s[4] = cat
             if name.startswith("Search: "):
