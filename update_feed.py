@@ -295,6 +295,90 @@ def pick(stories):
         final += sorted(chosen, key=lambda s: -s[6])
     return final
 
+def _meta(page, prop):
+    for p in (r'<meta[^>]+(?:property|name)=["\']%s["\'][^>]*content=["\']([^"\']*)' % re.escape(prop),
+              r'<meta[^>]+content=["\']([^"\']*)["\'][^>]*(?:property|name)=["\']%s["\']' % re.escape(prop)):
+        m = re.search(p, page, re.I)
+        if m:
+            return html.unescape(m.group(1)).strip()
+    return ""
+
+def _embed(kind, ident):
+    return "https://bandcamp.com/EmbeddedPlayer/%s=%s/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/" % (kind, ident)
+
+def bc_player(page):
+    """Official Bandcamp embed address, read from a page's own embed / page metadata."""
+    m = re.search(r"EmbeddedPlayer/(?:v=\d+/)?(album|track)=(\d+)", page)
+    if m:
+        return _embed(m.group(1), m.group(2))
+    m = re.search(r'bc-page-properties[^>]*content=["\']([^"\']+)', page, re.I)
+    if m:
+        try:
+            p = json.loads(html.unescape(m.group(1)))
+            kind = {"a": "album", "t": "track"}.get(p.get("item_type"))
+            if kind and p.get("item_id"):
+                return _embed(kind, p["item_id"])
+        except Exception:
+            pass
+    return ""
+
+def daily_music():
+    """Bandcamp Daily's Album of the Day: artwork, title, blurb, artist links and the official embedded player."""
+    base = "https://daily.bandcamp.com"
+    try:
+        lst = get(base + "/album-of-the-day", 25).decode("utf-8", "ignore")
+        m = re.search(r'href=["\']((?:https://daily\.bandcamp\.com)?/album-of-the-day/[^"\'#?]+-review)["\']', lst)
+        if not m:
+            print("Daily music: no review link found")
+            return None
+        url = urllib.parse.urljoin(base, m.group(1))
+        page = get(url, 25).decode("utf-8", "ignore")
+    except Exception as e:
+        print("Daily music failed:", e)
+        return None
+    title, img, blurb = _meta(page, "og:title"), _meta(page, "og:image"), _meta(page, "og:description")
+    mm = re.match(r'^(.*?),\s*[\u201c"\u2018\'](.*?)[\u201d"\u2019\']\s*$', title)
+    artist, album = (mm.group(1).strip(), mm.group(2).strip()) if mm else ("", title)
+    links, seen = [], set()
+    for href, txt in re.findall(r'<a\b[^>]*href=["\'](https?://[a-z0-9-]+\.bandcamp\.com[^"\']*)["\'][^>]*>(.*?)</a>', page, re.S | re.I):
+        host = re.match(r"https?://([a-z0-9-]+)\.", href).group(1).lower()
+        if host in ("daily", "www") or host in seen:
+            continue
+        seen.add(host)
+        name = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", html.unescape(txt))).strip() or host
+        links.append({"n": name + " on Bandcamp", "u": "https://%s.bandcamp.com/" % host, "host": host, "t": name.lower()})
+    links.sort(key=lambda l: 0 if artist and l["t"] == artist.lower() else 1)
+    links = links[:3]
+    player = bc_player(page)
+    tries = 0
+    for l in links:
+        if player or tries >= 4:
+            break
+        cands = re.findall(r'https?://%s\.bandcamp\.com/(?:album|track)/[A-Za-z0-9_-]+' % re.escape(l["host"]), page)[:1]
+        try:
+            if not cands:
+                tries += 1
+                music = get("https://%s.bandcamp.com/music" % l["host"], 25).decode("utf-8", "ignore")
+                words = [w for w in re.findall(r"[a-z0-9]+", album.lower()) if len(w) > 2]
+                hrefs = re.findall(r'href=["\'](/(?:album|track)/[A-Za-z0-9_-]+)', music)
+                best = [h for h in hrefs if words and all(w in h.lower() for w in words[:2])] or hrefs[:1]
+                cands = ["https://%s.bandcamp.com%s" % (l["host"], best[0])] if best else []
+            if cands:
+                tries += 1
+                player = bc_player(get(cands[0], 25).decode("utf-8", "ignore"))
+        except Exception as e:
+            print("  Daily music: could not read", l["host"], e)
+    for l in links:
+        l.pop("host", None)
+        l.pop("t", None)
+    try:
+        ts = int(time.mktime(time.strptime(_meta(page, "article:published_time")[:19], "%Y-%m-%dT%H:%M:%S")))
+    except Exception:
+        ts = int(time.time())
+    print("Daily music:", artist or "?", "-", album or "?", "| player", "found" if player else "NOT found", "|", len(links), "artist links")
+    return ["Bandcamp Daily", title or "Album of the Day", blurb, url, "DailyMusic", img, ts, [],
+            {"artist": artist, "album": album, "blurb": blurb, "player": player, "links": links}]
+
 def og_image(url):
     pats = (r'<meta[^>]+property=["\']og:image(?::secure_url)?["\'][^>]*content=["\']([^"\']+)',
             r'<meta[^>]+content=["\']([^"\']+)["\'][^>]*property=["\']og:image["\']',
@@ -480,6 +564,9 @@ def main():
     pins = [pin_story(p["url"], p["cat"]) for p in cfg.get("pins", []) if p.get("url") and p.get("cat") in CATS]
     stories = [p for p in pins if p] + stories
     final = pick(stories)
+    dm = daily_music()
+    if dm:
+        final.append(dm)
     # Topic stories come as Google News redirects: find the real article address so we can read its picture
     cand = [s for s in final if gn_id(s[3])][:200]
     with ThreadPoolExecutor(4) as ex:
