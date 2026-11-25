@@ -418,6 +418,46 @@
     "https://www.stereogum.com/feed/"
    ],
    "cat": "Art"
+  },
+  {
+   "name": "thequietus.com",
+   "home": "https://thequietus.com",
+   "feeds": [
+    "https://thequietus.com/feed"
+   ],
+   "cat": "Art"
+  },
+  {
+   "name": "fangoria.com",
+   "home": "https://www.fangoria.com",
+   "feeds": [
+    "https://www.fangoria.com/feed/"
+   ],
+   "cat": "Art"
+  },
+  {
+   "name": "mymodernmet.com",
+   "home": "https://mymodernmet.com",
+   "feeds": [
+    "https://mymodernmet.com/feed/"
+   ],
+   "cat": "Art"
+  },
+  {
+   "name": "booooooom.com",
+   "home": "https://www.booooooom.com",
+   "feeds": [
+    "https://www.booooooom.com/feed/"
+   ],
+   "cat": "Art"
+  },
+  {
+   "name": "news.artnet.com",
+   "home": "https://news.artnet.com",
+   "feeds": [
+    "https://news.artnet.com/feed"
+   ],
+   "cat": "Art"
   }
  ],
  "topics": [
