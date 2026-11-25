@@ -458,6 +458,78 @@
     "https://news.artnet.com/feed"
    ],
    "cat": "Art"
+  },
+  {
+   "name": "messynessychic.com",
+   "home": "https://www.messynessychic.com",
+   "feeds": [
+    "https://www.messynessychic.com/feed/"
+   ],
+   "cat": "Oddities"
+  },
+  {
+   "name": "futilitycloset.com",
+   "home": "https://www.futilitycloset.com",
+   "feeds": [
+    "https://www.futilitycloset.com/feed/"
+   ],
+   "cat": "Oddities"
+  },
+  {
+   "name": "mentalfloss.com",
+   "home": "https://www.mentalfloss.com",
+   "feeds": [
+    "https://www.mentalfloss.com/rss.xml"
+   ],
+   "cat": "Oddities"
+  },
+  {
+   "name": "daily.jstor.org",
+   "home": "https://daily.jstor.org",
+   "feeds": [
+    "https://daily.jstor.org/feed/"
+   ],
+   "cat": "History"
+  },
+  {
+   "name": "medievalists.net",
+   "home": "https://www.medievalists.net",
+   "feeds": [
+    "https://www.medievalists.net/feed/"
+   ],
+   "cat": "History"
+  },
+  {
+   "name": "lithub.com",
+   "home": "https://lithub.com",
+   "feeds": [
+    "https://lithub.com/feed/"
+   ],
+   "cat": "History"
+  },
+  {
+   "name": "themarginalian.org",
+   "home": "https://www.themarginalian.org",
+   "feeds": [
+    "https://www.themarginalian.org/feed/"
+   ],
+   "cat": "History"
+  },
+  {
+   "name": "quantamagazine.org",
+   "home": "https://www.quantamagazine.org",
+   "feeds": [
+    "https://www.quantamagazine.org/feed/"
+   ],
+   "cat": "Science"
+  },
+  {
+   "name": "knowablemagazine.org",
+   "home": "https://knowablemagazine.org",
+   "feeds": [
+    "https://knowablemagazine.org/rss"
+   ],
+   "cat": "Science"
   }
  ],
  "topics": [
