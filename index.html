@@ -492,7 +492,7 @@ function airBurst(x,y,n){n=n||(7+Math.floor(Math.random()*8));const ez=['ease-ou
 function springAt(i){try{const b=SB[i],e=el('ellipse',{cx:b[0],cy:b[1],rx:b[2]-6,ry:b[3]-6,class:'pspring'});layer.appendChild(e);setTimeout(()=>e.remove(),420)}catch(x){}}
 let tapXY=null,curI=-1,swBusy=false,swOnCard=false;
 function pop(i){if(!cur&&tapXY){airBurst(tapXY[0],tapXY[1]);tapXY=null}
- if(cur)return;curI=i;lastPop=Date.now();snd();$('p'+i).classList.add('on');if($('q'+i))$('q'+i).classList.add('on');$('h'+i).classList.add('done');$('g'+i).classList.remove('on');
+ if(cur)return;curI=i;hist=[i];hp=0;lastPop=Date.now();snd();$('p'+i).classList.add('on');if($('q'+i))$('q'+i).classList.add('on');$('h'+i).classList.add('done');$('g'+i).classList.remove('on');
  popped++;setCnt();const pc=SB[i][4];catN[pc]++;setNs();if(catN[pc]===catT[pc])pendingCat=pc;popIdx.push(i);savePop();if(popped>=N)sheetDone();
  showStory(storyFor(i));
 }
@@ -563,7 +563,7 @@ $('more').addEventListener('click',()=>{snd();setTimeout(closeCard,60)});
 ov.addEventListener('pointerdown',e=>{sx=e.clientX;sy=e.clientY;t0=Date.now();swOnCard=!!(e.target.closest&&e.target.closest('#card'))});
 ov.addEventListener('pointerup',e=>{
  if(!cur)return;const dx=e.clientX-sx,dy=e.clientY-sy,d=Math.hypot(dx,dy);
- if(d>40){if(swOnCard&&dx<-40&&Math.abs(dx)>Math.abs(dy)*1.3){swipeNext(true);return}closeCard();return}
+ if(d>40){if(swOnCard&&Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)*1.3){if(dx<0)swipeNext(true);else swipePrev();return}closeCard();return}
  const T=e.target;
  if(T.closest('#more'))return;
  if(T.closest('#x')||T===ov){clk();closeCard();return}
@@ -575,23 +575,30 @@ function nextIdx(){const un=[];for(let i=0;i<N;i++)if(!$('h'+i).classList.contai
  const pk=a=>{const f=a.find(i=>i>curI);return f===undefined?a[0]:f};
  if(act){const a=un.filter(i=>SB[i][4]===act);if(a.length)return pk(a)}
  return pk(un)}
-function swipeNext(viaSwipe){if(!cur||swBusy||G||rdOpen||QZbusy||$('achov').classList.contains('show'))return;
- const c=$('card'),n=nextIdx();
- if(n<0){c.style.transition='transform .12s';c.style.transform='translate(-54%,0)';setTimeout(()=>{c.style.transform='';setTimeout(()=>{c.style.transition=''},160)},120);return}
- swBusy=true;
- c.style.transition='transform .2s ease-in,opacity .2s';c.style.transform='translate(-170%,0)';c.style.opacity='0';
- setTimeout(()=>{
+let hist=[],hp=0;
+function swOK(){return cur&&!swBusy&&!G&&!rdOpen&&!QZbusy&&!$('achov').classList.contains('show')}
+function swBounce(c,dir){c.style.transition='transform .12s';c.style.transform='translate(calc(-50% + '+(dir*18)+'px),0)';setTimeout(()=>{c.style.transform='';setTimeout(()=>{c.style.transition=''},160)},120)}
+function swSlide(dir,mid){const c=$('card');swBusy=true;
+ c.style.transition='transform .2s ease-in,opacity .2s';c.style.transform=dir<0?'translate(-170%,0)':'translate(70%,0)';c.style.opacity='0';
+ setTimeout(()=>{mid();
+  c.style.transition='none';c.style.transform=dir<0?'translate(70%,0)':'translate(-170%,0)';void c.offsetWidth;
+  c.style.transition='transform .26s cubic-bezier(.2,.8,.3,1),opacity .2s';c.style.transform='';c.style.opacity='';
+  setTimeout(()=>{c.style.transition='';swBusy=false},300)},200)}
+function swipeNext(viaSwipe){if(!swOK())return;const c=$('card');
+ if(hp<hist.length-1){swSlide(-1,()=>{hp++;curI=hist[hp];cur=null;showStory(storyFor(curI))});return}
+ const n=nextIdx();if(n<0){swBounce(c,-1);return}
+ swSlide(-1,()=>{
   const h=$('h'+n);let r=null;
   try{r=h.getBoundingClientRect();if(r.bottom<90||r.top>innerHeight-90){h.scrollIntoView({block:'center'});r=h.getBoundingClientRect()}}catch(x){}
-  cur=null;tapXY=r?[r.left+r.width/2,r.top+r.height/2]:null;pop(n);
-  c.style.transition='none';c.style.transform='translate(70%,0)';void c.offsetWidth;
-  c.style.transition='transform .26s cubic-bezier(.2,.8,.3,1),opacity .2s';c.style.transform='';c.style.opacity='';
-  setTimeout(()=>{c.style.transition='';swBusy=false},300);
+  const keep=hist.slice(0,hp+1);cur=null;tapXY=r?[r.left+r.width/2,r.top+r.height/2]:null;pop(n);hist=keep.concat(n);hp=hist.length-1;
   if(viaSwipe){try{const k=(+localStorage.getItem('ptf_sw')||0)+1;localStorage.setItem('ptf_sw',k);if(k>=5)$('swr').classList.add('fade')}catch(x){}}
- },200)}
+ })}
+function swipePrev(){if(!swOK())return;const c=$('card');
+ if(hp<=0){swBounce(c,1);return}
+ swSlide(1,()=>{hp--;curI=hist[hp];cur=null;showStory(storyFor(curI))})}
 $('nxt').addEventListener('click',e=>{e.stopPropagation();swipeNext(false)});
 try{if((+localStorage.getItem('ptf_sw')||0)>=5)$('swr').classList.add('fade')}catch(x){}
-document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'&&cur&&!rdOpen&&!QZbusy)swipeNext(false)});
+document.addEventListener('keydown',e=>{if(!cur||rdOpen||QZbusy)return;if(e.key==='ArrowRight')swipeNext(false);else if(e.key==='ArrowLeft')swipePrev()});
 let act=null;
 function applyGlow(){SB.forEach((b,i)=>$('g'+i).classList.toggle('on',b[4]===act&&!$('h'+i).classList.contains('done')));document.querySelectorAll('.cat').forEach(x=>x.classList.toggle('held',x.dataset.c===act))}
 document.querySelectorAll('.cat').forEach(btn=>{
