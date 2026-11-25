@@ -410,6 +410,14 @@
     "https://backend.deviantart.com/rss.xml?type=deviation&q=tag:surrealism"
    ],
    "cat": "Art"
+  },
+  {
+   "name": "Stereogum",
+   "home": "https://www.stereogum.com",
+   "feeds": [
+    "https://www.stereogum.com/feed/"
+   ],
+   "cat": "Art"
   }
  ],
  "topics": [
