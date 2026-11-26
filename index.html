@@ -714,7 +714,7 @@ function shId(u){let h=0xcbf29ce484222325n;const M=0xffffffffffffffffn;for(const
 function shUrl(st,lg){const b=new URL('index.html',location.href);try{if(!lg&&SHN.has(st[3]))return b.origin+b.pathname.replace(/[^\/]*$/,'')+'s/'+shId(st[3])+'.html'}catch(e){}return b.origin+b.pathname+'?r='+encodeURIComponent(st[3])+'&n='+encodeURIComponent(st[0]||'')+'&t='+encodeURIComponent((st[1]||'').slice(0,160))}
 function shToast(m){const t=$('rdtoast');t.textContent=m;t.classList.add('on');clearTimeout(shToast.t);shToast.t=setTimeout(()=>t.classList.remove('on'),1800)}
 $('rdsh').addEventListener('click',async()=>{clk();const st=rdSt;if(!st)return;let u=shUrl(st);if(/\/s\/[0-9a-z]{9}\.html$/.test(u)){try{const r=await fetch(u,{method:'HEAD',cache:'no-store'});if(!r.ok)u=shUrl(st,true)}catch(e){}}
- if(navigator.share){try{await navigator.share({title:st[1],text:st[1]+' — on Pop The Feed',url:u});return}catch(e){if(e&&e.name==='AbortError')return}}
+ if(navigator.share){try{await navigator.share({title:st[1],text:st[1]+(st[0]&&!/^Search:/.test(st[0])?' — via '+st[0]+' on popthefeed.com':' — on popthefeed.com'),url:u});return}catch(e){if(e&&e.name==='AbortError')return}}
  try{await navigator.clipboard.writeText(u);shToast('Link copied')}catch(e){const a=document.createElement('textarea');a.value=u;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();let ok=false;try{ok=document.execCommand('copy')}catch(e2){}a.remove();shToast(ok?'Link copied':'Copy failed')}});
 let shDone=false;
 function sharedOpen(){if(shDone)return;shDone=true;let q;try{q=new URLSearchParams(location.search)}catch(e){return}

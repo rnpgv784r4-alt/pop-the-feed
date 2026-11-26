@@ -559,7 +559,7 @@ def pin_story(url, cat):
     img = good_img(urllib.parse.urljoin(url, im)) if im else ""
     return [site, title, desc, url, cat, img, int(time.time())]
 
-SITE = "https://rnpgv784r4-alt.github.io/pop-the-feed/"
+SITE = "https://popthefeed.com/"
 
 def share_id(url):
     """Short stable id for a story link. The app computes the same thing (FNV-1a 64 -> base36, 9 chars)."""
@@ -584,22 +584,40 @@ def write_share_pages(stories):
         sid = share_id(st[3])
         keep.add(sid + ".html")
         fn = os.path.join("s", sid + ".html")
-        if os.path.exists(fn):
-            continue
+        born = now
+        if os.path.exists(fn):   # rewrite existing pages too, but keep their original date for the 30-day cleanup
+            try:
+                m = _re.search(r"<!--g:(\d+)-->", open(fn, encoding="utf-8").read(600))
+                born = int(m.group(1)) if m else now
+            except Exception:
+                pass
         title = st[1] or "Pop The Feed"
+        src = (st[0] or "").strip()
+        if src.startswith("Search:"):
+            src = ""
         desc = st[2] if st[2] and not st[2].startswith("Tap the button") else "Read this story on Pop The Feed."
+        # credit the original publisher on the link card: "Title | Publisher" and "From Publisher · via popthefeed.com"
+        card_title = title + (" | " + src if src else "")
+        credit = ("From " + src + " · via popthefeed.com") if src else "Via popthefeed.com"
+        desc = credit + " — " + desc
+        site_name = (src + " via Pop The Feed") if src else "Pop The Feed"
         img = st[5] if st[5] and st[5].startswith("http") else SITE + "apple-touch-icon.PNG"
         e = lambda x: html.escape(x or "", quote=True)
         target = "../index.html?r=" + quote(st[3], safe="") + "&n=" + quote(st[0] or "", safe="") + "&t=" + quote(title[:160], safe="")
         page = ('<!doctype html><html><head><meta charset="utf-8"><!--g:%d--><title>%s</title>'
                 '<meta name="viewport" content="width=device-width,initial-scale=1">'
-                '<meta property="og:type" content="article"><meta property="og:site_name" content="Pop The Feed">'
+                '<meta property="og:type" content="article"><meta property="og:site_name" content="%s">'
                 '<meta property="og:title" content="%s"><meta property="og:description" content="%s">'
                 '<meta property="og:image" content="%s"><meta property="og:url" content="%s">'
                 '<meta name="twitter:card" content="summary_large_image">'
                 '<meta http-equiv="refresh" content="0;url=%s"></head><body>'
                 '<script>location.replace(%s)</script><p><a href="%s">Open in Pop The Feed</a></p></body></html>'
-                ) % (now, e(title), e(title), e(desc[:300]), e(img), e(SITE + "s/" + sid + ".html"), e(target), json.dumps(target), e(target))
+                ) % (born, e(title), e(site_name), e(card_title), e(desc[:300]), e(img), e(SITE + "s/" + sid + ".html"), e(target), json.dumps(target), e(target))
+        try:
+            if open(fn, encoding="utf-8").read() == page:
+                continue
+        except Exception:
+            pass
         open(fn, "w", encoding="utf-8").write(page)
     # drop pages of stories that left the feed more than 30 days ago
     for f in os.listdir("s"):
