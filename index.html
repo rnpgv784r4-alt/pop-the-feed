@@ -51,6 +51,10 @@ html,body{height:100%;margin:0;background:#35024a;overflow:hidden;overscroll-beh
 #rdn{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #rdx{flex:none;height:36px;min-width:84px;padding:0 12px;border:1px solid #fff;border-radius:6px;background:linear-gradient(#e9876b,#c9391a);color:#fff;font:800 14px Tahoma,Verdana,sans-serif;text-shadow:1px 1px 0 rgba(0,0,0,.4);cursor:pointer}
 #rdx:active{background:#a82d12}
+#rdsh{flex:none;width:40px;height:36px;padding:0;display:flex;align-items:center;justify-content:center;border:1px solid #fff;border-radius:6px;background:linear-gradient(#5fa0f6,#1b62dd);cursor:pointer}
+#rdsh:active{background:#0a3fd6}#rdsh svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#rdtoast{position:absolute;left:50%;top:58px;transform:translateX(-50%);background:rgba(30,8,50,.9);color:#fff;padding:8px 14px;border-radius:16px;font:600 13px system-ui,sans-serif;opacity:0;pointer-events:none;transition:opacity .25s;z-index:3;white-space:nowrap}
+#rdtoast.on{opacity:1}
 #rdc{overflow-anchor:none;flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y;padding:16px 18px calc(88px + env(safe-area-inset-bottom,0px));color:#111}
 #rds{display:block;font:700 11px Tahoma,Verdana,sans-serif;color:#0a3fd6;text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px}
 #rdh{margin:0 0 14px;font:700 24px/1.18 'Trebuchet MS',Tahoma,sans-serif}
@@ -261,7 +265,7 @@ body.gaming #oglow{display:none}
 <div id="gm"><div id="gart"></div><div id="gbs"></div><div id="gfl"></div><div id="glt"></div><div id="gtime"></div><div id="gint"></div><div id="gflash"></div></div>
 <div id="bar"><button id="mute" aria-label="Mute sound effects" aria-pressed="false"><svg viewBox="0 0 16 16" shape-rendering="crispEdges" fill="currentColor"><path d="M2 6h3l4-3v10l-4-3H2z"/><path class="w" d="M11 5h1v1h1v4h-1v1h-1v-1h1V6h-1zM13 3h1v1h1v8h-1v1h-1v-1h1V4h-1z"/><path class="x" d="M11 6h1v1h1V6h1v1h-1v1h1v1h-1v1h-1V9h-1V8h1V7h-1z"/></svg></button><button id="mnote" aria-label="Music"><svg viewBox="0 0 16 16" shape-rendering="crispEdges" fill="currentColor"><path d="M6 1h8v2H8v8H6zM4 10h3v1h1v3H7v1H4v-1H3v-3h1z"/></svg></button><div id="top"><div id="side"><div id="cn"><span id="cnt">0 / 39</span><small>popped</small></div></div><div id="lgw"><img id="logoimg" src="logo-banner.png" alt="Pop The Feed"><div id="oglow"></div><div id="oglint"></div><div id="osp"></div></div><button id="reset" aria-label="Refresh"><img src="refresh.png" alt="Refresh"></button></div>
 <div id="tag">Pop a bubble. Find a story.</div><div id="cats"><div id="catg"><button class="cat" data-c="Art"><span>Art</span></button><button class="cat" data-c="Entertainment"><span>Entertainment</span></button><button class="cat" data-c="Oddities"><span>Oddities</span></button><button class="cat" data-c="History"><span>History</span></button><button class="cat" data-c="Science"><span>Science</span></button></div><button class="cat dly" id="dly" data-c="Daily" type="button"><span><i class="mn">&#9834;</i>Daily</span></button></div><div id="ghud"><span id="grd">R1/5</span><span id="gcat"><span id="garr">&#8593;</span> <span id="gcn">Art</span></span><span id="gdots"><i></i><i></i><i></i><i></i><i></i></span><span id="gtm">0:30</span><button id="gq">Quit</button></div></div>
-<div id="a2h"><img src="apple-touch-icon.PNG" alt=""><span><b>Pop The Feed</b><i id="a2t" style="font-style:normal">Add us to your Home Screen.</i></span><button id="a2b">Add</button><button id="a2x" aria-label="Close">&#10005;</button></div><div id="rd"><div id="rdb"></div><div id="rdp" role="dialog" aria-modal="true" aria-label="Reader"><div id="rdt"><span id="rdn">Reader</span><button id="rdx" aria-label="Close reader">&#10005; Close</button></div><div id="rdau" aria-label="Auto scroll"><button id="rdam" aria-label="Slower">&minus;</button><button id="rdap">&#9654; Auto</button><span id="rdsp"><b id="rdsn">3</b>speed</span><button id="rdaa" aria-label="Faster">+</button></div><div id="rdc"><span id="rds"></span><h2 id="rdh"></h2><img id="rdi" alt=""><p id="rdl"></p><div id="rdbd"></div><a id="rdm" target="_blank" rel="noopener"></a><small id="rdat"></small></div></div></div><div id="spw"></div><div id="ytw"></div>
+<div id="a2h"><img src="apple-touch-icon.PNG" alt=""><span><b>Pop The Feed</b><i id="a2t" style="font-style:normal">Add us to your Home Screen.</i></span><button id="a2b">Add</button><button id="a2x" aria-label="Close">&#10005;</button></div><div id="rd"><div id="rdb"></div><div id="rdp" role="dialog" aria-modal="true" aria-label="Reader"><div id="rdt"><span id="rdn">Reader</span><button id="rdsh" aria-label="Share this story"><svg viewBox="0 0 24 24"><path d="M12 15V3"/><path d="M7.5 7.5 12 3l4.5 4.5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg></button><button id="rdx" aria-label="Close reader">&#10005; Close</button></div><div id="rdtoast">Link copied</div><div id="rdau" aria-label="Auto scroll"><button id="rdam" aria-label="Slower">&minus;</button><button id="rdap">&#9654; Auto</button><span id="rdsp"><b id="rdsn">3</b>speed</span><button id="rdaa" aria-label="Faster">+</button></div><div id="rdc"><span id="rds"></span><h2 id="rdh"></h2><img id="rdi" alt=""><p id="rdl"></p><div id="rdbd"></div><a id="rdm" target="_blank" rel="noopener"></a><small id="rdat"></small></div></div></div><div id="spw"></div><div id="ytw"></div>
 <label id="hp" style="position:fixed;bottom:2px;left:2px;width:44px;height:26px;opacity:.01;pointer-events:none;z-index:-1"><input type="checkbox" switch></label>
 <div id="ptr">Pull to refresh</div>
 <div id="lvl"></div>
@@ -513,10 +517,10 @@ function airBurst(x,y,n){n=n||(7+Math.floor(Math.random()*8));const ez=['ease-ou
   document.body.appendChild(p);setTimeout(()=>p.remove(),dur*1000+dl+80)}}
 function springAt(i){try{const b=SB[i],e=el('ellipse',{cx:b[0],cy:b[1],rx:b[2]-6,ry:b[3]-6,class:'pspring'});layer.appendChild(e);setTimeout(()=>e.remove(),420)}catch(x){}}
 let tapXY=null,curI=-1,swBusy=false,swOnCard=false;
-function pop(i){if(!cur&&tapXY){airBurst(tapXY[0],tapXY[1]);tapXY=null}
+function pop(i,forced){if(!cur&&tapXY){airBurst(tapXY[0],tapXY[1]);tapXY=null}
  if(cur)return;curI=i;hist=[i];hp=0;lastPop=Date.now();snd();$('p'+i).classList.add('on');if($('q'+i))$('q'+i).classList.add('on');$('h'+i).classList.add('done');$('g'+i).classList.remove('on');
  popped++;setCnt();const pc=SB[i][4];catN[pc]++;setNs();if(catN[pc]===catT[pc])pendingCat=pc;popIdx.push(i);savePop();if(popped>=N)sheetDone();
- showStory(storyFor(i));
+ showStory(forced||storyFor(i));
 }
 function showStory(st){cur=st;markRead(st[3]);$('rdo').classList.toggle('has',Array.isArray(st[7])&&st[7].length>0);$('src').textContent=cur[0];$('more').textContent=(Array.isArray(cur[7])&&cur[7].length)?'Read at source':'Read at '+cur[0];$('more').href=cur[3];$('hl').textContent=cur[1];$('sm').textContent=cur[2];
  const th=$('thumb'),fs=$('fbsvg');const noimg=()=>{th.style.display='none';fs.style.display='block'};th.style.display='block';fs.style.display='none';th.onerror=noimg;if(cur[5])th.src=cur[5];else noimg();
@@ -577,6 +581,22 @@ function closeReader(){rsStop();
  if(!rdOpen)return;rdOpen=false;rdUser=false;{const st=rdSt,dn=rdDone;if(dn&&st&&Array.isArray(st[7])&&st[7].length)setTimeout(()=>artQuiz(st),650)}$('rd').classList.remove('open');
  rdTm=setTimeout(()=>$('rd').classList.remove('on'),440)}
 $('rdx').addEventListener('click',()=>{clk();closeReader()});
+/* share: link carries the story address, name and title; opening it pops the story and its Reader */
+function shUrl(st){const b=new URL('index.html',location.href);return b.origin+b.pathname+'?r='+encodeURIComponent(st[3])+'&n='+encodeURIComponent(st[0]||'')+'&t='+encodeURIComponent((st[1]||'').slice(0,160))}
+function shToast(m){const t=$('rdtoast');t.textContent=m;t.classList.add('on');clearTimeout(shToast.t);shToast.t=setTimeout(()=>t.classList.remove('on'),1800)}
+$('rdsh').addEventListener('click',async()=>{clk();const st=rdSt;if(!st)return;const u=shUrl(st);
+ if(navigator.share){try{await navigator.share({title:st[1],text:st[1]+' — on Pop The Feed',url:u});return}catch(e){if(e&&e.name==='AbortError')return}}
+ try{await navigator.clipboard.writeText(u);shToast('Link copied')}catch(e){const a=document.createElement('textarea');a.value=u;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();let ok=false;try{ok=document.execCommand('copy')}catch(e2){}a.remove();shToast(ok?'Link copied':'Copy failed')}});
+let shDone=false;
+function sharedOpen(){if(shDone)return;shDone=true;let q;try{q=new URLSearchParams(location.search)}catch(e){return}
+ const r=q.get('r');if(!r||!/^https?:\/\//i.test(r))return;
+ let st=S.find(x=>x[3]===r);
+ if(!st)st=[q.get('n')||'Pop The Feed',q.get('t')||'Shared story','',r,'',''];
+ try{history.replaceState(null,'',location.pathname+(/nf=/.test(location.search)?'?'+location.search.match(/nf=\d/)[0]:''))}catch(e){}
+ setTimeout(()=>{if(G||cur)return;const fr=[];for(let i=0;i<N;i++)if(!$('h'+i).classList.contains('done'))fr.push(i);const m=fr.filter(i=>SB[i][4]===st[4]),pl=m.length?m:fr;
+  if(pl.length){const i=pl[Math.floor(Math.random()*pl.length)];tapXY=null;pop(i,st)}else showStory(st);
+  setTimeout(openReader,420)},500)}
+
 $('rdb').addEventListener('click',()=>{if(Date.now()-rdAt>500){clk();closeReader()}});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeReader()});
 $('more').addEventListener('click',()=>{closeReader()});
@@ -650,7 +670,7 @@ document.querySelectorAll('.cat:not(.dly)').forEach(btn=>{
  btn.addEventListener('click',()=>{if(Date.now()-lastT>600)tgl()});
  btn.addEventListener('contextmenu',e=>e.preventDefault());
 });
-function loadStories(){fetch('stories.json?'+Date.now()).then(r=>r.ok?r.json():[]).then(d=>{if(Array.isArray(d)&&d.length){const j=JSON.stringify(d);if(j!==SJ){S=d;SJ=j;build()}}}).catch(()=>{})}
+function loadStories(){return fetch('stories.json?'+Date.now()).then(r=>r.ok?r.json():[]).then(d=>{if(Array.isArray(d)&&d.length){const j=JSON.stringify(d);if(j!==SJ){S=d;SJ=j;build()}}}).catch(()=>{})}
 function doReset(){glowRun('i');popped=0;popIdx=[];savePop();CL.forEach(c=>catN[c]=0);pendingCat=null;setNs();setCnt();$('reset').classList.remove('ready');document.querySelectorAll('.pop').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.hit').forEach(x=>x.classList.remove('done'));applyGlow();closeCard();build();$('scroll').scrollTo({top:0,behavior:'smooth'});loadStories()}
 $('reset').addEventListener('click',askReset);
 const pt=$('ptr'),sc=$('scroll'),inn=$('inner');let py=null,pull=0;const PULL=150;
@@ -968,5 +988,5 @@ fetch('music.json?'+Date.now()).then(r=>r.ok?r.json():null).then(d=>{if(d&&d.son
   if($('a2b').dataset.s){hide();return}
   $('a2b').dataset.s=1;$('a2b').textContent='Got it';
   $('a2t').innerHTML='Tap <svg width="12" height="14" viewBox="0 0 12 14" style="vertical-align:-2px"><path d="M6 1v8M3 4l3-3 3 3M2 7v5h8V7" fill="none" stroke="#ffe27a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Share, then &ldquo;Add to Home Screen&rdquo;'})})();
-restorePop();renderRank();setCnt();setNs();loadStories();
+restorePop();renderRank();setCnt();setNs();loadStories().then(sharedOpen);
 </script></body></html>
