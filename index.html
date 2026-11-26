@@ -299,7 +299,7 @@ body.gaming #oglow{display:none}
 #qzs .big{color:#fff;text-shadow:2px 2px 0 rgba(0,0,0,.35)}#qzs.f .big{color:#ff9a8a}#qzs p,#qzm{color:#f1e6fa}
 /* Daily music */
 #dk{color:#c3a1f9}#dh{color:#fff}#dby{color:#d9c4ee}#dbl{color:#f1e6fa}#dhint{color:#c9b2e0}
-#dimg{border-color:#ad80e4;background:#2f1736}#dpw{border-color:#ad80e4}
+#dimg{border-color:#ad80e4;background:#2f1736}#dpw{border-color:#ad80e4;background:#dfc6f1}
 #dlk a{background:transparent;border:2px solid #fff;border-radius:6px;box-shadow:none;color:#fff}
 #qzs{padding-bottom:18px}#qzi{display:flex;justify-content:center;align-items:center;margin:14px 0 2px}#qzi img{display:block;width:88px;height:auto;-webkit-user-drag:none}
 /* achievement / game boxes */
@@ -711,7 +711,7 @@ function dlyFill(d){$('dh').textContent=d.album;$('dby').textContent=d.artist?'b
  const ok=/^https:\/\/bandcamp\.com\/EmbeddedPlayer\//.test(d.player||'');$('dpw').style.display=ok?'':'none';$('dhint').style.display=ok?'':'none';return ok}
 function dlyStart(){const d=dlyData(),ok=dlyFill(d);$('dov').classList.add('show');
  if(!ok)return;try{if(Song.playing||Song.want)songPause()}catch(x){}
- const f=$('dpl');if(f.dataset.src!==d.player){f.src=d.player;f.dataset.src=d.player}
+ const f=$('dpl');if(f.dataset.src!==d.player){f.src=String(d.player).replace('bgcol=ffffff','bgcol=dfc6f1').replace('linkcol=0687f5','linkcol=5b2d91');f.dataset.src=d.player}
  DLY.on=true;DLY.live=false;DLY.paused=false;dlyUi()}
 function dlyStop(){const f=$('dpl');f.src='about:blank';f.dataset.src='';DLY.on=false;DLY.live=false;DLY.paused=false;dlyUi();$('dov').classList.remove('show')}
 function dlyClose(){$('dov').classList.remove('show')}

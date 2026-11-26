@@ -310,7 +310,7 @@ def _meta(page, prop):
     return ""
 
 def _embed(kind, ident):
-    return "https://bandcamp.com/EmbeddedPlayer/%s=%s/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/" % (kind, ident)
+    return "https://bandcamp.com/EmbeddedPlayer/%s=%s/size=large/bgcol=dfc6f1/linkcol=5b2d91/tracklist=false/artwork=small/transparent=true/" % (kind, ident)
 
 def bc_player(page):
     """Official Bandcamp embed address, read from a page's own embed / page metadata."""
