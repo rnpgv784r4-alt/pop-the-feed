@@ -183,6 +183,48 @@ def reader_body(raw, desc=""):
         out.append(["m", "preview" if preview else ""])
     return out
 
+NPR_FAILS = {"page": 0, "text": 0}   # consecutive failed fetches this run; after 3 we stop using that source
+
+def npr_text_url(link):
+    m = re.search(r"npr\.org/\d{4}/\d{2}/\d{2}/([^/?#]+)", link or "")
+    return "https://text.npr.org/" + m.group(1) if m else ""
+
+def _npr_fetch(kind, url):
+    """Fetch one page; counts consecutive failures per source so a blocked source is skipped for the rest of the run."""
+    if NPR_FAILS[kind] >= 3:
+        return None
+    try:
+        page = get(url, 15).decode("utf-8", "replace")
+        NPR_FAILS[kind] = 0
+        return page
+    except Exception as e:
+        NPR_FAILS[kind] += 1
+        print("  npr", kind, "failed", url, e)
+        return None
+
+def npr_enrich(stories):
+    """NPR feeds only carry a one-line summary. First try the article page itself (text AND inline pictures, in order);
+    if NPR refuses that, fall back to text.npr.org (text only)."""
+    for st in stories:
+        if len(st) > 7 or not npr_text_url(st[3]):
+            continue
+        body = None
+        page = _npr_fetch("page", st[3].split("?")[0])
+        if page:
+            m = re.search(r'(?is)<div[^>]+id=["\']storytext["\'][^>]*>(.*)', page)
+            if m:
+                region = m.group(1)
+                end = re.search(r"(?is)</article>|<div[^>]+class=[\"'][^\"']*(?:story-footer|storyfooter|share-tools|tags-container)", region)
+                body = reader_body(region[:end.start()] if end else region[:250000], st[2])
+        if not body:
+            page = _npr_fetch("text", npr_text_url(st[3]))
+            if page:
+                m = re.search(r"(?is)<article\b.*?</article>", page) or re.search(r"(?is)<main\b.*?</main>", page) or re.search(r"(?is)<body\b.*?</body>", page)
+                paras = re.findall(r"(?is)<p\b[^>]*>.*?</p>", m.group(0) if m else page)
+                body = reader_body("\n".join(paras), st[2])
+        if body:
+            st.append(body)
+
 def find_image(it, raw):
     for tag in (MEDIA + "thumbnail", MEDIA + "content"):
         for e in it.iter(tag):
@@ -603,6 +645,8 @@ def main():
                         break
             except Exception as e:
                 print("  discovery failed", name, e)
+        if got and "npr.org" in (home or "") + " ".join(feeds):
+            npr_enrich(got)
         print(name, ("%d (%d with Reader text)" % (len(got), sum(1 for g in got if len(g) > 7))) if got else "SKIPPED")
         for s in got:
             s[4] = cat
