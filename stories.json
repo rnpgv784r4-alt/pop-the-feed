@@ -1,5 +1,112 @@
 [
  [
+  "mymodernmet.com",
+  "Here’s What a Perfect Game of Checkers Looks Like, According to Researchers",
+  "Here’s What a Perfect Game of Checkers Looks Like, According to Researchers People have been playing versions of checkers for thousands of years, making it one of the oldest board games…",
+  "https://mymodernmet.com/researchers-checkers-draw/?adt_ei={{ subscriber.email_address }}",
+  "Art",
+  "https://mymodernmet.com/wp/wp-content/uploads/2026/11/checkers-solved-1.jpg",
+  1795704317,
+  [
+   [
+    "h",
+    "Here’s What a Perfect Game of Checkers Looks Like, According to Researchers"
+   ],
+   [
+    "i",
+    "https://mymodernmet.com/wp/wp-content/uploads/2026/11/checkers-solved-1.jpg"
+   ],
+   [
+    "p",
+    "Photo: HayDmitriy/ Depositphotos"
+   ],
+   [
+    "p",
+    "People have been playing versions of checkers for thousands of years, making it one of the oldest board games still played today . But despite its long history, researchers only recently figured out what happens when the game is played perfectly."
+   ],
+   [
+    "p",
+    "In 2007, a team led by University of Alberta computer scientist Jonathan Schaeffer announced that checkers had been weakly solved ; if both players make the best possible move every time, the game will always end in a draw."
+   ],
+   [
+    "p",
+    "Reaching that conclusion took nearly two decades. Beginning in 1989, Schaeffer and his team used computers to analyze the game, eventually building databases containing around 39 trillion endgame positions. That might sound excessive for a game played on an eight-by-eight board, but checkers is far more complicated than it looks. Researchers estimate around 500 billion possible positions. Rather than calculating every single one, the team worked from both ends. They solved huge numbers of possible endgames while their program searched forward from the standard starting position until the two sets of information connected."
+   ],
+   [
+    "p",
+    "At the center of the project was Chinook, a computer program originally created to compete against the world’s best checkers players. It eventually became strong enough to outperform human opponents, but Schaeffer and his team wanted to go one step further and prove what would happen if both sides played without making a single mistake."
+   ],
+   [
+    "p",
+    "That’s where the term “weakly solved” comes in. The researchers did not solve every possible checkers position. Instead, they proved the outcome from the normal starting position and showed that neither player can force a win when both play perfectly. Of course, that doesn’t mean every game of checkers will end in a draw. Human players make mistakes all the time, leaving plenty of opportunities for someone to triumph."
+   ],
+   [
+    "p",
+    "So while checkers may be mathematically solved, it isn’t exactly ruined. Unless both players can play perfectly, there’s still plenty of game left to play."
+   ],
+   [
+    "h",
+    "Source: Is Checkers Solved? Yes, and Here Is What That Means , Checkers is Solved"
+   ],
+   [
+    "h",
+    "Related Articles :"
+   ],
+   [
+    "p",
+    "3-Year-Old Boy Becomes the World’s Youngest Chess Player To Earn an Official Rating"
+   ],
+   [
+    "p",
+    "America’s Oldest Board Game Teaches 19th-Century Geography"
+   ],
+   [
+    "p",
+    "Mathematician Who Solved Major Math Mystery Rejects Awards and $1M Prize"
+   ],
+   [
+    "p",
+    "READ: Here’s What a Perfect Game of Checkers Looks Like, According to Researchers"
+   ]
+  ]
+ ],
+ [
+  "Stereogum",
+  "U2 Perform Their Dolly Parton Collaboration At First-Ever Thanksgiving Eve NFL Game",
+  "Some might say, there’s nothing like turkey and football. Some of those people might say there’s nothing like U2 before turkey and football. And those people probably watched the first…",
+  "https://stereogum.com/2521986/u2-perform-their-dolly-parton-collaboration-at-first-ever-thanksgiving-eve-nfl-game/news/",
+  "Art",
+  "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/GettyImages-2306917462.jpg?w=564",
+  1795703478
+ ],
+ [
+  "news.artnet.com",
+  "Hoor Al-Qasimi Tapped to Curate the 2028 Venice Biennale",
+  "The Emirati art leader recently curated Japan's Aichi Triennial and the Biennale of Sydney.",
+  "https://news.artnet.com/art-world/hoor-al-qasimi-venice-biennale-2842478",
+  "Art",
+  "",
+  1795701738
+ ],
+ [
+  "JamBase",
+  "Tracing ‘Strange Overtones’ From David Byrne & Brian Eno To Goose",
+  "Parker Harrington traces David Byrne and Brian Eno’s “Strange Overtones” from their 2008 reunion to Goose’s repertoire in Flight Path.",
+  "https://www.jambase.com/article/goose-strange-overtones-david-byrne-brian-eno-flight-path",
+  "Art",
+  "https://www.jambase.com/wp-content/uploads/2026/11/jambase-flight-path-004-header-1480x832.jpg",
+  1795700700
+ ],
+ [
+  "booooooom.com",
+  "Artist Spotlight: Philippa Brück",
+  "Philippa Brück Philippa Brück’s Website Philippa Brück on Instagram",
+  "https://www.booooooom.com/2026/11/26/artist-spotlight-philippa-bruck/",
+  "Art",
+  "https://cdn.booooooom.com/wp-content/uploads/2026/11/Bruck1.jpg",
+  1795698032
+ ],
+ [
   "DailyArt Magazine",
   "Magical Friendship: Remedios Varo and Leonora Carrington",
   "Leonora Carrington and Remedios Varo fled a war-torn Europe and found friendship and freedom in Mexico City.",
@@ -359,6 +466,15 @@
   1795683600
  ],
  [
+  "news.artnet.com",
+  "At This Caribbean Art Fair, Sales Are Not Really the Point",
+  "Backed by a luxe resort, Fuze aims to build Bahamas's art scene.",
+  "https://news.artnet.com/market/fuze-art-fair-baha-mar-2835743",
+  "Art",
+  "",
+  1795680054
+ ],
+ [
   "Creative Boom",
   "Why Victorious Festival stopped selling its headliners and started selling Portsmouth",
   "Portsmouth’s August bank holiday festival had a bit of a problem. Too many people were buying a ticket for one act on one day, then disappearing. Wildish & Co.’s solution is an identity…",
@@ -444,6 +560,15 @@
     ""
    ]
   ]
+ ],
+ [
+  "SMH.com.au",
+  "Only this legend could earn a tribute album featuring Bruce Springsteen and Tom Waits",
+  "When The Pogues’ Shane MacGowan died in 2023, he left a mighty legacy.",
+  "https://www.smh.com.au/culture/music/only-this-legend-could-earn-a-tribute-album-featuring-bruce-springsteen-and-tom-waits-20261126-p61g2c.html",
+  "Art",
+  "https://static.ffx.io/images/$zoom_0.4689679693325876%2C$multiply_0.7554%2C$ratio_1.777778%2C$width_1059%2C$x_0%2C$y_11/t_crop_custom/q_86%2Cf_auto/7528dc370d36a2d792c916577be71c6b910e6a58",
+  1795680000
  ],
  [
   "thequietus.com",
@@ -913,24 +1038,6 @@
   1795636625
  ],
  [
-  "Stereogum",
-  "Original King Crimson Drummer Michael Giles Dead At 84",
-  "Michael Giles, the original drummer of English prog-rock titans King Crimson, has died. Discipline Global Mobile, the record label founded by his old bandmate Robert Fripp, shared the news…",
-  "https://stereogum.com/2521598/original-king-crimson-drummer-michael-giles-dead-at-84/news/",
-  "Art",
-  "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/11/MichaelGiles.jpg?w=400",
-  1795634837
- ],
- [
-  "news.artnet.com",
-  "JoCa Is Bringing Art to the Table at Miami Art Week",
-  "The artist is making her U.S. debut at the hot spot restaurant The Mexican, where 10 site specific works will complement a menu designed to echo their themes.",
-  "https://news.artnet.com/art-world/joca-miami-2839776",
-  "Art",
-  "",
-  1795634578
- ],
- [
   "Hyperallergic",
   "Tending the Legacy of Cuff Annum, Ancestor of Black and Native Worcester",
   "Like thousands of other Black and Native American soldiers in the Revolutionary War, Cuff risked his life for the faulty promise of freedom and land for his family. Because of him, I am…",
@@ -1234,15 +1341,6 @@
     ""
    ]
   ]
- ],
- [
-  "news.artnet.com",
-  "Estimates Need a Reset, and Other Takeaways From New York’s Auction Week",
-  "Plus, what's behind the headline lots and is de Kooning's market cooling? Auction veteran Jussi Pylkkänen weighs in.",
-  "https://news.artnet.com/art-world/new-york-auction-week-recap-2841932",
-  "Art",
-  "",
-  1795628789
  ],
  [
   "mymodernmet.com",
@@ -2358,33 +2456,6 @@
   ]
  ],
  [
-  "Colossal",
-  "Kate Jenkins Whips Up Delicious ‘Knitalian’ Dishes in an Immersive Exhibition",
-  "Have you ever considered the mouthwatering possibilities of yarn?",
-  "https://www.thisiscolossal.com/2026/11/kate-jenkins-knitalian-knitted-foods-sculpture-installation/",
-  "Art",
-  "https://www.thisiscolossal.com/wp-content/uploads/2026/11/jenkins-8.jpg",
-  1795552200,
-  [
-   [
-    "p",
-    "From plates of ravioli and spaghetti to bottles of chianti and sardines springing from their tins, Kate Jenkins ‘ immersive art-meets-restaurant experience is something to really sink your teeth into. Known for her realistic knitted foodstuffs , the Brighton-based artist and knitwear designer presents Kate’s Knitalian at Air Contemporary , inviting us to consider the (rather unexpected) mouthwatering possibilities of yarn."
-   ],
-   [
-    "p",
-    "For the opening reception, visitors were required to reserve a spot much as one would do to book a table in a traditional restaurant, including two timed sittings. Everything from wheels of salami and tortellini to tiramisù and bottles of “Pinot Stitchio” fill the delicatessen experience in a celebration of Italian cuisine."
-   ],
-   [
-    "i",
-    "https://www.thisiscolossal.com/wp-content/uploads/2026/11/jenkins-1.jpg"
-   ],
-   [
-    "p",
-    "Kate’s Knitalian continues through December 22 in London. And if you find yourself in Brighton, you can visit the artist’s studio, which is open daily in Arundel Place. See more on Jenkins’ Instagram . You might also enjoy Lucy Sparrow’s The Beginning of Convenience, an entirely felted supermarket at The Momentary in Bentonville, Arkansas."
-   ]
-  ]
- ],
- [
   "WDET 101.9 FM",
   "Automatic’s ‘Shadowplay’ (Joy Division cover) | In The Groove Song of the Week",
   "In The Groove Song of the Week featuring 'Shadowplay' by Automatic, a cover of the Joy Division track by the same name.",
@@ -2392,6 +2463,15 @@
   "Art",
   "https://wdet.org/wp-content/uploads/2026/11/Automatic.jpg",
   1795539740
+ ],
+ [
+  "Northern Transmissions",
+  "Interpol announce new album ‘This Mirror Weighs a Ton’",
+  "Tap the button below for the full story.",
+  "https://northerntransmissions.com/interpol-announce-new-album-this-mirror-weighs-a-ton/",
+  "Art",
+  "",
+  1795537053
  ],
  [
   "WHRO",
@@ -2421,24 +2501,6 @@
   1795490663
  ],
  [
-  "mxdwn…",
-  "Steve Lacy Brings Childish Gambino, SZA, Tyler, The Creator & More Onstage During Hollywood Bowl Show",
-  "Steve Lacy's show at the Hollywood Bowl on Nov. 21 brought an exciting night for fans as he brought out legendary musical guests, from Childish Gambino to Thundercat. The full guest list…",
-  "https://music.mxdwn.com/2026/11/23/news/steve-lacy-brings-childish-gambino-sza-tyler-the-creator-more-onstage-during-hollywood-bowl-show/",
-  "Art",
-  "https://music-b26f.kxcdn.com/wp-content/uploads/2023/06/STEVE-LACY_JH_060323_00_6.png",
-  1795458639
- ],
- [
-  "Sneaker News",
-  "Tyler, The Creator And Converse Are Having A Massive Archive Sale",
-  "Tap the button below for the full story.",
-  "https://sneakernews.com/2026/11/23/tyler-the-creator-converse-golf-le-fleur-archive-sale/",
-  "Art",
-  "",
-  1795458611
- ],
- [
   "booooooom.com",
   "“Rural Veterinarian” by Photographer Timur Mansurov",
   "Timur Mansurov Timur Mansurov’s Website Timur Mansurov … Continued",
@@ -2446,15 +2508,6 @@
   "Art",
   "https://cdn.booooooom.com/wp-content/uploads/2026/11/Mansurov1.jpg",
   1795438807
- ],
- [
-  "Pinault Collection",
-  "Prix Pierre Daix 2026",
-  "The 2026 Pierre Daix Prize was awarded to Arnauld Pierre on November 23, 2026, at the Bourse de Commerce by Emma Lavigne.",
-  "https://www.pinaultcollection.com/en/prix-pierre-daix-2026",
-  "Art",
-  "https://www.pinaultcollection.com/www.pinaultcollection.com/p/page/main/prix-pierre-daix-2026-arnauld-pierre.jpg?VersionId=1795530352.861152",
-  1795420800
  ],
  [
   "GraffitiStreet",
@@ -2558,15 +2611,6 @@
     ""
    ]
   ]
- ],
- [
-  "booooooom.com",
-  "“Stravaig” by Photographer James Parker",
-  "James Parker James Parker’s Website James Parker on Instagram",
-  "https://www.booooooom.com/2026/11/20/stravaig-by-photographer-james-parker/",
-  "Art",
-  "https://cdn.booooooom.com/wp-content/uploads/2026/10/Parker1.jpg",
-  1795179648
  ],
  [
   "GraffitiStreet",
@@ -2904,53 +2948,25 @@
   ]
  ],
  [
-  "Dangerous Minds",
-  "Russian man found in Thailand jungle. He had lived there for 19 years",
-  "He must have a lot to catch up on.",
-  "https://dangerousminds.net/weird-news/russian-man-found-living-in-thailand-jungle-for-19-years/",
+  "Bloody Disgusting",
+  "Dystopian Dark Comedy Title ‘DEAD COPIES’ Sees You Using Dead Bodies to Solve Puzzles [Trailer]",
+  "solo developer DustyEffsky has announced their dark-comedy puzzle game DEAD COPIES, which is slated for release on Steam on March 9. The offbeat dystopian title takes the idea of employees…",
+  "https://bloody-disgusting.com/video-games/3976922/dystopian-dark-comedy-title-dead-copies-sees-you-using-dead-bodies-to-solve-puzzles-trailer/",
   "Entertainment",
-  "https://cdn1.dangerousminds.net/uploads/7/2026/11/Russian-Man-Thai-Jungle-2026-Dangerous-Minds-1024x768.jpg",
-  1795700266,
+  "https://bloody-disgusting.com/wp-content/uploads/2026/11/deadcopies.jpg",
+  1795703444,
   [
    [
     "p",
-    "Tourists exploring a Thailand jungle discovered a Russian man who had been living there for the past 19 years."
+    "solo developer DustyEffsky has announced their dark-comedy puzzle game DEAD COPIES , which is slated for release on Steam on March 9 . The offbeat dystopian title takes the idea of employees being glorified disposable drones, and cranks it up with you requiring to solve puzzles using their literal dead bodies."
    ],
    [
     "p",
-    "The group were exploring the coast of Surat Thani, a city in Southern Thailand, when their Google Maps showed them a stretch of beach hidden across from a boulder-strewn part of the coastline."
+    "Set inside an industrial facility, your continued employment is contingent on satisfactory performance. In order to accomplish that, you must direct your employees to accomplish tasks that will inevitably result in their demise. That includes jumping over laser tripwires, avoiding trapped floors and lethal security systems. On the “conclusion of a contract,” a successor will be thawed out and take over the previous employee’s task, using the latter’s remains to solve puzzles."
    ],
    [
     "p",
-    "South African national DJ Boardman led his group over to the beach and spoke to Metro about what he found next."
-   ],
-   [
-    "p",
-    "He said, “It was a really secluded beach. There were old wooden buildings there, so it had been inhabited before. Suddenly we spotted a man in a palm tree watching us.”"
-   ],
-   [
-    "p",
-    "The musician continued, “It was a little scary cause it was just so totally random. It’s such an isolated area and we never imagined we’d find anyone out there . He was really quiet. It was just a totally random moment to see him up in the palm tree just sitting there.”"
-   ],
-   [
-    "p",
-    "The man then climbed down from the tree and approached them. Despite not being able to speak any English, he welcomed them to his beach and cracked open a few coconuts for them to share. He even showed them his living space, an abandoned hut with a few belongings scrounged from surrounding areas scattered on the floor."
-   ],
-   [
-    "p",
-    "Despite how welcoming the man was, Boardman and his group alerted authorities about him and he was arrested shortly afterwards."
-   ],
-   [
-    "p",
-    "After a background check and some questioning, the man revealed that he was a Russian national who had arrived illegally in Thailand in 2007. He then lived an itinerant life for the next 19 years before settling on this secluded beach."
-   ],
-   [
-    "p",
-    "Raza, a Russian Telegram channel, have confirmed his story, as have Thai authorities. The former claimed that he had been avoiding authorities before escaping the country nearly two decades ago , and the latter alleged that there’s no record of his identity on any official immigration channel."
-   ],
-   [
-    "p",
-    "Despite not hurting or bothering anyone, he now faces imprisonment followed by deportation for illegal border crossing and staying without permission."
+    "That involves players using the dead bodies and their severed appendages to find the solutions, such as depressing pressure plates. Each operation having a headcount target, encouraging solutions with fewer casualties."
    ]
   ]
  ],
@@ -3000,6 +3016,15 @@
   1795680082
  ],
  [
+  "Search: Gang of Four",
+  "- AIMA Media",
+  "AIMA Media",
+  "https://aimamedia.org/newsdetails.aspx?nid=862646",
+  "Entertainment",
+  "https://aimamedia.org/fotos/aimanewsphoto1/f8899245-9ddf-4280-be01-eb8ba3fceff9.webp",
+  1795679040
+ ],
+ [
   "Talk House",
   "Tune-Yards: Powa (Art and Technology with Jiabao Li)",
   "Note: this podcast contains explicit content. ​ ⁨@tuneyards⁩ front woman Merrill Garbus joins artist and Northeastern University professor of art and design Jiabao Li for a conversation…",
@@ -3037,7 +3062,7 @@
   "The drummer played an essential role in the recording of In the Court of the Crimson King",
   "https://pitchfork.com/story/king-crimson-co-founder-michael-giles-dies-at-84/",
   "Entertainment",
-  "https://media.pitchfork.com/photos/6b0773df7ac68071266746d4/master/pass/GettyImages-74279841.jpg",
+  "https://media.pitchfork.com/photos/6b0843a997681df23b6bd68a/master/pass/michael-giles-king-crimson.jpg",
   1795650728
  ],
  [
@@ -3341,6 +3366,15 @@
   ]
  ],
  [
+  "Sports Illustrated",
+  "Kylian Mbappe Makes Feelings Toward Vinicius Jr Clear After Thumping PSV Win",
+  "Real Madrid’s two highest-paid players were on the scoresheet together for only the second time in 2026–27.",
+  "https://www.si.com/soccer/kylian-mbappe-makes-feelings-toward-vinicius-clear-thumping-psv-win",
+  "Entertainment",
+  "https://images2.minutemediacdn.com/image/upload/c_crop,x_0,y_9,w_1024,h_576/c_fill,w_1440,ar_1440:810,f_auto,q_auto,g_auto/images/voltaxMediaLibrary/mmsport/si/01m89m7abd4243t43j2z.jpg",
+  1795640402
+ ],
+ [
   "Dangerous Minds",
   "How political satire gave the world porn",
   "Everything is political.",
@@ -3394,6 +3428,15 @@
     ""
    ]
   ]
+ ],
+ [
+  "AV Club",
+  "Somehow Amanda Seyfried got away with telling \"a lot of people\" about her YCSE role",
+  "Despite the secrecy surrounding <i>You Can See Everything</i>, Amanda Seyfried revealed that she blabbed to \"a lot of people\" about her involvement.",
+  "https://www.avclub.com/amanda-seyfried-you-can-see-everything-role-told-people",
+  "Entertainment",
+  "https://www.avclub.com/wp-content/uploads/2026/11/25/amanda-seyfried-tonight-show-featured.jpg",
+  1795638920
  ],
  [
   "Bloody Disgusting",
@@ -4367,45 +4410,6 @@
   ]
  ],
  [
-  "Bloody Disgusting",
-  "‘Day Drinker’ Starring Johnny Depp Gets ‘R’ Rating for Strong Bloody Violence",
-  "Fresh off director Ti West’s Ebenezer, a new take on A Christmas Carol, Johnny Depp again returns to the genre next year in Day Drinker, being billed as a horror movie by Lionsgate. .",
-  "https://bloody-disgusting.com/movie/3976830/day-drinker-starring-johnny-depp-gets-r-rating-for-strong-bloody-violence/",
-  "Entertainment",
-  "https://i0.wp.com/bloody-disgusting.com/wp-content/uploads/2026/09/DDR_2025x3000_Online_1SHT_TSR_V19.jpg?resize=1200%2C1778&ssl=1",
-  1795617783,
-  [
-   [
-    "p",
-    "Fresh off director Ti West’s Ebenezer , a new take on A Christmas Carol , Johnny Depp again returns to the genre next year in Day Drinker , being billed as a horror movie by Lionsgate."
-   ],
-   [
-    "p",
-    "Day Drinker has been Rated ‘R’ by the MPA this week for “ strong bloody violence, language and brief drug use .” Lionsgate releases the film in theaters on March 26, 2027 ."
-   ],
-   [
-    "p",
-    "Directed by Marc Webb ( 500 Days of Summer, The Amazing Spider-Man, Snow White ), Day Drinker stars Johnny Depp alongside Madelyn Cline and Penélope Cruz ."
-   ],
-   [
-    "p",
-    "In Day Drinker , “a private-yacht bartender (Madelyn Cline) encounters a mysterious, onboard guest (Johnny Depp). They soon find themselves entangled with a criminal figure (Penélope Cruz) and connected in ways no one saw coming.”"
-   ],
-   [
-    "p",
-    "Watch the previously released official teaser trailer below."
-   ],
-   [
-    "p",
-    "Zach Deann wrote the screenplay for Day Drinker . The film is Produced by Basil Iwanyk p.g.a., Erica Lee p.g.a., Adam Kolbrenner, Zach Dean, and Nathan Kahane, with Executive Producers including Dan Friedkin, Micah Green, Daniel Steinman, Stephen Deuters, Jason Forman, Sam Sarkar, Marc Webb, Eric Sherman, Sarah Hong, Scott LaStaiti, Adrián Guerra."
-   ],
-   [
-    "p",
-    "Lionsgate presents in association with 30WEST and Media Capital Technologies, a Thunder Road production in association with IN.2, a Nostromo Picture / Baby Door production."
-   ]
-  ]
- ],
- [
   "Sports Illustrated",
   "Erling Haaland ‘Questioning Everything’ As Man City Crisis Deepens",
   "The striker addressed the team’s ongoing struggles after a flat display against Napoli.",
@@ -4638,10 +4642,10 @@
  [
   "music is to blame.",
   "Does Indie Music Still Have An Inclusivity Problem?",
-  "Tap the button below for the full story.",
+  "Taking a look at the inclusivity problem in the indie and alternative music scene.",
   "https://www.musicistoblame.co.uk/2026/11/does-indie-music-still-have-inclusivity.html",
   "Entertainment",
-  "",
+  "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjgnGb__axtV_KZlhlNI5k9Az1Yj0v6FowcsSo4roeg-pEwIwhGbJ3o5rETJkBVrlaxuPNDiJSlppBzo3F-fEMLICpt9WzipnMF6vme_dcchvMv3NHf_aEu_jSmL50rwSnvkD68GUnGSEIo81_jaHUfPVV9zcUnIDeddoVR5KYZZ5KODR_MpyZlcqKU509Q/w1200-h630-p-k-no-nu/image.png",
   1795600908
  ],
  [
@@ -4675,6 +4679,15 @@
     "Hosted on Acast. See acast.com/privacy for more information."
    ]
   ]
+ ],
+ [
+  "ESPN",
+  "Erling Haaland: When Man City don't win 'you start questioning everything'",
+  "Tap the button below for the full story.",
+  "https://www.espn.com/soccer/story/_/id/50590889/erling-haaland-man-city-napoli",
+  "Entertainment",
+  "",
+  1795592160
  ],
  [
   "Talk House",
@@ -4721,15 +4734,6 @@
     "Hosted on Acast. See acast.com/privacy for more information."
    ]
   ]
- ],
- [
-  "Chosunbiz",
-  "China investigates Shanghai party chief as leadership purge widens",
-  "China investigates Shanghai party chief as leadership purge widens Chen Jining investigation signals deeper upheaval in Chinas leadership",
-  "https://biz.chosun.com/en/en-international/2026/11/25/JDGLXEQONZDMPN6QYTHOVNALZQ/?outputType=amp",
-  "Entertainment",
-  "https://biz.chosun.com/resizer/v2/JKMZV4G4L5JLPKFQEUJ43PNV6E.jpg?auth=e88442c702e30ee70f613e135d15141a438f0d76a3c18903f1d823216be6ccf8&width=1200&height=630&smart=true",
-  1795568340
  ],
  [
   "XKCD",
@@ -4798,15 +4802,6 @@
     "Not wanting to give a metric ton of candy to a literal criminal, M&Ms changed course slightly and instead gave the monetary value of two million pieces of their candy (around 140,000 kroner) to the Munch Museum to help with its restoration."
    ]
   ]
- ],
- [
-  "Search: Gang of Four",
-  "Gujarat horror: Gang waylaid family of 6 in car, threw them into canal; 3 die, 2 minors missing, boy survives…",
-  "Gujarat horror: Gang waylaid family of 6 in car, threw them into canal; 3 die, 2 minors missing, boy survives The Indian Express",
-  "https://indianexpress.com/article/cities/ahmedabad/gujarat-horror-gang-waylaid-family-of-6-in-car-threw-them-into-canal-3-die-2-minors-missing-boy-survives-10977252/",
-  "Entertainment",
-  "",
-  1795556587
  ],
  [
   "Dangerous Minds",
@@ -4909,15 +4904,6 @@
     "Maybe that’s the very meaning of the term “print the legend.”"
    ]
   ]
- ],
- [
-  "Search: Patrick Stewart",
-  "Inside Patrick Stewart’s final performance: ‘Xavier’s the conscience in the movie’ (exclusive) -…",
-  "Inside Patrick Stewart’s final performance: ‘Xavier’s the conscience in the movie’ (exclusive) Entertainment Weekly",
-  "https://ew.com/patrick-stewart-avengers-doomsday-final-performance-tributes-exclusive-12262759",
-  "Entertainment",
-  "",
-  1795543200
  ],
  [
   "Dangerous Minds",
@@ -5416,6 +5402,15 @@
     "And you can pre-order the record here: PINS – If I’m Alive Now, Then I Was Dead"
    ]
   ]
+ ],
+ [
+  "Good News Network",
+  "Family Is Thankful Their Baby, Given Weeks to Live on Christmas Eve, Now Brain Cancer-Free",
+  "An infant girl with weeks to live from aggressive brain cancer has made a full recovery after her case arrived at the desk of a hospital which had just finished a rigorous study on her form…",
+  "https://www.goodnewsnetwork.org/girl-given-weeks-to-live-on-christmas-eve-makes-miracle-recovery-after-serendipitous-call-to-st-jude/",
+  "Oddities",
+  "https://www.goodnewsnetwork.org/wp-content/uploads/2026/11/The-Mehtabd-family-with-Imani-on-the-right-credit-family-photo.jpg",
+  1795701654
  ],
  [
   "mentalfloss.com",
@@ -6315,15 +6310,6 @@
     ""
    ]
   ]
- ],
- [
-  "mentalfloss.com",
-  "20 Classic TV Shows That Were Surprisingly Controversial When They First Aired",
-  "From lighthearted sitcoms to gripping dramas, these TV staples were once heavily criticized for surprising reasons.",
-  "https://www.mentalfloss.com/entertainment/tv/classic-shows-controversial-first-aired?utm_source=RSS",
-  "Oddities",
-  "https://images2.minutemediacdn.com/image/upload/c_crop,w_3690,h_2075,x_0,y_1164/c_fill,w_2880,ar_16:9,f_auto,q_auto,g_auto/images/GettyImages/mmsport/mentalfloss/01m87phymfmeq9jahhq9.jpg",
-  1795618802
  ],
  [
   "Search: Hunter S Thompson",
@@ -7420,15 +7406,6 @@
   ]
  ],
  [
-  "Ranker",
-  "50+ Celebrities Born on October 5",
-  "Tap the button below for the full story.",
-  "https://www.ranker.com/list/celebrities-born-on-october-5",
-  "Oddities",
-  "",
-  1795468941
- ],
- [
   "The Portugal News",
   "Major music festival returns to Portugal",
   "The Lux Interior festival, scheduled for Coimbra across three dates in October and November and marking the event’s seventh edition, celebrates the 30th anniversary of the Lux Records label…",
@@ -7474,13 +7451,22 @@
   1795111906
  ],
  [
-  "The Guardian",
+  "IMDb",
   "Alex Cox: ‘John Lydon said Sid and Nancy was a nightmarish piece of garbage’",
-  "The cult film director and Moviedrome presenter answers your questions on why James Bond is anti-Russian propaganda, whether Christopher Nolan is a bore and wanting to save Hunter S Thompson",
-  "https://www.theguardian.com/film/2026/nov/19/alex-cox-john-lydon-said-sid-and-nancy-was-a-nightmarish-piece-of-garbage",
+  "Tap the button below for the full story.",
+  "https://www.imdb.com/es/news/ni66118931/?ref_=nwc_art_perm",
   "Oddities",
-  "https://i.guim.co.uk/img/media/9c7ec3ce96c482041b3c52c4d5629eb10fe4b068/0_0_3540_2832/master/3540.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=997828b80af03e21954a354f54af9564",
-  1795108440
+  "",
+  1795102756
+ ],
+ [
+  "NME",
+  "Asia’s Clockenflap reveals full 2026 line-up with Turnstile, Jane Remover and more",
+  "Asia’s Clockenflap festival has announced the final names for its 2026 line-up, with Turnstile, Jane Remover and more joining the line-up.",
+  "https://www.nme.com/news/music/asias-clockenflap-reveals-full-2026-line-up-with-turnstile-jane-remover-and-more-3976389",
+  "Oddities",
+  "https://www.nme.com/wp-content/uploads/2026/11/turnstile-jane-remover@2000x1270.jpg",
+  1795089358
  ],
  [
   "messynessychic.com",
@@ -7618,6 +7604,15 @@
   ]
  ],
  [
+  "Bloomberg.com",
+  "Japan Tobacco Studies Deal for Imperial Brands",
+  "Tap the button below for the full story.",
+  "https://www.bloomberg.com/news/articles/2026-11-26/japan-tobacco-studies-deal-for-imperial-brands",
+  "History",
+  "",
+  1795695834
+ ],
+ [
   "Herzindagi",
   "7 Most Haunted Places in California Every Thrill-Seeker Must Visit",
   "Explore the 7 most haunted places in California, from the Winchester Mystery House and The Queen Mary to Preston Castle, Bodie Ghost Town, and more.",
@@ -7713,6 +7708,15 @@
   1795684666
  ],
  [
+  "The New York Times",
+  "Was Japan Prime Minister Takaichi Snubbed at China’s Big Summit?",
+  "Tap the button below for the full story.",
+  "https://www.nytimes.com/2026/11/26/world/asia/japan-china-takaichi-snubbed.html",
+  "History",
+  "",
+  1795684469
+ ],
+ [
   "Open Culture",
   "The Illustrated Version of “Alice’s Restaurant”: Watch Arlo Guthrie’s Thanksgiving Counterculture Classic",
   "Alice’s Restaurant. It’s now a Thanksgiving classic, and something of a tradition around here. Recorded in 1967, the 18+ minute counterculture song recounts Arlo Guthrie’s real encounter…",
@@ -7771,15 +7775,6 @@
   "History",
   "https://www.thenationalnews.com/resizer/v2/HKXOC5MKZFGZRDCZB3CFTIHDF4.jpg?auth=268655fd3241f9b8f5f879193b663797e7bfd92f4d2303501d318c67c390158e&smart=true&width=1200&height=630",
   1795676588
- ],
- [
-  "The New York Times",
-  "Was Japan’s Leader Snubbed at China’s Big Summit? A Visual Evaluation.",
-  "Tap the button below for the full story.",
-  "https://www.nytimes.com/2026/11/26/world/asia/japan-china-takaichi-snubbed.html",
-  "History",
-  "",
-  1795669264
  ],
  [
   "themarginalian.org",
@@ -7968,6 +7963,15 @@
   ]
  ],
  [
+  "The Hill",
+  "Abrego Garcia sees victory in Spain arrival after Trump deportation push",
+  "Tap the button below for the full story.",
+  "https://thehill.com/homenews/administration/6243654-kilmar-abrego-garcia-trump-administration-deportation-case/",
+  "History",
+  "",
+  1795641480
+ ],
+ [
   "lithub.com",
   "What I’m thankful for, literarily.",
   "– Weird and in person celebrations of books. – Listening to a poem while doing my little stretches. The Library of Congress and Poetry Archive collections, to be specific. – And I’m…",
@@ -8096,6 +8100,15 @@
   "History",
   "https://www.medievalists.net/wp-content/uploads/2026/11/Medievalists-feature-scaled.jpg",
   1795624142
+ ],
+ [
+  "Defense News",
+  "Japan to use Indian ranges for long-range missile training under new pact",
+  "Japanese officials visited India in October to assess whether its missile ranges could accommodate training with anti-ship missiles and smaller attack drones.",
+  "https://www.defensenews.com/global/asia-pacific/2026/11/25/japan-to-use-indian-ranges-for-long-range-missile-training-under-new-pact/",
+  "History",
+  "https://one.sightlinemg.com/wp-content/uploads/2026/08/GettyImages-2266504569.jpg.jpg",
+  1795618469
  ],
  [
   "daily.jstor.org",
@@ -8873,33 +8886,6 @@
     ""
    ]
   ]
- ],
- [
-  "Reuters",
-  "Spain thought it had the 2030 World Cup final. Morocco had other plans.",
-  "Tap the button below for the full story.",
-  "https://www.reuters.com/sports/soccer/spain-thought-it-had-2030-world-cup-final-morocco-had-other-plans-2026-11-25/",
-  "History",
-  "",
-  1795590180
- ],
- [
-  "Politico",
-  "Kilmar Abrego Garcia self-deports to Spain after fending off Trump administration legal onslaught",
-  "Tap the button below for the full story.",
-  "https://www.politico.com/news/2026/11/24/kilmar-abrego-garcia-deport-spain-01182883",
-  "History",
-  "",
-  1795581240
- ],
- [
-  "The Hill",
-  "Van Hollen: Abrego Garcia leaving US, ‘will be safe’ amid self-deportation reports",
-  "Tap the button below for the full story.",
-  "https://thehill.com/policy/international/6241572-kilmar-abrego-garcia-self-deports/",
-  "History",
-  "",
-  1795570920
  ],
  [
   "themarginalian.org",
@@ -11032,6 +11018,112 @@
   ]
  ],
  [
+  "Phys.org",
+  "Two mechanisms of amino acid transport in a rare disease-associated protein revealed",
+  "Cells must constantly exchange amino acids with their environment to make proteins and support numerous bodily processes. To do this, they have specialized transporters located in their…",
+  "https://phys.org/news/2026-11-mechanisms-amino-acid-rare-disease.html",
+  "Science",
+  "https://scx1.b-cdn.net/csz/news/tmb/2023/amino-acid.jpg",
+  1795704001
+ ],
+ [
+  "Tech Spot",
+  "New LCD technology promises three times the brightness and twice the lifespan of OLED",
+  "The design comes from Seoul Viosys, a Seoul Semiconductor subsidiary. Its WICOP technology removes the conventional package, the housing that normally surrounds an LED die. The chip…",
+  "https://www.techspot.com/news/114712-new-lcd-technology-promises-three-times-brightness-twice.html",
+  "Science",
+  "https://www.techspot.com/images2/news/ts3_thumbs/2026/11/2026-11-26-ts3_thumbs-841.jpg",
+  1795703940
+ ],
+ [
+  "Pop Sci",
+  "Meteorites fascinated ancient Egyptians—just look at King Tut’s ‘space dagger’",
+  "Meteoric iron was revered across the ancient Mediterranean.",
+  "https://www.popsci.com/science/ancient-egyptian-meteorite-artifacts-king-tut/",
+  "Science",
+  "https://www.popsci.com/wp-content/uploads/2026/11/meteor-ancient-egypt.jpg?quality=85",
+  1795701660,
+  [
+   [
+    "p",
+    "In August 2026, an analysis of iron from ancient Greek tombs revealed surprising results . The objects surveyed included weapons and jewelry from around 3,000 to 4,000 years ago. Most of them were fashioned from regular old iron ore, but around 10 rings were made of iron from outer space—aka from meteorites that crash-landed on Earth."
+   ],
+   [
+    "p",
+    "It seems that, among the upper classes of Bronze Age Greece, rings fashioned from this out-of-this-world metal were all the rage. Before people learned how to extract iron from ore by melting it at super-high temperatures—a process called smelting—the only source of metallic iron was the occasional space rock . This material, known as meteoric iron , is rare worldwide, but especially in Greece, where approaching meteors usually disappear into the sea rather than make landfall."
+   ],
+   [
+    "p",
+    "Researchers believe that the Greek meteoric rings were actually imported from Egypt: a land with a special relationship to this metal from the skies."
+   ],
+   [
+    "i",
+    "https://www.popsci.com/wp-content/uploads/2026/11/meteorite-rings-Greece.jpg?strip=all&quality=85"
+   ],
+   [
+    "h",
+    "Egyptians had meteoric iron early, but smelted iron came late"
+   ],
+   [
+    "p",
+    "Meteoric iron can be identified because it’s purer than the iron ore that naturally occurs on Earth, with a higher proportion of nickel mixed into it. Because meteoric iron “already arrives on Earth in metallic form,” says Victoria Almansa-Villatoro, a professor of Egyptology at Yale University, “it’s very malleable” and can be shaped more easily than unrefined ore."
+   ],
+   [
+    "p",
+    "The Egyptians started working with this rare material early. “The oldest meteoric iron objects in the world come from Egypt,” says Almansa-Villatoro: Nine small beads , excavated from a site called Gerzeh along the bank of the Nile about 20 miles south of Cairo, are the oldest artifacts discovered made from space rocks. They are dated to around 3,200 BCE, more than a thousand years older than the 10 meteoric iron rings found in Greece."
+   ],
+   [
+    "p",
+    "Not only are the Gerzeh beads older than any other meteoric iron objects, they are much, much older than widespread iron smelting in Egypt. Almansa-Villatoro explains that “Egypt was relatively late in comparison with other Near Eastern civilizations to start smelting iron.” By the time the Egyptians were producing iron on a large scale in the 500s BCE, ancient people in Anatolia and other regions had been doing it for about five hundred years."
+   ],
+   [
+    "i",
+    "https://www.popsci.com/wp-content/uploads/2026/11/meteoric-iron-beads.jpg?strip=all&quality=85"
+   ],
+   [
+    "p",
+    "A major reason for this late adoption was Egypt’s natural resources. Iron smelting forges burned a lot of wood charcoal, and Egypt had no large forests. For centuries, the Egyptians relied on bronze, which cost less fuel to produce. It wasn’t until major changes in political and trade networks, including pressure to match the iron arsenals of foreign enemies like the Assyrians , that the Egyptians finally made the shift ."
+   ],
+   [
+    "p",
+    "While early iron weapons and armor were not automatically better than bronze ones, iron proved easier to repair, and could be strengthened through further reworking. But objects like the Gerzeh beads show that the ancient Egyptians shaped small amounts of meteoric iron long before they knew how to extract it from ore."
+   ],
+   [
+    "h",
+    "King Tut’s “space dagger” and other ancient objects made from meteorites"
+   ],
+   [
+    "p",
+    "The Gerzeh iron beads were incorporated into jewelry with gems and gold, hinting at their perceived value. All of the other Egyptian objects believed to be made of meteoric iron are similarly small and mostly decorative. The largest and most spectacular is a dagger with a meteoric iron blade more than eight inches long . It was found in the tomb of Egypt’s famous pharaoh, Tutankhamun, who died around 1,323 BCE."
+   ],
+   [
+    "p",
+    "Government records from the reign of Tutankhamun’s grandfather, Amenhotep III, mention an Anatolian king gifting a dagger to the Pharaoh. “People have speculated that this was the same dagger,” says Almansa-Villatoro. “Because, why would they make such a big deal about this king receiving a dagger from a foreign leader, unless it’s made of a very important or very rare material?” As seen with the recent findings from Greece, demand for meteoric iron in the ancient Mediterranean was international."
+   ],
+   [
+    "i",
+    "https://www.popsci.com/wp-content/uploads/2026/11/king-tuts-dagger.jpg?strip=all&quality=85"
+   ],
+   [
+    "p",
+    "As of 2013, archaeologists had discovered 28 objects in Egypt believed to be made of meteoric iron . This accounts for about half of the 55 known ancient meteoric iron artifacts found…"
+   ],
+   [
+    "m",
+    ""
+   ]
+  ]
+ ],
+ [
+  "Phys.org",
+  "Scientists discover quasar formed within a mere 630 million years of the Big Bang, setting a record",
+  "Scientists have discovered the most distant quasar yet, the core of a galaxy with a slow-chomping black hole at its center dating back to nearly the dawn of the universe.",
+  "https://phys.org/news/2026-11-scientists-quasar-mere-million-years.html",
+  "Science",
+  "https://scx1.b-cdn.net/csz/news/tmb/2026/farthest-quasar.jpg",
+  1795701602
+ ],
+ [
   "Tech Spot",
   "Elon Musk now promises two free SpaceX shares to every child in America",
   "SpaceX offered some specifics on its website about who qualifies. The company announced that it would issue one new share of its Class A common stock for every currently active Trump…",
@@ -11172,24 +11264,6 @@
     "Kenya’s Cabinet Secretary for Mining and Blue Economy has announced that the mining ministry has issued a “notice of intention” to award the tender for the development of the Mrima Hill mining project to U.S.-based mining consortium Frontier Minerals. Mrima Hill is thought to be rich in critical minerals sought after by electronics, aerospace and energy industries, “The choice of an American consortium reflects a commitment from the Kenyan government to develop their mining sector in a transparent manner that will bring market-leading innovation to Kenya, ensure local value addition, and create jobs and economic benefits [for the U.S. and Kenya],” said the U.S. State Department in a statement. The U.S.’s interest in Kenya’s critical minerals is part of Washington’s effort to diversify supply chains and reduce dependence on China, which dominates the critical minerals market. According to Kenya’s Ministry of Mining, Mrima Hill holds at least 5.8 million tons of material that may contain niobium pentoxide, which is used to make niobium, a critical element used in electronics, the aerospace industry and energy storage. Two-thirds of the world’s niobium reserves are currently held by Brazil; the remaining third are mostly held by China. The region is also potentially home to millions of metric tons of rare earth elements (REEs), which are key components in the manufacture of batteries, magnets, mobile phones and cars. While in its statement, the U.S. State Department emphasized transparency in the mining sector, Kenyan civil society organizations raised concerns that the process has not fully…This article was originally published on Mongabay"
    ]
   ]
- ],
- [
-  "Phys.org",
-  "'King tide' waves batter California coast, soaking San Francisco",
-  "Massive waves carried on king tides battered California's coast Wednesday, prompting evacuations and soaking San Francisco, but sparing feared mass disruptions to Thanksgiving holiday…",
-  "https://phys.org/news/2026-11-king-tide-batter-california-coast.html",
-  "Science",
-  "https://scx1.b-cdn.net/csz/news/tmb/2026/california-coast-brace.jpg",
-  1795689606
- ],
- [
-  "Phys.org",
-  "Wildfires raze homes, displace wildlife on Australian island",
-  "Wildfires have forced road closures, displaced animals and razed homes while engulfing over 10% of Australia's southeastern Flinders Island, emergency services said Thursday.",
-  "https://phys.org/news/2026-11-wildfires-raze-homes-displace-wildlife.html",
-  "Science",
-  "https://scx1.b-cdn.net/csz/news/tmb/2026/this-aerial-photo-take.jpg",
-  1795688401
  ],
  [
   "Mongabay",
@@ -12083,409 +12157,6 @@
   1795582800
  ],
  [
-  "Bioengineer.org",
-  "Study Analyzes How Darwin Revised Selective Breeding Concepts to Support Evolution",
-  "A philosophical analysis reveals how Charles Darwin systematically redefined contemporary assumptions about selective breeding to turn an apparent counterargument into primary support for…",
-  "https://bioengineer.org/study-analyzes-how-darwin-revised-selective-breeding-concepts-to-support-evolution/",
-  "Science",
-  "https://bioengineer.org/wp-content/uploads/2026/11/stackrss-featured-27323.png",
-  1795573744
- ],
- [
-  "Pop Sci",
-  "Grab rare deals up to 40% off on Arc’teryx outdoor gear during this limited Black Friday sale",
-  "The sale runs from $32 waist packs to GORE-TEX PRO shells, but many of the discounts only apply to certain colors.",
-  "https://www.popsci.com/gear/arcteryx-black-friday-sale-2026/",
-  "Science",
-  "https://www.popsci.com/wp-content/uploads/2026/11/arc-teryx-black-friday-header.jpg?quality=85",
-  1795560155,
-  [
-   [
-    "p",
-    "We’re big fans of products that are worth the money and Arc’teryx outdoor gear fits the bill. It’s not cheap, but it’s built extremely tough and with performance in mind. Right now, the company has more than 120 jackets, fleeces, pants, shoes, and packs marked down by as much as 40 percent for Black Friday. Prices in the Arc’teryx Black Friday sale start at $32.00 for a waist pack, GORE-TEX shells start at $280.00, and Arc’teryx calls these its biggest deals of the year. Many of the discounts apply only to specific colors, so make sure the color you pick shows the sale price before it goes in your cart. REI has its own Arc’teryx deals , including hiking boots and approach shoes that aren’t in Arc’teryx’s sale, and those have their own sections below. We checked every price in this post on Arc’teryx’s site and at REI Tuesday morning, November 24."
-   ],
-   [
-    "h",
-    "Top Arc’teryx Black Friday deals"
-   ],
-   [
-    "p",
-    "Atom Hoody Men’s $240.00 (was $300.00) in select colors."
-   ],
-   [
-    "p",
-    "Beta AR Jacket Men’s $520.00 (was $650.00)."
-   ],
-   [
-    "p",
-    "Kopec Mid GTX Hiking Boots Men’s $99.93 (was $200.00) at REI."
-   ],
-   [
-    "p",
-    "Sabre Bib Pants Men’s $349.83 (was $700.00) at REI."
-   ],
-   [
-    "p",
-    "Norvan LD 4 GTX Shoe Men’s $120.00 (was $200.00)."
-   ],
-   [
-    "p",
-    "Gamma AR Pants Men’s $99.83 (was $240.00) at REI."
-   ],
-   [
-    "h",
-    "Delta Hoody Men’s: $154.00 (was $220.00)"
-   ],
-   [
-    "h",
-    "Delta Hoody Men’s $154.00 (was $220.00)"
-   ],
-   [
-    "p",
-    "A 9-ounce technical fleece that layers under a shell"
-   ],
-   [
-    "i",
-    "https://www.popsci.com/wp-content/uploads/2026/11/arcteryx-delta-hoody-mens.jpg?quality=85&w=768"
-   ],
-   [
-    "p",
-    "Fleece is the layer that gets worn most, and that makes the Delta Hoody at $154.00 an easy place to start in this sale. Arc’teryx lists it at 9.2 ounces and builds it from Octa fleece, a polyester with hollow-core fibers that hold heat without the bulk of a thicker pile. The hood is designed to fit under a climbing helmet, and Arc’teryx cuts the body trim so it slides under a shell. The sale price applies to the black colorway, and the page listed sizes XS through XXL when we checked."
-   ],
-   [
-    "h",
-    "Beta Jacket Men’s: $320.00 (was $400.00)"
-   ],
-   [
-    "h",
-    "Beta Jacket Men’s $320.00 (was $400.00)"
-   ],
-   [
-    "p",
-    "A three-layer GORE-TEX shell that weighs 13 ounces"
-   ],
-   [
-    "i",
-    "https://www.popsci.com/wp-content/uploads/2026/11/arcteryx-beta-jacket-mens.jpg?quality=85&w=768"
-   ],
-   [
-    "p",
-    "Arc’teryx sells more specialized shells, but the Beta Jacket is the one it describes as its most versatile, and it’s $320.00 in this sale. The three-layer GORE-TEX ePE fabric has an 80-denier face, and Arc’teryx lists the jacket at 13.2 ounces in a regular fit with room for a midlayer. A RECCO reflector is embedded in case a search crew ever needs to find you, and the hood adjusts with a single pull. This listing discounts the Spotlight color only."
-   ],
-   [
-    "h",
-    "Norvan LD 4 Shoe Men’s: $102.00 (was $170.00)"
-   ],
-   [
-    "h",
-    "Norvan LD 4 Shoe Men’s $102.00 (was $170.00)"
-   ],
-   [
-    "p",
-    "A Vibram-soled trail runner at 40 percent off"
-   ],
-   [
-    "i",
-    "https://www.popsci.com/wp-content/uploads/2026/11/arcteryx-Norvan-LD-4-Shoe-Mens.jpg?quality=85&w=768"
-   ],
-   [
-    "p",
-    "Trail shoes wear out faster than jackets do, so 40 percent off the Norvan LD 4 is worth a look even if your current pair has some miles left. It has a Vibram Megagrip outsole with 4mm lugs and a 6mm heel-to-toe offset, and Arc’teryx lists each shoe at 10 ounces. Arc’teryx says this model runs large and recommends ordering a half size down. The $102.00 price applies to the Lt Bracken/Oakmoss color, and the women’s Norvan LD 4 is the same price."
-   ],
-   [
-    "h",
-    "Grotto Toque: $42.00 (was $60.00)"
-   ],
-   [
-    "h",
-    "Grotto Toque $42.00 (was $60.00)"
-   ],
-   [
-    "p",
-    "A recycled-polyester beanie with no sizing to guess"
-   ],
-   [
-    "i",
-    "https://www.popsci.com/wp-content/uploads/2026/11/arcteryx-Grotto-Toque-Cosmic-Bloom-Front-View-Grotto-Toque-Cosmic-Bloom-Hover-Grotto-Toque-Cosmic-Bloom-Side-View-Grotto-Toque.jpg?quality=85&w=768"
-   ],
-   [
-    "p",
-    "Sizing is the hard part of buying Arc’teryx as a gift, and the Grotto Toque skips it. The mid-length beanie comes in a single size, is knit from 100 percent recycled polyester, and weighs 2.2 ounces according to Arc’teryx. The bird logo sits front and center. It’s $42.00 in the Cosmic Bloom color."
-   ],
-   [
-    "h",
-    "Arc’teryx GORE-TEX shell jacket deals from $280"
-   ],
-   [
-    "p",
-    "The Beta Jacket Men’s is covered above. The hiking-focused Coelle Jacket Women’s is $280.00, and the Beta AR Jacket Men’s in GORE-TEX PRO is $520.00."
-   ],
-   [
-    "p",
-    "Coelle Jacket Women’s $280.00 (was $400.00)."
-   ],
-   [
-    "p",
-    "Beta Jacket Women’s $320.00 (was $400.00)."
-   ],
-   [
-    "p",
-    "Beta SL Jacket Men’s $400.00 (was $500.00)."
-   ],
-   [
-    "p",
-    "Beta SL Jacket Women’s $400.00 (was $500.00)."
-   ],
-   [
-    "p",
-    "Beta AR Jacket Men’s $520.00 (was $650.00)."
-   ],
-   [
-    "p",
-    "Beta AR Jacket Women’s $520.00 (was $650.00) in select colors."
-   ],
-   [
-    "p",
-    "Emaris Relaxed Jacket Women’s $525.00 (was $750.00) in select colors."
-   ],
-   [
-    "p",
-    "Alpha Jacket Men’s $560.00 (was $700.00)."
-   ],
-   [
-    "p",
-    "Alpha Jacket Women’s $560.00 (was $700.00)."
-   ],
-   [
-    "p",
-    "Beta SV Jacket Men’s $640.00 (was $800.00)."
-   ],
-   [
-    "p",
-    "Alpha SV Jacket Men’s $720.00 (was $900.00) in select colors."
-   ],
-   [
-    "h",
-    "Arc’teryx insulated jacket and fleece deals from $84"
-   ],
-   [
-    "m",
-    ""
-   ]
-  ]
- ],
- [
-  "Pop Sci",
-  "We hand-picked more than 200 of the best Amazon Black Friday deals",
-  "Amazon’s Black Friday sale runs through November 30. These are the deals from brands we know that we think are worth your money.",
-  "https://www.popsci.com/gear/amazon-black-friday-deals-2026/",
-  "Science",
-  "https://www.popsci.com/wp-content/uploads/2026/11/black-friday-amazon-update-header.jpg?quality=85",
-  1795559800,
-  [
-   [
-    "p",
-    "You pried yourself away from your marathon GTA VI session long enough to look at the internet and we’re going to reward you by saving you tons of money. Amazon just officially launched its Black Friday deals and we’ll be tracking the best of the best until the dust has fully settled on Cyber Monday. Amazon says the full Black Friday sale runs through November 30, and it covers far more than fits in one post, so we stuck to brands we know in categories you actually care about. We’ll update throughout and throw the best deals in, so check back regularly."
-   ],
-   [
-    "h",
-    "Top Black Friday deals on Amazon"
-   ],
-   [
-    "p",
-    "Ninja Air Fryer XL $89.99 (was $179.99)."
-   ],
-   [
-    "p",
-    "Bose SoundLink Micro (2nd Gen) speaker $79.00 (was $129.00)."
-   ],
-   [
-    "p",
-    "Nex Playground $209.00 (was $299.00)."
-   ],
-   [
-    "p",
-    "Breville Barista Express espresso machine $494.95 (was $699.95)."
-   ],
-   [
-    "p",
-    "Dyson V9 Motorbar cordless vacuum $269.95 (was $599.99)."
-   ],
-   [
-    "p",
-    "Beats Studio Pro headphones $149.00 (was $299.99)."
-   ],
-   [
-    "h",
-    "Ninja Air Fryer XL: $89.99 (was $179.99)"
-   ],
-   [
-    "p",
-    "A 5.5-quart Ninja air fryer for under $90"
-   ],
-   [
-    "i",
-    "https://www.popsci.com/wp-content/uploads/2026/11/Ninja-Air-Fryer-XL-5.5-Qt-5-in-1.jpg?quality=85&w=768"
-   ],
-   [
-    "p",
-    "If you still reheat pizza in the microwave, consider this your intervention. The Ninja Air Fryer XL is $89.99, half its $179.99 list price. Amazon’s listing puts the basket at 5.5 quarts, which Ninja says fits 3 pounds of wings, and the heat tops out at 400 degrees. It also roasts, reheats and dehydrates, and the listing calls it dishwasher-safe for the cleanup you’d otherwise put off."
-   ],
-   [
-    "h",
-    "Bose SoundLink Micro (2nd Gen) speaker: $79.00 (was $129.00)"
-   ],
-   [
-    "p",
-    "Bose’s tiny waterproof speaker for under $80"
-   ],
-   [
-    "i",
-    "https://www.popsci.com/wp-content/uploads/2026/11/Bose-SoundLink-Micro-Portable-Bluetooth-Speaker.jpg?quality=85&w=768"
-   ],
-   [
-    "p",
-    "Small speakers make easy gifts because nobody has to guess a size. The Bose SoundLink Micro (2nd Gen) speaker is $79.00, which is $50 under its $129.00 list price. Bose rates the palm-sized speaker for up to 12 hours of battery life and calls it waterproof and dustproof, so it can ride along on a bike, a backpack or the edge of a hot tub. This price applies to the Sandstone color."
-   ],
-   [
-    "h",
-    "Nex Playground: $209.00 (was $299.00)"
-   ],
-   [
-    "p",
-    "The family motion-gaming system for $90 off"
-   ],
-   [
-    "i",
-    "https://www.popsci.com/wp-content/uploads/2026/11/nex-playground.jpg?quality=85&w=768"
-   ],
-   [
-    "p",
-    "The Nex Playground drops to $209.00 from a $299.00 list price. It’s a small cube that plugs into a TV and uses a built-in camera to track players’ movements, so nobody has to hold a controller. Amazon’s listing pitches it for game nights, parties and playdates. That makes it a strong candidate for the gift that gets everyone off the couch after a holiday dinner."
-   ],
-   [
-    "h",
-    "Breville Barista Express espresso machine: $494.95 (was $699.95)"
-   ],
-   [
-    "p",
-    "Breville’s grind-and-brew espresso machine for $205 off"
-   ],
-   [
-    "i",
-    "https://www.popsci.com/wp-content/uploads/2026/11/breville-espresso-machine.jpg?quality=85&w=768"
-   ],
-   [
-    "p",
-    "A coffee shop habit gets expensive, and this machine is one way out. The Breville Barista Express espresso machine is $494.95, down from a $699.95 list price. This is the BES870XL in brushed stainless steel, and it has a grinder built in, so whole beans go in the top and espresso comes out the bottom. Breville’s listing calls it a manual machine, so expect a short learning curve before the lattes start looking like the ones you pay for."
-   ],
-   [
-    "h",
-    "Amazon device deals from $29.99"
-   ],
-   [
-    "p",
-    "We broke the Kindle Black Friday deals out into their own post if an e-reader is all you’re after."
-   ],
-   [
-    "p",
-    "Kindle Scribe Colorsoft $479.99 (was $679.99)."
-   ],
-   [
-    "p",
-    "Kindle Scribe (64GB) $389.99 (was $549.99)."
-   ],
-   [
-    "p",
-    "Amazon Echo Show 21 $349.99 (was $499.99)."
-   ],
-   [
-    "p",
-    "Kindle Colorsoft Kids $179.99 (was $299.99)."
-   ],
-   [
-    "p",
-    "Kindle Paperwhite Signature Edition (32GB) $179.99 (was $249.99)."
-   ],
-   [
-    "p",
-    "Kindle Colorsoft (16GB) $169.99 (was $289.99)."
-   ],
-   [
-    "p",
-    "Kindle Paperwhite Kids (16GB) $149.99 (was $229.99)."
-   ],
-   [
-    "p",
-    "Amazon Alexa Photo Frame $134.99 (was $229.99)."
-   ],
-   [
-    "p",
-    "Kindle Paperwhite (16GB) $129.99 (was $199.99)."
-   ],
-   [
-    "p",
-    "Kindle (16GB) $119.99 (was $149.99)."
-   ],
-   [
-    "p",
-    "Amazon Kids Echo Time $99.99 (was $209.99)."
-   ],
-   [
-    "p",
-    "Amazon Fire TV Cube $89.99 (was $199.99)."
-   ],
-   [
-    "p",
-    "Amazon Echo Show 5 Kids $54.99 (was $109.99)."
-   ],
-   [
-    "p",
-    "Amazon Fire TV Stick 4K Plus $29.99 (was $69.99)."
-   ],
-   [
-    "h",
-    "Toy, LEGO and puzzle deals from $21.05"
-   ],
-   [
-    "p",
-    "Ravensburger GraviTrax XXL Starter Set $90.99 (was $129.99)."
-   ],
-   [
-    "p",
-    "LEGO Star Wars Battle Droid with STAP $83.99 (was $139.99)."
-   ],
-   [
-    "p",
-    "Magna-Tiles Classic 100-piece set $83.99 (was $119.99)."
-   ],
-   [
-    "p",
-    "LEGO Botanicals Mini Bonsai Trees $44.99 (was $64.99)."
-   ],
-   [
-    "p",
-    "Hot Wheels Monster Trucks All-Terrain Great Bite RC $41.99 (was $59.99)."
-   ],
-   [
-    "p",
-    "Ravensburger Harry Potter Hogwarts Castle 3,000-piece puzzle $41.99 (was $59.99)."
-   ],
-   [
-    "p",
-    "LEGO Creator 3-in-1 T. rex $41.99 (was $59.99)."
-   ],
-   [
-    "p",
-    "LEGO Star Wars The Mandalorian’s N-1 Starfighter $41.99 (was $59.99)."
-   ],
-   [
-    "m",
-    ""
-   ]
-  ]
- ],
- [
   "The Times of India",
   "Which country invented WiFi?",
   "Wi-Fi has become such a familiar part of everyday life that most people rarely think about how it came into existence. From connecting smartphones and laptops to sharing files and accessing…",
@@ -12601,6 +12272,15 @@
   "Science",
   "https://cdn.slowdownwiseup.co.uk/media/original_images/WEB_Article_Editorial_Image.jpg",
   1795276263
+ ],
+ [
+  "Raccoon Valley Radio",
+  "ADM and Perry Students to Perform At All-State Festival Tomorrow",
+  "Photo Courtesy of ADM Community School DistrictPhoto Courtesy of ADM Community School District Adel-DeSoto-Minburn and Perry will have 14 students performing during tomorrow’s Iowa High…",
+  "https://www.raccoonvalleyradio.com/2026/11/20/adm-and-perry-students-to-perform-at-all-state-festival-tomorrow/",
+  "Science",
+  "https://dehayf5mhw1h7.cloudfront.net/wp-content/uploads/sites/1074/2026/10/26154141/adm-all-state-band-1024x607.jpg",
+  1795215855
  ],
  [
   "The Kid Should See This",
