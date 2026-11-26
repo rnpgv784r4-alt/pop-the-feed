@@ -419,7 +419,7 @@ let lastHap=0;
 let MUTED=false;try{MUTED=localStorage.getItem('ptf_mute')==='1'}catch(e){}
 function muteUi(){const m=document.getElementById('mute');if(!m)return;m.classList.toggle('off',MUTED);m.setAttribute('aria-pressed',MUTED?'true':'false');m.setAttribute('aria-label',MUTED?'Unmute sound effects':'Mute sound effects')}
 function hap(){const n=Date.now();if(n-lastHap<150)return;lastHap=n;try{if(navigator.vibrate){navigator.vibrate(18);return}}catch(e){}try{document.getElementById('hp').click()}catch(e){}}
-function snd(){hap();if(MUTED)return;try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state!=='running')AC.resume();
+function snd(nh){if(!nh)hap();if(MUTED)return;try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state!=='running')AC.resume();
 const t=AC.currentTime,sr=AC.sampleRate,v=.85+Math.random()*.3;
 const m=AC.createGain();m.gain.value=.85;const lp=AC.createBiquadFilter();lp.type='lowpass';lp.frequency.value=5000;m.connect(lp);lp.connect(AC.destination);
 function burst(at,len,ty,f,q,gain,pw){const n=Math.floor(sr*len),bf=AC.createBuffer(1,n,sr),d=bf.getChannelData(0);for(let i=0;i<n;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/n,pw);const s=AC.createBufferSource();s.buffer=bf;const fl=AC.createBiquadFilter();fl.type=ty;fl.frequency.value=f;fl.Q.value=q;const g=AC.createGain();g.gain.value=gain;s.connect(fl);fl.connect(g);g.connect(m);s.start(at)}
@@ -625,7 +625,7 @@ function airBurst(x,y,n){n=n||(7+Math.floor(Math.random()*8));const ez=['ease-ou
 function springAt(i){try{const b=SB[i],e=el('ellipse',{cx:b[0],cy:b[1],rx:b[2]-6,ry:b[3]-6,class:'pspring'});layer.appendChild(e);setTimeout(()=>e.remove(),420)}catch(x){}}
 let tapXY=null,curI=-1,swBusy=false,swOnCard=false;
 function pop(i,forced){if(!cur&&tapXY){airBurst(tapXY[0],tapXY[1]);tapXY=null}
- if(cur)return;curI=i;hist=[i];hp=0;lastPop=Date.now();snd();$('p'+i).classList.add('on');if($('q'+i))$('q'+i).classList.add('on');$('h'+i).classList.add('done');$('g'+i).classList.remove('on');
+ if(cur)return;curI=i;hist=[i];hp=0;lastPop=Date.now();snd(true);$('p'+i).classList.add('on');if($('q'+i))$('q'+i).classList.add('on');$('h'+i).classList.add('done');$('g'+i).classList.remove('on');
  popped++;setCnt();const pc=SB[i][4];catN[pc]++;setNs();if(catN[pc]===catT[pc])pendingCat=pc;popIdx.push(i);savePop();if(popped>=N)sheetDone();
  showStory(forced||storyFor(i));
 }
@@ -720,7 +720,6 @@ ov.addEventListener('pointerup',e=>{
  if(T.closest('#x')||T===ov){clk();closeCard();return}
  if(T.closest('#rdo')){clk();openReader()}
 });
-$('svg').addEventListener('click',()=>{if(Date.now()-lastPop<600)hap()});
 ov.addEventListener('click',()=>{if(Date.now()-closedAt<600)hap()});
 function nextIdx(){const un=[];for(let i=0;i<N;i++)if(!$('h'+i).classList.contains('done'))un.push(i);if(!un.length)return -1;
  const pk=a=>{const f=a.find(i=>i>curI);return f===undefined?a[0]:f};
@@ -735,7 +734,7 @@ function swSlide(dir,mid){const c=$('card');swBusy=true;
   c.style.transition='none';c.style.transform=dir<0?'translate(70%,0)':'translate(-170%,0)';void c.offsetWidth;
   c.style.transition='transform .26s cubic-bezier(.2,.8,.3,1),opacity .2s';c.style.transform='';c.style.opacity='';
   setTimeout(()=>{c.style.transition='';swBusy=false},300)},200)}
-function swipeNext(viaSwipe){if(!swOK())return;const c=$('card');
+function swipeNext(viaSwipe){if(!swOK())return;const c=$('card');if(viaSwipe)hap();
  if(hp<hist.length-1){swSlide(-1,()=>{hp++;curI=hist[hp];cur=null;showStory(storyFor(curI))});return}
  const n=nextIdx();if(n<0){swBounce(c,-1);return}
  swSlide(-1,()=>{
@@ -743,7 +742,7 @@ function swipeNext(viaSwipe){if(!swOK())return;const c=$('card');
   try{r=h.getBoundingClientRect();if(r.bottom<90||r.top>innerHeight-90){h.scrollIntoView({block:'center'});r=h.getBoundingClientRect()}}catch(x){}
   const keep=hist.slice(0,hp+1);cur=null;tapXY=r?[r.left+r.width/2,r.top+r.height/2]:null;pop(n);hist=keep.concat(n);hp=hist.length-1;
  })}
-function swipePrev(){if(!swOK())return;const c=$('card');
+function swipePrev(){if(!swOK())return;const c=$('card');hap();
  if(hp<=0){swBounce(c,1);return}
  swSlide(1,()=>{hp--;curI=hist[hp];cur=null;showStory(storyFor(curI))})}
 /* ===== Daily pill: Bandcamp Album of the Day preview + background playback ===== */
