@@ -18,5 +18,5 @@ jobs:
       - run: |
           git config user.name "feed-bot"
           git config user.email "feed-bot@users.noreply.github.com"
-          git add stories.json
+          git add -A stories.json s
           git diff --cached --quiet || (git commit -m "Update stories" && git push)
