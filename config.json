@@ -530,6 +530,46 @@
     "https://knowablemagazine.org/rss"
    ],
    "cat": "Science"
+  },
+  {
+   "name": "NPR Music",
+   "home": "https://feeds.npr.org",
+   "feeds": [
+    "https://feeds.npr.org/1039/rss.xml"
+   ],
+   "cat": "Entertainment"
+  },
+  {
+   "name": "NPR Culture",
+   "home": "https://feeds.npr.org",
+   "feeds": [
+    "https://feeds.npr.org/1008/rss.xml"
+   ],
+   "cat": "Art"
+  },
+  {
+   "name": "NPR Art & Design",
+   "home": "https://feeds.npr.org",
+   "feeds": [
+    "https://feeds.npr.org/1047/rss.xml"
+   ],
+   "cat": "Art"
+  },
+  {
+   "name": "NPR Science",
+   "home": "https://feeds.npr.org",
+   "feeds": [
+    "https://feeds.npr.org/1007/rss.xml"
+   ],
+   "cat": "Science"
+  },
+  {
+   "name": "NPR Space",
+   "home": "https://feeds.npr.org",
+   "feeds": [
+    "https://feeds.npr.org/1026/rss.xml"
+   ],
+   "cat": "Science"
   }
  ],
  "topics": [
