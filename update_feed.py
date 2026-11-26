@@ -1,4 +1,4 @@
-import json, re, html, urllib.request, urllib.parse, xml.etree.ElementTree as ET
+import os, json, re, html, urllib.request, urllib.parse, xml.etree.ElementTree as ET
 from email.utils import parsedate_to_datetime
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor
@@ -511,6 +511,60 @@ def pin_story(url, cat):
     img = good_img(urllib.parse.urljoin(url, im)) if im else ""
     return [site, title, desc, url, cat, img, int(time.time())]
 
+SITE = "https://rnpgv784r4-alt.github.io/pop-the-feed/"
+
+def share_id(url):
+    """Short stable id for a story link. The app computes the same thing (FNV-1a 64 -> base36, 9 chars)."""
+    h = 0xcbf29ce484222325
+    for b in url.encode("utf-8"):
+        h = ((h ^ b) * 0x100000001b3) & 0xffffffffffffffff
+    n, out = h % (36 ** 9), ""
+    while n:
+        n, r = divmod(n, 36)
+        out = "0123456789abcdefghijklmnopqrstuvwxyz"[r] + out
+    return out.rjust(9, "0")
+
+def write_share_pages(stories):
+    """One tiny page per story in s/: gives chat apps and social sites a title + picture, then opens the app on that story."""
+    import html, re as _re
+    from urllib.parse import quote
+    os.makedirs("s", exist_ok=True)
+    now, keep = int(time.time()), set()
+    for st in stories:
+        if st[4] == "DailyMusic" or not st[3]:
+            continue
+        sid = share_id(st[3])
+        keep.add(sid + ".html")
+        fn = os.path.join("s", sid + ".html")
+        if os.path.exists(fn):
+            continue
+        title = st[1] or "Pop The Feed"
+        desc = st[2] if st[2] and not st[2].startswith("Tap the button") else "Read this story on Pop The Feed."
+        img = st[5] if st[5] and st[5].startswith("http") else SITE + "apple-touch-icon.PNG"
+        e = lambda x: html.escape(x or "", quote=True)
+        target = "../index.html?r=" + quote(st[3], safe="") + "&n=" + quote(st[0] or "", safe="") + "&t=" + quote(title[:160], safe="")
+        page = ('<!doctype html><html><head><meta charset="utf-8"><!--g:%d--><title>%s</title>'
+                '<meta name="viewport" content="width=device-width,initial-scale=1">'
+                '<meta property="og:type" content="article"><meta property="og:site_name" content="Pop The Feed">'
+                '<meta property="og:title" content="%s"><meta property="og:description" content="%s">'
+                '<meta property="og:image" content="%s"><meta property="og:url" content="%s">'
+                '<meta name="twitter:card" content="summary_large_image">'
+                '<meta http-equiv="refresh" content="0;url=%s"></head><body>'
+                '<script>location.replace(%s)</script><p><a href="%s">Open in Pop The Feed</a></p></body></html>'
+                ) % (now, e(title), e(title), e(desc[:300]), e(img), e(SITE + "s/" + sid + ".html"), e(target), json.dumps(target), e(target))
+        open(fn, "w", encoding="utf-8").write(page)
+    # drop pages of stories that left the feed more than 30 days ago
+    for f in os.listdir("s"):
+        if f in keep or not f.endswith(".html"):
+            continue
+        try:
+            m = _re.search(r"<!--g:(\d+)-->", open(os.path.join("s", f), encoding="utf-8").read(600))
+            if not m or now - int(m.group(1)) > 30 * 86400:
+                os.remove(os.path.join("s", f))
+        except Exception:
+            pass
+    print("share pages:", len(keep))
+
 def main():
     cfg = load_cfg()
     sites = [(x["name"], x.get("home", ""), x.get("feeds", []), x["cat"]) for x in cfg["sites"] if x.get("cat") in CATS] if cfg.get("sites") else list(SITES)
@@ -591,6 +645,10 @@ def main():
     if len(final) >= 20:
         json.dump(final, open("stories.json", "w"), ensure_ascii=False, indent=1)
         print("wrote", len(final))
+        try:
+            write_share_pages(final)
+        except Exception as ex:
+            print("share pages failed:", ex)
     else:
         print("too few stories; keeping old file")
 

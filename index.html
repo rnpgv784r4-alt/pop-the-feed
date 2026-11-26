@@ -582,7 +582,9 @@ function closeReader(){rsStop();
  rdTm=setTimeout(()=>$('rd').classList.remove('on'),440)}
 $('rdx').addEventListener('click',()=>{clk();closeReader()});
 /* share: link carries the story address, name and title; opening it pops the story and its Reader */
-function shUrl(st){const b=new URL('index.html',location.href);return b.origin+b.pathname+'?r='+encodeURIComponent(st[3])+'&n='+encodeURIComponent(st[0]||'')+'&t='+encodeURIComponent((st[1]||'').slice(0,160))}
+let SHN=new Set();
+function shId(u){let h=0xcbf29ce484222325n;const M=0xffffffffffffffffn;for(const b of new TextEncoder().encode(u)){h^=BigInt(b);h=(h*0x100000001b3n)&M}return (h%(36n**9n)).toString(36).padStart(9,'0')}
+function shUrl(st){const b=new URL('index.html',location.href);try{if(SHN.has(st[3]))return b.origin+b.pathname.replace(/[^\/]*$/,'')+'s/'+shId(st[3])+'.html'}catch(e){}return b.origin+b.pathname+'?r='+encodeURIComponent(st[3])+'&n='+encodeURIComponent(st[0]||'')+'&t='+encodeURIComponent((st[1]||'').slice(0,160))}
 function shToast(m){const t=$('rdtoast');t.textContent=m;t.classList.add('on');clearTimeout(shToast.t);shToast.t=setTimeout(()=>t.classList.remove('on'),1800)}
 $('rdsh').addEventListener('click',async()=>{clk();const st=rdSt;if(!st)return;const u=shUrl(st);
  if(navigator.share){try{await navigator.share({title:st[1],text:st[1]+' — on Pop The Feed',url:u});return}catch(e){if(e&&e.name==='AbortError')return}}
@@ -670,7 +672,7 @@ document.querySelectorAll('.cat:not(.dly)').forEach(btn=>{
  btn.addEventListener('click',()=>{if(Date.now()-lastT>600)tgl()});
  btn.addEventListener('contextmenu',e=>e.preventDefault());
 });
-function loadStories(){return fetch('stories.json?'+Date.now()).then(r=>r.ok?r.json():[]).then(d=>{if(Array.isArray(d)&&d.length){const j=JSON.stringify(d);if(j!==SJ){S=d;SJ=j;build()}}}).catch(()=>{})}
+function loadStories(){return fetch('stories.json?'+Date.now()).then(r=>r.ok?r.json():[]).then(d=>{if(Array.isArray(d)&&d.length){try{SHN=new Set(d.map(x=>x[3]))}catch(e){}const j=JSON.stringify(d);if(j!==SJ){S=d;SJ=j;build()}}}).catch(()=>{})}
 function doReset(){glowRun('i');popped=0;popIdx=[];savePop();CL.forEach(c=>catN[c]=0);pendingCat=null;setNs();setCnt();$('reset').classList.remove('ready');document.querySelectorAll('.pop').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.hit').forEach(x=>x.classList.remove('done'));applyGlow();closeCard();build();$('scroll').scrollTo({top:0,behavior:'smooth'});loadStories()}
 $('reset').addEventListener('click',askReset);
 const pt=$('ptr'),sc=$('scroll'),inn=$('inner');let py=null,pull=0;const PULL=150;
