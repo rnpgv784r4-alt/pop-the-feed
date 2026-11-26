@@ -342,6 +342,10 @@ body.gaming #oglow{display:none}
 #logo,#dt i{display:block!important;width:26px;height:26px;transform:none;border-radius:50%;background:radial-gradient(ellipse 32% 24% at 32% 26%,rgba(255,255,255,.95),rgba(255,255,255,0)),radial-gradient(circle at 50% 50%,transparent 58%,var(--b3,#6a33b0) 100%),radial-gradient(circle at 35% 30%,var(--b1,#c9a4f5),var(--b2,#8f55d6) 60%,var(--b3,#6a33b0));opacity:.78;box-shadow:inset 0 0 0 1px rgba(255,255,255,.55),inset 0 -3px 5px rgba(255,255,255,.25);flex:none}
 #logo u,#dt i u{display:none}
 #ov #tb{gap:10px;padding-left:14px}#dt{gap:10px;padding-left:14px}
+/* category pill glows in its bubble colour while its story is open */
+.cat.lit{color:#fff;transition:box-shadow .3s,background .3s}
+.cat.lit[data-c=Art]{--lc:212,16,129}.cat.lit[data-c=Entertainment]{--lc:230,40,45}.cat.lit[data-c=Oddities]{--lc:245,160,20}.cat.lit[data-c=Science]{--lc:20,200,200}.cat.lit[data-c=History]{--lc:175,60,225}
+.cat.lit{background:rgba(var(--lc),.5);border-color:rgb(var(--lc));box-shadow:0 0 16px rgba(var(--lc),.9),0 0 4px rgba(var(--lc),.9),inset 0 0 10px rgba(var(--lc),.5);text-shadow:0 0 6px rgba(var(--lc),.9)}
 #qzs{padding-bottom:18px}#qzi{display:flex;justify-content:center;align-items:center;margin:14px 0 2px}#qzi img{display:block;width:88px;height:auto;-webkit-user-drag:none}
 /* achievement / game boxes */
 #achov:not(.pr) #apt{color:#f1e6fa}#achov:not(.pr) .rknm{color:#fff}
@@ -622,10 +626,10 @@ function pop(i,forced){if(!cur&&tapXY){airBurst(tapXY[0],tapXY[1]);tapXY=null}
  showStory(forced||storyFor(i));
 }
 function showStory(st){cur=st;markRead(st[3]);$('rdo').classList.toggle('has',Array.isArray(st[7])&&st[7].length>0);$('src').textContent=cur[0];$('more').textContent=(Array.isArray(cur[7])&&cur[7].length)?'Read at source':'Read at '+cur[0];$('more').href=cur[3];$('hl').textContent=cur[1];$('sm').textContent=cur[2];
- const th=$('thumb'),fs=$('fbsvg');const noimg=()=>{th.style.display='none';fs.style.display='block'};th.style.display='block';fs.style.display='none';th.onerror=noimg;if(cur[5])th.src=cur[5];else noimg();{const BC={Art:'#d41081',Entertainment:'#cc151a',Oddities:'#da8d05',Science:'#0ba6a6',History:'#a624cb'}[cur[4]]||'#8f55d6',h=BC.slice(1).match(/../g).map(v=>parseInt(v,16)),mx=(t,k)=>'rgb('+h.map(v=>Math.round(v+(t-v)*k))+')',lg=$('logo').style;lg.setProperty('--b1',mx(255,.55));lg.setProperty('--b2',BC);lg.setProperty('--b3',mx(0,.35))}
+ const th=$('thumb'),fs=$('fbsvg');const noimg=()=>{th.style.display='none';fs.style.display='block'};th.style.display='block';fs.style.display='none';th.onerror=noimg;if(cur[5])th.src=cur[5];else noimg();{document.querySelectorAll('.cat.lit').forEach(e=>e.classList.remove('lit'));const lc=document.querySelector('.cat[data-c="'+cur[4]+'"]');if(lc)lc.classList.add('lit');const BC={Art:'#d41081',Entertainment:'#cc151a',Oddities:'#da8d05',Science:'#0ba6a6',History:'#a624cb'}[cur[4]]||'#8f55d6',h=BC.slice(1).match(/../g).map(v=>parseInt(v,16)),mx=(t,k)=>'rgb('+h.map(v=>Math.round(v+(t-v)*k))+')',lg=$('logo').style;lg.setProperty('--b1',mx(255,.55));lg.setProperty('--b2',BC);lg.setProperty('--b3',mx(0,.35))}
  setTimeout(()=>$('ov').classList.add('show'),90);
 }
-function closeCard(){closedAt=Date.now();if(G&&G.state==='card'){G.state='next';setTimeout(nextRound,200)}$('ov').classList.remove('show');cur=null;const pc=pendingCat;pendingCat=null;if(popped>=N){$('reset').classList.add('ready');$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',3500)}if(pc)celebrate(pc,popped>=N);if(pendingAch){const a=pendingAch;pendingAch=null;setTimeout(()=>showAch(a),pc?900:250)}}
+function closeCard(){closedAt=Date.now();if(G&&G.state==='card'){G.state='next';setTimeout(nextRound,200)}$('ov').classList.remove('show');document.querySelectorAll('.cat.lit').forEach(e=>e.classList.remove('lit'));cur=null;const pc=pendingCat;pendingCat=null;if(popped>=N){$('reset').classList.add('ready');$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',3500)}if(pc)celebrate(pc,popped>=N);if(pendingAch){const a=pendingAch;pendingAch=null;setTimeout(()=>showAch(a),pc?900:250)}}
 /* Reader view: the story popup grows into a full-screen, scrollable reader (transform + opacity only) */
 let rdOpen=false,rdAt=0,rdTm=0,rdDone=false,rdSt=null;
 function rdFill(st){
