@@ -727,7 +727,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeReader()});
 $('more').addEventListener('click',()=>{closeReader()});
 let sx=0,sy=0,t0=0,swHap=0;const ov=$('ov');
 /* iOS only gives the haptic when it is triggered from touchend/click, so the swipe buzz is fired there */
-function swBuzz(){if(!swHap||Date.now()-swHap>700)return;swHap=0;lastHap=Date.now();try{if(navigator.vibrate){navigator.vibrate(18);return}}catch(e){}try{document.getElementById('hp').click()}catch(e){}}
+function swBuzz(e){if(!swHap||Date.now()-swHap>700)return;swHap=0;try{if(window.__L)window.__L('swipe buzz via '+(e&&e.type)+' trusted='+(e&&e.isTrusted)+' vib='+(typeof navigator.vibrate))}catch(x){}lastHap=Date.now();try{if(navigator.vibrate){navigator.vibrate(18);return}}catch(e){}try{document.getElementById('hp').click()}catch(e){}}
 ov.addEventListener('touchend',swBuzz,true);ov.addEventListener('click',swBuzz,true);
 $('more').addEventListener('click',()=>{snd();setTimeout(closeCard,60)});
 ov.addEventListener('pointerdown',e=>{sx=e.clientX;sy=e.clientY;t0=Date.now();swOnCard=!!(e.target.closest&&e.target.closest('#card'))});
