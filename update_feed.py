@@ -51,6 +51,8 @@ PER_FEED = 15     # newest items read from each site or search
 PER_CAT = 70      # stories kept per category (the page picks 7-8 per sheet, newest unread first)
 MAX_AGE_DAYS = 21  # stories older than this are dropped (undated ones are kept)
 READER_BONUS = 36 * 3600  # a story with a Reader view counts as this much newer when ranking
+SEARCH_MAX = 12   # at most this many 'Search:' topic stories per category (they never have Reader text), so real sites fill the rest
+SEARCH_IDS = set()  # id() of every story that came from a Search: topic
 MAX_PER_SITE = 3  # first pass: at most this many per site, so one busy site can't take over
 DROP = {"Smithsonian Ocean"}   # sources that block our servers; skipped even if they are in config.json
 TOPIC_DAYS = 30   # topic searches only look at stories from the last N days
@@ -283,11 +285,15 @@ def pick(stories):
         # stories with a Reader view (full text in the feed) come first, newest first within each group
         pool = sorted([s for s in uniq if s[4] == cat], key=lambda s: -(s[6] + (READER_BONUS if len(s) > 7 else 0)))
         chosen, count = [], {}
+        nsearch = 0
         for s in pool:
-            if len(chosen) < PER_CAT and count.get(s[0], 0) < MAX_PER_SITE:
+            srch = id(s) in SEARCH_IDS
+            if len(chosen) < PER_CAT and count.get(s[0], 0) < MAX_PER_SITE and not (srch and nsearch >= SEARCH_MAX):
                 chosen.append(s)
                 count[s[0]] = count.get(s[0], 0) + 1
-        for s in pool:
+                nsearch += srch
+        # still room: more from real sites first, search topics only as a last resort
+        for s in [x for x in pool if id(x) not in SEARCH_IDS] + [x for x in pool if id(x) in SEARCH_IDS]:
             if len(chosen) >= PER_CAT:
                 break
             if s not in chosen:
@@ -601,6 +607,7 @@ def main():
         for s in got:
             s[4] = cat
             if name.startswith("Search: "):
+                SEARCH_IDS.add(id(s))
                 # Google News titles end with " - Publisher": show the publisher as the source
                 m = re.match(r"^(.*\S)\s+[-\u2013\u2014]\s+([^-\u2013\u2014]{2,40})$", s[1])
                 if m:
