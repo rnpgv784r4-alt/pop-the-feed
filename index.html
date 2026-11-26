@@ -366,6 +366,10 @@ body.gaming #oglow{display:none}
 /* translucent look for the quiz, Daily and achievement popups too */
 #qzc,#dc,#achov:not(.pr) #achcard{background:linear-gradient(rgba(54,24,61,.76),rgba(56,26,63,.8));-webkit-backdrop-filter:blur(7px) saturate(1.25);backdrop-filter:blur(7px) saturate(1.25);box-shadow:0 14px 40px rgba(10,0,25,.5),inset 0 0 0 1px rgba(214,190,255,.28)}
 #qzt,#dt,#achov:not(.pr) #atb{background:linear-gradient(rgba(224,202,244,.86),rgba(210,184,232,.8));border-bottom:1px solid rgba(255,255,255,.35)}
+/* real (invisible) iOS switch over the story card: dragging across it gives the native haptic */
+#card{position:relative}
+#swsw{position:absolute;left:0;right:0;top:46px;bottom:0;width:100%;height:calc(100% - 46px);margin:0;padding:0;opacity:.02;z-index:2;border-radius:0 0 22px 22px;-webkit-tap-highlight-color:transparent;touch-action:pan-y}
+#ov #card #rdo,#ov #card a#more,#ov #card #nxt,#ov #card #swr,#ov #card #x,#ov #card #tb{position:relative;z-index:3}
 #qzs{padding-bottom:18px}#qzi{display:flex;justify-content:center;align-items:center;margin:14px 0 2px}#qzi img{display:block;width:88px;height:auto;-webkit-user-drag:none}
 /* achievement / game boxes */
 #achov:not(.pr) #apt{color:#f1e6fa}#achov:not(.pr) .rknm{color:#fff}
@@ -497,7 +501,7 @@ SB.forEach((b,i)=>{const rx=b[2]-8,ry=b[3]-8,inp=document.createElement('input')
 /* ?dbg=1 shows an on-screen log of what each tap does (for diagnosing iOS) */
 if(/[?&]dbg=1/.test(location.search)){const box=document.createElement('div');box.style.cssText='position:fixed;left:0;right:0;bottom:0;max-height:34vh;overflow:hidden;z-index:99999;background:rgba(0,0,0,.82);color:#7CFC9A;font:11px/1.25 ui-monospace,monospace;padding:4px 6px;pointer-events:none;white-space:pre-wrap';document.body.appendChild(box);const lines=[];
  const L=m=>{lines.push(((Date.now()%100000)+'').padStart(5,'0')+' '+m);if(lines.length>14)lines.shift();box.textContent=lines.join('\n')};
- window.__L=L;L('debug on; build 32 swipe-buzz; cur='+(!!cur)+' popped='+popped);
+ window.__L=L;L('debug on; build 33 card-switch; cur='+(!!cur)+' popped='+popped);
  ['pointerdown','pointerup','pointercancel','touchstart','touchend','click','change'].forEach(t=>document.addEventListener(t,e=>{const x=e.target&&e.target.closest&&e.target.closest('#hsws input,#osw,.gb');if(!x)return;const i=x.id==='osw'?'O':(x.classList.contains('gb')?'G'+(x.dataset.l||x.dataset.e)+(e.target.tagName==='INPUT'?'i':''):sw.indexOf(x));L(t+' #'+i+' done='+x.classList.contains('done')+' cur='+(!!cur)+(t==='pointerdown'||t==='pointerup'?' '+Math.round(e.clientX)+','+Math.round(e.clientY):''))},true));
  const _p=pop;window.pop=pop=function(i){L('POP('+i+') cur='+(!!cur));try{return _p(i)}catch(err){L('POP ERR '+err.message);throw err}};
  addEventListener('error',e=>L('ERR '+e.message))}
@@ -728,7 +732,10 @@ $('more').addEventListener('click',()=>{closeReader()});
 let sx=0,sy=0,t0=0,swHap=0;const ov=$('ov');
 /* iOS only gives the haptic when it is triggered from touchend/click, so the swipe buzz is fired there */
 function swBuzz(e){if(!swHap||Date.now()-swHap>700)return;swHap=0;try{if(window.__L)window.__L('swipe buzz via '+(e&&e.type)+' trusted='+(e&&e.isTrusted)+' vib='+(typeof navigator.vibrate))}catch(x){}lastHap=Date.now();try{if(navigator.vibrate){navigator.vibrate(18);return}}catch(e){}try{document.getElementById('hp').click()}catch(e){}}
-ov.addEventListener('touchend',swBuzz,true);ov.addEventListener('click',swBuzz,true);
+ov.addEventListener('touchend',swBuzz,true);
+{const sw=document.createElement('input');sw.type='checkbox';sw.setAttribute('switch','');sw.id='swsw';sw.tabIndex=-1;sw.setAttribute('aria-hidden','true');sw.checked=true;$('card').appendChild(sw);
+ sw.addEventListener('change',()=>{try{if(window.__L)window.__L('card switch toggled')}catch(e){}setTimeout(()=>{sw.checked=true},120)});
+ new MutationObserver(()=>{if($('ov').classList.contains('show'))sw.checked=true}).observe($('ov'),{attributes:true,attributeFilter:['class']})}ov.addEventListener('click',swBuzz,true);
 $('more').addEventListener('click',()=>{snd();setTimeout(closeCard,60)});
 ov.addEventListener('pointerdown',e=>{sx=e.clientX;sy=e.clientY;t0=Date.now();swOnCard=!!(e.target.closest&&e.target.closest('#card'))});
 ov.addEventListener('pointerup',e=>{
