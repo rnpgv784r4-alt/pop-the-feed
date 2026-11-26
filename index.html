@@ -321,6 +321,24 @@ body.gaming #oglow{display:none}
 #qzo button.ok{background:#1f7a3c;border-color:#7ee08f}
 #qzo button.no{background:#8a2f3a;border-color:#ff9a8a}
 #qzhint{margin-top:10px}
+/* all popups: rounded plum card + lavender title bar, like the quiz */
+#ov #card,#achov:not(.pr) #achcard,#dc,#rdp{border:0;background:linear-gradient(#36183d,#381a3f);color:#f3e9fb}
+#ov #card,#achov:not(.pr) #achcard{border-radius:22px}
+#dc,#rdp{border-radius:22px}
+#ov #tb,#achov:not(.pr) #atb,#dt,#rdt{height:46px;margin:0;border-radius:22px 22px 0 0;border-bottom:0;background:linear-gradient(#d7c1ea,#d0b7e5);color:#2c1631;text-shadow:none}
+#rdt{border-radius:0}
+#logo,#alogo,#dt i{display:none}
+#ov #tb,#dt,#rdt{padding:0 8px 0 20px}
+#achov:not(.pr) #atb{padding:0;justify-content:center;position:relative}
+#ov #ttl,#dt span,#rdn{font:800 20px/1 'Montserrat','Avenir Next',Arial,sans-serif;letter-spacing:0;color:#2c1631;text-shadow:none}
+#achov:not(.pr) #attl{position:absolute;left:0;right:0;text-align:center;font:800 17px/1.1 'Montserrat','Avenir Next',Arial,sans-serif;color:#2c1631;text-shadow:none;text-transform:uppercase}
+#dt span{font-size:14px}
+#ov #x,#dx,#achov:not(.pr) #ax,#rdx{background:none;border:0;box-shadow:none;color:#2c0a35;font:400 26px/40px Arial,sans-serif;text-shadow:none;width:40px;height:40px;min-width:0;padding:0;margin:0}
+#rdx{font-size:0}#rdx::before{content:'\2715';font:400 26px/40px Arial,sans-serif;color:#2c0a35}
+#achov:not(.pr) #ax{position:absolute;right:8px;top:3px}
+#rdsh{background:#6f3fae;border:0;border-radius:50%}
+#ov a#more,#rdm{border-radius:12px;border-color:#a870c0;background:#43284b}
+#ov #rdo{border-radius:12px}
 #qzs{padding-bottom:18px}#qzi{display:flex;justify-content:center;align-items:center;margin:14px 0 2px}#qzi img{display:block;width:88px;height:auto;-webkit-user-drag:none}
 /* achievement / game boxes */
 #achov:not(.pr) #apt{color:#f1e6fa}#achov:not(.pr) .rknm{color:#fff}
