@@ -843,7 +843,14 @@
   }
  ],
  "blocked": [
-  "Paid Promotion"
+  "Paid Promotion",
+  "black friday",
+  "cyber monday",
+  "prime day",
+  "deals",
+  "% off",
+  "best buy",
+  "amazon deal"
  ],
  "pins": []
 }
