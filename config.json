@@ -919,8 +919,12 @@
  ],
  "pins": [
   {
+   "url": "https://play.js13kgames.com/virtual-war/",
+   "cat": "Games"
+  },
+  {
    "url": "https://www.bored.com/",
-   "cat": "Oddities"
+   "cat": "Games"
   }
  ]
 }
