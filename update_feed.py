@@ -138,10 +138,17 @@ BODY_JUNK = re.compile(r"appeared first on|read more|continue reading|subscribe|
 BODY_MAX = 4200   # characters of article text kept per story
 BODY_IMGS = 5
 
+HTML_LEAK = re.compile(r"srcset=|<source|</?picture|class=[\"']|data-[a-z-]+=[\"']|https?://\S+\s\d+w\b|^\s*[\w-]+=[\"']")
+def bad_body(body):
+    return any(k in ("p", "h") and HTML_LEAK.search(v or "") for k, v in (body or []) if isinstance(v, str))
+
 def reader_body(raw, desc=""):
     """Reader view content, ONLY from the full text a publisher puts in its own feed (content:encoded).
     Returns [["p",text],["h",text],["i",url],...] (+ ["m",""] when cut short), or None when the feed only has an excerpt."""
     raw = re.sub(r"(?is)<(script|style|figcaption|iframe|noscript|aside|form)\b.*?</\1>", " ", raw or "")
+    raw = re.sub(r"(?is)<!--.*?-->", " ", raw)
+    raw = re.sub(r"(?is)</?(?:picture|source|svg|path|button|video|audio|track)\b[^<>]*>", " ", raw)
+    raw = re.sub(r"<[^<>]*>", lambda m: re.sub(r"\s+", " ", m.group(0)), raw)   # tags split over lines must not leak
     if len(re.sub(r"<[^>]+>", "", raw)) < 700:
         return None
     raw = re.sub(r"(?is)<img\b[^>]*?(?:data-src|src)=[\"']([^\"']+)[\"'][^>]*>", lambda m: "\n\x00" + m.group(1) + "\x00\n", raw)
@@ -161,7 +168,7 @@ def reader_body(raw, desc=""):
         head = line.startswith("\x01")
         t = html.unescape(re.sub(r"<[^>]+>", " ", line.lstrip("\x01")))
         t = re.sub(r"\s+", " ", t).strip()
-        if len(t) < (3 if head else 30) or BODY_JUNK.search(t):
+        if len(t) < (3 if head else 30) or BODY_JUNK.search(t) or HTML_LEAK.search(t):
             continue
         if chars + len(t) > BODY_MAX:
             room = BODY_MAX - chars
@@ -206,7 +213,7 @@ def npr_enrich(stories):
     """NPR feeds only carry a one-line summary. First try the article page itself (text AND inline pictures, in order);
     if NPR refuses that, fall back to text.npr.org (text only)."""
     for st in stories:
-        if len(st) > 7 or not npr_text_url(st[3]):
+        if (len(st) > 7 and not bad_body(st[7])) or not npr_text_url(st[3]):
             continue
         body = None
         page = _npr_fetch("page", st[3].split("?")[0])
@@ -223,7 +230,10 @@ def npr_enrich(stories):
                 paras = re.findall(r"(?is)<p\b[^>]*>.*?</p>", m.group(0) if m else page)
                 body = reader_body("\n".join(paras), st[2])
         if body:
-            st.append(body)
+            if len(st) > 7:
+                st[7] = body
+            else:
+                st.append(body)
 
 def find_image(it, raw):
     for tag in (MEDIA + "thumbnail", MEDIA + "content"):
