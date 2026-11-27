@@ -46,7 +46,7 @@ SITES = [
    ["https://science.nasa.gov/earth/earth-observatory/feed/", "https://earthobservatory.nasa.gov/feeds/earth-observatory.rss"], "Science"),
  ("Audubon", "https://www.audubon.org/magazine", ["https://www.audubon.org/magazine/rss.xml", "https://www.audubon.org/rss.xml"], "Science"),
 ]
-CATS = ["Art", "Entertainment", "Oddities", "History", "Science"]
+CATS = ["Art", "Entertainment", "Oddities", "History", "Science", "Games"]
 PER_FEED = 15     # newest items read from each site or search
 PER_CAT = 70      # stories kept per category (the page picks 7-8 per sheet, newest unread first)
 MAX_AGE_DAYS = 21  # stories older than this are dropped (undated ones are kept)

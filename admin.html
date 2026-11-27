@@ -35,7 +35,7 @@ small,.dim{color:var(--dim)}#bar{position:fixed;left:0;right:0;bottom:0;backgrou
 <div id="msg"></div>
 <div id="bar" hidden><button id="save">Save</button><button id="run" class="b2">Save &amp; update now</button></div>
 <script>
-const CATS=['Art','Entertainment','Oddities','History','Science'];
+const CATS=['Art','Entertainment','Oddities','History','Science','Games'];
 const host=location.hostname.split('.')[0],seg=location.pathname.split('/')[1];
 const OWNER=localStorage.getItem('ptf_owner')||(location.hostname.endsWith('github.io')?host:'rnpgv784r4-alt');
 const REPO=localStorage.getItem('ptf_repo')||(location.hostname.endsWith('github.io')&&seg?seg:'pop-the-feed');
