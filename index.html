@@ -495,21 +495,32 @@ function shuffleLayout(){GN=gamesN();if(!NB)NB=nbTables();
  for(let i=0;i<n;i++){const g=FG.slice(0,GN).includes(i)&&i<n;SB[i][4]=g?'Games':NAT[i];SB[i][5]=i;SB[i][6]=g?(GHUE[NAT[i]]||0):0}
 }
 const GFIX={Oddities:[[1.2,.9,.03],[1.2,.9,.03],[1.2,.9,.03]],Entertainment:[[1.6,.55,.07],[1.6,.55,.07],[1.6,.55,.07]]},GTINT={Art:[214,51,132],Entertainment:[232,96,60],Oddities:[232,160,32],History:[142,123,224],Science:[31,165,140]},GSAT=0.1,GTA=0.5; /* red photos need a brightness lift to match the amber ones */
-/* The Games bubbles are re-coloured once into a small picture (no live filter), so scrolling stays smooth on phones. */
-let SHI=null;
-function bakeBubble(rc,i,b,s,col){
- const rx=b[2],ry=b[3],x0=b[0]-rx,y0=b[1]-ry,GP=GFIX[NAT[s]]||GFIX.Oddities;
- const put=()=>{try{
-  const k=SHI.naturalWidth/SH.w,w=Math.ceil(2*rx*k),h=Math.ceil(2*ry*k),cv=document.createElement('canvas');cv.width=w;cv.height=h;const cx=cv.getContext('2d');
-  cx.drawImage(SHI,(SB[s][0]-rx-SH.x)*k,(SB[s][1]-ry-SH.y)*k,w,h,0,0,w,h);
-  if(col){const d=cx.getImageData(0,0,w,h),a=d.data,q=GSAT,m0=.213+.787*q,m1=.715-.715*q,m2=.072-.072*q,n0=.213-.213*q,n1=.715+.285*q,n2=.072-.072*q,o0=.213-.213*q,o1=.715-.715*q,o2=.072+.928*q;
-  const L=[0,1,2].map(c=>{const t=new Uint8ClampedArray(256);for(let v=0;v<256;v++)t[v]=(GP[c][0]*Math.pow(v/255,GP[c][1])+GP[c][2])*255;return t});
-  for(let n=0;n<a.length;n+=4){const r=a[n],g=a[n+1],bl=a[n+2];a[n]=L[0][Math.max(0,Math.min(255,m0*r+m1*g+m2*bl))|0];a[n+1]=L[1][Math.max(0,Math.min(255,n0*r+n1*g+n2*bl))|0];a[n+2]=L[2][Math.max(0,Math.min(255,o0*r+o1*g+o2*bl))|0]}
-  cx.putImageData(d,0,0)}
-  rc.textContent='';rc.appendChild(el('image',{href:cv.toDataURL('image/jpeg',.92),x:x0,y:y0,width:2*rx,height:2*ry}));return true}catch(e){return false}};
- const go=()=>{if(!put()){rc.textContent='';rc.appendChild(el('image',{href:SH.img,x:SH.x+b[0]-SB[s][0],y:SH.y+b[1]-SB[s][1],width:SH.w,height:SH.h}))}};
+/* The re-arranged bubble sheet is painted ONCE into a single picture (same size as the photo), so the phone only ever draws one image
+   while scrolling: no per-bubble layers, clips or filters. */
+let SHI=null,BASEIM=null,SHURL='';
+function composeSheet(){
+ if(!BASEIM){BASEIM=$('svg').querySelector('image')}
  if(!SHI){SHI=new Image();SHI.src=SH.img}
- if(SHI.complete&&SHI.naturalWidth)go();else SHI.addEventListener('load',go,{once:true});
+ const run=()=>{try{
+  const k=SHI.naturalWidth/SH.w,cv=document.createElement('canvas');cv.width=SHI.naturalWidth;cv.height=SHI.naturalHeight;const cx=cv.getContext('2d');
+  cx.drawImage(SHI,0,0);
+  SB.forEach((b,i)=>{const s=b[5];if(s==null)return;const dx=b[0]-SB[s][0],dy=b[1]-SB[s][1],col=!!b[6];if(!(dx||dy||col))return;
+   const rx=b[2],ry=b[3],w=Math.ceil(2*rx*k),h=Math.ceil(2*ry*k),px=(b[0]-rx-SH.x)*k,py=(b[1]-ry-SH.y)*k,sx=(SB[s][0]-rx-SH.x)*k,sy=(SB[s][1]-ry-SH.y)*k;
+   let src=SHI,ox=sx,oy=sy;
+   if(col){const t=document.createElement('canvas');t.width=w;t.height=h;const tx=t.getContext('2d');tx.drawImage(SHI,sx,sy,w,h,0,0,w,h);
+    const GP=GFIX[NAT[s]]||GFIX.Oddities,d=tx.getImageData(0,0,w,h),a=d.data,q=GSAT,m0=.213+.787*q,m1=.715-.715*q,m2=.072-.072*q,n0=.213-.213*q,n1=.715+.285*q,n2=.072-.072*q,o0=.213-.213*q,o1=.715-.715*q,o2=.072+.928*q;
+    const L=[0,1,2].map(c=>{const u=new Uint8ClampedArray(256);for(let v=0;v<256;v++)u[v]=(GP[c][0]*Math.pow(v/255,GP[c][1])+GP[c][2])*255;return u});
+    for(let n=0;n<a.length;n+=4){const r=a[n],g=a[n+1],bl=a[n+2];a[n]=L[0][Math.max(0,Math.min(255,m0*r+m1*g+m2*bl))|0];a[n+1]=L[1][Math.max(0,Math.min(255,n0*r+n1*g+n2*bl))|0];a[n+2]=L[2][Math.max(0,Math.min(255,o0*r+o1*g+o2*bl))|0]}
+    tx.putImageData(d,0,0);src=t;ox=0;oy=0}
+   cx.save();cx.beginPath();cx.ellipse((b[0]-SH.x)*k,(b[1]-SH.y)*k,rx*k,ry*k,0,0,Math.PI*2);cx.clip();cx.drawImage(src,ox,oy,w,h,px,py,w,h);
+   if(col){/* clear bubble: a soft wash of the colours of the bubbles around it */
+    SB.forEach((n,j)=>{if(j===i||n[4]==='Games'||!GTINT[n[4]])return;const vx=n[0]-b[0],vy=n[1]-b[1];if(Math.abs(vx)>b[2]*2.3||Math.abs(vy)>b[3]*2.3)return;
+     const Ln=Math.hypot(vx/b[2],vy/b[3])||1,ux=vx/b[2]/Ln,uy=vy/b[3]/Ln,c=GTINT[n[4]],gx=(b[0]+ux*b[2]*.95-SH.x)*k,gy=(b[1]+uy*b[3]*.95-SH.y)*k,gr=Math.max(b[2],b[3])*.95*k;
+     const rg=cx.createRadialGradient(gx,gy,0,gx,gy,gr);rg.addColorStop(0,'rgba('+c+','+GTA+')');rg.addColorStop(1,'rgba('+c+',0)');cx.fillStyle=rg;cx.fillRect(px,py,w,h)})}
+   cx.restore()});
+  cv.toBlob(bl=>{if(!bl)return;const u=URL.createObjectURL(bl);BASEIM.setAttribute('href',u);BASEIM.style.opacity='';if(SHURL)URL.revokeObjectURL(SHURL);SHURL=u},'image/jpeg',.93);
+ }catch(e){BASEIM.style.opacity=''}};
+ if(SHI.complete&&SHI.naturalWidth)run();else SHI.addEventListener('load',run,{once:true});
 }
 function paintLayout(){
  SB.forEach((b,i)=>{
@@ -518,17 +529,9 @@ function paintLayout(){
   const s=b[5],pim=$('p'+i)&&$('p'+i).firstChild;if(s==null||!pim)return;
   const dx=b[0]-SB[s][0],dy=b[1]-SB[s][1],fid=b[6]?'hr'+i:null;
   pim.setAttribute('x',SH.x+dx);pim.setAttribute('y',SH.y+dy);pim.removeAttribute('filter');
-  if(dx||dy||fid){const rc=el('g',{'clip-path':'url(#c'+i+')',id:'rc'+i});
-   bakeBubble(rc,i,b,s,!!fid);
-   gl.parentNode.insertBefore(rc,gl)}
-  if(b[4]==='Games'){ /* clear bubble: it picks up a soft wash of the colours of the bubbles around it */
-   const tn=el('g',{'clip-path':'url(#c'+i+')',id:'tn'+i,'pointer-events':'none'});let k=0;
-   SB.forEach((n,j)=>{if(j===i||n[4]==='Games'||!GTINT[n[4]])return;const vx=n[0]-b[0],vy=n[1]-b[1];if(Math.abs(vx)>b[2]*2.3||Math.abs(vy)>b[3]*2.3)return;const L=Math.hypot(vx/b[2],vy/b[3])||1,ux=vx/b[2]/L,uy=vy/b[3]/L,c=GTINT[n[4]],gid='tg'+i+'_'+(k++);
-    const rg=el('radialGradient',{id:gid,gradientUnits:'userSpaceOnUse',cx:b[0]+ux*b[2]*.95,cy:b[1]+uy*b[3]*.95,r:Math.max(b[2],b[3])*.95});
-    [[0,GTA],[1,0]].forEach(([o,a])=>rg.appendChild(el('stop',{offset:o,'stop-color':'rgb('+c+')','stop-opacity':a})));defs.appendChild(rg);
-    tn.appendChild(el('ellipse',{cx:b[0],cy:b[1],rx:b[2],ry:b[3],fill:'url(#'+gid+')'}))});
-   gl.parentNode.insertBefore(tn,gl)}
+
  });
+ try{composeSheet()}catch(e){}
  try{applyGlow()}catch(e){} /* a held pill must re-light the right bubbles after a reshuffle */
 }
 shuffleLayout();
