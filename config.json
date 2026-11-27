@@ -726,6 +726,12 @@
    "home": "https://glider.game/",
    "feeds": [],
    "cat": "Games"
+  },
+  {
+   "name": "Quick Draw",
+   "home": "https://quickdraw.withgoogle.com/",
+   "feeds": [],
+   "cat": "Games"
   }
  ],
  "topics": [
