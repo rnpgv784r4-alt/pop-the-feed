@@ -881,5 +881,10 @@
   "amazon deal",
   "https://www.rd.com/article/wendys-frosty-christmas-ornament-merch/"
  ],
- "pins": []
+ "pins": [
+  {
+   "url": "https://www.bored.com/",
+   "cat": "Oddities"
+  }
+ ]
 }
