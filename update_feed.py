@@ -384,13 +384,49 @@ def daily_music():
     """Bandcamp Daily's Album of the Day: artwork, title, blurb, artist links and the official embedded player."""
     base = "https://daily.bandcamp.com"
     try:
-        lst = get(base + "/album-of-the-day", 25).decode("utf-8", "ignore")
-        m = re.search(r'href=["\']((?:https://daily\.bandcamp\.com)?/album-of-the-day/[^"\'#?]+-review)["\']', lst)
-        if not m:
+        url = ""
+        try:   # newest first: the site's own feed carries publish dates, the listing page may keep an older pick on top
+            feed = get(base + "/feed", 25).decode("utf-8", "ignore")
+            best = None
+            for it in re.findall(r"(?is)<item\b.*?</item>", feed):
+                lk = re.search(r"(?is)<link>\s*(?:<!\[CDATA\[)?\s*(https?://[^<\s\]]+)", it)
+                dt = re.search(r"(?is)<pubDate>(.*?)</pubDate>", it)
+                if not lk or "/album-of-the-day/" not in lk.group(1) or not lk.group(1).split("?")[0].endswith("-review"):
+                    continue
+                ts = parse_date(dt.group(1).strip()) if dt else 0
+                if best is None or (ts or 0) > best[0]:
+                    best = (ts or 0, lk.group(1).split("?")[0])
+            if best:
+                url = best[1]
+        except Exception as e:
+            print("Daily music feed:", e)
+        cands = [url] if url else []
+        try:
+            lst = get(base + "/album-of-the-day", 25).decode("utf-8", "ignore")
+            for h in re.findall(r'href=["\']((?:https://daily\.bandcamp\.com)?/album-of-the-day/[^"\'#?]+-review)["\']', lst):
+                u = urllib.parse.urljoin(base, h)
+                if u not in cands:
+                    cands.append(u)
+        except Exception as e:
+            print("Daily music listing:", e)
+        if not cands:
             print("Daily music: no review link found")
             return None
-        url = urllib.parse.urljoin(base, m.group(1))
-        page = get(url, 25).decode("utf-8", "ignore")
+        pages, bestd = {}, -1
+        for u in cands[:4]:   # the newest publish date wins, wherever the link was found
+            try:
+                pg = get(u, 25).decode("utf-8", "ignore")
+            except Exception:
+                continue
+            pages[u] = pg
+            d = parse_date(_meta(pg, "article:published_time") or (re.search(r'"datePublished"\s*:\s*"([^"]+)"', pg) or [None, ""])[1] or (re.search(r'<time[^>]+datetime=["\']([^"\']+)', pg) or [None, ""])[1])
+            print("  Daily candidate:", u, d)
+            if d > bestd:
+                bestd, url = d, u
+        if not url:
+            url = cands[0]
+        page = pages.get(url) or get(url, 25).decode("utf-8", "ignore")
+        print("Daily music pick:", url)
     except Exception as e:
         print("Daily music failed:", e)
         return None
