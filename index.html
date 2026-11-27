@@ -449,12 +449,16 @@ const SH=WIDE?{img:'bubbles-wide.JPG',pop:'bubbles-wide-popped.JPG',x:0,y:0,w:10
 
 /* Bubble colours are reshuffled on every load and every new sheet. Each position borrows the photo of a same-coloured bubble from elsewhere on the sheet; Games bubbles are hue-shifted to lime. The arcade game keeps using the untouched B array. */
 const NAT=SB.map(b=>b[4]),NCAT=['Art','Entertainment','Oddities','History','Science'],GLOSE={Art:0,Entertainment:3,Oddities:3,History:0,Science:0},GHUE={Entertainment:1,Oddities:1} /* Games bubbles are only ever made from red or amber photos, which shift to one calm emerald green */;
-function shuffleLayout(){
+/* one Games bubble per distinct Games story, up to 6: never repeat a story, grow as games are added */
+function gamesN(){try{return Math.min(6,new Set(S.filter(t=>(t[4]||SRC[t[0]])==='Games').map(t=>t[3])).size)}catch(e){return 0}}
+let GN=-1;
+function shuffleLayout(){GN=gamesN();
  const sh=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
  const n=SB.length,cover=Math.min(WIDE?12:9,n);
  /* on the phone sheet the left and right columns run off the edge of the photo, so an edge position can only borrow from the same edge or the middle, and a middle position only from the middle */
  const cl=i=>WIDE?'M':(SB[i][0]<300?'L':SB[i][0]>900?'R':'M'),fits=(t,s)=>cl(t)==='M'?cl(s)==='M':(cl(s)==='M'||cl(s)===cl(t));
- const want={Games:0},nat={};NCAT.forEach(c=>{nat[c]=[];NAT.forEach((x,i)=>{if(x===c)nat[c].push(i)});want[c]=Math.max(0,nat[c].length-GLOSE[c]);want.Games+=nat[c].length-want[c]});
+ const gn=gamesN(),lose={Entertainment:Math.min(GLOSE.Entertainment,Math.ceil(gn/2)),Oddities:Math.min(GLOSE.Oddities,Math.floor(gn/2))};lose.Entertainment=Math.min(GLOSE.Entertainment,gn-lose.Oddities);
+ const want={Games:0},nat={};NCAT.forEach(c=>{nat[c]=[];NAT.forEach((x,i)=>{if(x===c)nat[c].push(i)});want[c]=Math.max(0,nat[c].length-(lose[c]||0));want.Games+=nat[c].length-want[c]});
  for(let tries=0;tries<4000;tries++){
   const w=Object.assign({},want),cats=new Array(n).fill(null),top=sh([0,1,2,3,4,5].filter(i=>i<n));
   for(let k=0;k<Math.min(2,w.Games,top.length);k++){cats[top[k]]='Games';w.Games--}
@@ -472,7 +476,7 @@ function shuffleLayout(){
   return;
  }
  const FG=WIDE?[1,2,14,28,19,10]:[1,2,16,24,28,13]; /* safety net: fixed Games bubbles, two of them on the first screen */
- for(let i=0;i<n;i++){const g=FG.includes(i)&&i<n;SB[i][4]=g?'Games':NAT[i];SB[i][5]=i;SB[i][6]=g?(GHUE[NAT[i]]||0):0}
+ for(let i=0;i<n;i++){const g=FG.slice(0,GN).includes(i)&&i<n;SB[i][4]=g?'Games':NAT[i];SB[i][5]=i;SB[i][6]=g?(GHUE[NAT[i]]||0):0}
 }
 const GFIX={Oddities:[[1.2,.9,.03],[1.2,.9,.03],[1.2,.9,.03]],Entertainment:[[1.6,.55,.07],[1.6,.55,.07],[1.6,.55,.07]]},GTINT={Art:[214,51,132],Entertainment:[232,96,60],Oddities:[232,160,32],History:[142,123,224],Science:[31,165,140]},GSAT=0.1,GTA=0.5; /* red photos need a brightness lift to match the amber ones */
 function paintLayout(){
@@ -885,7 +889,7 @@ document.querySelectorAll('.cat:not(.dly)').forEach(btn=>{
  btn.addEventListener('click',()=>{if(Date.now()-lastT>600&&!cdrag)tgl()});
  btn.addEventListener('contextmenu',e=>e.preventDefault());
 });
-function loadStories(){return fetch('stories.json?'+Date.now()).then(r=>r.ok?r.json():[]).then(d=>{if(Array.isArray(d)&&d.length){try{SHN=new Set(d.map(x=>x[3]))}catch(e){}const j=JSON.stringify(d);if(j!==SJ){S=d;SJ=j;build()}}}).catch(()=>{})}
+function loadStories(){return fetch('stories.json?'+Date.now()).then(r=>r.ok?r.json():[]).then(d=>{if(Array.isArray(d)&&d.length){try{SHN=new Set(d.map(x=>x[3]))}catch(e){}const j=JSON.stringify(d);if(j!==SJ){S=d;SJ=j;if(gamesN()!==GN&&!popped){shuffleLayout();paintLayout();CL.forEach(c=>{catT[c]=SB.filter(b=>b[4]===c).length;catN[c]=0});setNs();setCnt()}build()}}}).catch(()=>{})}
 function doReset(){glowRun('i');popped=0;popIdx=[];savePop();shuffleLayout();paintLayout();CL.forEach(c=>{catT[c]=SB.filter(b=>b[4]===c).length;catN[c]=0});pendingCat=null;setNs();setCnt();$('reset').classList.remove('ready');document.querySelectorAll('.pop').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.hit').forEach(x=>x.classList.remove('done'));applyGlow();closeCard();build();$('scroll').scrollTo({top:0,behavior:'smooth'});loadStories()}
 $('reset').addEventListener('click',askReset);
 const pt=$('ptr'),sc=$('scroll'),inn=$('inner');let py=null,pull=0;const PULL=150;
