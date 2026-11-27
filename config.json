@@ -590,6 +590,14 @@
     "https://disquiet.com/feed/"
    ],
    "cat": "Art"
+  },
+  {
+   "name": "Surrealism Today",
+   "home": "https://surrealismtoday.com",
+   "feeds": [
+    "https://surrealismtoday.com/feed/"
+   ],
+   "cat": "Art"
   }
  ],
  "topics": [
