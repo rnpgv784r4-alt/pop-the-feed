@@ -598,6 +598,38 @@
     "https://surrealismtoday.com/feed/"
    ],
    "cat": "Art"
+  },
+  {
+   "name": "Futility Closet",
+   "home": "https://www.futilitycloset.com",
+   "feeds": [
+    "https://www.futilitycloset.com/feed/"
+   ],
+   "cat": "History"
+  },
+  {
+   "name": "Aeon",
+   "home": "https://aeon.co",
+   "feeds": [
+    "https://aeon.co/feed.rss"
+   ],
+   "cat": "History"
+  },
+  {
+   "name": "Today I Found Out",
+   "home": "https://www.todayifoundout.com",
+   "feeds": [
+    "https://www.todayifoundout.com/index.php/feed/"
+   ],
+   "cat": "History"
+  },
+  {
+   "name": "Lapham’s Quarterly",
+   "home": "https://www.laphamsquarterly.org",
+   "feeds": [
+    "https://www.laphamsquarterly.org/rss.xml"
+   ],
+   "cat": "Oddities"
   }
  ],
  "topics": [
