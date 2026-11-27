@@ -260,22 +260,10 @@
    "cat": "Science"
   },
   {
-   "name": "Sound Art",
-   "home": "https://www.creativeboom.com/news/apple-musics-new-logo-was-shaped-by-fred-again-and-a-bath-of-mineral-oil/",
-   "feeds": [],
-   "cat": "Art"
-  },
-  {
    "name": "Paste",
    "home": "https://www.pastemagazine.com/",
    "feeds": [],
    "cat": "Entertainment"
-  },
-  {
-   "name": "Print Magazine",
-   "home": "https://store.beautifulbizarre.net/product-category/magazine/?v=0b3b97fa6688",
-   "feeds": [],
-   "cat": "Art"
   },
   {
    "name": "muddycolors.com",
@@ -578,6 +566,38 @@
     "https://www.vox.com/rss/index.xml"
    ],
    "cat": "Oddities"
+  },
+  {
+   "name": "Claude Homies - Reddit",
+   "home": "https://www.reddit.com",
+   "feeds": [
+    "https://www.reddit.com/r/ClaudeHomies/.rss"
+   ],
+   "cat": "Oddities"
+  },
+  {
+   "name": "Print Magazine",
+   "home": "https://www.printmag.com",
+   "feeds": [
+    "https://www.printmag.com/feed/"
+   ],
+   "cat": "Art"
+  },
+  {
+   "name": "A Closer Listen",
+   "home": "https://acloserlisten.com",
+   "feeds": [
+    "https://acloserlisten.com/feed/"
+   ],
+   "cat": "Art"
+  },
+  {
+   "name": "Disquiet",
+   "home": "https://disquiet.com",
+   "feeds": [
+    "https://disquiet.com/feed/"
+   ],
+   "cat": "Art"
   }
  ],
  "topics": [
