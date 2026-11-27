@@ -47,13 +47,15 @@ SITES = [
  ("Audubon", "https://www.audubon.org/magazine", ["https://www.audubon.org/magazine/rss.xml", "https://www.audubon.org/rss.xml"], "Science"),
 ]
 CATS = ["Art", "Entertainment", "Oddities", "History", "Science", "Games"]
-PER_FEED = 15     # newest items read from each site or search
-PER_CAT = 70      # stories kept per category (the page picks 7-8 per sheet, newest unread first)
-MAX_AGE_DAYS = 21  # stories older than this are dropped (undated ones are kept)
-READER_BONUS = 36 * 3600  # a story with a Reader view counts as this much newer when ranking
+FEED_CAP = PER_FEED = 25     # newest items read from each site or search
+PER_CAT = 120     # stories kept per category (the page picks 7-8 per sheet, newest unread first)
+GAMES_CAT = "Games"   # games never age out, are not limited per site, and are read in full (up to GAMES_MAX)
+GAMES_MAX = 500
+MAX_AGE_DAYS = 30  # stories older than this are dropped (undated ones are kept)
+READER_BONUS = 96 * 3600  # a story with a Reader view counts as this much newer when ranking
 SEARCH_MAX = 12   # at most this many 'Search:' topic stories per category (they never have Reader text), so real sites fill the rest
 SEARCH_IDS = set()  # id() of every story that came from a Search: topic
-MAX_PER_SITE = 3  # first pass: at most this many per site, so one busy site can't take over
+MAX_PER_SITE = 4  # first pass: at most this many per site (Reader stories get 3 extra), so one busy site can't take over
 FIX_NAMES = {"Hi-Frctose Magazine": "Hi-Fructose Magazine"}   # typos in config.json names
 FIX_QUERIES = {"athanasius kirche": "Athanasius Kircher", "harry partc": "Harry Partch", "michael chrichton": "Michael Crichton"}
 NO_FALLBACK = ("reddit.com", "deviantart.com")   # Google News has nothing useful for these
@@ -274,7 +276,7 @@ def parse_xml(name, data):
             if body:
                 story.append(body)
             out.append(story)
-        if len(out) >= PER_FEED:
+        if len(out) >= FEED_CAP:
             break
     return out
 
@@ -297,7 +299,7 @@ def loose(name, data):
         im = re.search(r"<media:(?:thumbnail|content)[^>]+url=[\"']([^\"']+)", blk, re.I) or re.search(r"<img[^>]+src=[\"']([^\"']+)", html.unescape(blk), re.I)
         if title and link.startswith("http"):
             out.append([name, title, desc or "Tap the button below for the full story.", link, "", good_img(im.group(1)) if im else "", ts])
-        if len(out) >= PER_FEED:
+        if len(out) >= FEED_CAP:
             break
     return out
 
@@ -340,16 +342,18 @@ def pick(stories):
         # stories with a Reader view (full text in the feed) come first, newest first within each group
         pool = sorted([s for s in uniq if s[4] == cat], key=lambda s: -(s[6] + (READER_BONUS if len(s) > 7 else 0)))
         chosen, count = [], {}
+        cap = GAMES_MAX if cat == GAMES_CAT else PER_CAT
+        per_site = 10**6 if cat == GAMES_CAT else MAX_PER_SITE
         nsearch = 0
         for s in pool:
             srch = id(s) in SEARCH_IDS
-            if len(chosen) < PER_CAT and count.get(s[0], 0) < MAX_PER_SITE and not (srch and nsearch >= SEARCH_MAX):
+            if len(chosen) < cap and count.get(s[0], 0) < per_site + (3 if len(s) > 7 else 0) and not (srch and nsearch >= SEARCH_MAX):
                 chosen.append(s)
                 count[s[0]] = count.get(s[0], 0) + 1
                 nsearch += srch
         # still room: more from real sites first, search topics only as a last resort
         for s in [x for x in pool if id(x) not in SEARCH_IDS] + [x for x in pool if id(x) in SEARCH_IDS]:
-            if len(chosen) >= PER_CAT:
+            if len(chosen) >= cap:
                 break
             if s not in chosen:
                 chosen.append(s)
@@ -718,7 +722,9 @@ def main():
             sites.append(("Search: " + t["q"], "", ["https://news.google.com/rss/search?q=" + urllib.parse.quote('"%s" when:%dd' % (t["q"], TOPIC_DAYS)) + "&hl=en-US&gl=US&ceid=US:en"], t["cat"]))
     blocked = [b.strip().lower() for b in cfg.get("blocked", []) if b.strip()]
     stories = []
+    global FEED_CAP
     for name, home, feeds, cat in sites:
+        FEED_CAP = GAMES_MAX if cat == GAMES_CAT else PER_FEED
         got = []
         for url in feeds:
             try:
@@ -772,7 +778,7 @@ def main():
         stories += got
     stories = [s for s in stories if not any(b in s[3].lower() or b in s[1].lower() for b in blocked)]
     cutoff = int(time.time()) - MAX_AGE_DAYS * 86400
-    stories = [s for s in stories if s[6] == 0 or s[6] >= cutoff]
+    stories = [s for s in stories if s[6] == 0 or s[6] >= cutoff or s[4] == GAMES_CAT]
     pins = [pin_story(p["url"], p["cat"]) for p in cfg.get("pins", []) if p.get("url") and p.get("cat") in CATS]
     stories = [p for p in pins if p] + stories
     final = pick(stories)
