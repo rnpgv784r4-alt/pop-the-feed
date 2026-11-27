@@ -29,7 +29,7 @@ html,body{height:100%;margin:0;background:#35024a;overflow:hidden;overscroll-beh
 #gml button.seen{color:#c9b2e0}#gml button.seen b{background:#7c6a99;box-shadow:none}
 #gmx{position:fixed;inset:0;z-index:69;background:rgba(20,4,28,.35)}
 
-#gmenu.on,#gmx.on{display:flex}#gmx{display:none}#gml button:active{background:rgba(214,196,246,.18)}#gml .none{color:#c9b2e0;padding:14px 16px;font:600 15px -apple-system,Arial,sans-serif}.cat.gms{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+#gmenu.on,#gmx.on{display:flex}.cat.gms.hold{transform:scale(.93)}#gmx{display:none}#gml button:active{background:rgba(214,196,246,.18)}#gml .none{color:#c9b2e0;padding:14px 16px;font:600 15px -apple-system,Arial,sans-serif}.cat.gms{transition:transform .15s;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
 #ldw{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;background:rgba(36,6,48,.62);-webkit-tap-highlight-color:transparent}#ldw.on{display:flex}#ldw i{width:54px;height:54px;border-radius:50%;border:6px solid rgba(255,255,255,.22);border-top-color:#e9d5ff;animation:ldws .8s linear infinite}@keyframes ldws{to{transform:rotate(360deg)}}
 .pop{opacity:0;visibility:hidden;transition:opacity .12s,visibility 0s .12s}.pop.on{opacity:1;visibility:visible;transition:opacity .12s}
 .hit{fill:transparent;cursor:pointer}
@@ -942,26 +942,36 @@ let cdx=0,csl=0,cdrag=false;{const cr=$('cats');cr.addEventListener('pointerdown
 const wasDrag=e=>cdrag||Math.abs((e&&e.clientX!=null?e.clientX:cdx)-cdx)>8||Math.abs($('cats').scrollLeft-csl)>2;
 /* long-press the Games pill: a menu of every game, A to Z */
 let gmLP=false;
-let gmT=0;
+let gmHeld=false,gmU=0;
+/* the finger that opened the menu is still down, or only just lifted: its release must not close the menu */
+const gmGuard=()=>gmHeld||Date.now()-gmU<600;
+['pointerup','pointercancel','touchend','touchcancel','mouseup'].forEach(n=>document.addEventListener(n,()=>{if(gmHeld){gmHeld=false;gmU=Date.now()}},true));
 function gmClose(){$('gmenu').classList.remove('on');$('gmx').classList.remove('on')}
 function gmOpen(){if(cur||G||rdOpen)return false;const pill=document.querySelector('.cat.gms'),r=pill.getBoundingClientRect(),m=$('gmenu');
  const seen=new Set(),list=S.filter(t=>catOf(t)==='Games'&&t[3]&&!seen.has(t[3])&&seen.add(t[3])).sort((a,b)=>String(a[1]).localeCompare(String(b[1]),undefined,{sensitivity:'base'}));
  $('gmn').textContent=list.length;const L=$('gml');L.textContent='';
  if(!list.length){const d=document.createElement('div');d.className='none';d.textContent='No games yet';L.appendChild(d)}
  list.forEach(st=>{const b=document.createElement('button');b.type='button';if(readL.indexOf(st[3])>=0)b.className='seen';const d=document.createElement('b'),t=document.createElement('span');t.textContent=st[1];b.appendChild(d);b.appendChild(t);
-  b.addEventListener('click',e=>{e.stopPropagation();if(Date.now()-gmT<350)return;gmClose();if(cur)return;curI=-1;hist=[];hp=0;showStory(st)});L.appendChild(b)});
+  b.addEventListener('click',e=>{e.stopPropagation();if(gmGuard())return;gmClose();if(cur)return;curI=-1;hist=[];hp=0;showStory(st)});L.appendChild(b)});
  const vw=innerWidth,w=Math.min(262,vw-20),right=Math.max(10,vw-r.right-6),top=r.bottom+10;
  m.style.width=w+'px';m.style.right=right+'px';m.style.top=top+'px';m.style.maxHeight=Math.max(160,Math.min(innerHeight*.6,innerHeight-top-24))+'px';
  m.style.setProperty('--ax',Math.max(14,Math.min(w-30,(vw-right)-(r.left+r.width/2)-7))+'px');
- gmT=Date.now();m.classList.add('on');$('gmx').classList.add('on');L.scrollTop=0;return true}
-/* the finger that opened the menu is still lifting: ignore it for a moment */
-$('gmx').addEventListener('pointerdown',e=>{e.preventDefault();if(Date.now()-gmT>700)gmClose()});$('gmx').addEventListener('click',()=>{if(Date.now()-gmT>700)gmClose()});
-{const gp=document.querySelector('.cat.gms');let gt=0,gx=0,gy=0;
- const gc=()=>{clearTimeout(gt)};
+ gmHeld=true;gmU=0;m.classList.add('on');$('gmx').classList.add('on');L.scrollTop=0;return true}
+$('gmx').addEventListener('pointerdown',e=>{e.preventDefault();if(!gmGuard())gmClose()});$('gmx').addEventListener('click',()=>{if(!gmGuard())gmClose()});
+{const gp=document.querySelector('.cat.gms'),cr=$('cats');let gt=0,gx=0,gy=0,gs=0;
+ const gc=()=>{clearTimeout(gt);gt=0;gp.classList.remove('hold')};
+ const start=(x,y)=>{if(gt)return;gx=x;gy=y;gs=cr.scrollLeft;gp.classList.add('hold');
+  gt=setTimeout(()=>{gt=0;gp.classList.remove('hold');if(Math.abs(cr.scrollLeft-gs)>6)return;
+   if(gmOpen()){gmLP=true;setTimeout(()=>{gmLP=false},1800);try{navigator.vibrate&&navigator.vibrate(12)}catch(e){}}},450)};
+ const mv=(x,y)=>{if(gt&&(Math.abs(x-gx)>18||Math.abs(y-gy)>18))gc()};
  gp.addEventListener('contextmenu',e=>e.preventDefault());
- gp.addEventListener('pointerdown',e=>{gc();gx=e.clientX;gy=e.clientY;gt=setTimeout(()=>{if(wasDrag({clientX:gx}))return;if(gmOpen()){gmLP=true;try{navigator.vibrate&&navigator.vibrate(12)}catch(x){}}},480)});
- gp.addEventListener('pointermove',e=>{if(Math.abs(e.clientX-gx)>8||Math.abs(e.clientY-gy)>8)gc()});
- ['pointerup','pointercancel','pointerleave'].forEach(n=>gp.addEventListener(n,gc))}
+ /* fingers wobble: allow 18px. Pointer AND touch events both start it, in case the phone cancels one of them */
+ gp.addEventListener('pointerdown',e=>start(e.clientX,e.clientY));
+ gp.addEventListener('pointermove',e=>mv(e.clientX,e.clientY));
+ gp.addEventListener('touchstart',e=>{const t=e.touches[0];if(t)start(t.clientX,t.clientY)},{passive:true});
+ gp.addEventListener('touchmove',e=>{const t=e.touches[0];if(t)mv(t.clientX,t.clientY)},{passive:true});
+ ['pointerup','touchend','touchcancel'].forEach(n=>gp.addEventListener(n,gc));
+ cr.addEventListener('scroll',()=>{if(gt&&Math.abs(cr.scrollLeft-gs)>6)gc()},{passive:true})}
 document.querySelectorAll('.cat:not(.dly)').forEach(btn=>{
  let lastT=0;const tgl=()=>{act=act===btn.dataset.c?null:btn.dataset.c;applyGlow()};
  btn.addEventListener('pointerup',e=>{if(btn.dataset.c==='Games'&&gmLP){gmLP=false;lastT=Date.now();return}if(e.pointerType==='mouse')return;if(wasDrag(e)){lastT=Date.now();return}lastT=Date.now();tgl()});
