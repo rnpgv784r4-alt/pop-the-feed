@@ -570,6 +570,14 @@
     "https://feeds.npr.org/1026/rss.xml"
    ],
    "cat": "Science"
+  },
+  {
+   "name": "Vox",
+   "home": "https://www.vox.com",
+   "feeds": [
+    "https://www.vox.com/rss/index.xml](https://www.vox.com/rss/index.xml"
+   ],
+   "cat": "Oddities"
   }
  ],
  "topics": [
