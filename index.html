@@ -305,6 +305,7 @@ body.gaming #oglow{display:none}
 #qzno{color:#c3a1f9}
 #qzs .big{color:#fff;text-shadow:2px 2px 0 rgba(0,0,0,.35)}#qzs.f .big{color:#ff9a8a}#qzs p,#qzm{color:#f1e6fa}
 /* Daily music */
+#dnr{display:none;align-items:center;gap:12px;margin:0 0 12px}#dnx{flex:none;background:#43284b;border:2px solid #a870c0;border-radius:10px;color:#fff;font:700 15px -apple-system,'Helvetica Neue',Arial,sans-serif;padding:10px 16px;min-height:44px;cursor:pointer}#dnx:active{border-color:#fff3a0}#dct{color:#c9b2e0;font:700 13px -apple-system,'Helvetica Neue',Arial,sans-serif}
 #dk{color:#c3a1f9}#dh{color:#fff}#dby{color:#d9c4ee}#dbl{color:#f1e6fa}#dhint{color:#c9b2e0}
 #dimg{border-color:#ad80e4;background:#2f1736}#dpw{border-color:#ad80e4;background:#dfc6f1}
 #dlk a{background:transparent;border:2px solid #fff;border-radius:6px;box-shadow:none;color:#fff}
@@ -415,7 +416,7 @@ body.gaming #oglow{display:none}
 <div id="stat"><span id="stk">Status:</span><span id="stl">Lvl 1 - Bubble Wrap Beginner</span><div id="sdots"></div></div>
 <div id="nes"><div id="nesc"><div class="pn"></div><div class="dp"><svg viewBox="-1 -1 32 32"><polygon points="10,0 20,0 20,10 30,10 30,20 20,20 20,30 10,30 10,20 0,20 0,10 10,10" fill="#3a3834" stroke="#e8e6e0" stroke-width="1.3" stroke-linejoin="round"/><circle cx="15" cy="15" r="4.2" fill="#2c2a27"/></svg></div><div class="bar b1" id="npl"></div><div class="bar b2" id="nbest"></div><div class="lg" id="nlg"></div><div class="ab"><button id="nb"><span></span>B</button><button id="na"><span></span>A</button></div></div></div>
 <div id="qzov"><div id="qzc"><div id="qzt"><i><u></u><u></u><u></u><u></u></i><span>Pop Quiz!</span><b id="qzx" aria-label="Close">&#10005;</b></div><div id="qzb"><div id="qzp"></div><div id="qzq0"><div id="qzn"></div><div id="qzf"></div><p id="qzq"></p><div id="qzo"></div><button id="qzhint" type="button" aria-label="Hint"><svg viewBox="0 0 48 60" aria-hidden="true"><path class="bf" d="M24 3C13 3 6 11 6 21c0 7 3.5 11.5 7.5 15.5 2 2 3 4 3 7v1h15v-1c0-3 1-5 3-7C38.5 32.5 42 28 42 21 42 11 35 3 24 3z"/><ellipse class="bh" cx="16" cy="15" rx="3" ry="6" transform="rotate(25 16 15)"/><path class="bw" d="M18 25l6 9 6-9M24 34v9"/><rect class="bb" x="16" y="46" width="16" height="4.5" rx="1.5"/><rect class="bb" x="19" y="51.5" width="10" height="5" rx="2.5"/></svg></button></div><div id="qzs" style="display:none"><div class="trophy" id="qzi"></div><div class="big" id="qzh"></div><p id="qzm"></p><button id="qzgo"></button><button id="qzno" style="display:none">No thanks, skip level-up</button></div></div></div></div><div id="achov"><div id="achcard"><div id="atb"><i id="alogo"><u></u><u></u><u></u><u></u></i><span id="attl">Achievement Unlocked!</span><b id="ax">&#10005;</b></div><div id="abd"><div class="trophy">&#127942;</div><div class="lvbig" id="avl">LEVEL 2</div><div class="rknm" id="ark">Thumb Warmup</div><p id="apt"></p><div id="hsrow"><input id="hsi" maxlength="3" placeholder="AAA" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false"><button id="hsv">Save top score</button></div><button id="aok">Keep Popping</button><button id="ayes" style="display:none;margin-top:10px">New Sheet</button></div></div></div>
-<div id="dov"><div id="dc"><div id="dt"><i><u></u><u></u><u></u><u></u></i><span><em>Bandcamp Daily</em><em>Album of the Day</em></span><b id="dx">&#10005;</b></div><div id="db"><div id="dr"><img id="dimg" alt=""><div><div id="dk">Album of the Day</div><div id="dh"></div><div id="dby"></div></div></div><p id="dbl"></p><div id="dpw"><iframe id="dpl" title="Bandcamp player" allow="autoplay; encrypted-media" referrerpolicy="no-referrer-when-downgrade"></iframe></div><p id="dhint">Press play above. You can close this window and the music keeps playing &mdash; tap the Daily button again to stop it.</p><div id="dlk"></div></div></div></div>
+<div id="dov"><div id="dc"><div id="dt"><i><u></u><u></u><u></u><u></u></i><span><em>Bandcamp Daily</em><em>Album of the Day</em></span><b id="dx">&#10005;</b></div><div id="db"><div id="dr"><img id="dimg" alt=""><div><div id="dk">Album of the Day</div><div id="dh"></div><div id="dby"></div></div></div><p id="dbl"></p><div id="dpw"><iframe id="dpl" title="Bandcamp player" allow="autoplay; encrypted-media" referrerpolicy="no-referrer-when-downgrade"></iframe></div><div id="dnr"><button id="dnx" type="button">Next artist &#8250;</button><span id="dct"></span></div><p id="dhint">Press play above. You can close this window and the music keeps playing &mdash; tap the Daily button again to stop it.</p><div id="dlk"></div></div></div></div>
 <div id="ov"><div id="card"><div id="tb"><i id="logo"><u></u><u></u><u></u><u></u></i><span id="ttl">Pop The Feed</span><b id="x">&#10005;</b></div><div id="bd"><div id="row"><svg id="fbsvg" viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="12" y="1" width="1" height="1" fill="#ffffff"/><rect x="10" y="3" width="1" height="1" fill="#c9a2ff"/><rect x="13" y="4" width="1" height="1" fill="#c9a2ff"/><rect x="3" y="5" width="4" height="1" fill="#3a1670"/><rect x="2" y="6" width="1" height="1" fill="#3a1670"/><rect x="3" y="6" width="2" height="1" fill="#c9a2ff"/><rect x="5" y="6" width="3" height="1" fill="#9a5bec"/><rect x="1" y="7" width="1" height="1" fill="#3a1670"/><rect x="2" y="7" width="1" height="1" fill="#c9a2ff"/><rect x="3" y="7" width="2" height="1" fill="#ffffff"/><rect x="5" y="7" width="4" height="1" fill="#9a5bec"/><rect x="0" y="8" width="1" height="1" fill="#3a1670"/><rect x="1" y="8" width="1" height="1" fill="#c9a2ff"/><rect x="2" y="8" width="2" height="1" fill="#ffffff"/><rect x="4" y="8" width="6" height="1" fill="#9a5bec"/><rect x="10" y="8" width="1" height="1" fill="#3a1670"/><rect x="0" y="9" width="1" height="1" fill="#3a1670"/><rect x="1" y="9" width="1" height="1" fill="#c9a2ff"/><rect x="2" y="9" width="1" height="1" fill="#ffffff"/><rect x="3" y="9" width="7" height="1" fill="#9a5bec"/><rect x="10" y="9" width="1" height="1" fill="#3a1670"/><rect x="0" y="10" width="1" height="1" fill="#3a1670"/><rect x="1" y="10" width="8" height="1" fill="#9a5bec"/><rect x="9" y="10" width="1" height="1" fill="#7a3dc8"/><rect x="10" y="10" width="1" height="1" fill="#3a1670"/><rect x="0" y="11" width="1" height="1" fill="#3a1670"/><rect x="1" y="11" width="8" height="1" fill="#9a5bec"/><rect x="9" y="11" width="1" height="1" fill="#7a3dc8"/><rect x="10" y="11" width="1" height="1" fill="#3a1670"/><rect x="0" y="12" width="1" height="1" fill="#3a1670"/><rect x="1" y="12" width="7" height="1" fill="#9a5bec"/><rect x="8" y="12" width="2" height="1" fill="#7a3dc8"/><rect x="10" y="12" width="1" height="1" fill="#3a1670"/><rect x="1" y="13" width="1" height="1" fill="#3a1670"/><rect x="2" y="13" width="4" height="1" fill="#9a5bec"/><rect x="6" y="13" width="3" height="1" fill="#7a3dc8"/><rect x="9" y="13" width="1" height="1" fill="#3a1670"/><rect x="2" y="14" width="1" height="1" fill="#3a1670"/><rect x="3" y="14" width="5" height="1" fill="#7a3dc8"/><rect x="8" y="14" width="1" height="1" fill="#3a1670"/><rect x="3" y="15" width="5" height="1" fill="#3a1670"/></svg><img id="thumb" alt="" referrerpolicy="no-referrer" style="display:none"><div id="msg"><span id="src"></span><b id="hl"></b></div></div><p id="sm"></p><div id="btns"><button id="rdo">Reader</button><a id="more" href="#" target="_blank" rel="noopener noreferrer">Read More</a></div><div id="swr"><div id="sfn" role="button"></div><button id="nxt" type="button"><span class="sw-t">&#8249; Swipe left for next story</span><span class="sw-d">Next story &#8250;</span></button></div></div></div></div>
 <script>
 const B=[[128,214,228,206,"Art"],[606,214,228,206,"Entertainment"],[1085,214,228,206,"Oddities"],[128,644,228,206,"Science"],[606,644,228,206,"Art"],[1085,644,228,206,"Entertainment"],[128,1072,228,206,"History"],[606,1072,228,206,"Science"],[1085,1072,228,206,"Art"],[128,1502,228,206,"Oddities"],[606,1502,228,206,"History"],[1085,1502,228,206,"Science"],[128,1930,228,206,"Entertainment"],[606,1930,228,206,"Oddities"],[1085,1930,228,206,"History"],[128,2360,228,206,"Art"],[606,2360,228,206,"Entertainment"],[1085,2360,228,206,"Oddities"],[128,2788,228,206,"Science"],[606,2788,228,206,"Art"],[1085,2788,228,206,"Entertainment"],[128,3218,228,206,"History"],[606,3218,228,206,"Science"],[1085,3218,228,206,"Art"],[128,3646,228,206,"Oddities"],[606,3646,228,206,"History"],[1085,3646,228,206,"Science"],[128,4076,228,206,"Entertainment"],[606,4076,228,206,"Oddities"],[1085,4076,228,206,"History"],[128,4504,228,206,"Art"],[606,4504,228,206,"Entertainment"],[1085,4504,228,206,"Oddities"],[128,4934,228,206,"Science"],[606,4934,228,206,"Art"],[1085,4934,228,206,"Entertainment"],[128,5362,228,206,"History"],[606,5362,228,206,"Science"],[1085,5362,228,206,"Art"]];
@@ -452,23 +453,38 @@ const NAT=SB.map(b=>b[4]),NCAT=['Art','Entertainment','Oddities','History','Scie
 /* one Games bubble per distinct Games story, up to 6: never repeat a story, grow as games are added */
 function gamesN(){try{return Math.min(6,new Set(S.filter(t=>(t[4]||SRC[t[0]])==='Games').map(t=>t[3])).size)}catch(e){return 0}}
 let GN=-1;
-function shuffleLayout(){GN=gamesN();
+let NB=null;
+function nbTables(){const n=SB.length,o=[],d=[];for(let i=0;i<n;i++){o.push([]);d.push([]);for(let j=0;j<n;j++){if(i===j)continue;const u=Math.hypot((SB[i][0]-SB[j][0])/(2*SB[i][2]),(SB[i][1]-SB[j][1])/(2*SB[i][3]));if(u<1.25)o[i].push(j);if(u<1.65)d[i].push(j)}}return[o,d]}
+function shuffleLayout(){GN=gamesN();if(!NB)NB=nbTables();
  const sh=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
  const n=SB.length,cover=Math.min(WIDE?12:9,n);
  /* on the phone sheet the left and right columns run off the edge of the photo, so an edge position can only borrow from the same edge or the middle, and a middle position only from the middle */
  const cl=i=>WIDE?'M':(SB[i][0]<300?'L':SB[i][0]>900?'R':'M'),fits=(t,s)=>cl(t)==='M'?cl(s)==='M':(cl(s)==='M'||cl(s)===cl(t));
- const gn=gamesN(),lose={Entertainment:Math.min(GLOSE.Entertainment,Math.ceil(gn/2)),Oddities:Math.min(GLOSE.Oddities,Math.floor(gn/2))};lose.Entertainment=Math.min(GLOSE.Entertainment,gn-lose.Oddities);
- const want={Games:0},nat={};NCAT.forEach(c=>{nat[c]=[];NAT.forEach((x,i)=>{if(x===c)nat[c].push(i)});want[c]=Math.max(0,nat[c].length-(lose[c]||0));want.Games+=nat[c].length-want[c]});
+ const G=Math.min(6,gamesN()),nat={};NCAT.forEach(c=>{nat[c]=[];NAT.forEach((x,i)=>{if(x===c)nat[c].push(i)})});
+ const GR=WIDE?['M']:['L','M','R'],posBy={};GR.forEach(g=>posBy[g]=[]);for(let i=0;i<n;i++)posBy[cl(i)].push(i);
  for(let tries=0;tries<4000;tries++){
-  const w=Object.assign({},want),cats=new Array(n).fill(null),top=sh([0,1,2,3,4,5].filter(i=>i<n));
-  for(let k=0;k<Math.min(2,w.Games,top.length);k++){cats[top[k]]='Games';w.Games--}
-  sh(NCAT).forEach(c=>{if(!w[c])return;const fr=sh(Array.from({length:cover},(_,i)=>i).filter(i=>cats[i]===null));if(fr.length){cats[fr[0]]=c;w[c]--}});
-  const rest=[];Object.keys(w).forEach(c=>{for(let k=0;k<w[c];k++)rest.push(c)});const pool=sh(rest);
-  for(let i=0;i<n;i++)if(cats[i]===null)cats[i]=pool.pop();
+  /* a colour sits in the same column of the photo as the bubble it is copied from, so each column is its own shuffle of its own colours */
+  const cats=new Array(n).fill(null),strict=tries<1500,bad=(i,c)=>NB[strict?1:0][i].some(j=>cats[j]===c);
+  /* Games bubbles first: two of them on the first screen, never touching each other */
+  const gp=[],top=sh([0,1,2,3,4,5].filter(i=>i<n));for(let k=0;k<Math.min(2,G);k++)gp.push(top[k]);
+  sh(Array.from({length:n},(_,i)=>i).filter(i=>!gp.includes(i))).forEach(i=>{if(gp.length<G)gp.push(i)});
+  let ok=true;gp.forEach(i=>{if(bad(i,'Games'))ok=false;cats[i]='Games'});if(!ok)continue;
+  const lose={Entertainment:0,Oddities:0},ms={};
+  GR.forEach(g=>{ms[g]=posBy[g].map(i=>NAT[i])});
+  for(const i of gp){const a=ms[cl(i)],ix=sh(a.map((c,k)=>k).filter(k=>(a[k]==='Entertainment'||a[k]==='Oddities')&&lose[a[k]]<GLOSE[a[k]]))[0];if(ix===undefined){ok=false;break}lose[a[ix]]++;a.splice(ix,1)}
+  if(!ok)continue;
+  for(const g of sh(GR)){
+   const free=sh(posBy[g].filter(i=>cats[i]===null)),w={};ms[g].forEach(c=>{w[c]=(w[c]||0)+1});let nodes=0;
+   const dfs=k=>{if(k===free.length)return true;if(++nodes>2500)return false;const i=free[k];
+    for(const c of sh(Object.keys(w).filter(c=>w[c]>0))){if(bad(i,c))continue;cats[i]=c;w[c]--;if(dfs(k+1))return true;w[c]++;cats[i]=null}return false};
+   if(!dfs(0)){ok=false;break}
+  }
+  if(!ok)continue;
+  /* every colour has to show somewhere on the first screen */
+  if(NCAT.some(c=>nat[c].length>lose[c]&&!cats.slice(0,cover).includes(c)))continue;
   const used=new Set(),srcOf=new Array(n).fill(-1);
   const match=(targets,cands)=>{const T=sh(targets).sort((a,b)=>(cl(a)==='M'?0:1)-(cl(b)==='M'?0:1)),av=sh(cands);
    for(const t of T){let k=av.findIndex(s=>!used.has(s)&&fits(t,s)&&cl(s)===cl(t));if(k<0)k=av.findIndex(s=>!used.has(s)&&fits(t,s));if(k<0)return false;srcOf[t]=av[k];used.add(av[k])}return true};
-  let ok=true;
   for(const c of NCAT){if(!match(cats.map((x,i)=>x===c?i:-1).filter(i=>i>=0),nat[c])){ok=false;break}}
   if(ok&&!match(cats.map((x,i)=>x==='Games'?i:-1).filter(i=>i>=0),NAT.map((_,i)=>i).filter(i=>!used.has(i))))ok=false;
   if(!ok)continue;
@@ -487,7 +503,7 @@ function paintLayout(){
   const dx=b[0]-SB[s][0],dy=b[1]-SB[s][1],fid=b[6]?'hr'+i:null;
   if(fid){const f=el('filter',{id:fid,x:'0%',y:'0%',width:'100%',height:'100%','color-interpolation-filters':'sRGB'});f.appendChild(el('feColorMatrix',{type:'saturate',values:String(GSAT)}));const GP=GFIX[NAT[s]]||GFIX.Oddities,ct=el('feComponentTransfer',{});[['feFuncR',GP[0]],['feFuncG',GP[1]],['feFuncB',GP[2]]].forEach(([n,v])=>ct.appendChild(el(n,{type:'gamma',amplitude:String(v[0]),exponent:String(v[1]),offset:String(v[2])})));f.appendChild(ct);defs.appendChild(f)}
   pim.setAttribute('x',SH.x+dx);pim.setAttribute('y',SH.y+dy);if(fid)pim.setAttribute('filter','url(#'+fid+')');else pim.removeAttribute('filter');
-  if(dx||dy){const rc=el('g',{'clip-path':'url(#c'+i+')',id:'rc'+i});const im=el('image',{href:SH.img,x:SH.x+dx,y:SH.y+dy,width:SH.w,height:SH.h});if(fid)im.setAttribute('filter','url(#'+fid+')');rc.appendChild(im);gl.parentNode.insertBefore(rc,gl)}
+  if(dx||dy||fid){const rc=el('g',{'clip-path':'url(#c'+i+')',id:'rc'+i});const im=el('image',{href:SH.img,x:SH.x+dx,y:SH.y+dy,width:SH.w,height:SH.h});if(fid)im.setAttribute('filter','url(#'+fid+')');rc.appendChild(im);gl.parentNode.insertBefore(rc,gl)}
   if(b[4]==='Games'){ /* clear bubble: it picks up a soft wash of the colours of the bubbles around it */
    const tn=el('g',{'clip-path':'url(#c'+i+')',id:'tn'+i,'pointer-events':'none'});let k=0;
    SB.forEach((n,j)=>{if(j===i||n[4]==='Games'||!GTINT[n[4]])return;const vx=n[0]-b[0],vy=n[1]-b[1];if(Math.abs(vx)>b[2]*2.3||Math.abs(vy)>b[3]*2.3)return;const L=Math.hypot(vx/b[2],vy/b[3])||1,ux=vx/b[2]/L,uy=vy/b[3]/L,c=GTINT[n[4]],gid='tg'+i+'_'+(k++);
@@ -854,13 +870,19 @@ function swipePrev(){if(!swOK())return;const c=$('card');
  if(hp<=0){swBounce(c,1);return}
  swSlide(1,()=>{hp--;curI=hist[hp];cur=null;showStory(storyFor(curI))})}
 /* ===== Daily pill: Bandcamp Album of the Day preview + background playback ===== */
-const DLY={on:false,live:false,paused:false};
+const DLY={on:false,live:false,paused:false,i:0};
 const DLY_NONE={album:'Today\u2019s pick isn\u2019t loaded yet',artist:'',blurb:'Check back after the next update, or open Bandcamp Daily directly.',img:'',player:'',links:[{n:'Open Bandcamp Daily: Album of the Day',u:'https://daily.bandcamp.com/album-of-the-day'}]};
-function dlyData(){const t=S.find(x=>x[4]==='DailyMusic');if(!t)return DLY_NONE;const e=t[8]||{};
- const links=Array.isArray(e.links)?e.links.slice():[];if(/^https?:\/\//.test(t[3]||''))links.push({n:'Read the review',u:t[3]});
- return{album:e.album||t[1],artist:e.artist||'',blurb:e.blurb||t[2]||'',img:t[5]||'',player:e.player||'',links}}
+function dlyList(){const t=S.find(x=>x[4]==='DailyMusic');if(!t)return[DLY_NONE];const e=t[8]||{};
+ const mk=(o,u,img)=>{const links=Array.isArray(o.links)?o.links.slice():[];if(/^https?:\/\//.test(u||''))links.push({n:'Read the review',u});return{album:o.album||o.title||'',artist:o.artist||'',blurb:o.blurb||'',img:img||'',player:o.player||'',links}};
+ const a=[mk(Object.assign({title:t[1]},e),t[3],t[5])];if(!a[0].blurb)a[0].blurb=t[2]||'';
+ (Array.isArray(e.more)?e.more:[]).forEach(m=>{if(m&&(m.album||m.title))a.push(mk(m,m.url,m.img))});return a}
+function dlyData(){const a=dlyList();if(DLY.i>=a.length)DLY.i=0;return a[DLY.i]}
+function dlyNext(){const a=dlyList();if(a.length<2)return;DLY.i=(DLY.i+1)%a.length;const d=a[DLY.i],ok=dlyFill(d);
+ if(ok&&DLY.on){const f=$('dpl');f.src=String(d.player).replace('bgcol=ffffff','bgcol=dfc6f1').replace('linkcol=0687f5','linkcol=5b2d91');f.dataset.src=d.player;DLY.live=false;dlyUi()}
+ else if(!ok&&DLY.on){const f=$('dpl');f.src='about:blank';f.dataset.src='';DLY.live=false;dlyUi()}
+ try{$('dov').querySelector('#db').scrollTo(0,0)}catch(x){}}
 function dlyUi(){const b=$('dly'),p=DLY.paused&&!DLY.on;b.classList.toggle('on',DLY.on);b.classList.toggle('live',DLY.on&&DLY.live);b.classList.toggle('paused',p);b.setAttribute('aria-pressed',DLY.on?'true':'false');const m=b.querySelector('.mn');if(m)m.textContent=p?'\u25B6\uFE0E':'\u266A'}
-function dlyFill(d){$('dh').textContent=d.album;$('dby').textContent=d.artist?'by '+d.artist:'';$('dbl').textContent=d.blurb;
+function dlyFill(d){const n=dlyList().length;$('dnr').style.display=n>1?'flex':'none';$('dct').textContent=n>1?'Artist '+(DLY.i+1)+' of '+n:'';$('dh').textContent=d.album;$('dby').textContent=d.artist?'by '+d.artist:'';$('dbl').textContent=d.blurb;
  const im=$('dimg');if(d.img){im.referrerPolicy='no-referrer';im.src=d.img;im.style.display=''}else{im.removeAttribute('src');im.style.display='none'}
  const lk=$('dlk');lk.textContent='';
  d.links.forEach(l=>{if(!/^https?:\/\//i.test(l.u||''))return;const a=document.createElement('a');a.href=l.u;a.target='_blank';a.rel='noopener noreferrer';a.textContent=(l.n||'Bandcamp')+' \u203A';lk.appendChild(a)});
@@ -870,6 +892,7 @@ function dlyStart(){const d=dlyData(),ok=dlyFill(d);$('dov').classList.add('show
  const f=$('dpl');if(f.dataset.src!==d.player){f.src=String(d.player).replace('bgcol=ffffff','bgcol=dfc6f1').replace('linkcol=0687f5','linkcol=5b2d91');f.dataset.src=d.player}
  DLY.on=true;DLY.live=false;DLY.paused=false;dlyUi()}
 function dlyStop(){const f=$('dpl');f.src='about:blank';f.dataset.src='';DLY.on=false;DLY.live=false;DLY.paused=false;dlyUi();$('dov').classList.remove('show')}
+$('dnx').addEventListener('click',e=>{e.stopPropagation();clk();dlyNext()});
 function dlyClose(){$('dov').classList.remove('show')}
 (function(){const d=$('dly');let lt=0;
  const go=()=>{if(G||swBusy)return;clk();if(DLY.on)dlyStop();else dlyStart()};

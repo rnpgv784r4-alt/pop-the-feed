@@ -445,6 +445,29 @@ def daily_music():
     except Exception as e:
         print("Daily music failed:", e)
         return None
+    main = _daily_build(page, url)
+    if not main:
+        return None
+    # the other recent Album of the Day reviews, so the app can offer "next artist"
+    more = []
+    for d, u in dated:
+        if u == url or u not in pages or len(more) >= 4:
+            continue
+        try:
+            e = _daily_build(pages[u], u)
+        except Exception as ex:
+            print("  Daily extra failed:", u, ex)
+            continue
+        if e and e[8].get("album"):
+            x = dict(e[8])
+            x.update({"img": e[5], "url": e[3], "title": e[1]})
+            more.append(x)
+    main[8]["more"] = more
+    print("Daily shuffle list:", 1 + len(more), "artists")
+    return main
+
+
+def _daily_build(page, url):
     title, img, blurb = _meta(page, "og:title"), _meta(page, "og:image"), _meta(page, "og:description")
     mm = re.match(r'^(.*?),\s*[\u201c"\u2018\'](.*?)[\u201d"\u2019\']\s*$', title)
     artist, album = (mm.group(1).strip(), mm.group(2).strip()) if mm else ("", title)
