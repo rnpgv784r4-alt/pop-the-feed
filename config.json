@@ -630,6 +630,12 @@
     "https://www.laphamsquarterly.org/rss.xml"
    ],
    "cat": "Oddities"
+  },
+  {
+   "name": "Quick Draw",
+   "home": "https://quickdraw.withgoogle.com/",
+   "feeds": [],
+   "cat": "Art"
   }
  ],
  "topics": [
