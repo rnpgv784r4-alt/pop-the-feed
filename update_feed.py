@@ -739,6 +739,16 @@ def write_share_pages(stories):
             pass
     print("share pages:", len(keep))
 
+URL_TOPICS = []   # a web address typed into Topics: treated like a pinned article
+
+def game_story(name, home):
+    """A game site is the game: one card that opens the site itself (picture and blurb from its own page)."""
+    st = pin_story(home, GAMES_CAT) if home else None
+    if st:
+        st[0], st[1] = name, name
+        return st
+    return [name, name, "Tap the button below to play.", home, GAMES_CAT, "", int(time.time())]
+
 def main():
     cfg = load_cfg()
     sites = [(x["name"], x.get("home", ""), x.get("feeds", []), x["cat"]) for x in cfg["sites"] if x.get("cat") in CATS] if cfg.get("sites") else list(SITES)
@@ -750,7 +760,9 @@ def main():
         if k in seen_q:
             continue
         seen_q.add(k)
-        if t.get("q") and t.get("cat") in CATS:
+        if t.get("q") and t.get("cat") in CATS and re.match(r"https?://", t["q"].strip()):
+            URL_TOPICS.append((t["q"].strip(), t["cat"]))
+        elif t.get("q") and t.get("cat") in CATS:
             sites.append(("Search: " + t["q"], "", ["https://news.google.com/rss/search?q=" + urllib.parse.quote('"%s" when:%dd' % (t["q"], TOPIC_DAYS)) + "&hl=en-US&gl=US&ceid=US:en"], t["cat"]))
     blocked = [b.strip().lower() for b in cfg.get("blocked", []) if b.strip()]
     stories = []
@@ -758,6 +770,12 @@ def main():
     for name, home, feeds, cat in sites:
         FEED_CAP = GAMES_MAX if cat == GAMES_CAT else PER_FEED
         got = []
+        if cat == GAMES_CAT and not feeds and home:
+            # no feed address given: the site itself is the game, so one card that opens it
+            got = [game_story(name, home)]
+            print(name, "1 (game page)")
+            stories += got
+            continue
         for url in feeds:
             try:
                 got = parse(name, get(url))
@@ -811,7 +829,7 @@ def main():
     stories = [s for s in stories if not any(b in s[3].lower() or b in s[1].lower() for b in blocked)]
     cutoff = int(time.time()) - MAX_AGE_DAYS * 86400
     stories = [s for s in stories if s[6] == 0 or s[6] >= cutoff or s[4] == GAMES_CAT]
-    pins = [pin_story(p["url"], p["cat"]) for p in cfg.get("pins", []) if p.get("url") and p.get("cat") in CATS]
+    pins = [pin_story(p["url"], p["cat"]) for p in cfg.get("pins", []) if p.get("url") and p.get("cat") in CATS] + [pin_story(u, c) for u, c in URL_TOPICS]
     stories = [p for p in pins if p] + stories
     final = pick(stories)
     dm = daily_music()
@@ -828,28 +846,6 @@ def main():
             ok += 1
     print("resolved", ok, "of", len(cand), "Google News links")
     final = [s for s in final if not (DEALURL.search(s[3]) or any(b in s[3].lower() for b in blocked))]
-    # Games: some feeds list the "how to play" page; send people to the game itself
-    hp = [s for s in final if s[4] == GAMES_CAT and (HOWTO.search(s[1]) or HOWTO.search(s[3]))]
-    def _gl(st):
-        try:
-            return game_link(st[3])
-        except Exception as e:
-            print("  game link failed", st[3][:70], e)
-            return ""
-    with ThreadPoolExecutor(8) as ex:
-        found = list(ex.map(_gl, hp))
-    nfix, seen_g = 0, set()
-    for st, g in zip(hp, found):
-        if g:
-            print("  game:", st[1][:50], "->", g[:90])
-            st[3], st[5], st[2] = g, "", "Tap the button below for the full story."
-            st[1] = re.sub(r"^\s*how\s+to\s+play\s+", "", st[1], flags=re.I)
-            st[7:] = []   # a how-to-play page has no Reader text worth keeping
-            nfix += 1
-        else:
-            print("  game link NOT found for", st[3][:90])
-    print("Games: pointed %d of %d how-to-play pages at the game itself" % (nfix, len(hp)))
-    final = [s for s in final if not (s[4] == GAMES_CAT and (s[3] in seen_g or seen_g.add(s[3])))]
     need = [s for s in final if not gn_id(s[3]) and (not s[5] or s[2].startswith("Tap the button"))]
     with ThreadPoolExecutor(8) as ex:
         for s, (img, desc) in zip(need, ex.map(lambda s: og_meta(s[3]), need)):
