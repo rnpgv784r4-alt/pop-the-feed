@@ -54,6 +54,9 @@ READER_BONUS = 36 * 3600  # a story with a Reader view counts as this much newer
 SEARCH_MAX = 12   # at most this many 'Search:' topic stories per category (they never have Reader text), so real sites fill the rest
 SEARCH_IDS = set()  # id() of every story that came from a Search: topic
 MAX_PER_SITE = 3  # first pass: at most this many per site, so one busy site can't take over
+FIX_NAMES = {"Hi-Frctose Magazine": "Hi-Fructose Magazine"}   # typos in config.json names
+FIX_QUERIES = {"athanasius kirche": "Athanasius Kircher", "harry partc": "Harry Partch", "michael chrichton": "Michael Crichton"}
+NO_FALLBACK = ("reddit.com", "deviantart.com")   # Google News has nothing useful for these
 DROP = {"Smithsonian Ocean"}   # sources that block our servers; skipped even if they are in config.json
 TOPIC_DAYS = 30   # topic searches only look at stories from the last N days
 A = "{http://www.w3.org/2005/Atom}"
@@ -412,8 +415,8 @@ def daily_music():
         if not cands:
             print("Daily music: no review link found")
             return None
-        pages, bestd = {}, -1
-        for u in cands[:4]:   # the newest publish date wins, wherever the link was found
+        pages, dated = {}, []
+        for u in cands[:5]:
             try:
                 pg = get(u, 25).decode("utf-8", "ignore")
             except Exception:
@@ -421,11 +424,23 @@ def daily_music():
             pages[u] = pg
             d = parse_date(_meta(pg, "article:published_time") or (re.search(r'"datePublished"\s*:\s*"([^"]+)"', pg) or [None, ""])[1] or (re.search(r'<time[^>]+datetime=["\']([^"\']+)', pg) or [None, ""])[1])
             print("  Daily candidate:", u, d)
-            if d > bestd:
-                bestd, url = d, u
-        if not url:
-            url = cands[0]
-        page = pages.get(url) or get(url, 25).decode("utf-8", "ignore")
+            dated.append((d, u))
+        dated.sort(key=lambda x: -x[0])
+        url = dated[0][1] if dated else cands[0]
+        if len(dated) > 1 and dated[0][0]:
+            # No new review today? Rotate through the recent ones, one per day, until the next review is published.
+            try:
+                from zoneinfo import ZoneInfo
+                tz = ZoneInfo("America/Chicago")
+                age = (datetime.now(tz).date() - datetime.fromtimestamp(dated[0][0], tz).date()).days
+            except Exception:
+                age = 0
+            if age >= 2:
+                url = dated[(age - 1) % len(dated)][1]
+                print("  Daily: newest review is %d days old, rotating to #%d" % (age, (age - 1) % len(dated) + 1))
+        if url not in pages:
+            pages[url] = get(url, 25).decode("utf-8", "ignore")
+        page = pages[url]
         print("Daily music pick:", url)
     except Exception as e:
         print("Daily music failed:", e)
@@ -668,9 +683,10 @@ def write_share_pages(stories):
 def main():
     cfg = load_cfg()
     sites = [(x["name"], x.get("home", ""), x.get("feeds", []), x["cat"]) for x in cfg["sites"] if x.get("cat") in CATS] if cfg.get("sites") else list(SITES)
-    sites = [x for x in sites if x[0] not in DROP]
+    sites = [(FIX_NAMES.get(x[0], x[0]),) + tuple(x[1:]) for x in sites if x[0] not in DROP]
     seen_q = set()
     for t in cfg.get("topics", []):
+        t = dict(t, q=FIX_QUERIES.get(t.get("q", "").strip().lower(), t.get("q", "")))
         k = (t.get("q", "").strip().lower(), t.get("cat"))
         if k in seen_q:
             continue
@@ -697,6 +713,22 @@ def main():
                         break
             except Exception as e:
                 print("  discovery failed", name, e)
+        if not got and home and not name.startswith("Search: ") and not any(d in home for d in NO_FALLBACK):
+            # The site blocks our servers (or has no feed we can read): ask Google News for its latest stories instead
+            try:
+                dom = urllib.parse.urlparse(home).netloc.lower().replace("www.", "")
+                q = "site:%s when:%dd" % (dom, TOPIC_DAYS)
+                got = parse(name, get("https://news.google.com/rss/search?q=" + urllib.parse.quote(q) + "&hl=en-US&gl=US&ceid=US:en"))
+                first = re.sub(r"[^a-z0-9 ]", "", name.lower()).split()[:1]
+                for g in got:
+                    m = re.match(r"^(.*\S)\s+[-\u2013\u2014]\s+([^-\u2013\u2014]{2,40})$", g[1])
+                    if m and first and first[0] in m.group(2).lower():
+                        g[1] = m.group(1)
+                    g[0] = name
+                if got:
+                    print("  used Google News for", name)
+            except Exception as e:
+                print("  Google News fallback failed", name, e)
         if got and "npr.org" in (home or "") + " ".join(feeds):
             npr_enrich(got)
         print(name, ("%d (%d with Reader text)" % (len(got), sum(1 for g in got if len(g) > 7))) if got else "SKIPPED")
