@@ -942,12 +942,14 @@ let cdx=0,csl=0,cdrag=false;{const cr=$('cats');cr.addEventListener('pointerdown
 const wasDrag=e=>cdrag||Math.abs((e&&e.clientX!=null?e.clientX:cdx)-cdx)>8||Math.abs($('cats').scrollLeft-csl)>2;
 /* long-press the Games pill: a menu of every game, A to Z */
 let gmLP=false;
+const GDBG=/dbg/.test(location.search);let gdp=null;const gdbg=m=>{if(!GDBG)return;try{if(!gdp){gdp=document.createElement('div');gdp.style.cssText='position:fixed;left:6px;right:6px;bottom:70px;z-index:99999;background:rgba(0,0,0,.82);color:#9fffa8;font:11px/1.35 ui-monospace,Menlo,monospace;padding:6px 8px;border-radius:8px;pointer-events:none;white-space:pre-wrap;max-height:34vh;overflow:hidden';gdp.textContent='game menu debug (build gm4)\n';document.body.appendChild(gdp)}
+ const t=new Date(),ts=String(t.getSeconds()).padStart(2,'0')+'.'+String(t.getMilliseconds()).padStart(3,'0');const L=(gdp.textContent+ts+' '+m+'\n').split('\n');gdp.textContent=L.slice(-14).join('\n')}catch(e){}};
 let gmHeld=false,gmU=0;
 /* the finger that opened the menu is still down, or only just lifted: its release must not close the menu */
 const gmGuard=()=>gmHeld||Date.now()-gmU<600;
 ['pointerup','pointercancel','touchend','touchcancel','mouseup'].forEach(n=>document.addEventListener(n,()=>{if(gmHeld){gmHeld=false;gmU=Date.now()}},true));
 function gmClose(){$('gmenu').classList.remove('on');$('gmx').classList.remove('on')}
-function gmOpen(){if(cur||G||rdOpen)return false;const pill=document.querySelector('.cat.gms'),r=pill.getBoundingClientRect(),m=$('gmenu');
+function gmOpen(){if(cur||G||rdOpen){gdbg('blocked: cur='+!!cur+' G='+!!G+' rdOpen='+rdOpen);return false}const pill=document.querySelector('.cat.gms'),r=pill.getBoundingClientRect(),m=$('gmenu');
  const seen=new Set(),list=S.filter(t=>catOf(t)==='Games'&&t[3]&&!seen.has(t[3])&&seen.add(t[3])).sort((a,b)=>String(a[1]).localeCompare(String(b[1]),undefined,{sensitivity:'base'}));
  $('gmn').textContent=list.length;const L=$('gml');L.textContent='';
  if(!list.length){const d=document.createElement('div');d.className='none';d.textContent='No games yet';L.appendChild(d)}
@@ -959,19 +961,19 @@ function gmOpen(){if(cur||G||rdOpen)return false;const pill=document.querySelect
  gmHeld=true;gmU=0;m.classList.add('on');$('gmx').classList.add('on');L.scrollTop=0;return true}
 $('gmx').addEventListener('pointerdown',e=>{e.preventDefault();if(!gmGuard())gmClose()});$('gmx').addEventListener('click',()=>{if(!gmGuard())gmClose()});
 {const gp=document.querySelector('.cat.gms'),cr=$('cats');let gt=0,gx=0,gy=0,gs=0;
- const gc=()=>{clearTimeout(gt);gt=0;gp.classList.remove('hold')};
+ const gc=(why)=>{if(gt)gdbg('cancelled '+(typeof why==='string'?why:''));clearTimeout(gt);gt=0;gp.classList.remove('hold')};
  const start=(x,y)=>{if(gt)return;gx=x;gy=y;gs=cr.scrollLeft;gp.classList.add('hold');
-  gt=setTimeout(()=>{gt=0;gp.classList.remove('hold');if(Math.abs(cr.scrollLeft-gs)>6)return;
-   if(gmOpen()){gmLP=true;setTimeout(()=>{gmLP=false},1800);try{navigator.vibrate&&navigator.vibrate(12)}catch(e){}}},450)};
- const mv=(x,y)=>{if(gt&&(Math.abs(x-gx)>18||Math.abs(y-gy)>18))gc()};
+  gt=setTimeout(()=>{gt=0;gp.classList.remove('hold');gdbg('timer fired, row moved '+Math.round(Math.abs(cr.scrollLeft-gs))+'px');if(Math.abs(cr.scrollLeft-gs)>6)return;
+   const ok=gmOpen();gdbg('menu opened: '+ok+' games='+document.querySelectorAll('#gml button').length);if(ok){gmLP=true;setTimeout(()=>{gmLP=false},1800);try{navigator.vibrate&&navigator.vibrate(12)}catch(e){}}},450)};
+ const mv=(x,y)=>{if(gt&&(Math.abs(x-gx)>18||Math.abs(y-gy)>18))gc('moved '+Math.round(Math.abs(x-gx))+','+Math.round(Math.abs(y-gy)))};
  gp.addEventListener('contextmenu',e=>e.preventDefault());
  /* fingers wobble: allow 18px. Pointer AND touch events both start it, in case the phone cancels one of them */
- gp.addEventListener('pointerdown',e=>start(e.clientX,e.clientY));
+ gp.addEventListener('pointerdown',e=>{gdbg('pointerdown '+e.pointerType);start(e.clientX,e.clientY)});
  gp.addEventListener('pointermove',e=>mv(e.clientX,e.clientY));
- gp.addEventListener('touchstart',e=>{const t=e.touches[0];if(t)start(t.clientX,t.clientY)},{passive:true});
+ gp.addEventListener('touchstart',e=>{gdbg('touchstart');const t=e.touches[0];if(t)start(t.clientX,t.clientY)},{passive:true});
  gp.addEventListener('touchmove',e=>{const t=e.touches[0];if(t)mv(t.clientX,t.clientY)},{passive:true});
- ['pointerup','touchend','touchcancel'].forEach(n=>gp.addEventListener(n,gc));
- cr.addEventListener('scroll',()=>{if(gt&&Math.abs(cr.scrollLeft-gs)>6)gc()},{passive:true})}
+ ['pointerup','touchend','touchcancel','pointercancel'].forEach(n=>gp.addEventListener(n,()=>{gdbg(n);if(n!=='pointercancel')gc(n)}));
+ cr.addEventListener('scroll',()=>{if(gt&&Math.abs(cr.scrollLeft-gs)>6)gc('row scrolled')},{passive:true});gdbg('ready: pill found')}
 document.querySelectorAll('.cat:not(.dly)').forEach(btn=>{
  let lastT=0;const tgl=()=>{act=act===btn.dataset.c?null:btn.dataset.c;applyGlow()};
  btn.addEventListener('pointerup',e=>{if(btn.dataset.c==='Games'&&gmLP){gmLP=false;lastT=Date.now();return}if(e.pointerType==='mouse')return;if(wasDrag(e)){lastT=Date.now();return}lastT=Date.now();tgl()});
