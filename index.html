@@ -859,18 +859,21 @@ function dlyStart(){const d=dlyData(),ok=dlyFill(d);$('dov').classList.add('show
 function dlyStop(){const f=$('dpl');f.src='about:blank';f.dataset.src='';DLY.on=false;DLY.live=false;DLY.paused=false;dlyUi();$('dov').classList.remove('show')}
 function dlyClose(){$('dov').classList.remove('show')}
 (function(){const d=$('dly');let lt=0;
- const go=()=>{if(G||swBusy)return;try{d.scrollIntoView({inline:'end',block:'nearest',behavior:'smooth'})}catch(x){}clk();if(DLY.on)dlyStop();else dlyStart()};
- d.addEventListener('pointerup',e=>{if(e.pointerType==='mouse')return;lt=Date.now();go()});d.addEventListener('click',()=>{if(Date.now()-lt>600)go()});d.addEventListener('contextmenu',e=>e.preventDefault());
+ const go=()=>{if(G||swBusy)return;clk();if(DLY.on)dlyStop();else dlyStart()};
+ d.addEventListener('pointerup',e=>{if(e.pointerType==='mouse')return;lt=Date.now();if(wasDrag(e))return;go()});d.addEventListener('click',()=>{if(Date.now()-lt>600&&!cdrag)go()});d.addEventListener('contextmenu',e=>e.preventDefault());
  $('dx').addEventListener('click',dlyClose);$('dov').addEventListener('click',e=>{if(e.target===$('dov'))dlyClose()});
  window.addEventListener('blur',()=>{setTimeout(()=>{if(DLY.on&&document.activeElement===$('dpl')){DLY.live=true;dlyUi()}},0)})})();
 $('nxt').addEventListener('click',e=>{e.stopPropagation();swipeNext(false)});
 document.addEventListener('keydown',e=>{if(!cur||rdOpen||QZbusy)return;if(e.key==='ArrowRight')swipeNext(false);else if(e.key==='ArrowLeft')swipePrev()});
 let act=null;
 function applyGlow(){SB.forEach((b,i)=>$('g'+i).classList.toggle('on',b[4]===act&&!$('h'+i).classList.contains('done')));document.querySelectorAll('.cat').forEach(x=>x.classList.toggle('held',x.dataset.c===act))}
+/* dragging the pill row sideways must not count as a tap on whichever pill the finger lifts over */
+let cdx=0,csl=0,cdrag=false;{const cr=$('cats');cr.addEventListener('pointerdown',e=>{cdx=e.clientX;csl=cr.scrollLeft;cdrag=false},true);cr.addEventListener('pointermove',e=>{if(Math.abs(e.clientX-cdx)>8||Math.abs(cr.scrollLeft-csl)>2)cdrag=true},true)}
+const wasDrag=e=>cdrag||Math.abs((e&&e.clientX!=null?e.clientX:cdx)-cdx)>8||Math.abs($('cats').scrollLeft-csl)>2;
 document.querySelectorAll('.cat:not(.dly)').forEach(btn=>{
  let lastT=0;const tgl=()=>{act=act===btn.dataset.c?null:btn.dataset.c;applyGlow()};
- btn.addEventListener('pointerup',e=>{if(e.pointerType==='mouse')return;lastT=Date.now();tgl()});
- btn.addEventListener('click',()=>{if(Date.now()-lastT>600)tgl()});
+ btn.addEventListener('pointerup',e=>{if(e.pointerType==='mouse')return;if(wasDrag(e)){lastT=Date.now();return}lastT=Date.now();tgl()});
+ btn.addEventListener('click',()=>{if(Date.now()-lastT>600&&!cdrag)tgl()});
  btn.addEventListener('contextmenu',e=>e.preventDefault());
 });
 function loadStories(){return fetch('stories.json?'+Date.now()).then(r=>r.ok?r.json():[]).then(d=>{if(Array.isArray(d)&&d.length){try{SHN=new Set(d.map(x=>x[3]))}catch(e){}const j=JSON.stringify(d);if(j!==SJ){S=d;SJ=j;build()}}}).catch(()=>{})}
