@@ -591,6 +591,38 @@ def gn_resolve(url):
         return ""
     return u if u and not gn_id(u) else ""
 
+HOWTO = re.compile(r"how[\s-]to[\s-]play|\brules\b|how to win|game guide", re.I)
+
+def game_link(url):
+    """A 'how to play' page links to the game itself: find that link (Play / Play now / Play online buttons, or an embedded game)."""
+    page = urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=12).read(600000).decode("utf-8", "ignore")
+    here = urllib.parse.urlparse(url).netloc.lower().replace("www.", "")
+    best = None
+    for href, txt in re.findall(r'<a\b[^>]*href=["\']([^"\'#]+)["\'][^>]*>(.*?)</a>', page, re.S | re.I):
+        t = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", html.unescape(txt))).strip().lower()
+        u = urllib.parse.urljoin(url, html.unescape(href).strip())
+        if not u.startswith("http") or u.split("?")[0].rstrip("/") == url.split("?")[0].rstrip("/"):
+            continue
+        if HOWTO.search(t) or HOWTO.search(u) or re.search(r"facebook|twitter|pinterest|instagram|youtube|mailto|/tag/|/category/", u, re.I):
+            continue
+        score = 0
+        if re.match(r"^(play|start|launch)\b", t) or re.search(r"\bplay (now|online|free|it|here|the game|for free)\b|play .{0,40} on ", t):
+            score += 10
+        if re.search(r"/(play|game|games)/", u, re.I):
+            score += 3
+        if not score:
+            continue
+        if urllib.parse.urlparse(u).netloc.lower().replace("www.", "") != here:
+            score += 2
+        if best is None or score > best[0]:
+            best = (score, u)
+    if best:
+        return best[1]
+    m = re.search(r'<iframe[^>]+src=["\']([^"\']+)', page, re.I)
+    if m and re.search(r"game|play|embed", m.group(1), re.I):
+        return urllib.parse.urljoin(url, html.unescape(m.group(1)))
+    return ""
+
 def og_meta(url):
     """Picture and description from an article's own page."""
     img, desc = "", ""
@@ -796,6 +828,28 @@ def main():
             ok += 1
     print("resolved", ok, "of", len(cand), "Google News links")
     final = [s for s in final if not (DEALURL.search(s[3]) or any(b in s[3].lower() for b in blocked))]
+    # Games: some feeds list the "how to play" page; send people to the game itself
+    hp = [s for s in final if s[4] == GAMES_CAT and (HOWTO.search(s[1]) or HOWTO.search(s[3]))]
+    def _gl(st):
+        try:
+            return game_link(st[3])
+        except Exception as e:
+            print("  game link failed", st[3][:70], e)
+            return ""
+    with ThreadPoolExecutor(8) as ex:
+        found = list(ex.map(_gl, hp))
+    nfix, seen_g = 0, set()
+    for st, g in zip(hp, found):
+        if g:
+            print("  game:", st[1][:50], "->", g[:90])
+            st[3], st[5], st[2] = g, "", "Tap the button below for the full story."
+            st[1] = re.sub(r"^\s*how\s+to\s+play\s+", "", st[1], flags=re.I)
+            st[7:] = []   # a how-to-play page has no Reader text worth keeping
+            nfix += 1
+        else:
+            print("  game link NOT found for", st[3][:90])
+    print("Games: pointed %d of %d how-to-play pages at the game itself" % (nfix, len(hp)))
+    final = [s for s in final if not (s[4] == GAMES_CAT and (s[3] in seen_g or seen_g.add(s[3])))]
     need = [s for s in final if not gn_id(s[3]) and (not s[5] or s[2].startswith("Tap the button"))]
     with ThreadPoolExecutor(8) as ex:
         for s, (img, desc) in zip(need, ex.map(lambda s: og_meta(s[3]), need)):
